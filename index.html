@@ -129,17 +129,7 @@
             <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20las%20manzanas.pdf" class="btn-pdf" target="_blank">📄 Descargar PDF Manzanas</a>
         </div>
     </div>
-    ```
-
----
-
-### ¿Por qué esto no afecta a los otros videos?
-
-* **Es independiente:** Cada bloque `<div class="card">` es como un cajón separado. Agregar uno nuevo no mueve los de arriba.
-* **La lógica se mantiene:** Como el código de "auto-pausa" que hicimos antes busca **todos** los videos de la página automáticamente, este nuevo video de las manzanas se "unirá al equipo" por sí solo sin que tengas que programar nada extra.
-* **Seguridad:** Al estar antes del script, se asegura de que también se esconda el botón de descarga hasta que el cliente pague.
-
-**¿Quieres que te pase el código completo ya unido (con las 4 clases) para que solo borres todo lo de tu archivo y pegues lo nuevo?** A veces es más fácil así para no estar buscando líneas entre tanto texto.
+    
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const pagoStatus = urlParams.get('status');
