@@ -1,68 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>VideoMarket Pro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: white;
-      text-align: center;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    video {
-      width: 100%;
-      border-radius: 12px;
-    }
-
-    h1 {
-      margin-top: 20px;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 15px 30px;
-      font-size: 18px;
-      background: #00bfff;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    .btn:hover {
-      background: #009acd;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoMarket Pro - Mis Videos</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0f8ff; /* Azul suave para niños */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+        }
+        .video-card {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            padding: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        video {
+            width: 100%;
+            border-radius: 15px;
+            background: #000;
+        }
+        h2 { color: #5d5d5d; font-size: 1.2rem; margin: 10px 0; }
+        .btn-comprar {
+            background-color: #009ee3; /* Color Mercado Pago */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
 </head>
-
 <body>
 
-  <div class="container">
-    
-    <h1>Accede al Contenido Exclusivo</h1>
+    <div class="container" id="video-list">
+        <p>Cargando videos mágicos...</p>
+    </div>
 
-    <video autoplay muted loop playsinline>
-      <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/escribir2.mp4" type="video/mp4">
-      Tu navegador no soporta video.
-    </video>
+    <script>
+        // CONFIGURACIÓN DE TU SUPABASE
+        const SUPABASE_URL = 'https://nmdljfwudjkqrzvuuqvq.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_-03fDV0jBU9n-7JLRitWsw_y1J11mPj';
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    <a href="#" class="btn">
-      Comprar Ahora
-    </a>
+        async function cargarVideos() {
+            const { data, error } = await supabase
+                .from('Videos') // Nombre de tu tabla
+                .select('*');
 
-  </div>
+            if (error) {
+                console.error('Error:', error);
+                return;
+            }
 
+            const listContainer = document.getElementById('video-list');
+            listContainer.innerHTML = ''; // Limpiar mensaje de carga
+
+            data.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <h2>${video.nombre || 'Video Educativo'}</h2>
+                    <video controls loop muted>
+                        <source src="${video.url_video}" type="video/mp4">
+                        Tu navegador no soporta videos.
+                    </video>
+                    <a href="TU_LINK_DE_MERCADO_PAGO" class="btn-comprar">Comprar para descargar PDF</a>
+                `;
+                listContainer.appendChild(card);
+            });
+        }
+
+        cargarVideos();
+    </script>
 </body>
 </html>
