@@ -55,15 +55,28 @@
     </div>
 
     <script>
-        // SEGURIDAD: Detecta si el usuario regresa de Mercado Pago
-        const urlParams = new URLSearchParams(window.location.search);
-        const pagoStatus = urlParams.get('status');
+    // 1. SEGURIDAD: Detecta si el usuario regresa de Mercado Pago
+    const urlParams = new URLSearchParams(window.location.search);
+    const pagoStatus = urlParams.get('status');
 
-        if (pagoStatus === 'approved' || urlParams.has('payment_id')) {
-            // Mostramos todas las secciones de descarga y ocultamos los botones de compra
-            document.querySelectorAll('.seccion-descarga').forEach(seccion => seccion.style.display = 'block');
-            document.querySelectorAll('.btn-pago').forEach(boton => boton.style.display = 'none');
-        }
+    if (pagoStatus === 'approved' || urlParams.has('payment_id')) {
+        document.querySelectorAll('.seccion-descarga').forEach(seccion => seccion.style.display = 'block');
+        document.querySelectorAll('.btn-pago').forEach(boton => boton.style.display = 'none');
+    }
+
+    // 2. SOLUCIÓN AL AUDIO MEZCLADO: Pausar otros videos al dar Play
+    const todosLosVideos = document.querySelectorAll('video');
+
+    todosLosVideos.forEach(videoActual => {
+        videoActual.addEventListener('play', () => {
+            // Cuando un video inicia, pausamos todos los demás
+            todosLosVideos.forEach(otroVideo => {
+                if (otroVideo !== videoActual) {
+                    otroVideo.pause();
+                }
+            });
+        });
+    });
     </script>
 </body>
 </html
