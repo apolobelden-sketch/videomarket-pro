@@ -1,93 +1,69 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoMarket Pro - Mis Videos</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>VideoMarket Pro - Clases Infantiles</title>
     <style>
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #f0f8ff; /* Azul suave para niños */
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .container {
-            width: 100%;
-            max-width: 500px;
-            padding: 20px;
-        }
-        .video-card {
-            background: white;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            padding: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        video {
-            width: 100%;
-            border-radius: 15px;
-            background: #000;
-        }
-        h2 { color: #5d5d5d; font-size: 1.2rem; margin: 10px 0; }
-        .btn-comprar {
-            background-color: #009ee3; /* Color Mercado Pago */
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
-        }
+        body { font-family: 'Comic Sans MS', cursive, sans-serif; background-color: #f0f8ff; display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; }
+        .card { background: white; border-radius: 25px; padding: 20px; margin-bottom: 30px; width: 100%; max-width: 450px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; border: 3px solid #b3e5fc; }
+        h2 { color: #0277bd; font-size: 1.3rem; margin-bottom: 15px; }
+        video { width: 100%; border-radius: 15px; background: #000; margin-bottom: 15px; }
+        .btn-pago { display: block; background-color: #009ee3; color: white; padding: 15px; border-radius: 15px; text-decoration: none; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(0,158,227,0.3); }
+        .seccion-descarga { display: none; margin-top: 20px; padding: 15px; background-color: #e8f5e9; border: 2px dashed #4caf50; border-radius: 15px; }
+        .btn-pdf { display: block; background-color: #4caf50; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; margin-top: 10px; }
+        .pago-aprobado { color: #2e7d32; font-weight: bold; font-size: 1rem; }
     </style>
 </head>
 <body>
 
-    <div class="container" id="video-list">
-        <p>Cargando videos mágicos...</p>
+    <div class="card">
+        <h2>✍️ Clase: Aprendiendo a Escribir</h2>
+        <video controls controlsList="nodownload">
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/escribir2.mp4" type="video/mp4">
+        </video>
+        <a href="https://mpago.la/1xQZVqo" class="btn-pago">🛒 Comprar Actividades Escritura</a>
+        <div class="seccion-descarga">
+            <p class="pago-aprobado">✅ ¡Gracias por tu compra!</p>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/escribir2.pdf" class="btn-pdf" target="_blank">📄 Descargar PDF Escritura</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🔢 Clase: Cuenta y Colorea</h2>
+        <video controls controlsList="nodownload">
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20y%20colorea3.mp4" type="video/mp4">
+        </video>
+        <a href="https://mpago.la/1xQZVqo" class="btn-pago">🛒 Comprar Actividades Contar</a>
+        <div class="seccion-descarga">
+            <p class="pago-aprobado">✅ ¡Gracias por tu compra!</p>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20y%20colorea4.pdf" class="btn-pdf" target="_blank">📄 Descargar PDF Contar</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎨 Clase: Colorea y Aprende</h2>
+        <video controls controlsList="nodownload">
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20aprende4.mp4" type="video/mp4">
+        </video>
+        <a href="https://mpago.la/1xQZVqo" class="btn-pago">🛒 Comprar Actividades Colorear</a>
+        <div class="seccion-descarga">
+            <p class="pago-aprobado">✅ ¡Gracias por tu compra!</p>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20aprende3.pdf" class="btn-pdf" target="_blank">📄 Descargar PDF Colorear</a>
+        </div>
     </div>
 
     <script>
-        // CONFIGURACIÓN DE TU SUPABASE
-        const SUPABASE_URL = 'https://nmdljfwudjkqrzvuuqvq.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_-03fDV0jBU9n-7JLRitWsw_y1J11mPj';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // SEGURIDAD: Detecta si el usuario regresa de Mercado Pago
+        const urlParams = new URLSearchParams(window.location.search);
+        const pagoStatus = urlParams.get('status');
 
-        async function cargarVideos() {
-            const { data, error } = await supabase
-                .from('Videos') // Nombre de tu tabla
-                .select('*');
-
-            if (error) {
-                console.error('Error:', error);
-                return;
-            }
-
-            const listContainer = document.getElementById('video-list');
-            listContainer.innerHTML = ''; // Limpiar mensaje de carga
-
-            data.forEach(video => {
-                const card = document.createElement('div');
-                card.className = 'video-card';
-                card.innerHTML = `
-                    <h2>${video.nombre || 'Video Educativo'}</h2>
-                    <video controls loop muted>
-                        <source src="${video.url_video}" type="video/mp4">
-                        Tu navegador no soporta videos.
-                    </video>
-                    <a href="TU_LINK_DE_MERCADO_PAGO" class="btn-comprar">Comprar para descargar PDF</a>
-                `;
-                listContainer.appendChild(card);
-            });
+        if (pagoStatus === 'approved' || urlParams.has('payment_id')) {
+            // Mostramos todas las secciones de descarga y ocultamos los botones de compra
+            document.querySelectorAll('.seccion-descarga').forEach(seccion => seccion.style.display = 'block');
+            document.querySelectorAll('.btn-pago').forEach(boton => boton.style.display = 'none');
         }
-
-        cargarVideos();
     </script>
 </body>
-</html>
+</html
