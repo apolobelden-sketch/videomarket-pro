@@ -1,72 +1,105 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Clases Infantiles</title>
+    <title>Mis Clases Mágicas</title>
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #f0f8ff; text-align: center; padding: 20px; }
-        h1 { color: #ff69b4; }
-        .contenedor { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        body { 
+            font-family: 'Comic Sans MS', 'Arial', sans-serif; 
+            margin: 0;
+            padding: 20px;
+            /* Fondo estilo anime suave de fantasía */
+            background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), 
+                        url('https://img.freepik.com/premium-photo/anime-style-clouds-background_675567-1547.jpg'); 
+            background-size: cover;
+            background-attachment: fixed;
+            text-align: center;
+        }
+        h1 { color: #ff4081; text-shadow: 3px 3px white; font-size: 2.8em; margin-bottom: 10px; }
+        p.intro { background: rgba(255,255,255,0.8); display: inline-block; padding: 10px 20px; border-radius: 20px; font-weight: bold; color: #333; }
+        .contenedor { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 30px; }
         .clase-card { 
-            background: white; border-radius: 15px; padding: 15px; width: 280px; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 2px solid #ffb6c1;
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 30px; 
+            padding: 20px; 
+            width: 280px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            border: 4px solid #f8bbd0;
+            transition: 0.3s;
         }
-        .clase-card img { width: 100%; border-radius: 10px; }
-        .precio { font-size: 1.2em; color: #2ecc71; font-weight: bold; margin: 10px 0; }
-        .btn-comprar { 
-            background-color: #25D366; color: white; padding: 12px; 
-            text-decoration: none; border-radius: 8px; display: block; font-weight: bold;
+        .clase-card:hover { transform: translateY(-10px); }
+        .clase-card img { width: 100%; border-radius: 20px; margin-bottom: 15px; border: 2px solid #eee; height: 160px; object-fit: cover; }
+        .precio { font-size: 1.6em; color: #4caf50; font-weight: bold; margin: 10px 0; }
+        .btn { 
+            display: block; padding: 12px; margin: 10px 0; border-radius: 20px; 
+            text-decoration: none; font-weight: bold; font-size: 0.95em; transition: 0.3s;
         }
-        .btn-comprar:hover { background-color: #128C7E; }
+        .btn-telegram { background-color: #0088cc; color: white; border-bottom: 4px solid #005f8d; }
+        .btn-ver { background-color: #ff4081; color: white; border-bottom: 4px solid #c60055; }
+        .btn-pdf { background-color: #03a9f4; color: white; border-bottom: 4px solid #007ac1; }
+        .btn:active { transform: translateY(3px); border-bottom: none; }
     </style>
 </head>
 <body>
 
-    <h1>📚 Mis Clases Mágicas</h1>
-    <p>Selecciona una clase y págame por transferencia para recibir tu material al instante.</p>
+    <h1>🌈 Mis Clases Mágicas 🌈</h1>
+    <p class="intro">Cada clase por solo $10 MXN. ¡Sin comisiones, directo en Telegram!</p>
 
     <div class="contenedor">
         <div class="clase-card">
-            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada1.jpg" alt="Clase 1">
-            <h3>Clase 1: Las Manzanas</h3>
+            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada2.jpg" alt="Familia">
+            <h3>La Familia</h3>
             <p class="precio">$10 MXN</p>
-            <a href="https://wa.me/TU_NUMERO_AQUI?text=Hola!%20Quiero%20la%20clase%201%20de%20Las%20Manzanas%20por%20$10" class="btn-comprar">💰 Comprar por WhatsApp</a>
+            <a href="https://t.me/TU_USUARIO_AQUI?text=Hola!%20Quiero%20la%20clase%20de%20la%20Familia" class="btn btn-telegram">✈️ Pedir por Telegram</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4" class="btn btn-ver" target="_blank">📺 Ver Video</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia5.pdf" class="btn btn-pdf" target="_blank">📄 Bajar PDF</a>
         </div>
 
         <div class="clase-card">
-            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada2.jpg" alt="Clase 2">
-            <h3>Clase 2: La Familia</h3>
+            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada3.jpg" alt="Escribir">
+            <h3>Escribir (Trazos)</h3>
             <p class="precio">$10 MXN</p>
-            <a href="https://wa.me/TU_NUMERO_AQUI?text=Hola!%20Quiero%20la%20clase%202%20de%20La%20Familia%20por%20$10" class="btn-comprar">💰 Comprar por WhatsApp</a>
+            <a href="https://t.me/TU_USUARIO_AQUI?text=Hola!%20Quiero%20la%20clase%20de%20Escribir" class="btn btn-telegram">✈️ Pedir por Telegram</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/escribir2.mp4" class="btn btn-ver" target="_blank">📺 Ver Video</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/escribir2.pdf" class="btn btn-pdf" target="_blank">📄 Bajar PDF</a>
         </div>
 
         <div class="clase-card">
-            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada3.jpg" alt="Clase 3">
-            <h3>Clase 3: Colores</h3>
+            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada4.jpg" alt="Cuenta y Colorea">
+            <h3>Cuenta y Colorea</h3>
             <p class="precio">$10 MXN</p>
-            <a href="https://wa.me/TU_NUMERO_AQUI?text=Hola!%20Quiero%20la%20clase%203%20de%20Colores%20por%20$10" class="btn-comprar">💰 Comprar por WhatsApp</a>
+            <a href="https://t.me/TU_USUARIO_AQUI?text=Hola!%20Quiero%20la%20clase%20Cuenta%20y%20Colorea" class="btn btn-telegram">✈️ Pedir por Telegram</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20y%20colorea3.mp4" class="btn btn-ver" target="_blank">📺 Ver Video</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20y%20colorea4.pdf" class="btn btn-pdf" target="_blank">📄 Bajar PDF</a>
         </div>
 
         <div class="clase-card">
-            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada4.jpg" alt="Clase 4">
-            <h3>Clase 4: Los Animales</h3>
+            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada1.jpg" alt="Manzanas">
+            <h3>Cuenta Manzanas</h3>
             <p class="precio">$10 MXN</p>
-            <a href="https://wa.me/TU_NUMERO_AQUI?text=Hola!%20Quiero%20la%20clase%204%20de%20Los%20Animales%20por%20$10" class="btn-comprar">💰 Comprar por WhatsApp</a>
+            <a href="https://t.me/TU_USUARIO_AQUI?text=Hola!%20Quiero%20la%20clase%20de%20Manzanas" class="btn btn-telegram">✈️ Pedir por Telegram</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20las%20manzanas.mp4" class="btn btn-ver" target="_blank">📺 Ver Video</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20las%20manzanas.pdf" class="btn btn-pdf" target="_blank">📄 Bajar PDF</a>
         </div>
 
         <div class="clase-card">
-            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada5.jpg" alt="Clase 5">
-            <h3>Clase 5: Los Números</h3>
+            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada5.jpg" alt="Coloreando">
+            <h3>Coloreando</h3>
             <p class="precio">$10 MXN</p>
-            <a href="https://wa.me/TU_NUMERO_AQUI?text=Hola!%20Quiero%20la%20clase%205%20de%20Los%20Números%20por%20$10" class="btn-comprar">💰 Comprar por WhatsApp</a>
+            <a href="https://t.me/TU_USUARIO_AQUI?text=Hola!%20Quiero%20la%20clase%20de%20Coloreando" class="btn btn-telegram">✈️ Pedir por Telegram</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando6.mp4" class="btn btn-ver" target="_blank">📺 Ver Video</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando6.pdf" class="btn btn-pdf" target="_blank">📄 Bajar PDF</a>
         </div>
 
         <div class="clase-card">
-            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada6.jpg" alt="Clase 6">
-            <h3>Clase 6: Vocales</h3>
+            <img src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/portada6.jpg" alt="Colorea y Aprende">
+            <h3>Colorea y Aprende</h3>
             <p class="precio">$10 MXN</p>
-            <a href="https://wa.me/TU_NUMERO_AQUI?text=Hola!%20Quiero%20la%20clase%206%20de%20Las%20Vocales%20por%20$10" class="btn-comprar">💰 Comprar por WhatsApp</a>
+            <a href="https://t.me/TU_USUARIO_AQUI?text=Hola!%20Quiero%20la%20clase%20Colorea%20y%20Aprende" class="btn btn-telegram">✈️ Pedir por Telegram</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20aprende4.mp4" class="btn btn-ver" target="_blank">📺 Ver Video</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20aprende3.pdf" class="btn btn-pdf" target="_blank">📄 Bajar PDF</a>
         </div>
     </div>
 
