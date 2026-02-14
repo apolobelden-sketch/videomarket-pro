@@ -1,39 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIBRO DE SUMAS DIVERTIDAS</title>
+<title>🌈✨ HAPPY KIDS ✨🌈</title>
 
 <style>
-
 body {
     margin: 0;
     font-family: 'Comic Sans MS', Arial, sans-serif;
     background: linear-gradient(to bottom, #e6f2ff, #f5faff);
 }
 
-/* TITULO FIJO */
+/* TITULO SUPER BONITO */
 .titulo-fijo {
     position: fixed;
     top: 0;
     width: 100%;
-    background: white;
-    padding: 15px 0;
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #c9184a;
+    padding: 18px 0;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    font-size: 2em;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ffb703, #fb8500, #ff006e);
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     z-index: 1000;
 }
 
 .espacio-arriba {
-    height: 75px;
+    height: 70px;
 }
 
-/* SECCION VIDEO */
+/* VIDEO SECCION */
 .video-section {
     height: 100vh;
     display: flex;
@@ -53,9 +52,10 @@ video {
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
+/* DESCRIPCION */
 .descripcion {
     margin-top: 12px;
-    font-size: 1em;
+    font-size: 1.1em;
     color: #444;
 }
 
@@ -93,11 +93,10 @@ video {
 
 </style>
 </head>
-
 <body>
 
 <div class="titulo-fijo">
-📚 LIBRO DE SUMAS DIVERTIDAS
+🌈✨ HAPPY KIDS ✨🌈
 </div>
 
 <div class="espacio-arriba"></div>
@@ -117,28 +116,25 @@ video {
 <script>
 
 /* ===========================
-   AQUI SOLO PEGAS TUS VIDEOS
+   AQUI PEGAS TUS VIDEOS
    =========================== */
-
 const contenido = [
     {
-        video: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4",
-        descripcion: "familia"
+        video: "PEGA_AQUI_URL_VIDEO_1.mp4",
+        descripcion: "Clase 1 - Hola, bienvenidos a Happy Kids"
     },
     {
-        video: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/escribir2.mp4",
-        descripcion: "aprendiendo a escribir"
+        video: "PEGA_AQUI_URL_VIDEO_2.mp4",
+        descripcion: "Clase 2 - Más sumas con diversión"
     }
 ];
 
 /* ===========================
    NO MODIFICAR ABAJO
    =========================== */
-
 const contenedor = document.getElementById("contenedor");
 
 contenido.forEach((item, index) => {
-
     const section = document.createElement("div");
     section.className = "video-section";
 
@@ -150,13 +146,11 @@ contenido.forEach((item, index) => {
             <div class="descripcion">${item.descripcion}</div>
         </div>
     `;
-
     contenedor.appendChild(section);
 });
 
+/* PAUSA AUTOMÁTICA ENTRE VIDEOS */
 const videos = document.querySelectorAll("video");
-
-/* SOLO UN VIDEO SONANDO */
 videos.forEach(video => {
     video.addEventListener("play", () => {
         videos.forEach(v => {
@@ -165,7 +159,6 @@ videos.forEach(video => {
     });
 });
 
-/* AUTO PAUSA POR SCROLL */
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
