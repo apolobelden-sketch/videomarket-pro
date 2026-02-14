@@ -1,224 +1,191 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Kids</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Kids - Libros Educativos</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            background: linear-gradient(135deg, #e0f2f1 0%, #fff9c4 100%);
+            background-attachment: fixed;
+        }
 
-<style>
+        /* HEADER */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            z-index: 1000;
+            border-bottom: 4px solid #81d4fa;
+        }
 
-body {
-    margin: 0;
-    font-family: 'Comic Sans MS', Arial, sans-serif;
-    background: linear-gradient(to bottom, #e6f2ff, #f5faff);
-}
+        .header h1 { margin: 0; font-size: 2.2em; color: #0288d1; text-shadow: 2px 2px #b3e5fc; }
 
-/* ENCABEZADO AZUL SUAVE */
-.titulo-fijo {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 18px 0;
-    text-align: center;
-    font-size: 1.9em;
-    font-weight: bold;
-    background: #d9f0ff;
-    color: #2a6f97;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    z-index: 1000;
-}
+        .espacio-superior { height: 100px; }
 
-.espacio-arriba {
-    height: 80px;
-}
+        /* CONTENEDOR DE TARJETAS */
+        .video-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: start;
+        }
 
-/* SECCION VIDEO */
-.video-section {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .card {
+            background: white;
+            width: 92%;
+            max-width: 700px;
+            padding: 20px;
+            border-radius: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 6px solid #f1f8ff;
+        }
 
-.video-card {
-    width: 95%;
-    max-width: 900px;
-    text-align: center;
-}
+        video { width: 100%; border-radius: 25px; background: #000; }
 
-video {
-    width: 100%;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
+        .titulo-tema { font-size: 1.6em; color: #ef6c00; margin: 15px 0; font-weight: bold; }
 
-/* TITULO DEL VIDEO */
-.titulo-video {
-    margin-top: 15px;
-    font-size: 1.4em;
-    font-weight: bold;
-}
+        .badge-precio {
+            background: #fff59d;
+            color: #f57c00;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            border: 2px dashed #ffd54f;
+        }
 
-.label-titulo {
-    color: #4a90e2; /* azul suave */
-}
+        /* BOTONES */
+        .btn-group { display: flex; flex-direction: column; gap: 10px; align-items: center; }
 
-.nombre-tema {
-    color: #f4a261; /* naranja cálido */
-}
+        .btn {
+            width: 80%;
+            padding: 12px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            transition: 0.3s;
+            display: inline-block;
+        }
 
-/* BOTONES ABAJO */
-.botones-fijos {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: white;
-    padding: 12px 0;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    z-index: 1000;
-}
+        /* Mercado Pago */
+        .btn-pago { background: #ff5252; color: white; box-shadow: 0 4px 10px rgba(255, 82, 82, 0.3); }
 
-.btn-mp {
-    background: #009ee3;
-    color: white;
-    padding: 12px 22px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-}
+        /* Telegram */
+        .btn-telegram { background: #0088cc; color: white; box-shadow: 0 4px 10px rgba(0, 136, 204, 0.3); }
 
-.btn-telegram {
-    background: #4dabf7;
-    color: white;
-    padding: 12px 22px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-}
+        /* Descarga PDF (Oculto) */
+        .btn-pdf {
+            display: none;
+            background: #4caf50;
+            color: white;
+            font-size: 1.2em;
+            padding: 18px;
+            box-shadow: 0 6px 15px rgba(76, 175, 80, 0.3);
+            animation: pulse 2s infinite;
+        }
 
-</style>
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+    </style>
 </head>
-
 <body>
 
-<div class="titulo-fijo">
-🌈 Happy Kids
-</div>
+    <div class="header">
+        <h1>🌈 Happy Kids ✨</h1>
+    </div>
 
-<div class="espacio-arriba"></div>
+    <div class="espacio-superior"></div>
+    <div id="app"></div>
 
-<div id="contenedor"></div>
+    <script>
+        // Lógica de URL para mostrar descarga tras pago
+        const params = new URLSearchParams(window.location.search);
+        const yaPago = params.get('pago') === 'exitoso';
 
-<div class="botones-fijos">
-    <a href="https://mpago.la/1xQZVqo" target="_blank" class="btn-mp">
-        💳 Comprar
-    </a>
-    <a href="https://t.me/TU_USUARIO_TELEGRAM" target="_blank" class="btn-telegram">
-        📲 Telegram
-    </a>
-</div>
+        const misLibros = [
+            {
+                titulo: "Cuenta las Manzanas",
+                video: "TU_VIDEO_1.mp4",
+                pagoUrl: "https://mpago.la/2i9aDso",
+                pdfUrl: "TU_PDF_1.pdf",
+                telegramUrl: "https://t.me/TU_BOT_AQUI" // Pon aquí el link de tu bot
+            },
+            {
+                titulo: "La Familia",
+                video: "TU_VIDEO_2.mp4",
+                pagoUrl: "https://mpago.la/2X3uMmY",
+                pdfUrl: "TU_PDF_2.pdf",
+                telegramUrl: "https://t.me/TU_BOT_AQUI"
+            },
+            {
+                titulo: "Coloreando",
+                video: "TU_VIDEO_3.mp4",
+                pagoUrl: "https://mpago.la/2fCekEw",
+                pdfUrl: "TU_PDF_3.pdf",
+                telegramUrl: "https://t.me/TU_BOT_AQUI"
+            }
+            // Puedes seguir agregando los demás aquí...
+        ];
 
-<script>
+        const contenedor = document.getElementById('app');
 
-/* ==============================
-   AQUI PEGAS TUS VIDEOS
-   PUEDES AGREGAR INFINITOS
-   ============================== */
+        misLibros.forEach((libro, i) => {
+            const seccion = document.createElement('div');
+            seccion.className = 'video-container';
+            
+            seccion.innerHTML = `
+                <div class="card">
+                    <video id="v${i}" controls>
+                        <source src="${libro.video}" type="video/mp4">
+                    </video>
+                    <div class="titulo-tema">${libro.titulo}</div>
+                    <div class="badge-precio">💰 Solo $12</div>
+                    
+                    <div class="btn-group">
+                        <a href="${libro.pagoUrl}" class="btn btn-pago" id="btnP${i}">
+                            💳 Pagar con Mercado Pago
+                        </a>
+                        <a href="${libro.telegramUrl}" class="btn btn-telegram" id="btnT${i}">
+                            ✈️ Pago por Transferencia (Telegram)
+                        </a>
 
-const contenido = [
+                        <a href="${libro.pdfUrl}" download class="btn btn-pdf" id="btnD${i}">
+                            📥 DESCARGAR MI PDF AHORA
+                        </a>
+                    </div>
+                </div>
+            `;
+            contenedor.appendChild(seccion);
 
-    {
-        video: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4",
-        titulo: "LINDA FAMILIA"
-    },
-    {
-        video: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/escribir2.mp4",
-        titulo: "APRENDIENDO A ESCRIBIR"
-    },
-    {
-        video: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20y%20colorea3.mp4",
-        titulo: "CUENTA Y COLOREA"
-    },
-    {
-        video: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20las%20manzanas.mp4",
-        titulo: "CUENTA LAS MANZANAS"
-    },
-    {
-        video: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando6.mp4",
-        titulo: "//COLOREANDO"
-    },
-    {
-        video: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20aprende4.mp4",
-        titulo: "COLOREA Y APRENDE"
-    }
-
-    // 👇 Para agregar más, solo copia esto y cambia número:
-
-    /*
-    ,
-    {
-        video: "PEGA_AQUI_URL_VIDEO_7.mp4",
-        titulo: "Nombre del tema 7"
-    }
-    */
-
-];
-
-/* ==============================
-   NO MODIFICAR ABAJO
-   ============================== */
-
-const contenedor = document.getElementById("contenedor");
-
-contenido.forEach((item, index) => {
-
-    const section = document.createElement("div");
-    section.className = "video-section";
-
-    section.innerHTML = `
-        <div class="video-card">
-            <video id="video${index}" controls>
-                <source src="${item.video}" type="video/mp4">
-            </video>
-            <div class="titulo-video">
-                <span class="label-titulo">Título:</span>
-                <span class="nombre-tema">${item.titulo}</span>
-            </div>
-        </div>
-    `;
-
-    contenedor.appendChild(section);
-});
-
-/* SOLO UN VIDEO SONANDO */
-const videos = document.querySelectorAll("video");
-
-videos.forEach(video => {
-    video.addEventListener("play", () => {
-        videos.forEach(v => {
-            if (v !== video) v.pause();
+            if (yaPago) {
+                document.getElementById(`btnP${i}`).style.display = 'none';
+                document.getElementById(`btnT${i}`).style.display = 'none';
+                document.getElementById(`btnD${i}`).style.display = 'inline-block';
+            }
         });
-    });
-});
 
-/* AUTO PLAY / PAUSA POR SCROLL */
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.play();
-        } else {
-            entry.target.pause();
-        }
-    });
-}, { threshold: 0.6 });
-
-videos.forEach(video => observer.observe(video));
-
-</script>
-
+        const todosLosVideos = document.querySelectorAll('video');
+        todosLosVideos.forEach(v => {
+            v.addEventListener('play', () => {
+                todosLosVideos.forEach(otro => { if (otro !== v) otro.pause(); });
+            });
+        });
+    </script>
 </body>
 </html>
