@@ -1,38 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌈✨ HAPPY KIDS ✨🌈</title>
+<title>Happy Kids</title>
 
 <style>
+
 body {
     margin: 0;
     font-family: 'Comic Sans MS', Arial, sans-serif;
     background: linear-gradient(to bottom, #e6f2ff, #f5faff);
 }
 
-/* TITULO SUPER BONITO */
+/* ENCABEZADO AZUL SUAVE */
 .titulo-fijo {
     position: fixed;
     top: 0;
     width: 100%;
     padding: 18px 0;
     text-align: center;
-    font-size: 2em;
+    font-size: 1.9em;
     font-weight: bold;
-    background: linear-gradient(90deg, #ffb703, #fb8500, #ff006e);
-    color: white;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.25);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    background: #d9f0ff;
+    color: #2a6f97;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     z-index: 1000;
 }
 
 .espacio-arriba {
-    height: 70px;
+    height: 80px;
 }
 
-/* VIDEO SECCION */
+/* SECCION VIDEO */
 .video-section {
     height: 100vh;
     display: flex;
@@ -48,18 +49,26 @@ body {
 
 video {
     width: 100%;
-    border-radius: 25px;
+    border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* DESCRIPCION */
-.descripcion {
-    margin-top: 12px;
-    font-size: 1.1em;
-    color: #444;
+/* TITULO DEL VIDEO */
+.titulo-video {
+    margin-top: 15px;
+    font-size: 1.4em;
+    font-weight: bold;
 }
 
-/* BOTONES FIJOS ABAJO */
+.label-titulo {
+    color: #4a90e2; /* azul suave */
+}
+
+.nombre-tema {
+    color: #f4a261; /* naranja cálido */
+}
+
+/* BOTONES ABAJO */
 .botones-fijos {
     position: fixed;
     bottom: 0;
@@ -93,10 +102,11 @@ video {
 
 </style>
 </head>
+
 <body>
 
 <div class="titulo-fijo">
-🌈✨ HAPPY KIDS ✨🌈
+🌈 Happy Kids
 </div>
 
 <div class="espacio-arriba"></div>
@@ -107,7 +117,6 @@ video {
     <a href="https://mpago.la/1xQZVqo" target="_blank" class="btn-mp">
         💳 Comprar
     </a>
-
     <a href="https://t.me/TU_USUARIO_TELEGRAM" target="_blank" class="btn-telegram">
         📲 Telegram
     </a>
@@ -115,26 +124,58 @@ video {
 
 <script>
 
-/* ===========================
+/* ==============================
    AQUI PEGAS TUS VIDEOS
-   =========================== */
+   PUEDES AGREGAR INFINITOS
+   ============================== */
+
 const contenido = [
+
     {
-        video: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4",
-        descripcion: "familia"
+        video: "PEGA_AQUI_URL_VIDEO_1.mp4",
+        titulo: "Nombre del tema 1"
     },
     {
-        video: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/escribir2.mp4",
-        descripcion: "aprendiendo a escribir"
+        video: "PEGA_AQUI_URL_VIDEO_2.mp4",
+        titulo: "Nombre del tema 2"
+    },
+    {
+        video: "PEGA_AQUI_URL_VIDEO_3.mp4",
+        titulo: "Nombre del tema 3"
+    },
+    {
+        video: "PEGA_AQUI_URL_VIDEO_4.mp4",
+        titulo: "Nombre del tema 4"
+    },
+    {
+        video: "PEGA_AQUI_URL_VIDEO_5.mp4",
+        titulo: "Nombre del tema 5"
+    },
+    {
+        video: "PEGA_AQUI_URL_VIDEO_6.mp4",
+        titulo: "Nombre del tema 6"
     }
+
+    // 👇 Para agregar más, solo copia esto y cambia número:
+
+    /*
+    ,
+    {
+        video: "PEGA_AQUI_URL_VIDEO_7.mp4",
+        titulo: "Nombre del tema 7"
+    }
+    */
+
 ];
 
-/* ===========================
+/* ==============================
    NO MODIFICAR ABAJO
-   =========================== */
+   ============================== */
+
 const contenedor = document.getElementById("contenedor");
 
 contenido.forEach((item, index) => {
+
     const section = document.createElement("div");
     section.className = "video-section";
 
@@ -143,14 +184,19 @@ contenido.forEach((item, index) => {
             <video id="video${index}" controls>
                 <source src="${item.video}" type="video/mp4">
             </video>
-            <div class="descripcion">${item.descripcion}</div>
+            <div class="titulo-video">
+                <span class="label-titulo">Título:</span>
+                <span class="nombre-tema">${item.titulo}</span>
+            </div>
         </div>
     `;
+
     contenedor.appendChild(section);
 });
 
-/* PAUSA AUTOMÁTICA ENTRE VIDEOS */
+/* SOLO UN VIDEO SONANDO */
 const videos = document.querySelectorAll("video");
+
 videos.forEach(video => {
     video.addEventListener("play", () => {
         videos.forEach(v => {
@@ -159,6 +205,7 @@ videos.forEach(video => {
     });
 });
 
+/* AUTO PLAY / PAUSA POR SCROLL */
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
