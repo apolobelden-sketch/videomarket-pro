@@ -3,122 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids - Libros Educativos</title>
+    <title>Happy Kids - Libros Interactivos</title>
     <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --bg: #f7f9fc;
+        }
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
             margin: 0;
-            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
-            background: linear-gradient(135deg, #e0f2f1 0%, #fff9c4 100%);
-            background-attachment: fixed;
-        }
-
-        /* HEADER */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            text-align: center;
-            padding: 15px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            z-index: 1000;
-            border-bottom: 4px solid #81d4fa;
-        }
-
-        .header h1 { margin: 0; font-size: 2.2em; color: #0288d1; text-shadow: 2px 2px #b3e5fc; }
-
-        .espacio-superior { height: 100px; }
-
-        /* CONTENEDOR DE TARJETAS */
-        .video-container {
-            height: 100vh;
+            padding: 10px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            scroll-snap-align: start;
         }
-
-        .card {
+        h1 { 
+            color: var(--primary); 
+            text-align: center; 
+            margin: 20px 0;
+            font-size: 1.8rem;
+        }
+        .contenedor {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            max-width: 600px; /* Tamaño ideal para celulares y tablets */
+        }
+        .video-container {
             background: white;
-            width: 92%;
-            max-width: 700px;
-            padding: 20px;
-            border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            text-align: center;
-            border: 6px solid #f1f8ff;
-        }
-
-        video { width: 100%; border-radius: 25px; background: #000; }
-
-        .titulo-tema { font-size: 1.6em; color: #ef6c00; margin: 15px 0; font-weight: bold; }
-
-        .badge-precio {
-            background: #fff59d;
-            color: #f57c00;
-            padding: 5px 20px;
             border-radius: 20px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 15px;
-            border: 2px dashed #ffd54f;
+            padding: 0; /* Quitamos padding para que el video luzca más */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            text-align: center;
         }
-
-        /* BOTONES */
-        .btn-group { display: flex; flex-direction: column; gap: 10px; align-items: center; }
-
+        /* ESTO HACE LOS VIDEOS MÁS GRANDES */
+        video { 
+            width: 100%; 
+            display: block;
+            aspect-ratio: 16 / 9; /* Mantiene la proporción de cine */
+            background: #000;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .titulo-tema { 
+            font-weight: bold; 
+            font-size: 1.4rem; 
+            margin-bottom: 5px; 
+            color: #333; 
+        }
+        .badge-precio { 
+            background: var(--accent); 
+            padding: 5px 15px; 
+            border-radius: 20px; 
+            display: inline-block; 
+            margin-bottom: 15px; 
+            font-weight: bold;
+            color: #555;
+        }
+        .btn-group { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+        }
         .btn {
-            width: 80%;
-            padding: 12px;
-            border-radius: 50px;
+            padding: 15px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1em;
             transition: 0.3s;
-            display: inline-block;
-        }
-
-        /* Mercado Pago */
-        .btn-pago { background: #ff5252; color: white; box-shadow: 0 4px 10px rgba(255, 82, 82, 0.3); }
-
-        /* Telegram */
-        .btn-telegram { background: #0088cc; color: white; box-shadow: 0 4px 10px rgba(0, 136, 204, 0.3); }
-
-        /* Descarga PDF (Oculto) */
-        .btn-pdf {
-            display: none;
-            background: #4caf50;
             color: white;
-            font-size: 1.2em;
-            padding: 18px;
-            box-shadow: 0 6px 15px rgba(76, 175, 80, 0.3);
+            font-size: 1rem;
+            display: block;
+        }
+        .btn-pago { background-color: #009EE3; }
+        .btn-telegram { background-color: #24A1DE; }
+        .btn-pdf { 
+            background-color: #28a745; 
+            font-size: 1.2rem; 
+            border: 2px solid #1e7e34;
             animation: pulse 2s infinite;
         }
-
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
             100% { transform: scale(1); }
         }
-
-        .btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+        .btn:hover { opacity: 0.9; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>🌈 Happy Kids ✨</h1>
-    </div>
-
-    <div class="espacio-superior"></div>
-    <div id="app"></div>
+    <h1>🌈 Happy Kids: Libros Didácticos</h1>
+    <div id="app" class="contenedor"></div>
 
     <script>
-        // Lógica de URL para mostrar descarga tras pago
         const params = new URLSearchParams(window.location.search);
-const yaPago = params.get('pago') === 'exitoso' || 
-               params.get('status') === 'approved' || 
-               params.get('collection_status') === 'approved';
+        const yaPago = params.get('pago') === 'exitoso' || 
+                       params.get('status') === 'approved' || 
+                       params.get('collection_status') === 'approved';
 
         const misLibros = [
             {
@@ -142,7 +130,6 @@ const yaPago = params.get('pago') === 'exitoso' ||
                 pdfUrl: "https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando6.pdf",
                 telegramUrl: "https://t.me/mis_libros_gen_bot"
             }
-            // Puedes seguir agregando los demás aquí...
         ];
 
         const contenedor = document.getElementById('app');
@@ -152,38 +139,30 @@ const yaPago = params.get('pago') === 'exitoso' ||
             seccion.className = 'video-container';
             
             seccion.innerHTML = `
-                <div class="card">
-                    <video id="v${i}" controls>
-                        <source src="${libro.video}" type="video/mp4">
-                    </video>
+                <video id="v${i}" controls>
+                    <source src="${libro.video}" type="video/mp4">
+                </video>
+                <div class="card-content">
                     <div class="titulo-tema">${libro.titulo}</div>
                     <div class="badge-precio">💰 Solo $12</div>
-                    
-                         <div class="btn-group">
-                ${yaPago ? `
-                    <a href="${libro.pdfUrl}" download class="btn btn-pdf">
-                        📥 DESCARGAR MI PDF AHORA
-                    </a>
-                ` : `
-                    <a href="${libro.pagoUrl}" class="btn btn-pago">
-                        💳 Pagar con Mercado Pago
-                    </a>
-                    <a href="${libro.telegramUrl}" class="btn btn-telegram">
-                        ✈️ Pago por Transferencia (Telegram)
-                    </a>
-                `}
-            </div>
-        </div>
-    `;
-    contenedor.appendChild(seccion);
-});
-            contenedor.appendChild(seccion);
 
-            if (yaPago) {
-                document.getElementById(`btnP${i}`).style.display = 'none';
-                document.getElementById(`btnT${i}`).style.display = 'none';
-                document.getElementById(`btnD${i}`).style.display = 'inline-block';
-            }
+                    <div class="btn-group">
+                        ${yaPago ? `
+                            <a href="${libro.pdfUrl}" download class="btn btn-pdf">
+                                📥 DESCARGAR MI PDF AHORA
+                            </a>
+                        ` : `
+                            <a href="${libro.pagoUrl}" class="btn btn-pago">
+                                💳 Pagar con Mercado Pago
+                            </a>
+                            <a href="${libro.telegramUrl}" class="btn btn-telegram">
+                                ✈️ Pago por Transferencia (Telegram)
+                            </a>
+                        `}
+                    </div>
+                </div>
+            `;
+            contenedor.appendChild(seccion);
         });
 
         const todosLosVideos = document.querySelectorAll('video');
