@@ -159,20 +159,24 @@ const yaPago = params.get('pago') === 'exitoso' ||
                     <div class="titulo-tema">${libro.titulo}</div>
                     <div class="badge-precio">💰 Solo $12</div>
                     
-                    <div class="btn-group">
-                        <a href="${libro.pagoUrl}" class="btn btn-pago" id="btnP${i}">
-                            💳 Pagar con Mercado Pago
-                        </a>
-                        <a href="${libro.telegramUrl}" class="btn btn-telegram" id="btnT${i}">
-                            ✈️ Pago por Transferencia (Telegram)
-                        </a>
-
-                        <a href="${libro.pdfUrl}" download class="btn btn-pdf" id="btnD${i}">
-                            📥 DESCARGAR MI PDF AHORA
-                        </a>
-                    </div>
-                </div>
-            `;
+                         <div class="btn-group">
+                ${yaPago ? `
+                    <a href="${libro.pdfUrl}" download class="btn btn-pdf">
+                        📥 DESCARGAR MI PDF AHORA
+                    </a>
+                ` : `
+                    <a href="${libro.pagoUrl}" class="btn btn-pago">
+                        💳 Pagar con Mercado Pago
+                    </a>
+                    <a href="${libro.telegramUrl}" class="btn btn-telegram">
+                        ✈️ Pago por Transferencia (Telegram)
+                    </a>
+                `}
+            </div>
+        </div>
+    `;
+    contenedor.appendChild(seccion);
+});
             contenedor.appendChild(seccion);
 
             if (yaPago) {
