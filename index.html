@@ -116,7 +116,9 @@
     <script>
         // Lógica de URL para mostrar descarga tras pago
         const params = new URLSearchParams(window.location.search);
-        const yaPago = params.get('pago') === 'exitoso';
+const yaPago = params.get('pago') === 'exitoso' || 
+               params.get('status') === 'approved' || 
+               params.get('collection_status') === 'approved';
 
         const misLibros = [
             {
