@@ -3,21 +3,191 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prueba Video</title>
+<title>Happy Kids</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#000;
+}
+
+.header{
+    position:fixed;
+    top:0;
+    width:100%;
+    text-align:center;
+    padding:15px;
+    color:white;
+    font-size:1.4rem;
+    font-weight:bold;
+    background:linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    z-index:1000;
+}
+
+.container{
+    margin-top:70px;
+}
+
+.card{
+    margin-bottom:50px;
+    background:#000;
+}
+
+video{
+    width:100%;
+    max-height:500px;
+    background:black;
+}
+
+.info{
+    padding:20px;
+    color:white;
+}
+
+.titulo{
+    font-size:1.2rem;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.precio{
+    color:#FFE66D;
+    margin-bottom:15px;
+    font-weight:bold;
+}
+
+.botones{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.btn{
+    padding:12px;
+    border-radius:10px;
+    text-align:center;
+    text-decoration:none;
+    font-weight:bold;
+    color:white;
+}
+
+.pago{background:#009EE3;}
+.telegram{background:#24A1DE;}
+</style>
 </head>
 
-<body style="background:black; text-align:center;">
+<body>
 
-<h2 style="color:white;">Prueba de Video Supabase</h2>
+<div class="header">🌈 Happy Kids</div>
 
-<video 
-    width="90%" 
-    controls 
-    playsinline
->
-    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando6.mp4">
-    Tu navegador no soporta video.
-</video>
+<div class="container">
+
+<!-- TARJETA 1 -->
+<div class="card">
+    <video controls playsinline>
+        <source src="VIDEO_LINK_1" type="video/mp4">
+    </video>
+    <div class="info">
+        <div class="titulo">NOMBRE_LIBRO_1</div>
+        <div class="precio">💰 Precio aquí</div>
+        <div class="botones">
+            <a href="LINK_PAGO_1" class="btn pago">💳 COMPRAR</a>
+            <a href="LINK_TELEGRAM_1" class="btn telegram">✈️ TRANSFERENCIA</a>
+        </div>
+    </div>
+</div>
+
+<!-- TARJETA 2 -->
+<div class="card">
+    <video controls playsinline>
+        <source src="VIDEO_LINK_2" type="video/mp4">
+    </video>
+    <div class="info">
+        <div class="titulo">NOMBRE_LIBRO_2</div>
+        <div class="precio">💰 Precio aquí</div>
+        <div class="botones">
+            <a href="LINK_PAGO_2" class="btn pago">💳 COMPRAR</a>
+            <a href="LINK_TELEGRAM_2" class="btn telegram">✈️ TRANSFERENCIA</a>
+        </div>
+    </div>
+</div>
+
+<!-- TARJETA 3 -->
+<div class="card">
+    <video controls playsinline>
+        <source src="VIDEO_LINK_3" type="video/mp4">
+    </video>
+    <div class="info">
+        <div class="titulo">NOMBRE_LIBRO_3</div>
+        <div class="precio">💰 Precio aquí</div>
+        <div class="botones">
+            <a href="LINK_PAGO_3" class="btn pago">💳 COMPRAR</a>
+            <a href="LINK_TELEGRAM_3" class="btn telegram">✈️ TRANSFERENCIA</a>
+        </div>
+    </div>
+</div>
+
+<!-- TARJETA 4 -->
+<div class="card">
+    <video controls playsinline>
+        <source src="VIDEO_LINK_4" type="video/mp4">
+    </video>
+    <div class="info">
+        <div class="titulo">NOMBRE_LIBRO_4</div>
+        <div class="precio">💰 Precio aquí</div>
+        <div class="botones">
+            <a href="LINK_PAGO_4" class="btn pago">💳 COMPRAR</a>
+            <a href="LINK_TELEGRAM_4" class="btn telegram">✈️ TRANSFERENCIA</a>
+        </div>
+    </div>
+</div>
+
+<!-- TARJETA 5 -->
+<div class="card">
+    <video controls playsinline>
+        <source src="VIDEO_LINK_5" type="video/mp4">
+    </video>
+    <div class="info">
+        <div class="titulo">NOMBRE_LIBRO_5</div>
+        <div class="precio">💰 Precio aquí</div>
+        <div class="botones">
+            <a href="LINK_PAGO_5" class="btn pago">💳 COMPRAR</a>
+            <a href="LINK_TELEGRAM_5" class="btn telegram">✈️ TRANSFERENCIA</a>
+        </div>
+    </div>
+</div>
+
+<!-- TARJETA 6 -->
+<div class="card">
+    <video controls playsinline>
+        <source src="VIDEO_LINK_6" type="video/mp4">
+    </video>
+    <div class="info">
+        <div class="titulo">NOMBRE_LIBRO_6</div>
+        <div class="precio">💰 Precio aquí</div>
+        <div class="botones">
+            <a href="LINK_PAGO_6" class="btn pago">💳 COMPRAR</a>
+            <a href="LINK_TELEGRAM_6" class="btn telegram">✈️ TRANSFERENCIA</a>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script>
+
+// Evita que dos videos suenen al mismo tiempo
+document.addEventListener("play", function(e){
+    const videos = document.querySelectorAll("video");
+    videos.forEach(video=>{
+        if(video !== e.target){
+            video.pause();
+        }
+    });
+}, true);
+
+</script>
 
 </body>
 </html>
