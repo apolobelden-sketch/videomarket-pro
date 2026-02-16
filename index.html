@@ -3,110 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids - Libros Interactivos</title>
+    <title>Happy Kids - TikTok Style</title>
     <style>
-        :root {
-            --primary: #FF6B6B;
-            --secondary: #4ECDC4;
-            --accent: #FFE66D;
-            --bg: #f7f9fc;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
+        body, html {
             margin: 0;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        h1 { 
-            color: var(--primary); 
-            text-align: center; 
-            margin: 20px 0;
-            font-size: 1.8rem;
-        }
-        .contenedor {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
+            padding: 0;
+            height: 100%;
             width: 100%;
-            max-width: 600px; /* Tamaño ideal para celulares y tablets */
+            background-color: #000; /* Fondo negro como TikTok */
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden; /* Evita el scroll raro */
         }
-        .video-container {
-            background: white;
-            border-radius: 20px;
-            padding: 0; /* Quitamos padding para que el video luzca más */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            overflow: hidden;
-            text-align: center;
+
+        /* Contenedor principal tipo TikTok */
+        .snap-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory; /* Hace el efecto de "salto" entre videos */
         }
-        /* ESTO HACE LOS VIDEOS MÁS GRANDES */
-        video { 
-            width: 100%; 
-            display: block;
-            aspect-ratio: 16 / 9; /* Mantiene la proporción de cine */
-            background: #000;
+
+        .video-page {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .card-content {
-            padding: 20px;
+
+        /* El video ocupa todo el fondo */
+        video {
+            height: 100%;
+            width: 100%;
+            object-fit: cover; /* Se estira para llenar la pantalla */
         }
-        .titulo-tema { 
-            font-weight: bold; 
-            font-size: 1.4rem; 
-            margin-bottom: 5px; 
-            color: #333; 
+
+        /* Capa oscura abajo para que los botones se lean bien */
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            pointer-events: none; /* Deja que toques el video */
         }
-        .badge-precio { 
-            background: var(--accent); 
-            padding: 5px 15px; 
-            border-radius: 20px; 
-            display: inline-block; 
-            margin-bottom: 15px; 
+
+        .info {
+            pointer-events: auto;
+            margin-bottom: 20px;
+        }
+
+        .titulo {
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #555;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        .btn-group { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px; 
+
+        /* Botones abajo del video */
+        .btn-group {
+            pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
+
         .btn {
             padding: 15px;
-            border-radius: 12px;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.3s;
+            text-align: center;
             color: white;
             font-size: 1rem;
-            display: block;
+            transition: 0.3s;
         }
-        .btn-pago { background-color: #009EE3; }
-        .btn-telegram { background-color: #24A1DE; }
-        .btn-pdf { 
-            background-color: #28a745; 
-            font-size: 1.2rem; 
-            border: 2px solid #1e7e34;
-            animation: pulse 2s infinite;
+
+        .btn-pago { background: #009EE3; }
+        .btn-telegram { background: #24A1DE; }
+        .btn-pdf { background: #28a745; border: 2px solid white; }
+
+        /* Estilo para el botón de "Scroll" para avisar que hay más */
+        .scroll-hint {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            opacity: 0.7;
+            font-size: 0.9rem;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-        .btn:hover { opacity: 0.9; }
     </style>
 </head>
 <body>
 
-    <h1>🌈 Happy Kids: Libros Didácticos</h1>
-    <div id="app" class="contenedor"></div>
+    <div id="app" class="snap-container"></div>
 
     <script>
         const params = new URLSearchParams(window.location.search);
-        const yaPago = params.get('pago') === 'exitoso' || 
-                       params.get('status') === 'approved' || 
-                       params.get('collection_status') === 'approved';
+        const yaPago = params.get('pago') === 'exitoso' || params.get('status') === 'approved';
 
         const misLibros = [
             {
@@ -135,42 +133,47 @@
         const contenedor = document.getElementById('app');
 
         misLibros.forEach((libro, i) => {
-            const seccion = document.createElement('div');
-            seccion.className = 'video-container';
+            const page = document.createElement('div');
+            page.className = 'video-page';
             
-            seccion.innerHTML = `
-                <video id="v${i}" controls>
+            page.innerHTML = `
+                ${i === 0 ? '<div class="scroll-hint">Desliza hacia arriba ↑</div>' : ''}
+                <video loop playsinline onclick="this.paused ? this.play() : this.pause()">
                     <source src="${libro.video}" type="video/mp4">
                 </video>
-                <div class="card-content">
-                    <div class="titulo-tema">${libro.titulo}</div>
-                    <div class="badge-precio">💰 Solo $12</div>
-
+                
+                <div class="overlay">
+                    <div class="info">
+                        <div class="titulo">${libro.titulo}</div>
+                        <div>💰 Solo $12 MXN</div>
+                    </div>
+                    
                     <div class="btn-group">
                         ${yaPago ? `
-                            <a href="${libro.pdfUrl}" download class="btn btn-pdf">
-                                📥 DESCARGAR MI PDF AHORA
-                            </a>
+                            <a href="${libro.pdfUrl}" download class="btn btn-pdf">📥 DESCARGAR PDF</a>
                         ` : `
-                            <a href="${libro.pagoUrl}" class="btn btn-pago">
-                                💳 Pagar con Mercado Pago
-                            </a>
-                            <a href="${libro.telegramUrl}" class="btn btn-telegram">
-                                ✈️ Pago por Transferencia (Telegram)
-                            </a>
+                            <a href="${libro.pagoUrl}" class="btn btn-pago">💳 COMPRAR AHORA</a>
+                            <a href="${libro.telegramUrl}" class="btn btn-telegram">✈️ PAGO POR TRANSFERENCIA</a>
                         `}
                     </div>
                 </div>
             `;
-            contenedor.appendChild(seccion);
+            contenedor.appendChild(page);
         });
 
-        const todosLosVideos = document.querySelectorAll('video');
-        todosLosVideos.forEach(v => {
-            v.addEventListener('play', () => {
-                todosLosVideos.forEach(otro => { if (otro !== v) otro.pause(); });
+        // Autoplay al hacer scroll (como TikTok)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target.querySelector('video');
+                if (entry.isIntersecting) {
+                    video.play().catch(() => {});
+                } else {
+                    video.pause();
+                }
             });
-        });
+        }, { threshold: 0.6 });
+
+        document.querySelectorAll('.video-page').forEach(div => observer.observe(div));
     </script>
 </body>
 </html>
