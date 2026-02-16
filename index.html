@@ -1,71 +1,75 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids - Cuenta las Manzanas</title>
-    <style>
-        body { margin: 0; background: #1a1a1a; font-family: 'Segoe UI', sans-serif; color: white; overflow: hidden; }
-        .tienda-header { position: fixed; top: 0; width: 100%; text-align: center; padding: 15px; background: linear-gradient(to bottom, #87CEEB, #6495ED); z-index: 100; font-weight: bold; font-size: 1.5rem; }
-        .contenedor { height: 100vh; display: flex; align-items: center; justify-content: center; background: #000; }
-        .libro-card { height: 100vh; width: 100%; position: relative; }
-        video { width: 100%; height: 100%; object-fit: cover; }
-        .overlay-info { position: absolute; bottom: 0; width: 100%; padding: 40px 20px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); box-sizing: border-box; text-align: center; }
-        .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; max-width: 300px; margin-left: auto; margin-right: auto; }
-        .btn { padding: 15px; text-align: center; text-decoration: none; color: white; border-radius: 30px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s; }
-        .btn-pago { background: #009EE3; }
-        .btn-pdf { background: #28a745; }
-        .btn-telegram { background: #24A1DE; }
-    </style>
-</head>
-<body>
 
-    <div class="tienda-header">🌈 Happy Kids</div>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const yaPago = params.get('pago') === 'exitoso' || params.get('status') === 'approved';
 
-    <div id="app" class="contenedor">
-        <div class="libro-card">
-            <video playsinline preload="metadata" loop muted autoplay id="videoPrincipal">
-                <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20las%20manzanas.mp4" type="video/mp4">
-            </video>
-
-            <div class="overlay-info">
-                <h2 style="margin:0; font-size: 1.8rem;">Cuenta las Manzanas</h2>
-                <p style="color:#FFE66D; font-weight:bold; margin:10px 0; font-size: 1.2rem;">💰 Solo $12 MXN</p>
-                
-                <div class="btn-group" id="botonesContenedor">
-                    </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const yaPago = params.get('pago') === 'exitoso' || params.get('status') === 'approved';
-        
-        const datosLibro = {
+    // AQUÍ ESTÁN LOS 6 VIDEOS UNIDOS SIN ERRORES
+    const misLibros = [
+        {
+            titulo: "Cuenta las Manzanas",
+            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20las%20manzanas.mp4",
             pagoUrl: "https://mpago.la/2i9aDso",
             pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20las%20manzanas.pdf",
             telegramUrl: "https://t.me/mis_libros_gen_bot"
-        };
-
-        const botones = document.getElementById('botonesContenedor');
-
-        if (yaPago) {
-            botones.innerHTML = `
-                <a href="${datosLibro.pdfUrl}" class="btn btn-pdf" download>📥 DESCARGAR PDF</a>
-            `;
-        } else {
-            botones.innerHTML = `
-                <a href="${datosLibro.pagoUrl}" class="btn btn-pago">💳 COMPRAR AHORA</a>
-                <a href="${datosLibro.telegramUrl}" class="btn btn-telegram">✈️ PAGO POR TRANSFERENCIA</a>
-            `;
+        },
+        {
+            titulo: "La Familia",
+            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4",
+            pagoUrl: "https://mpago.la/2X3uMmY",
+            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia5.pdf",
+            telegramUrl: "https://t.me/mis_libros_gen_bot"
+        },
+        {
+            titulo: "Coloreando",
+            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando6.mp4",
+            pagoUrl: "https://mpago.la/2fCekEw",
+            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando6.pdf",
+            telegramUrl: "https://t.me/mis_libros_gen_bot"
+        },
+        {
+            titulo: "COLOREA Y APRENDE",
+            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20aprende4.mp4",
+            pagoUrl: "https://mpago.la/2X3mQEa",
+            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20aprende3.pdf",
+            telegramUrl: "https://t.me/mis_libros_gen_bot"
+        },
+        {
+            titulo: "CUENTA Y COLOREA",
+            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20y%20colorea3.mp4",
+            pagoUrl: "https://mpago.la/2riNyBu",
+            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20y%20colorea4.pdf",
+            telegramUrl: "https://t.me/mis_libros_gen_bot"
+        },
+        {
+            titulo: "APRENDIENDO A ESCRIBIR",
+            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/escribir2.mp4",
+            pagoUrl: "https://mpago.la/1phomeu",
+            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/escribir2.pdf",
+            telegramUrl: "https://t.me/mis_libros_gen_bot"
         }
+    ];
 
-        // Intento de reproducción forzada por si el navegador bloquea el autoplay
-        const video = document.getElementById('videoPrincipal');
-        video.play().catch(() => {
-            console.log("El usuario debe interactuar para reproducir el audio.");
-        });
-    </script>
-</body>
-</html>
+    const contenedor = document.getElementById('app');
+
+    misLibros.forEach((libro) => {
+        const card = document.createElement('div');
+        card.className = 'libro-card';
+        card.innerHTML = `
+            <video controls playsinline preload="metadata">
+                <source src="${libro.video}" type="video/mp4">
+            </video>
+            <div class="overlay-info">
+                <div class="titulo-libro">${libro.titulo}</div>
+                <div class="precio-tag">💰 Solo $12 MXN</div>
+                <div class="btn-group">
+                    ${yaPago ? 
+                        `<a href="${libro.pdfUrl}" class="btn btn-pdf" download>📥 DESCARGAR PDF</a>` : 
+                        `<a href="${libro.pagoUrl}" class="btn btn-pago">💳 COMPRAR AHORA</a>
+                         <a href="${libro.telegramUrl}" class="btn btn-telegram">✈️ PAGO POR TRANSFERENCIA</a>`
+                    }
+                </div>
+            </div>
+        `;
+        contenedor.appendChild(card);
+    });
+                      </script>
