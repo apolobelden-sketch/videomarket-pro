@@ -1,4 +1,4 @@
->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,9 +8,9 @@
     <style>
         body { margin: 0; background: #000; font-family: sans-serif; color: white; text-align: center; }
         .header { background: #6495ED; padding: 15px; font-weight: bold; }
-        .video-card { height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
-        /* Usamos un contenedor con fondo gris para saber dónde debería estar el video */
-        .video-box { width: 100%; max-width: 350px; aspect-ratio: 9/16; background: #222; border-radius: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .video-card { height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        /* Forzamos el tamaño para que el celular no se confunda */
+        .video-box { width: 300px; height: 530px; background: #111; border-radius: 20px; overflow: hidden; border: 2px solid #333; }
         video { width: 100%; height: 100%; object-fit: cover; }
         .btn { display: inline-block; margin-top: 20px; padding: 15px 40px; background: #009EE3; color: white; text-decoration: none; border-radius: 30px; font-weight: bold; }
     </style>
@@ -22,8 +22,8 @@
         <h2>LA FAMILIA</h2>
         
         <div class="video-box">
-            <video controls playsinline preload="auto">
-                <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4?download=" type="video/mp4">
+            <video id="p" controls playsinline loop muted>
+                <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/render/image/public/Videos/familia5.mp4" type="video/mp4">
             </video>
         </div>
 
@@ -31,10 +31,14 @@
     </div>
 
     <script>
-        // Intentar que cargue sí o sí
-        window.onload = function() {
-            const v = document.querySelector('video');
-            v.load();
+        // Intentar forzar la carga 3 veces si falla
+        window.onload = () => {
+            const v = document.getElementById('p');
+            v.play().catch(() => {
+                console.log("Esperando clic...");
+                // Si no arranca, lo intentamos de nuevo al tocar la pantalla
+                document.body.onclick = () => v.play();
+            });
         };
     </script>
 </body>
