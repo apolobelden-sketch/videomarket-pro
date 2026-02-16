@@ -6,184 +6,174 @@
 <title>Happy Kids - Libros Interactivos</title>
 
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #000;
-    overflow: hidden;
+body{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI',sans-serif;
+    background:#000;
+    overflow:hidden;
 }
 
-.tienda-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    text-align: center;
-    padding: 15px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-    z-index: 1000;
+.tienda-header{
+    position:fixed;
+    top:0;
+    width:100%;
+    text-align:center;
+    padding:15px;
+    font-size:1.5rem;
+    font-weight:bold;
+    color:white;
+    background:linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    z-index:1000;
 }
 
-.contenedor {
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+.contenedor{
+    height:100vh;
+    overflow-y:scroll;
+    scroll-snap-type:y mandatory;
 }
 
-.libro-card {
-    height: 100vh;
-    width: 100%;
-    position: relative;
-    scroll-snap-align: start;
-    overflow: hidden;
-    background: #000;
+.libro-card{
+    height:100vh;
+    width:100%;
+    position:relative;
+    scroll-snap-align:start;
+    background:#000;
 }
 
-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    background:black;
 }
 
-.overlay-info {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 25px;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    color: white;
-    box-sizing: border-box;
+.overlay-info{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding:25px;
+    background:linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color:white;
+    box-sizing:border-box;
 }
 
-.titulo-libro {
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-bottom: 5px;
+.titulo-libro{
+    font-size:1.4rem;
+    font-weight:bold;
+    margin-bottom:5px;
 }
 
-.precio-tag {
-    color: #FFE66D;
-    margin-bottom: 15px;
-    font-weight: bold;
+.precio-tag{
+    color:#FFE66D;
+    margin-bottom:15px;
+    font-weight:bold;
 }
 
-.btn-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.btn-group{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
-.btn {
-    padding: 14px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    font-size: 1rem;
+.btn{
+    padding:14px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:bold;
+    text-align:center;
+    color:white;
+    font-size:1rem;
 }
 
-.btn-pago { background: #009EE3; }
-.btn-telegram { background: #24A1DE; }
-.btn-pdf { background: #28a745; }
+.btn-pago{background:#009EE3;}
+.btn-telegram{background:#24A1DE;}
+.btn-pdf{background:#28a745;}
 </style>
 </head>
 
 <body>
 
 <div class="tienda-header">🌈 Happy Kids</div>
-<div id="app" class="contenedor"></div>
+<div class="contenedor" id="contenedor">
 
-<script>
-const params = new URLSearchParams(window.location.search);
-const yaPago = params.get('pago') === 'exitoso' || params.get('status') === 'approved';
-
-const misLibros = [
-    {
-        titulo: "Cuenta las Manzanas",
-        video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20las%20manzanas.mp4",
-        pagoUrl: "https://mpago.la/2i9aDso",
-        pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20las%20manzanas.pdf",
-        telegramUrl: "https://t.me/mis_libros_gen_bot"
-    },
-    {
-        titulo: "La Familia",
-        video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4",
-        pagoUrl: "https://mpago.la/2X3uMmY",
-        pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia5.pdf",
-        telegramUrl: "https://t.me/mis_libros_gen_bot"
-    }
-    // puedes seguir agregando los demás igual
-];
-
-const contenedor = document.getElementById('app');
-
-misLibros.forEach((libro, index) => {
-    const card = document.createElement('div');
-    card.className = 'libro-card';
-
-    card.innerHTML = `
-        <video playsinline preload="metadata">
-            <source src="${libro.video}" type="video/mp4">
+    <!-- LIBRO 1 -->
+    <div class="libro-card">
+        <video controls playsinline preload="metadata">
+            <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20las%20manzanas.mp4" type="video/mp4">
         </video>
 
         <div class="overlay-info">
-            <div class="titulo-libro">${libro.titulo}</div>
+            <div class="titulo-libro">Cuenta las Manzanas</div>
             <div class="precio-tag">💰 Solo $12 MXN</div>
 
             <div class="btn-group">
-                ${yaPago ? `
-                    <a href="${libro.pdfUrl}" download class="btn btn-pdf">
-                        📥 DESCARGAR PDF
-                    </a>
-                ` : `
-                    <a href="${libro.pagoUrl}" class="btn btn-pago">
-                        💳 COMPRAR AHORA
-                    </a>
-                    <a href="${libro.telegramUrl}" class="btn btn-telegram">
-                        ✈️ PAGO POR TRANSFERENCIA
-                    </a>
-                `}
+                <a href="https://mpago.la/2i9aDso" class="btn btn-pago">
+                    💳 COMPRAR AHORA
+                </a>
+                <a href="https://t.me/mis_libros_gen_bot" class="btn btn-telegram">
+                    ✈️ PAGO POR TRANSFERENCIA
+                </a>
             </div>
         </div>
-    `;
+    </div>
 
-    contenedor.appendChild(card);
-});
+    <!-- LIBRO 2 -->
+    <div class="libro-card">
+        <video controls playsinline preload="metadata">
+            <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4" type="video/mp4">
+        </video>
 
-/* 🔥 SISTEMA TIPO TIKTOK */
+        <div class="overlay-info">
+            <div class="titulo-libro">La Familia</div>
+            <div class="precio-tag">💰 Solo $12 MXN</div>
+
+            <div class="btn-group">
+                <a href="https://mpago.la/2X3uMmY" class="btn btn-pago">
+                    💳 COMPRAR AHORA
+                </a>
+                <a href="https://t.me/mis_libros_gen_bot" class="btn btn-telegram">
+                    ✈️ PAGO POR TRANSFERENCIA
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+// 🔥 CONTROL PROFESIONAL DE VIDEOS
+
+const contenedor = document.getElementById("contenedor");
 const videos = document.querySelectorAll("video");
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        const video = entry.target;
-
-        if (entry.isIntersecting) {
-            // Pausa todos
-            videos.forEach(v => {
-                if (v !== video) {
-                    v.pause();
-                    v.currentTime = 0;
-                }
-            });
-
-            // Reproduce el visible
-            video.play().catch(() => {});
-        } else {
+// 1️⃣ Nunca permitir dos videos sonando al mismo tiempo
+document.addEventListener("play", function(e){
+    videos.forEach(video=>{
+        if(video !== e.target){
             video.pause();
-            video.currentTime = 0;
         }
     });
-}, {
-    threshold: 0.7
+}, true);
+
+
+// 2️⃣ Si haces scroll y el video sale de pantalla → se pausa
+contenedor.addEventListener("scroll", function(){
+
+    videos.forEach(video => {
+
+        const rect = video.getBoundingClientRect();
+
+        // Si el video ya no está visible en pantalla
+        if(rect.bottom < 0 || rect.top > window.innerHeight){
+            video.pause();
+        }
+
+    });
+
 });
 
-videos.forEach(video => {
-    observer.observe(video);
-});
 </script>
 
 </body>
