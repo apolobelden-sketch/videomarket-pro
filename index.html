@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Kids Store</title>
     <style>
-        /* Pantalla completa estilo TikTok */
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; font-family: sans-serif; }
         
         /* Video de fondo real */
@@ -13,39 +13,40 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            object-fit: cover; /* Llena toda la pantalla */
-            z-index: 1;
+            object-fit: cover;
+            z-index: 1; /* El video está atrás */
         }
 
-        /* Capa de interfaz (Encima del video) */
+        /* Capa de interfaz (Nombre y Botones) */
         .interfaz {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 2;
+            z-index: 2; /* Las letras están adelante */
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Nombre arriba, botones abajo */
+            justify-content: space-between;
             padding: 40px 0;
             box-sizing: border-box;
-            background: linear-gradient(rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.4) 100%);
+            /* ESTA LÍNEA ES LA MAGIA: Permite que el clic pase al video */
+            pointer-events: none; 
         }
 
-        /* Nombre arriba (Limpio) */
         .header {
             text-align: center;
             color: white;
             font-size: 2.2rem;
             font-weight: bold;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
         }
 
-        /* Botones abajo (Nada estorbosos) */
         .footer {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 12px;
+            /* ESTO PERMITE QUE LOS BOTONES SÍ SE PUEDAN TOCAR */
+            pointer-events: auto; 
         }
 
         .btn {
@@ -62,30 +63,28 @@
 
         .btn-mp { background: #009EE3; color: white; }
         
-        /* BOTÓN DE DESCARGA: Empieza invisible (no invasivo) */
+        /* BOTÓN DE DESCARGA: Invisible hasta el pago */
         #btn-pdf { 
             background: #28a745; 
             color: white; 
             display: none; 
         }
 
-        .etiqueta { color: white; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; text-shadow: 1px 1px 3px #000; }
+        .etiqueta { color: white; font-size: 0.9rem; text-transform: uppercase; text-shadow: 1px 1px 3px #000; }
     </style>
 </head>
 <body>
 
     <video id="video-tiktok" controls preload="auto">
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20aprende4.mp4" type="video/mp4">
+        <source src="NOMBRE_EXACTO.MP4" type="video/mp4">
     </video>
 
     <div class="interfaz">
         <div class="header">🌈 Happy Kids</div>
 
         <div class="footer">
-            <div class="etiqueta">Colorea y Aprende4</div>
-            
+            <div class="etiqueta">Colorea y Aprende</div>
             <a href="TU_LINK_MERCADO_PAGO" class="btn btn-mp">💳 COMPRAR AHORA</a>
-            
             <a href="TU_ARCHIVO.pdf" id="btn-pdf" class="btn">📂 DESCARGAR PDF</a>
         </div>
     </div>
@@ -93,13 +92,10 @@
     <script>
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
-            // Si regresa de pagar y el link tiene ?pago=exitoso
             if (urlParams.get('pago') === 'exitoso') {
                 document.getElementById('btn-pdf').style.display = 'block';
-                document.querySelector('.etiqueta').innerHTML = "¡PAGO CONFIRMADO!";
             }
         };
     </script>
-
 </body>
 </html>
