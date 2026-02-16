@@ -1,23 +1,42 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Prueba Directa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Kids</title>
+    <style>
+        body { margin: 0; background: #000; font-family: sans-serif; color: white; text-align: center; }
+        .header { background: #6495ED; padding: 15px; font-weight: bold; }
+        .video-container { height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        /* Añadimos un borde para ver si el cuadro del video al menos existe */
+        video { width: 100%; max-width: 350px; border: 2px solid #333; border-radius: 15px; background: #111; }
+        .btn { display: inline-block; margin-top: 20px; padding: 15px 40px; background: #009EE3; color: white; text-decoration: none; border-radius: 30px; font-weight: bold; }
+    </style>
 </head>
-<body style="background-color: black; color: white; text-align: center;">
+<body>
+    <div class="header">🌈 Happy Kids</div>
 
-    <h1>PRUEBA DE CONEXIÓN DIRECTA</h1>
+    <div class="video-container">
+        <h2 id="titulo">CARGANDO...</h2>
+        
+        <video id="reproductor" controls playsinline preload="auto">
+            <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4" type="video/mp4">
+            Tu navegador no soporta video.
+        </video>
 
-    <video width="320" height="560" controls autoplay muted playsinline>
-        <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4" type="video/mp4">
-        Tu navegador no soporta el video.
-    </video>
-
-    <div style="margin-top: 20px;">
-        <p>Si ves un cuadro negro con una X o una cámara tachada,</p>
-        <p>GitHub no tiene permiso de "ver" a Supabase.</p>
+        <a href="https://mpago.la/2X3uMmY" class="btn">💳 COMPRAR AHORA</a>
     </div>
 
+    <script>
+        // Este pequeño truco intentará "despertar" el video al cargar
+        window.onload = function() {
+            const v = document.getElementById('reproductor');
+            const t = document.getElementById('titulo');
+            t.innerText = "LA FAMILIA";
+            
+            // Intentamos cargar el video manualmente
+            v.load();
+        };
+    </script>
 </body>
 </html>
