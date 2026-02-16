@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,13 +7,13 @@
     <style>
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; font-family: sans-serif; }
         
-        /* Video de fondo real */
+        /* Video de fondo real - TikTok Style */
         video {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             object-fit: cover;
-            z-index: 1; /* El video está atrás */
+            z-index: 1;
         }
 
         /* Capa de interfaz (Nombre y Botones) */
@@ -22,14 +21,13 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 2; /* Las letras están adelante */
+            z-index: 2;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             padding: 40px 0;
             box-sizing: border-box;
-            /* ESTA LÍNEA ES LA MAGIA: Permite que el clic pase al video */
-            pointer-events: none; 
+            pointer-events: none; /* Esto permite que el toque llegue al video para dar Play */
         }
 
         .header {
@@ -45,8 +43,7 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
-            /* ESTO PERMITE QUE LOS BOTONES SÍ SE PUEDAN TOCAR */
-            pointer-events: auto; 
+            pointer-events: auto; /* Esto permite tocar los botones */
         }
 
         .btn {
@@ -62,6 +59,7 @@
         }
 
         .btn-mp { background: #009EE3; color: white; }
+        .btn-tg { background: #0088cc; color: white; } /* Azul Telegram */
         
         /* BOTÓN DE DESCARGA: Invisible hasta el pago */
         #btn-pdf { 
@@ -70,30 +68,36 @@
             display: none; 
         }
 
-        .etiqueta { color: white; font-size: 0.9rem; text-transform: uppercase; text-shadow: 1px 1px 3px #000; }
+        .etiqueta { color: white; font-size: 0.9rem; text-transform: lowercase; text-shadow: 1px 1px 3px #000; }
     </style>
 </head>
 <body>
 
     <video id="video-tiktok" controls preload="auto">
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20aprende4.mp4" type="video/mp4">
+        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/videos/colorea y aprende.mp4" type="video/mp4">
     </video>
 
     <div class="interfaz">
         <div class="header">🌈 Happy Kids</div>
 
         <div class="footer">
-            <div class="etiqueta">colorea y aprende4</div>
+            <div class="etiqueta">colorea y aprende</div>
+            
             <a href="https://mpago.la/2X3MqEa" class="btn btn-mp">💳 COMPRAR AHORA</a>
-            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20aprende3.pdf" id="btn-pdf" class="btn">📂 DESCARGAR PDF</a>
+            
+            <a href="TU_LINK_DE_TELEGRAM_AQUI" class="btn btn-tg">✈️ UNIRSE A TELEGRAM</a>
+
+            <a href="TU_LINK_DEL_PDF_AQUI" id="btn-pdf" class="btn">📂 DESCARGAR PDF</a>
         </div>
     </div>
 
     <script>
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
+            // Solo aparece si la URL termina en ?pago=exitoso
             if (urlParams.get('pago') === 'exitoso') {
                 document.getElementById('btn-pdf').style.display = 'block';
+                document.querySelector('.etiqueta').innerHTML = "¡pago confirmado!";
             }
         };
     </script>
