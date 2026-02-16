@@ -87,24 +87,15 @@ video{
     font-size:1rem;
 }
 
-.btn-pago{
-    background:#009EE3;
-}
-
-.btn-telegram{
-    background:#24A1DE;
-}
-
-.btn-pdf{
-    background:#28a745;
-}
+.btn-pago{ background:#009EE3; }
+.btn-telegram{ background:#24A1DE; }
+.btn-pdf{ background:#28a745; }
 </style>
 </head>
 
 <body>
 
 <div class="tienda-header">🌈 Happy Kids</div>
-
 <div id="app" class="contenedor"></div>
 
 <script>
@@ -170,6 +161,16 @@ misLibros.forEach((libro)=>{
 
     contenedor.appendChild(card);
 });
+
+/* 🔥 CONTROL PARA QUE SOLO UN VIDEO SE REPRODUZCA */
+document.addEventListener('play', function(e){
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => {
+        if(video !== e.target){
+            video.pause();
+        }
+    });
+}, true);
 
 </script>
 
