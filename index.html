@@ -1,3 +1,4 @@
+>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,34 +8,32 @@
     <style>
         body { margin: 0; background: #000; font-family: sans-serif; color: white; text-align: center; }
         .header { background: #6495ED; padding: 15px; font-weight: bold; }
-        .video-container { height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
-        /* Añadimos un borde para ver si el cuadro del video al menos existe */
-        video { width: 100%; max-width: 350px; border: 2px solid #333; border-radius: 15px; background: #111; }
+        .video-card { height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        /* Usamos un contenedor con fondo gris para saber dónde debería estar el video */
+        .video-box { width: 100%; max-width: 350px; aspect-ratio: 9/16; background: #222; border-radius: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        video { width: 100%; height: 100%; object-fit: cover; }
         .btn { display: inline-block; margin-top: 20px; padding: 15px 40px; background: #009EE3; color: white; text-decoration: none; border-radius: 30px; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="header">🌈 Happy Kids</div>
 
-    <div class="video-container">
-        <h2 id="titulo">CARGANDO...</h2>
+    <div class="video-card">
+        <h2>LA FAMILIA</h2>
         
-        <video id="reproductor" controls playsinline preload="auto">
-            <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4" type="video/mp4">
-            Tu navegador no soporta video.
-        </video>
+        <div class="video-box">
+            <video controls playsinline preload="auto">
+                <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4?download=" type="video/mp4">
+            </video>
+        </div>
 
         <a href="https://mpago.la/2X3uMmY" class="btn">💳 COMPRAR AHORA</a>
     </div>
 
     <script>
-        // Este pequeño truco intentará "despertar" el video al cargar
+        // Intentar que cargue sí o sí
         window.onload = function() {
-            const v = document.getElementById('reproductor');
-            const t = document.getElementById('titulo');
-            t.innerText = "LA FAMILIA";
-            
-            // Intentamos cargar el video manualmente
+            const v = document.querySelector('video');
             v.load();
         };
     </script>
