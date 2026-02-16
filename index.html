@@ -1,75 +1,28 @@
-
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const yaPago = params.get('pago') === 'exitoso' || params.get('status') === 'approved';
-
-    // AQUÍ ESTÁN LOS 6 VIDEOS UNIDOS SIN ERRORES
-    const misLibros = [
-        {
-            titulo: "Cuenta las Manzanas",
-            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20las%20manzanas.mp4",
-            pagoUrl: "https://mpago.la/2i9aDso",
-            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20las%20manzanas.pdf",
-            telegramUrl: "https://t.me/mis_libros_gen_bot"
-        },
-        {
-            titulo: "La Familia",
-            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4",
-            pagoUrl: "https://mpago.la/2X3uMmY",
-            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia5.pdf",
-            telegramUrl: "https://t.me/mis_libros_gen_bot"
-        },
-        {
-            titulo: "Coloreando",
-            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando6.mp4",
-            pagoUrl: "https://mpago.la/2fCekEw",
-            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando6.pdf",
-            telegramUrl: "https://t.me/mis_libros_gen_bot"
-        },
-        {
-            titulo: "COLOREA Y APRENDE",
-            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20aprende4.mp4",
-            pagoUrl: "https://mpago.la/2X3mQEa",
-            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20aprende3.pdf",
-            telegramUrl: "https://t.me/mis_libros_gen_bot"
-        },
-        {
-            titulo: "CUENTA Y COLOREA",
-            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20y%20colorea3.mp4",
-            pagoUrl: "https://mpago.la/2riNyBu",
-            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20y%20colorea4.pdf",
-            telegramUrl: "https://t.me/mis_libros_gen_bot"
-        },
-        {
-            titulo: "APRENDIENDO A ESCRIBIR",
-            video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/escribir2.mp4",
-            pagoUrl: "https://mpago.la/1phomeu",
-            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/escribir2.pdf",
-            telegramUrl: "https://t.me/mis_libros_gen_bot"
-        }
-    ];
-
-    const contenedor = document.getElementById('app');
-
-    misLibros.forEach((libro) => {
-        const card = document.createElement('div');
-        card.className = 'libro-card';
-        card.innerHTML = `
-            <video controls playsinline preload="metadata">
-                <source src="${libro.video}" type="video/mp4">
-            </video>
-            <div class="overlay-info">
-                <div class="titulo-libro">${libro.titulo}</div>
-                <div class="precio-tag">💰 Solo $12 MXN</div>
-                <div class="btn-group">
-                    ${yaPago ? 
-                        `<a href="${libro.pdfUrl}" class="btn btn-pdf" download>📥 DESCARGAR PDF</a>` : 
-                        `<a href="${libro.pagoUrl}" class="btn btn-pago">💳 COMPRAR AHORA</a>
-                         <a href="${libro.telegramUrl}" class="btn btn-telegram">✈️ PAGO POR TRANSFERENCIA</a>`
-                    }
-                </div>
-            </div>
-        `;
-        contenedor.appendChild(card);
-    });
-                      </script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Happy Kids</title>
+    <style>
+        body { margin: 0; background: #000; font-family: sans-serif; color: white; }
+        .tienda-header { position: fixed; top: 0; width: 100%; text-align: center; padding: 15px; background: rgba(0,0,0,0.8); z-index: 100; }
+        .contenedor { height: 100vh; display: flex; align-items: center; justify-content: center; }
+        video { width: 100%; height: 100%; object-fit: cover; }
+        .overlay-info { position: absolute; bottom: 50px; text-align: center; width: 100%; }
+        .btn { padding: 15px 30px; background: #009EE3; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="tienda-header">🌈 PRUEBA DE VUELO</div>
+    <div class="contenedor">
+        <video autoplay muted loop playsinline>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-info">
+            <h1>¡SI VES AL CONEJITO, TU CÓDIGO ESTÁ BIEN!</h1>
+            <a href="#" class="btn">BOTÓN DE PRUEBA</a>
+        </div>
+    </div>
+</body>
+</html>
