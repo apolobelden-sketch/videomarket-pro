@@ -5,55 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Kids</title>
     <style>
-        body { margin: 0; background: #000; font-family: sans-serif; color: white; overflow: hidden; }
-        .tienda-header { position: fixed; top: 0; width: 100%; text-align: center; padding: 15px; background: linear-gradient(to bottom, #87CEEB, #6495ED); z-index: 100; font-weight: bold; }
+        body { margin: 0; background: #000; font-family: sans-serif; color: white; }
+        .tienda-header { position: fixed; top: 0; width: 100%; text-align: center; padding: 15px; background: #6495ED; z-index: 100; font-weight: bold; }
         .contenedor { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; }
-        .libro-card { height: 100vh; position: relative; scroll-snap-align: start; background: #000; display: flex; align-items: center; justify-content: center; }
+        .libro-card { height: 100vh; position: relative; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; background: #000; }
         video { width: 100%; height: 100%; object-fit: cover; }
-        .overlay-info { position: absolute; bottom: 0; width: 100%; padding: 30px 20px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); box-sizing: border-box; }
-        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        .btn { padding: 15px; text-align: center; text-decoration: none; color: white; border-radius: 25px; font-weight: bold; }
-        .btn-pago { background: #009EE3; }
-        .btn-telegram { background: #24A1DE; }
+        .overlay { position: absolute; bottom: 0; width: 100%; padding: 40px 20px; background: linear-gradient(transparent, black); text-align: center; box-sizing: border-box; }
+        .btn { display: inline-block; padding: 15px 30px; background: #009EE3; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <div class="tienda-header">🌈 Happy Kids</div>
-    <div id="app" class="contenedor"></div>
 
-    <script>
-        // ESTA LISTA TIENE LOS NOMBRES EXACTOS DE TU CAPTURA DE LAS 12:43
-        const misLibros = [
-            { titulo: "COLOREA Y APRENDE", video: "colorea%20y%20aprende4.mp4", pago: "2X3mQEa" },
-            { titulo: "COLOREANDO", video: "coloreando6.mp4", pago: "2fCekEw" },
-            { titulo: "CUENTA LAS MANZANAS", video: "cuenta%20las%20manzanas.mp4", pago: "2i9aDso" },
-            { titulo: "CUENTA Y COLOREA", video: "cuenta%20y%20colorea3.mp4", pago: "2riNyBu" },
-            { titulo: "ESCRIBIR", video: "escribir2.mp4", pago: "1phomeu" },
-            { titulo: "LA FAMILIA", video: "familia5.mp4", pago: "2X3uMmY" }
-        ];
+    <div class="contenedor">
+        <div class="libro-card">
+            <video playsinline loop muted autoplay>
+                <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20aprende4.mp4" type="video/mp4">
+            </video>
+            <div class="overlay">
+                <h2>COLOREA Y APRENDE</h2>
+                <a href="https://mpago.la/2X3mQEa" class="btn">💳 COMPRAR AHORA</a>
+            </div>
+        </div>
 
-        const baseVideo = "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/";
-        const contenedor = document.getElementById('app');
+        <div class="libro-card">
+            <video playsinline loop muted autoplay>
+                <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4" type="video/mp4">
+            </video>
+            <div class="overlay">
+                <h2>LA FAMILIA</h2>
+                <a href="https://mpago.la/2X3uMmY" class="btn">💳 COMPRAR AHORA</a>
+            </div>
+        </div>
+    </div>
 
-        misLibros.forEach((libro) => {
-            const card = document.createElement('div');
-            card.className = 'libro-card';
-            card.innerHTML = `
-                <video playsinline preload="metadata" loop muted autoplay>
-                    <source src="${baseVideo}${libro.video}" type="video/mp4">
-                </video>
-                <div class="overlay-info">
-                    <h2 style="margin:0">${libro.titulo}</h2>
-                    <p style="color:#FFE66D; font-weight:bold; margin:5px 0">💰 Solo $12 MXN</p>
-                    <div class="btn-group">
-                        <a href="https://mpago.la/${libro.pago}" class="btn btn-pago">💳 COMPRAR AHORA</a>
-                        <a href="https://t.me/mis_libros_gen_bot" class="btn btn-telegram">✈️ PAGO POR TRANSFERENCIA</a>
-                    </div>
-                </div>
-            `;
-            contenedor.appendChild(card);
-        });
-    </script>
 </body>
 </html>
