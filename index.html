@@ -3,232 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids - Libros Interactivos</title>
-    <link rel="icon" href="https://raw.githubusercontent.com/google/material-design-icons/master/png/social/public/24dp_FILL_white/twotone_sentiment_satisfied_alt_white_24dp.png" type="image/png">
-    
+    <title>Happy Kids - Cuenta las Manzanas</title>
     <style>
-        /* Estilos generales para el cuerpo */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #f0f8ff; /* Fondo azul cielo suave por defecto */
-            color: #333; /* Color de texto oscuro para contraste */
-            overflow: hidden; /* Evita barras de desplazamiento no deseadas */
-            display: flex; /* Para centrar contenido si es necesario */
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Ocupa al menos el alto completo de la ventana */
-        }
-
-        /* Contenedor principal de la aplicación */
-        #app {
-            height: 100vh; /* Toma el alto completo de la ventana */
-            overflow-y: scroll; /* Permite desplazamiento vertical */
-            scroll-snap-type: y mandatory; /* Hace que el scroll se detenga en cada sección */
-            width: 100%;
-            max-width: 600px; /* Ancho máximo para mejor visualización en móviles */
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            background-color: #fff; /* Fondo blanco para las tarjetas de libros */
-        }
-
-        /* Estilo del encabezado de la tienda */
-        .tienda-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            max-width: inherit; /* Hereda el ancho máximo del #app */
-            text-align: center;
-            padding: 15px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(to bottom, #87CEEB, #6495ED); /* Degradado de cielo */
-            z-index: 1000; /* Asegura que esté por encima de otros elementos */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        /* Tarjeta individual de cada libro */
-        .libro-card {
-            height: 100vh;
-            width: 100%;
-            position: relative;
-            scroll-snap-align: start; /* El scroll se alinea con el inicio de cada tarjeta */
-            overflow: hidden;
-            background-color: #eee; /* Fondo gris claro mientras carga el video */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        /* Estilo del video */
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Cubre todo el espacio sin distorsionarse */
-            display: block; /* Elimina espacio extra debajo del video */
-        }
-
-        /* Capa de información superpuesta sobre el video */
-        .overlay-info {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            padding: 25px;
-            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); /* Degradado oscuro en la parte inferior */
-            color: white;
-            box-sizing: border-box; /* Incluye padding en el ancho */
-            text-align: center;
-        }
-
-        /* Título del libro */
-        .titulo-libro {
-            font-size: 1.6rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sombra para mejor lectura */
-        }
-
-        /* Etiqueta de precio */
-        .precio-tag {
-            color: #FFE66D; /* Amarillo dorado */
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        /* Grupo de botones */
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px; /* Espacio entre botones */
-            width: 80%; /* Ancho de los botones */
-            margin: 0 auto; /* Centrar botones */
-            max-width: 300px;
-        }
-
-        /* Estilo base de los botones */
-        .btn {
-            padding: 15px;
-            border-radius: 25px; /* Bordes más redondeados */
-            text-decoration: none;
-            font-weight: bold;
-            text-align: center;
-            color: white;
-            font-size: 1rem;
-            transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        /* Colores específicos para cada tipo de botón */
-        .btn-pago { background: #007bff; } /* Azul brillante */
-        .btn-pago:hover { background: #0056b3; }
-
-        .btn-telegram { background: #28a745; } /* Verde para Telegram */
-        .btn-telegram:hover { background: #218838; }
-
-        .btn-pdf { background: #dc3545; } /* Rojo para PDF */
-        .btn-pdf:hover { background: #c82333; }
+        body { margin: 0; background: #1a1a1a; font-family: 'Segoe UI', sans-serif; color: white; overflow: hidden; }
+        .tienda-header { position: fixed; top: 0; width: 100%; text-align: center; padding: 15px; background: linear-gradient(to bottom, #87CEEB, #6495ED); z-index: 100; font-weight: bold; font-size: 1.5rem; }
+        .contenedor { height: 100vh; display: flex; align-items: center; justify-content: center; background: #000; }
+        .libro-card { height: 100vh; width: 100%; position: relative; }
+        video { width: 100%; height: 100%; object-fit: cover; }
+        .overlay-info { position: absolute; bottom: 0; width: 100%; padding: 40px 20px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); box-sizing: border-box; text-align: center; }
+        .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; max-width: 300px; margin-left: auto; margin-right: auto; }
+        .btn { padding: 15px; text-align: center; text-decoration: none; color: white; border-radius: 30px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s; }
+        .btn-pago { background: #009EE3; }
+        .btn-pdf { background: #28a745; }
+        .btn-telegram { background: #24A1DE; }
     </style>
 </head>
-
 <body>
 
     <div class="tienda-header">🌈 Happy Kids</div>
-    <div id="app" class="contenedor"></div>
+
+    <div id="app" class="contenedor">
+        <div class="libro-card">
+            <video playsinline preload="metadata" loop muted autoplay id="videoPrincipal">
+                <source src="https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20las%20manzanas.mp4" type="video/mp4">
+            </video>
+
+            <div class="overlay-info">
+                <h2 style="margin:0; font-size: 1.8rem;">Cuenta las Manzanas</h2>
+                <p style="color:#FFE66D; font-weight:bold; margin:10px 0; font-size: 1.2rem;">💰 Solo $12 MXN</p>
+                
+                <div class="btn-group" id="botonesContenedor">
+                    </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const yaPago = params.get('pago') === 'exitoso' || params.get('status') === 'approved';
+        
+        const datosLibro = {
+            pagoUrl: "https://mpago.la/2i9aDso",
+            pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20las%20manzanas.pdf",
+            telegramUrl: "https://t.me/mis_libros_gen_bot"
+        };
 
-        const misLibros = [
-            {
-                titulo: "Cuenta las Manzanas",
-                video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20las%20manzanas.mp4",
-                pagoUrl: "https://mpago.la/2i9aDso",
-                pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20las%20manzanas.pdf",
-                telegramUrl: "https://t.me/mis_libros_gen_bot"
-            },
-            {
-                titulo: "La Familia",
-                video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia5.mp4",
-                pagoUrl: "https://mpago.la/2X3uMmY",
-                pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia5.pdf",
-                telegramUrl: "https://t.me/mis_libros_gen_bot"
-            },
-            {
-                titulo: "Coloreando",
-                video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando6.mp4",
-                pagoUrl: "https://mpago.la/2fCekEw",
-                pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando6.pdf",
-                telegramUrl: "https://t.me/mis_libros_gen_bot"
-            },
-            {
-                titulo: "Coloreando y aprendiendo",
-                video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20aprende4.mp4",
-                pagoUrl: "https://mpago.la/2X3mQEa",
-                pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20aprende3.pdf",
-                telegramUrl: "https://t.me/mis_libros_gen_bot"
-            },
-            {
-                titulo: "Cuenta y colorea",
-                video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/cuenta%20y%20colorea3.mp4",
-                pagoUrl: "https://mpago.la/2riNyBu",
-                pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/cuenta%20y%20colorea4.pdf",
-                telegramUrl: "https://t.me/mis_libros_gen_bot"
-            },
-            {
-                titulo: "Escribir",
-                video: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/Videos/escribir2.mp4",
-                pagoUrl: "https://mpago.la/1phomeu",
-                pdfUrl: "https://nmdljfwudjkrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/escribir2.pdf",
-                telegramUrl: "https://t.me/mis_libros_gen_bot"
-            }
-        ];
+        const botones = document.getElementById('botonesContenedor');
 
-        const contenedor = document.getElementById('app');
-
-        misLibros.forEach((libro) => {
-            const card = document.createElement('div');
-            card.className = 'libro-card';
-            card.innerHTML = `
-                <video controls playsinline preload="metadata" loop muted>
-                    <source src="${libro.video}" type="video/mp4">
-                    Tu navegador no soporta la reproducción de video.
-                </video>
-                <div class="overlay-info">
-                    <div class="titulo-libro">${libro.titulo}</div>
-                    <div class="precio-tag">💰 Solo $12 MXN</div>
-                    <div class="btn-group">
-                        ${yaPago ? `
-                            <a href="${libro.pdfUrl}" class="btn btn-pdf" download>
-                                📥 DESCARGAR PDF
-                            </a>
-                        ` : `
-                            <a href="${libro.pagoUrl}" class="btn btn-pago">
-                                💳 COMPRAR AHORA
-                            </a>
-                            <a href="${libro.telegramUrl}" class="btn btn-telegram">
-                                ✈️ PAGO POR TRANSFERENCIA
-                            </a>
-                        `}
-                    </div>
-                </div>
+        if (yaPago) {
+            botones.innerHTML = `
+                <a href="${datosLibro.pdfUrl}" class="btn btn-pdf" download>📥 DESCARGAR PDF</a>
             `;
-            contenedor.appendChild(card);
-        });
+        } else {
+            botones.innerHTML = `
+                <a href="${datosLibro.pagoUrl}" class="btn btn-pago">💳 COMPRAR AHORA</a>
+                <a href="${datosLibro.telegramUrl}" class="btn btn-telegram">✈️ PAGO POR TRANSFERENCIA</a>
+            `;
+        }
 
-        // Control para que solo un video se reproduzca a la vez
-        document.addEventListener('play', function(e) {
-            const videos = document.querySelectorAll('video');
-            videos.forEach(video => {
-                if (video !== e.target) {
-                    video.pause();
-                }
-            });
-        }, true);
+        // Intento de reproducción forzada por si el navegador bloquea el autoplay
+        const video = document.getElementById('videoPrincipal');
+        video.play().catch(() => {
+            console.log("El usuario debe interactuar para reproducir el audio.");
+        });
     </script>
 </body>
 </html>
