@@ -4,99 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids Store</title>
+    <title>Video Happy Kids</title>
     <style>
-        /* Fondo negro para que el video sea el protagonista sin deslumbrar */
-        body, html { margin: 0; padding: 0; height: 100%; background: #000; font-family: 'Segoe UI', sans-serif; overflow: hidden; color: white; }
-        
-        /* 1. Nombre de la tienda arriba (Espacio limpio) */
-        .header { 
-            height: 15vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 1.8rem; 
-            font-weight: bold;
-        }
-
-        /* 2. Video en el centro (Achicado, nada invasivo) */
-        .video-box {
-            height: 50vh; 
-            display: flex;
-            align-items: center; 
-            justify-content: center;
-        }
-
-        video {
-            max-width: 85%; /* No llega a los bordes laterales */
-            max-height: 100%;
-            border-radius: 15px; /* Bordes redondeados para suavizar */
-            box-shadow: 0 4px 20px rgba(255,255,255,0.1);
-        }
-
-        /* 3. Botones abajo (Con aire para que no se vea saturado) */
-        .footer {
-            height: 35vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .btn {
-            width: 85%;
-            max-width: 280px;
-            padding: 16px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-
-        /* Azul tipo Mercado Pago */
-        .btn-mp { background: #009EE3; color: white; }
-        
-        /* BOTÓN PDF: Totalmente oculto al inicio */
-        #btn-pdf { 
-            background: #28a745; 
-            color: white; 
-            display: none; 
-        }
-
-        .titulo-libro { font-size: 1rem; margin-bottom: 5px; opacity: 0.8; letter-spacing: 1px; }
+        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        video { max-width: 100%; max-height: 100vh; }
     </style>
 </head>
 <body>
 
-    <div class="header">🌈 Happy Kids</div>
-
-    <div class="video-box">
-        <video id="miVideo" controls>
-            <source src="NOMBRE_EXACTO.MP4" type="video/mp4">
-            Tu navegador no soporta video.
-        </video>
-    </div>
-
-    <div class="footer">
-        <div class="titulo-libro">colores y aprende</div>
-        
-        <a href="https://mpago.la/2X3MqEa" class="btn btn-mp">💳 COMPRAR AHORA</a>
-        
-        <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20aprende3.pdf" id="btn-pdf" class="btn">📂 DESCARGAR PDF</a>
-    </div>
-
-    <script>
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            // Detecta si regresamos de Mercado Pago con el parámetro de éxito
-            if (urlParams.get('pago') === 'exitoso') {
-                document.getElementById('btn-pdf').style.display = 'block';
-                document.querySelector('.titulo-libro').innerHTML = "¡LISTO! DESCARGA AQUÍ 👇";
-            }
-        };
-    </script>
+    <video controls>
+        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20aprende4.mp4" type="video/mp4">
+        Tu navegador no soporta este video.
+    </video>
 
 </body>
 </html>
