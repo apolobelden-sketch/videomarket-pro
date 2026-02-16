@@ -1,101 +1,92 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids - TikTok Style</title>
+    <title>Happy Kids - Libros Interactivos</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            width: 100%;
-            background-color: #000; /* Fondo negro como TikTok */
+            background-color: #ffffff; /* Bordes blancos */
             font-family: 'Segoe UI', Roboto, sans-serif;
-            overflow: hidden; /* Evita el scroll raro */
+            overflow: hidden;
         }
 
-        /* Contenedor principal tipo TikTok */
+        /* Contenedor principal */
         .snap-container {
             height: 100vh;
             overflow-y: scroll;
-            scroll-snap-type: y mandatory; /* Hace el efecto de "salto" entre videos */
+            scroll-snap-type: y mandatory;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .video-page {
             height: 100vh;
             width: 100%;
+            max-width: 450px; /* Borde blanco lateral */
             scroll-snap-align: start;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
 
-        /* El video ocupa todo el fondo */
+        /* TÍTULO DE LA PÁGINA ARRIBA */
+        .header-nombre {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), transparent);
+            color: white;
+            z-index: 10;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
         video {
-            height: 100%;
             width: 100%;
-            object-fit: cover; /* Se estira para llenar la pantalla */
+            height: 100%;
+            object-fit: cover;
         }
 
-        /* Capa oscura abajo para que los botones se lean bien */
+        /* Capa inferior de botones */
         .overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 40px 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 30px 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
             color: white;
-            pointer-events: none; /* Deja que toques el video */
+            z-index: 10;
         }
 
-        .info {
-            pointer-events: auto;
-            margin-bottom: 20px;
-        }
+        .info { margin-bottom: 15px; }
+        .titulo-libro { font-size: 1.3rem; font-weight: bold; }
 
-        .titulo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        /* Botones abajo del video */
-        .btn-group {
-            pointer-events: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
+        .btn-group { display: flex; flex-direction: column; gap: 8px; }
         .btn {
-            padding: 15px;
+            padding: 12px;
             border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
             text-align: center;
             color: white;
-            font-size: 1rem;
-            transition: 0.3s;
+            font-size: 0.9rem;
         }
 
         .btn-pago { background: #009EE3; }
         .btn-telegram { background: #24A1DE; }
-        .btn-pdf { background: #28a745; border: 2px solid white; }
-
-        /* Estilo para el botón de "Scroll" para avisar que hay más */
-        .scroll-hint {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
+        .btn-pdf { background: #28a745; border: 1px solid white; }
     </style>
 </head>
 <body>
@@ -137,15 +128,16 @@
             page.className = 'video-page';
             
             page.innerHTML = `
-                ${i === 0 ? '<div class="scroll-hint">Desliza hacia arriba ↑</div>' : ''}
+                <div class="header-nombre">🌈 Happy Kids</div>
+                
                 <video loop playsinline onclick="this.paused ? this.play() : this.pause()">
                     <source src="${libro.video}" type="video/mp4">
                 </video>
                 
                 <div class="overlay">
                     <div class="info">
-                        <div class="titulo">${libro.titulo}</div>
-                        <div>💰 Solo $12 MXN</div>
+                        <div class="titulo-libro">${libro.titulo}</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">💰 Solo $12 MXN</div>
                     </div>
                     
                     <div class="btn-group">
@@ -161,7 +153,6 @@
             contenedor.appendChild(page);
         });
 
-        // Autoplay al hacer scroll (como TikTok)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const video = entry.target.querySelector('video');
@@ -176,4 +167,4 @@
         document.querySelectorAll('.video-page').forEach(div => observer.observe(div));
     </script>
 </body>
-</html>
+</html
