@@ -1,110 +1,152 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids - Libros Interactivos</title>
+    <title>Happy Kids Store</title>
     <style>
-        /* Estilo Base */
-        body { margin: 0; background: #000; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white; overflow: hidden; }
+        /* Estilo TikTok: Sin márgenes y pantalla completa */
+        body { margin: 0; background: #000; font-family: 'Segoe UI', sans-serif; color: white; overflow: hidden; }
         
-        /* Cabecera */
-        .header { position: fixed; top: 0; width: 100%; text-align: center; padding: 15px; background: #6495ED; z-index: 100; font-weight: bold; font-size: 1.2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .header { position: fixed; top: 0; width: 100%; text-align: center; padding: 15px; background: rgba(100, 149, 237, 0.8); z-index: 100; font-weight: bold; }
 
-        /* Contenedor de Desplazamiento (Tipo Reel) */
-        .contenedor { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+        .contenedor { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; }
         
-        /* Tarjeta de cada Libro */
-        .libro-card { height: 100vh; position: relative; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; background: #000; }
-        
-        /* Video de fondo */
-        video { width: 100%; height: 100%; object-fit: cover; }
+        .libro-card { 
+            height: 100vh; 
+            position: relative; 
+            scroll-snap-align: start; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end; /* Empuja los botones hacia abajo */
+        }
 
-        /* Capa de información y botones */
-        .overlay { position: absolute; bottom: 0; width: 100%; padding: 50px 20px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); text-align: center; box-sizing: border-box; }
-        
-        h2 { margin: 0 0 15px 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
+        /* Video ocupa TODO el fondo */
+        .video-background { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -1; 
+            object-fit: cover; 
+        }
 
-        /* Botones */
-        .btn-comprar { display: inline-block; padding: 18px 35px; background: #009EE3; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,158,227,0.4); transition: transform 0.2s; }
-        .btn-comprar:active { transform: scale(0.95); }
+        /* Capa inferior para que los botones se vean bien */
+        .overlay { 
+            width: 100%; 
+            padding: 40px 20px 60px 20px; 
+            background: linear-gradient(transparent, rgba(0,0,0,0.8)); 
+            box-sizing: border-box; 
+            text-align: center;
+        }
+
+        h2 { margin-bottom: 15px; font-size: 1.8rem; text-shadow: 2px 2px 5px #000; text-transform: uppercase; }
+
+        /* Botones grandes uno arriba del otro */
+        .btn { 
+            display: block; 
+            width: 100%; 
+            max-width: 350px; 
+            margin: 10px auto; 
+            padding: 18px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.1rem; 
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .btn-mp { background: #009EE3; color: white; } /* Mercado Pago */
+        .btn-pdf { background: #28a745; color: white; } /* PDF */
     </style>
 </head>
 <body>
 
     <div class="header">🌈 Happy Kids Store</div>
 
-    <div class="contenedor">
-
+    <div class="contenedor" id="scroll-container">
+        
         <div class="libro-card">
-            <video playsinline loop muted autoplay crossorigin="anonymous">
-                <source src="AQUÍ_NOMBRE_DEL_VIDEO_1" type="video/mp4">
-            </video>
-            <div class="overlay">
-                <h2>LA FAMILIA</h2>
-                <a href="AQUÍ_LINK_DE_PAGO_1" class="btn-comprar">💳 COMPRAR AHORA</a>
-            </div>
-        </div>
-
-        <div class="libro-card">
-            <video playsinline loop muted autoplay crossorigin="anonymous">
-                <source src="AQUÍ_NOMBRE_DEL_VIDEO_2" type="video/mp4">
-            </video>
-            <div class="overlay">
-                <h2>APRENDIENDO A ESCRIBIR</h2>
-                <a href="AQUÍ_LINK_DE_PAGO_2" class="btn-comprar">💳 COMPRAR AHORA</a>
-            </div>
-        </div>
-
-        <div class="libro-card">
-            <video playsinline loop muted autoplay crossorigin="anonymous">
-                <source src="AQUÍ_NOMBRE_DEL_VIDEO_3" type="video/mp4">
+            <video class="video-background" loop playsinline muted autoplay>
+                <source src="URL_VIDEO_1" type="video/mp4">
             </video>
             <div class="overlay">
                 <h2>COLOREA Y APRENDE</h2>
-                <a href="AQUÍ_LINK_DE_PAGO_3" class="btn-comprar">💳 COMPRAR AHORA</a>
+                <a href="LINK_PAGO_1" class="btn btn-mp">💳 COMPRAR AHORA</a>
+                <a href="URL_PDF_1" class="btn btn-pdf">📂 DESCARGAR PDF</a>
             </div>
         </div>
 
         <div class="libro-card">
-            <video playsinline loop muted autoplay crossorigin="anonymous">
-                <source src="AQUÍ_NOMBRE_DEL_VIDEO_4" type="video/mp4">
+            <video class="video-background" loop playsinline muted>
+                <source src="URL_VIDEO_2" type="video/mp4">
             </video>
             <div class="overlay">
-                <h2>NÚMEROS DIVERTIDOS</h2>
-                <a href="AQUÍ_LINK_DE_PAGO_4" class="btn-comprar">💳 COMPRAR AHORA</a>
+                <h2>COLORIANDO</h2>
+                <a href="LINK_PAGO_2" class="btn btn-mp">💳 COMPRAR AHORA</a>
+                <a href="URL_PDF_2" class="btn btn-pdf">📂 DESCARGAR PDF</a>
             </div>
         </div>
 
         <div class="libro-card">
-            <video playsinline loop muted autoplay crossorigin="anonymous">
-                <source src="AQUÍ_NOMBRE_DEL_VIDEO_5" type="video/mp4">
+            <video class="video-background" loop playsinline muted>
+                <source src="URL_VIDEO_3" type="video/mp4">
             </video>
             <div class="overlay">
-                <h2>ANIMALES DE LA GRANJA</h2>
-                <a href="AQUÍ_LINK_DE_PAGO_5" class="btn-comprar">💳 COMPRAR AHORA</a>
+                <h2>CUENTA LAS MANZANAS</h2>
+                <a href="LINK_PAGO_3" class="btn btn-mp">💳 COMPRAR AHORA</a>
+                <a href="URL_PDF_3" class="btn btn-pdf">📂 DESCARGAR PDF</a>
             </div>
         </div>
 
         <div class="libro-card">
-            <video playsinline loop muted autoplay crossorigin="anonymous">
-                <source src="AQUÍ_NOMBRE_DEL_VIDEO_6" type="video/mp4">
+            <video class="video-background" loop playsinline muted>
+                <source src="URL_VIDEO_4" type="video/mp4">
             </video>
             <div class="overlay">
-                <h2>CUENTOS PARA DORMIR</h2>
-                <a href="AQUÍ_LINK_DE_PAGO_6" class="btn-comprar">💳 COMPRAR AHORA</a>
+                <h2>CUENTA Y COLOREA</h2>
+                <a href="LINK_PAGO_4" class="btn btn-mp">💳 COMPRAR AHORA</a>
+                <a href="URL_PDF_4" class="btn btn-pdf">📂 DESCARGAR PDF</a>
+            </div>
+        </div>
+
+        <div class="libro-card">
+            <video class="video-background" loop playsinline muted>
+                <source src="URL_VIDEO_5" type="video/mp4">
+            </video>
+            <div class="overlay">
+                <h2>APRENDE A ESCRIBIR</h2>
+                <a href="LINK_PAGO_5" class="btn btn-mp">💳 COMPRAR AHORA</a>
+                <a href="URL_PDF_5" class="btn btn-pdf">📂 DESCARGAR PDF</a>
+            </div>
+        </div>
+
+        <div class="libro-card">
+            <video class="video-background" loop playsinline muted>
+                <source src="URL_VIDEO_6" type="video/mp4">
+            </video>
+            <div class="overlay">
+                <h2>LA FAMILIA</h2>
+                <a href="LINK_PAGO_6" class="btn btn-mp">💳 COMPRAR AHORA</a>
+                <a href="URL_PDF_6" class="btn btn-pdf">📂 DESCARGAR PDF</a>
             </div>
         </div>
 
     </div>
 
     <script>
-        // Truco para que los videos no se pausen en algunos celulares
-        document.body.addEventListener('touchstart', function() {
-            const vids = document.querySelectorAll('video');
-            vids.forEach(v => v.play());
-        }, {once: true});
-    </script>
+        // Lógica de auto-pausa al deslizar para no mezclar sonidos
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                const v = e.target.querySelector('video');
+                if (e.isIntersecting) { v.play().catch(()=>{}); }
+                else { v.pause(); }
+            });
+        }, { threshold: 0.6 });
 
+        document.querySelectorAll('.libro-card').forEach(c => obs.observe(c));
+    </script>
 </body>
 </html>
