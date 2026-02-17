@@ -49,7 +49,7 @@ body{
 /* BOTONES ABAJO */
 .bottom-area{
   position:absolute;
-  bottom:40px;
+  bottom:20px; /* bajamos más los botones */
   width:100%;
   display:flex;
   flex-direction:column;
@@ -71,6 +71,14 @@ body{
 .buy{ background:#0b8ecf; }
 .telegram{ background:#0972a8; }
 .pdf{ background:#28a745; display:none; }
+
+.book-info{
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  text-align:center;
+  margin-bottom:8px;
+}
 </style>
 </head>
 
@@ -82,11 +90,12 @@ body{
 <div class="section">
   <div class="top-bar">Happy Kids</div>
   <video controls playsinline>
-    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia.mp4" type="video/mp4">
+    <source src="VIDEO_URL_1.mp4" type="video/mp4">
   </video>
   <div class="bottom-area">
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <div class="book-info">Familia Coloreando - $12</div>
     <button class="btn pdf">📘 DESCARGAR PDF</button>
   </div>
 </div>
@@ -95,11 +104,12 @@ body{
 <div class="section">
   <div class="top-bar">Happy Kids</div>
   <video controls playsinline>
-    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando.mp4" type="video/mp4">
+    <source src="VIDEO_URL_2.mp4" type="video/mp4">
   </video>
   <div class="bottom-area">
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <div class="book-info">Familia Aprendiendo - $12</div>
     <button class="btn pdf">📘 DESCARGAR PDF</button>
   </div>
 </div>
@@ -113,6 +123,7 @@ body{
   <div class="bottom-area">
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <div class="book-info">Familia Colores - $12</div>
     <button class="btn pdf">📘 DESCARGAR PDF</button>
   </div>
 </div>
@@ -126,6 +137,7 @@ body{
   <div class="bottom-area">
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <div class="book-info">Familia Números - $12</div>
     <button class="btn pdf">📘 DESCARGAR PDF</button>
   </div>
 </div>
@@ -139,6 +151,7 @@ body{
   <div class="bottom-area">
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <div class="book-info">Familia Letras - $12</div>
     <button class="btn pdf">📘 DESCARGAR PDF</button>
   </div>
 </div>
@@ -152,6 +165,7 @@ body{
   <div class="bottom-area">
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <div class="book-info">Familia Juegos - $12</div>
     <button class="btn pdf">📘 DESCARGAR PDF</button>
   </div>
 </div>
