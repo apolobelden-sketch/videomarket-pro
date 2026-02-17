@@ -1,126 +1,138 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids Store</title>
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; font-family: sans-serif; }
-        
-        /* Video de fondo real - TikTok Style */
-        video {
-  position: relative;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Kids</title>
 
-        /* Capa de interfaz (Nombre y Botones) */
-        .interfaz {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 40px 0;
-            box-sizing: border-box;
-            pointer-events: none; /* Esto permite que el toque llegue al video para dar Play */
-        }
+<style>
+body{
+  margin:0;
+  background:#f2f2f2;
+  font-family:Arial, sans-serif;
+  overflow:hidden;
+}
 
-        .header {
-            text-align: center;
-            color: white;
-            font-size: 2.2rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-        }
+.container{
+  height:100vh;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+}
 
-        .footer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            pointer-events: auto; /* Esto permite tocar los botones */
-        }
+.video-box{
+  height:100vh;
+  position:relative;
+  scroll-snap-align:start;
+}
 
-        .btn {
-            width: 85%;
-            max-width: 300px;
-            padding: 16px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
+video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-        .btn-mp { background: #009EE3; color: white; }
-        .btn-tg { background: #0088cc; color: white; } /* Azul Telegram */
-        
-        /* BOTÓN DE DESCARGA: Invisible hasta el pago */
-        #btn-pdf { 
-            background: #28a745; 
-            color: white; 
-            display: none; 
-        }
+.buttons{
+  position:absolute;
+  bottom:65px; /* un poco más abajo */
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+}
 
-        .etiqueta { color: white; font-size: 0.9rem; text-transform: lowercase; text-shadow: 1px 1px 3px #000; }
-    </style>
+.btn{
+  width:85%;
+  padding:15px;
+  border-radius:30px;
+  border:none;
+  font-size:18px;
+  font-weight:bold;
+  color:white;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.buy{
+  background:#0b8ecf;
+}
+
+.telegram{
+  background:#0972a8;
+}
+
+.pdf{
+  background:#28a745;
+}
+</style>
 </head>
+
 <body>
 
-    <video id="video-tiktok" controls preload="auto">
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia.mp4">
-    </video>
+<div class="container">
 
-    <div class="interfaz">
-        <div class="header">🌈 Happy Kids</div>
+  <!-- VIDEO 1 -->
+  <div class="video-box">
+    <video src="AQUI_PEGA_TU_VIDEO1.mp4" muted playsinline></video>
 
-        <div class="footer">
-            <div class="etiqueta">familia</div>
-            
-            <a href="https://mpago.la/1RG3bht" class="btn btn-mp">💳 COMPRAR AHORA</a>
-            
-            <a href="TU_LINK_DE_TELEGRAM_AQUI" class="btn btn-tg">✈️ UNIRSE A TELEGRAM</a>
+    <div class="buttons">
+      <button class="btn buy" onclick="window.location.href='TU_LINK_MERCADOPAGO'">💳 COMPRAR AHORA</button>
+      <button class="btn telegram" onclick="window.location.href='TU_LINK_TELEGRAM'">✈️ UNIRSE A TELEGRAM</button>
 
-            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia.pdf" id="btn-pdf" class="btn">📂 DESCARGAR PDF</a>
-        </div>
+      <!-- BOTÓN PDF OCULTO -->
+      <button id="pdfBtn1" class="btn pdf" style="display:none;"
+      onclick="window.location.href='LINK_DIRECTO_DEL_PDF'">
+      📘 DESCARGAR PDF
+      </button>
+
     </div>
-
-    <script>
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            // Solo aparece si la URL termina en ?pago=exitoso
-            if (urlParams.get('pago') === 'exitoso') {
-                document.getElementById('btn-pdf').style.display = 'block';
-                document.querySelector('.etiqueta').innerHTML = "¡pago confirmado!";
-            }
-        };
-    </script>
-    HTML
-Copiar código
-<!-- ====== NUEVO VIDEO ====== -->
-
-<video controls preload="auto">
-  <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando.mp4">
-</video>
-
-<div class="interfaz">
-  <div class="header">🌈 Happy Kids</div>
-
-  <div class="footer">
-    <div class="etiqueta">coloreando</div>
-
-    <a href="https://mpago.la/1Divt4K" class="btn btn-mp">💳 COMPRAR AHORA</a>
-
-    <a href="PEGA_AQUI_LINK_TELEGRAM" class="btn btn-tg">✈️ UNIRSE A TELEGRAM</a>
-
-    <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando.pdf" id="btn-pdf">📥 DESCARGAR PDF</a>
   </div>
+
+  <!-- VIDEO 2 -->
+  <div class="video-box">
+    <video src="AQUI_PEGA_TU_VIDEO2.mp4" muted playsinline></video>
+
+    <div class="buttons">
+      <button class="btn buy" onclick="window.location.href='TU_LINK_MERCADOPAGO'">💳 COMPRAR AHORA</button>
+      <button class="btn telegram" onclick="window.location.href='TU_LINK_TELEGRAM'">✈️ UNIRSE A TELEGRAM</button>
+
+      <button id="pdfBtn2" class="btn pdf" style="display:none;"
+      onclick="window.location.href='LINK_DIRECTO_DEL_PDF'">
+      📘 DESCARGAR PDF
+      </button>
+
+    </div>
+  </div>
+
 </div>
+
+<script>
+/* AUTO PLAY SOLO VIDEO VISIBLE */
+const videos = document.querySelectorAll("video");
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.play();
+    } else {
+      entry.target.pause();
+    }
+  });
+},{ threshold:0.8 });
+
+videos.forEach(video=>{
+  observer.observe(video);
+});
+
+/* MOSTRAR PDF SI EL PAGO FUE APROBADO */
+const urlParams = new URLSearchParams(window.location.search);
+const status = urlParams.get('status');
+
+if(status === 'approved'){
+  document.getElementById("pdfBtn1").style.display = "block";
+  document.getElementById("pdfBtn2").style.display = "block";
+}
+</script>
+
 </body>
 </html>
