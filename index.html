@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +10,8 @@
         
         body { 
             font-family: 'Arial', sans-serif; 
-            background-color: #f0faff; /* Un color suave de fondo */
+            /* Fondo estilo anime: Colores suaves y formas redondeadas */
+            background: linear-gradient(180deg, #e0f7fa 0%, #fff9c4 100%);
             color: #333;
         }
 
@@ -20,32 +22,30 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 3px solid #ffccbc;
         }
 
-        /* Video de fondo */
         .section video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        /* Barra Superior */
         .top-bar {
             position: absolute;
             top: 0;
             width: 100%;
             padding: 15px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
             color: #ff6b6b;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             z-index: 10;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-bottom: 2px solid rgba(255, 107, 107, 0.3);
         }
 
-        /* Área de Botones */
         .bottom-area {
             position: absolute;
             bottom: 30px;
@@ -59,12 +59,12 @@
 
         .book-info {
             background: rgba(255, 255, 255, 0.9);
-            padding: 5px 15px;
-            border-radius: 15px;
-            color: #333;
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: #444;
             font-size: 16px;
             font-weight: bold;
-            margin-bottom: 5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .btn {
@@ -77,10 +77,8 @@
             font-weight: bold;
             color: white;
             cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            transition: transform 0.2s;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
         }
 
         .btn:active { transform: scale(0.95); }
@@ -88,7 +86,7 @@
         .buy { background: #0b8ecf; }
         .telegram { background: #0088cc; }
         
-        /* EL BOTÓN PDF SE OCULTA POR DEFECTO */
+        /* BOTÓN PDF OCULTO POR DEFECTO */
         .pdf { 
             background: #28a745; 
             display: none; 
@@ -123,29 +121,62 @@
     </div>
 </div>
 
+<div class="section">
+    <div class="top-bar">Happy Kids</div>
+    <video controls playsinline>
+        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20escribe.mp4" type="video/mp4">
+    </video>
+    <div class="bottom-area">
+        <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+        <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+        <div class="book-info">Colorea y Escribe - $12MXN</div>
+        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20escribe.pdf'">📘 DESCARGAR PDF</button>
+    </div>
+</div>
+
+<div class="section">
+    <div class="top-bar">Happy Kids</div>
+    <video controls playsinline>
+        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/animalitos.mp4" type="video/mp4">
+    </video>
+    <div class="bottom-area">
+        <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+        <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+        <div class="book-info">Animalitos - $12MXN</div>
+        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/animalitos.pdf'">📘 DESCARGAR PDF</button>
+    </div>
+</div>
+
+<div class="section">
+    <div class="top-bar">Happy Kids</div>
+    <video controls playsinline>
+        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/del%201%20al%2010.mp4" type="video/mp4">
+    </video>
+    <div class="bottom-area">
+        <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+        <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+        <div class="book-info">Del 1 al 10 - $12MXN</div>
+        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/del%201%20al%2010.pdf'">📘 DESCARGAR PDF</button>
+    </div>
+</div>
+
 <script>
-    // 1. Detectar si el pago fue aprobado
+    // Mostrar botones si el pago es aprobado
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
-        const status = urlParams.get('status');
-
-        if (status === 'approved') {
-            // Mostrar todos los botones de descarga
-            const botonesPDF = document.querySelectorAll('.pdf');
-            botonesPDF.forEach(boton => {
-                boton.style.display = 'block';
+        if (urlParams.get('status') === 'approved') {
+            document.querySelectorAll('.pdf').forEach(btn => {
+                btn.style.display = 'block';
             });
-            alert("¡Pago aprobado! Los botones de descarga ya están disponibles.");
+            alert("¡Gracias por tu compra! Ya puedes descargar los PDF.");
         }
     };
 
-    // 2. Control de videos para que no suenen varios a la vez
+    // Pausar otros videos al reproducir uno
     const videos = document.querySelectorAll("video");
     videos.forEach(video => {
         video.addEventListener("play", () => {
-            videos.forEach(v => {
-                if(v !== video) v.pause();
-            });
+            videos.forEach(v => { if(v !== video) v.pause(); });
         });
     });
 </script>
