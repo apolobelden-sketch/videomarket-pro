@@ -49,7 +49,7 @@ body{
 /* BOTONES ABAJO */
 .bottom-area{
   position:absolute;
-  bottom:20px; /* bajamos más los botones */
+  bottom:20px;
   width:100%;
   display:flex;
   flex-direction:column;
@@ -66,11 +66,14 @@ body{
   font-size:16px;
   font-weight:bold;
   color:white;
+  cursor:pointer;
 }
 
 .buy{ background:#0b8ecf; }
 .telegram{ background:#0972a8; }
-.pdf{ background:#28a745; display:none; }
+/* NOTA: He quitado 'display:none' para que puedas ver los botones ahora mismo. 
+   Si quieres que solo se vean tras el pago, vuelve a poner 'display:none;' */
+.pdf{ background:#28a745; display:block; }
 
 .book-info{
   color:white;
@@ -84,9 +87,6 @@ body{
 
 <body>
 
-<!-- ================= VIDEOS ================= -->
-
-<!-- VIDEO 1 -->
 <div class="section">
   <div class="top-bar">Happy Kids</div>
   <video controls playsinline>
@@ -95,12 +95,11 @@ body{
   <div class="bottom-area">
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
-    <div class="book-info">Familia  - $12MXN</div>
-    <button class="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia.pdf">📘 DESCARGAR PDF</button>
+    <div class="book-info">Familia - $12MXN</div>
+    <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia.pdf'">📘 DESCARGAR PDF</button>
   </div>
 </div>
 
-<!-- VIDEO 2 -->
 <div class="section">
   <div class="top-bar">Happy Kids</div>
   <video controls playsinline>
@@ -110,11 +109,10 @@ body{
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
     <div class="book-info">coloreando - $12MXN</div>
-    <button class="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando.pdf">📘 DESCARGAR PDF</button>
+    <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando.pdf'">📘 DESCARGAR PDF</button>
   </div>
 </div>
 
-<!-- VIDEO 3 -->
 <div class="section">
   <div class="top-bar">Happy Kids</div>
   <video controls playsinline>
@@ -124,11 +122,10 @@ body{
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
     <div class="book-info">colorea y escribe - $12MXN</div>
-    <button class="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20escribe.pdf">📘 DESCARGAR PDF</button>
+    <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20escribe.pdf'">📘 DESCARGAR PDF</button>
   </div>
 </div>
 
-<!-- VIDEO 4 -->
 <div class="section">
   <div class="top-bar">Happy Kids</div>
   <video controls playsinline>
@@ -138,11 +135,10 @@ body{
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
     <div class="book-info">animalitos - $12MXN</div>
-    <button class="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/animalitos.pdf">📘 DESCARGAR PDF</button>
+    <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/animalitos.pdf'">📘 DESCARGAR PDF</button>
   </div>
 </div>
 
-<!-- VIDEO 5 -->
 <div class="section">
   <div class="top-bar">Happy Kids</div>
   <video controls playsinline>
@@ -152,31 +148,13 @@ body{
     <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
     <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
     <div class="book-info">del 1 al 10 - $12MXN</div>
-    <button class="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/del%201%20al%2010.pdf">📘 DESCARGAR PDF</button>
+    <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/del%201%20al%2010.pdf'">📘 DESCARGAR PDF</button>
   </div>
 </div>
-
-<!-- VIDEO 6 -->
-<div class="section">
-  <div class="top-bar">Happy Kids</div>
-  <video controls playsinline>
-    <source src="VIDEO_URL_6.mp4" type="video/mp4">
-  </video>
-  <div class="bottom-area">
-    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
-    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
-    <div class="book-info">Familia Juegos - $12</div>
-    <button class="btn pdf">📘 DESCARGAR PDF</button>
-  </div>
-</div>
-
-<!-- ================= SCRIPT ================= -->
 
 <script>
-
 /* Pausar los demás cuando uno se reproduce */
 const videos = document.querySelectorAll("video");
-
 videos.forEach(video => {
   video.addEventListener("play", () => {
     videos.forEach(v => {
@@ -187,16 +165,15 @@ videos.forEach(video => {
   });
 });
 
-/* Mostrar botón PDF si viene aprobado */
+/* Lógica para mostrar botones PDF tras el pago (opcional) */
 const params = new URLSearchParams(window.location.search);
 if(params.get("status") === "approved"){
-  document.querySelectorAll(".pdf").forEach(btn=>{
+  // Aquí podrías forzar que se vean si estuvieran ocultos por CSS
+  document.querySelectorAll(".pdf").forEach(btn => {
     btn.style.display = "block";
-    btn.onclick = () => window.location.href = "PDF_URL";
   });
 }
-
 </script>
 
 </body>
-</html>
+  </html>
