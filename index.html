@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,12 +18,11 @@ body{
   background:black;
 }
 
-/* CONTENEDOR PRINCIPAL */
+/* CADA VIDEO ES UNA SECCIÓN */
 .section{
   position:relative;
   width:100%;
   height:100vh;
-  overflow:hidden;
 }
 
 /* VIDEO */
@@ -46,7 +46,7 @@ body{
   z-index:10;
 }
 
-/* ZONA INFERIOR PARA BOTONES */
+/* BOTONES ABAJO */
 .bottom-area{
   position:absolute;
   bottom:40px;
@@ -54,39 +54,135 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:15px;
+  gap:12px;
   z-index:10;
 }
+
+.btn{
+  width:85%;
+  padding:14px;
+  border-radius:30px;
+  border:none;
+  font-size:16px;
+  font-weight:bold;
+  color:white;
+}
+
+.buy{ background:#0b8ecf; }
+.telegram{ background:#0972a8; }
+.pdf{ background:#28a745; display:none; }
 </style>
 </head>
 
 <body>
 
+<!-- ================= VIDEOS ================= -->
+
+<!-- VIDEO 1 -->
 <div class="section">
-
-  <div class="top-bar">
-    Happy Kids
-  </div>
-
+  <div class="top-bar">Happy Kids</div>
   <video controls playsinline>
-    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia.mp4" type="video/mp4">
+    <source src="VIDEO_URL_1.mp4" type="video/mp4">
   </video>
-
   <div class="bottom-area">
-    <!-- AQUÍ VAMOS A AGREGAR BOTONES DESPUÉS -->
+    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <button class="btn pdf">📘 DESCARGAR PDF</button>
   </div>
- <div class="section">
-
-  <div class="top-bar">
-    Happy Kids
-  </div>
-
-  <video controls playsinline>
-    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando.mp4" type="video/mp4">
-  </video>
-
- </div>
 </div>
+
+<!-- VIDEO 2 -->
+<div class="section">
+  <div class="top-bar">Happy Kids</div>
+  <video controls playsinline>
+    <source src="VIDEO_URL_2.mp4" type="video/mp4">
+  </video>
+  <div class="bottom-area">
+    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <button class="btn pdf">📘 DESCARGAR PDF</button>
+  </div>
+</div>
+
+<!-- VIDEO 3 -->
+<div class="section">
+  <div class="top-bar">Happy Kids</div>
+  <video controls playsinline>
+    <source src="VIDEO_URL_3.mp4" type="video/mp4">
+  </video>
+  <div class="bottom-area">
+    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <button class="btn pdf">📘 DESCARGAR PDF</button>
+  </div>
+</div>
+
+<!-- VIDEO 4 -->
+<div class="section">
+  <div class="top-bar">Happy Kids</div>
+  <video controls playsinline>
+    <source src="VIDEO_URL_4.mp4" type="video/mp4">
+  </video>
+  <div class="bottom-area">
+    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <button class="btn pdf">📘 DESCARGAR PDF</button>
+  </div>
+</div>
+
+<!-- VIDEO 5 -->
+<div class="section">
+  <div class="top-bar">Happy Kids</div>
+  <video controls playsinline>
+    <source src="VIDEO_URL_5.mp4" type="video/mp4">
+  </video>
+  <div class="bottom-area">
+    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <button class="btn pdf">📘 DESCARGAR PDF</button>
+  </div>
+</div>
+
+<!-- VIDEO 6 -->
+<div class="section">
+  <div class="top-bar">Happy Kids</div>
+  <video controls playsinline>
+    <source src="VIDEO_URL_6.mp4" type="video/mp4">
+  </video>
+  <div class="bottom-area">
+    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+    <button class="btn pdf">📘 DESCARGAR PDF</button>
+  </div>
+</div>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+
+/* Pausar los demás cuando uno se reproduce */
+const videos = document.querySelectorAll("video");
+
+videos.forEach(video => {
+  video.addEventListener("play", () => {
+    videos.forEach(v => {
+      if(v !== video){
+        v.pause();
+      }
+    });
+  });
+});
+
+/* Mostrar botón PDF si viene aprobado */
+const params = new URLSearchParams(window.location.search);
+if(params.get("status") === "approved"){
+  document.querySelectorAll(".pdf").forEach(btn=>{
+    btn.style.display = "block";
+    btn.onclick = () => window.location.href = "PDF_URL";
+  });
+}
+
+</script>
 
 </body>
 </html>
