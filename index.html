@@ -1,149 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Kids - Market</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background-color: #f0faff; /* Un color suave de fondo */
+            color: #333;
+        }
 
-}
+        .section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-bottom: 2px solid #ddd;
+        }
 
-/* VIDEO */
-.section video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+        /* Video de fondo */
+        .section video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-/* BARRA SUPERIOR */
-.top-bar{
-  position:absolute;
-  top:0;
-  width:100%;
-  padding:15px;
-  text-align:center;
-  background:rgba(0,0,0,0.4);
-  color:white;
-  font-size:18px;
-  font-weight:bold;
-  z-index:10;
-}
+        /* Barra Superior */
+        .top-bar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            color: #ff6b6b;
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-/* BOTONES ABAJO */
-.bottom-area{
-  position:absolute;
-  bottom:20px;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-  z-index:10;
-}
+        /* Área de Botones */
+        .bottom-area {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+        }
 
-.btn{
-  width:85%;
-  padding:14px;
-  border-radius:30px;
-  border:none;
-  font-size:16px;
-  font-weight:bold;
-  color:white;
-  cursor:pointer;
-}
+        .book-info {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5px 15px;
+            border-radius: 15px;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
 
-.buy{ background:#0b8ecf; }
-.telegram{ background:#0972a8; }
-/* NOTA: He quitado 'display:none' para que puedas ver los botones ahora mismo. 
-   Si quieres que solo se vean tras el pago, vuelve a poner 'display:none;' */
-.pdf{ background:#28a745; display:block; }
+        .btn {
+            width: 85%;
+            max-width: 350px;
+            padding: 15px;
+            border-radius: 50px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
 
-.book-info{
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  text-align:center;
-  margin-bottom:8px;
-}
-</style>
+        .btn:active { transform: scale(0.95); }
+
+        .buy { background: #0b8ecf; }
+        .telegram { background: #0088cc; }
+        
+        /* EL BOTÓN PDF SE OCULTA POR DEFECTO */
+        .pdf { 
+            background: #28a745; 
+            display: none; 
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="section">
-  <div class="top-bar">Happy Kids</div>
-  <video controls playsinline>
-    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia.mp4" type="video/mp4">
-  </video>
-  <div class="bottom-area">
-    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
-    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
-    <div class="book-info">Familia - $12MXN</div>
-    <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia.pdf'">📘 DESCARGAR PDF</button>
-  </div>
+    <div class="top-bar">Happy Kids</div>
+    <video controls playsinline>
+        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia.mp4" type="video/mp4">
+    </video>
+    <div class="bottom-area">
+        <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+        <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+        <div class="book-info">Familia - $12MXN</div>
+        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia.pdf'">📘 DESCARGAR PDF</button>
+    </div>
 </div>
 
 <div class="section">
-  <div class="top-bar">Happy Kids</div>
-  <video controls playsinline>
-    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando.mp4" type="video/mp4">
-  </video>
-  <div class="bottom-area">
-    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
-    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
-    <div class="book-info">coloreando - $12MXN</div>
-    <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando.pdf'">📘 DESCARGAR PDF</button>
-  </div>
-</div>
-
-<div class="section">
-  <div class="top-bar">Happy Kids</div>
-  <video controls playsinline>
-    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20escribe.mp4" type="video/mp4">
-  </video>
-  <div class="bottom-area">
-    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
-    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
-    <div class="book-info">colorea y escribe - $12MXN</div>
-    <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20escribe.pdf'">📘 DESCARGAR PDF</button>
-  </div>
-</div>
-
-<div class="section">
-  <div class="top-bar">Happy Kids</div>
-  <video controls playsinline>
-    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/animalitos.mp4" type="video/mp4">
-  </video>
-  <div class="bottom-area">
-    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
-    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
-    <div class="book-info">animalitos - $12MXN</div>
-    <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/animalitos.pdf'">📘 DESCARGAR PDF</button>
-  </div>
-</div>
-
-<div class="section">
-  <div class="top-bar">Happy Kids</div>
-  <video controls playsinline>
-    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/del%201%20al%2010.mp4" type="video/mp4">
-  </video>
-  <div class="bottom-area">
-    <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
-    <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
-    <div class="book-info">del 1 al 10 - $12MXN</div>
-    <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/del%201%20al%2010.pdf'">📘 DESCARGAR PDF</button>
-  </div>
+    <div class="top-bar">Happy Kids</div>
+    <video controls playsinline>
+        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando.mp4" type="video/mp4">
+    </video>
+    <div class="bottom-area">
+        <button class="btn buy" onclick="window.location.href='MERCADOPAGO_URL'">💳 COMPRAR AHORA</button>
+        <button class="btn telegram" onclick="window.location.href='TELEGRAM_URL'">✈️ UNIRSE A TELEGRAM</button>
+        <div class="book-info">Coloreando - $12MXN</div>
+        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando.pdf'">📘 DESCARGAR PDF</button>
+    </div>
 </div>
 
 <script>
-/* Pausar los demás cuando uno se reproduce */
-const videos = document.querySelectorAll("video");
-videos.forEach(video => {
-  video.addEventListener("play", () => {
-    videos.forEach(v => {
-      if(v !== video){
-        v.pause();
-      }
-    });
-  });
-});
+    // 1. Detectar si el pago fue aprobado
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
 
-/* Lógica para mostrar botones PDF tras el pago (opcional) */
-const params = new URLSearchParams(window.location.search);
-if(params.get("status") === "approved"){
-  // Aquí podrías forzar que se vean si estuvieran ocultos por CSS
-  document.querySelectorAll(".pdf").forEach(btn => {
-    btn.style.display
+        if (status === 'approved') {
+            // Mostrar todos los botones de descarga
+            const botonesPDF = document.querySelectorAll('.pdf');
+            botonesPDF.forEach(boton => {
+                boton.style.display = 'block';
+            });
+            alert("¡Pago aprobado! Los botones de descarga ya están disponibles.");
+        }
+    };
+
+    // 2. Control de videos para que no suenen varios a la vez
+    const videos = document.querySelectorAll("video");
+    videos.forEach(video => {
+        video.addEventListener("play", () => {
+            videos.forEach(v => {
+                if(v !== video) v.pause();
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
