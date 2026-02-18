@@ -222,5 +222,82 @@ k
     });
 </script>
 
-</body>
-</html>
+<style>
+    .adult-section {
+        background: #0f172a; /* Azul muy oscuro elegante */
+        color: #f8fafc;
+        padding: 50px 20px;
+        text-align: center;
+        border-top: 5px solid #fbbf24; /* Línea dorada divisoria */
+    }
+    .adult-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        max-width: 1200px;
+        margin: 30px auto;
+    }
+    .book-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(251, 191, 36, 0.3);
+        border-radius: 15px;
+        padding: 20px;
+        transition: 0.3s;
+    }
+    .book-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.1);
+    }
+    .amazon-btn {
+        background: #febd69;
+        color: #131921;
+        padding: 12px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 15px;
+    }
+    .adult-title {
+        font-size: 28px;
+        color: #fbbf24;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="adult-section">
+    <h2 class="adult-title">📚 Jairo Guizar - Author Collection</h2>
+    <p>Novels & Thrillers available on Amazon (English & Spanish Editions)</p>
+
+    <div class="adult-grid">
+        <div class="book-card">
+            <h3>THE LAST AUDITOR</h3>
+            <p style="font-size: 14px; opacity: 0.8;">Post-Apocalyptic Sci-Fi Novel</p>
+            <a href="https://www.amazon.com/dp/B0GJFPHZM6" class="amazon-btn" target="_blank">View on Amazon</a>
+        </div>
+
+        <div class="book-card">
+            <h3>IRON FOUNDATIONS</h3>
+            <p style="font-size: 14px; opacity: 0.8;">A story of blueprints, rivalry, and desire</p>
+            <a href="https://www.amazon.com/dp/B0GJ6X35B8" class="amazon-btn" target="_blank">View on Amazon</a>
+        </div>
+
+        <div class="book-card">
+            <h3>NO MAN'S LAND</h3>
+            <p style="font-size: 14px; opacity: 0.8;">Military Sci-Fi Action Thriller</p>
+            <a href="https://www.amazon.com/dp/B0GHPZP31KZ" class="amazon-btn" target="_blank">View on Amazon</a>
+        </div>
+
+        <div class="book-card">
+            <h3>THE ECHO OF YOUR VOICE</h3>
+            <p style="font-size: 14px; opacity: 0.8;">Drama & Mystery</p>
+            <a href="https://www.amazon.com/dp/B0GHZVH4R8" class="amazon-btn" target="_blank">View on Amazon</a>
+        </div>
+
+        <div class="book-card">
+            <h3>BONDS OF GOLD AND BLOOD</h3>
+            <p style="font-size: 14px; opacity: 0.8;">The Price of Legacy</p>
+            <a href="https://www.amazon.com/dp/B0GHSLS SCF" class="amazon-btn" target="_blank">View on Amazon</a>
+        </div>
+    </div>
+</div>
