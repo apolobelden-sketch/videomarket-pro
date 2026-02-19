@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos - Selección Premium</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+        }
+
+        /* Contenedor de cada producto (Pantalla Completa) */
+        .section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-snap-align: start;
+            background: #000; /* Fondo negro para que resalte el video vertical */
+        }
+
+        /* Barra Superior */
+        .top-bar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Video */
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Para que no se corte el video vertical */
+        }
+
+        /* Área de información y botón */
+        .bottom-area {
+            position: absolute;
+            bottom: 40px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .product-desc {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #111;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Botón estilo Mercado Libre */
+        .btn-ml {
+            width: 100%;
+            max-width: 300px;
+            padding: 16px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            background: #3483fa; 
+            box-shadow: 0 4px 15px rgba(52, 131, 250, 0.4);
+            transition: 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-ml:active { transform: scale(0.95); }
+
+        /* Categorías con colores distintos */
+        .tag-electronica { border-top: 5px solid #00e676; }
+        .tag-cocina { border-top: 5px solid #ff5252; }
+        .tag-autos { border-top: 5px solid #ffd740; }
+
+    </style>
+</head>
+<body>
+
+<div class="section tag-electronica">
+    <div class="top-bar">📱 TECNOLOGÍA TOP 📱</div>
+    <video controls playsinline poster="IMAGEN_PREVIA_OPCIONAL.jpg">
+        <source src="URL_DE_TU_VIDEO_TABLET.mp4" type="video/mp4">
+    </video>
+    <div class="bottom-area">
+        <div class="product-desc">Tablet de última generación - ¡La más vendida!</div>
+        <a href="TU_LINK_DE_AFILIADO_AQUÍ" class="btn-ml" target="_blank">🛒 VER EN MERCADO LIBRE</a>
+    </div>
+</div>
+
+<div class="section tag-cocina">
+    <div class="top-bar">🍳 COCINA INTELIGENTE 🍳</div>
+    <video controls playsinline>
+        <source src="URL_DE_TU_VIDEO_COCINA.mp4" type="video/mp4">
+    </video>
+    <div class="bottom-area">
+        <div class="product-desc">Freidora de aire: Cocina sin aceite y rápido</div>
+        <a href="TU_LINK_DE_AFILIADO_AQUÍ" class="btn-ml" target="_blank">🛒 VER OFERTA REBENTADA</a>
+    </div>
+</div>
+
+<div class="section tag-autos">
+    <div class="top-bar">🚗 ACCESORIOS PARA AUTO 🚗</div>
+    <video controls playsinline>
+        <source src="URL_DE_TU_VIDEO_CARRO.mp4" type="video/mp4">
+    </video>
+    <div class="bottom-area">
+        <div class="product-desc">Aspiradora portátil - Mantén tu carro limpio siempre</div>
+        <a href="TU_LINK_DE_AFILIADO_AQUÍ" class="btn-ml" target="_blank">🛒 VER PRECIO ESPECIAL</a>
+    </div>
+</div>
+
+<script>
+    // Este código evita que se escuchen dos videos al mismo tiempo
+    const videos = document.querySelectorAll("video");
+    videos.forEach(video => {
+        video.addEventListener("play", () => {
+            videos.forEach(v => { if(v !== video) v.pause(); });
+        });
+    });
+</script>
+
+</body>
+                                                                                        </html>
