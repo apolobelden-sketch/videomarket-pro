@@ -81,3 +81,43 @@
     .tag-cocina video { border: 4px solid #ff5252; }
     .tag-autos video { border: 4px solid #ffd740; }
         </style>
+<body>
+
+    <div class="section tag-electronica">
+        <div class="top-bar">📱 TECNOLOGÍA TOP 📱</div>
+        
+        <video controls playsinline loop muted>
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/animalitos.mp4" type="video/mp4">
+            Tu navegador no soporta video.
+        </video>
+
+        <div class="bottom-area">
+            <div class="product-desc">Libro Digital Animalitos - ¡Aprende jugando!</div>
+            <a href="TU_LINK_DE_AFILIADO_AQUÍ" class="btn-ml" target="_blank">🛒 VER EN MERCADO LIBRE</a>
+        </div>
+    </div>
+
+    <div class="section tag-cocina">
+        <div class="top-bar">🍳 COCINA INTELIGENTE 🍳</div>
+        
+        <video controls playsinline loop muted>
+            <source src="URL_DE_TU_VIDEO_COCINA_AQUÍ" type="video/mp4">
+        </video>
+
+        <div class="bottom-area">
+            <div class="product-desc">Freidora de aire - ¡Cocina sano y rápido!</div>
+            <a href="TU_LINK_DE_AFILIADO_AQUÍ" class="btn-ml" target="_blank">🛒 VER OFERTA REBENTADA</a>
+        </div>
+    </div>
+
+    <script>
+        const videos = document.querySelectorAll("video");
+        videos.forEach(video => {
+            video.addEventListener("play", () => {
+                videos.forEach(v => { if(v !== video) v.pause(); });
+            });
+        });
+    </script>
+
+</body>
+</html>
