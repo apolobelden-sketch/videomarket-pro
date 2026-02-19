@@ -1,123 +1,71 @@
 <style>
-    /* Configuración General */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-    body { background-color: #000; color: #fff; overflow-x: hidden; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+    
+    body { 
+        /* Cambiamos el negro total por un degradado para que no se vea vacío a los lados */
+        background: radial-gradient(circle, #232526 0%, #000000 100%); 
+        color: #fff; 
+        overflow-x: hidden; 
+    }
 
-    /* Contenedor de cada producto */
     .section {
         position: relative;
         width: 100vw;
         height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start; /* Alinea todo hacia arriba */
         align-items: center;
         scroll-snap-align: start;
-        background: #000;
+        padding-top: 60px; /* Espacio para el título */
     }
 
-    /* Título superior */
     .top-bar {
-        position: absolute;
-        top: 20px;
-        z-index: 10;
-        text-align: center;
-        width: 100%;
+        font-size: 22px;
         font-weight: bold;
-        text-transform: uppercase;
-        text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        margin-bottom: 20px;
+        text-shadow: 0px 0px 10px #3483fa;
     }
 
-    /* EL VIDEO: Al 90% de ancho, sin espacios negros */
     video {
-        width: 90%;
-        height: 80vh; /* Ocupa la mayor parte de la pantalla vertical */
-        object-fit: cover; /* ESTO ELIMINA EL FONDO NEGRO y llena la tarjeta */
-        border-radius: 25px;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        background: #111;
+        width: 95%; /* Un poquito más ancho para reducir el negro lateral */
+        height: 60vh; /* Altura controlada */
+        object-fit: cover; /* Esto estira el video para que no tenga franjas negras */
+        border-radius: 20px;
+        border: 3px solid rgba(255,255,255,0.2);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.8);
     }
 
-    /* Área de descripción y botón */
     .bottom-area {
-        position: absolute;
-        bottom: 40px;
+        margin-top: 25px; /* Sube los botones más cerca del video */
         width: 90%;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 15px;
-        z-index: 10;
     }
 
     .product-desc {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 12px 20px;
-        border-radius: 12px;
-        color: #111;
-        font-size: 14px;
-        font-weight: 600;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px); /* Efecto cristalino moderno */
+        padding: 15px;
+        border-radius: 15px;
+        font-size: 16px;
         text-align: center;
         width: 100%;
+        border: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* Botón Mercado Libre */
     .btn-ml {
         width: 100%;
-        padding: 18px;
-        border-radius: 12px;
-        border: none;
-        font-size: 16px;
+        padding: 20px; /* Botón más grande y fácil de tocar */
+        border-radius: 15px;
+        font-size: 18px;
         font-weight: bold;
         color: white;
-        background: #3483fa;
+        background: linear-gradient(90deg, #3483fa, #0056b3); /* Azul Mercado Libre con brillo */
         text-decoration: none;
         text-align: center;
-        box-shadow: 0 4px 15px rgba(52, 131, 250, 0.4);
+        box-shadow: 0 10px 20px rgba(52, 131, 250, 0.3);
     }
-
-    /* Colores por categoría (bordes de colores) */
-    .tag-electronica video { border: 4px solid #00e676; }
-    .tag-cocina video { border: 4px solid #ff5252; }
-    .tag-autos video { border: 4px solid #ffd740; }
-        </style>
-<body>
-
-    <div class="section tag-electronica">
-        <div class="top-bar">📱 TECNOLOGÍA TOP 📱</div>
-        
-        <video controls playsinline loop muted>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/animalitos.mp4" type="video/mp4">
-            Tu navegador no soporta video.
-        </video>
-
-        <div class="bottom-area">
-            <div class="product-desc">Libro Digital Animalitos - ¡Aprende jugando!</div>
-            <a href="TU_LINK_DE_AFILIADO_AQUÍ" class="btn-ml" target="_blank">🛒 VER EN MERCADO LIBRE</a>
-        </div>
-    </div>
-
-    <div class="section tag-cocina">
-        <div class="top-bar">🍳 COCINA INTELIGENTE 🍳</div>
-        
-        <video controls playsinline loop muted>
-            <source src="URL_DE_TU_VIDEO_COCINA_AQUÍ" type="video/mp4">
-        </video>
-
-        <div class="bottom-area">
-            <div class="product-desc">Freidora de aire - ¡Cocina sano y rápido!</div>
-            <a href="TU_LINK_DE_AFILIADO_AQUÍ" class="btn-ml" target="_blank">🛒 VER OFERTA REBENTADA</a>
-        </div>
-    </div>
-
-    <script>
-        const videos = document.querySelectorAll("video");
-        videos.forEach(video => {
-            video.addEventListener("play", () => {
-                videos.forEach(v => { if(v !== video) v.pause(); });
-            });
-        });
-    </script>
-
-</body>
-</html>
+</style>
