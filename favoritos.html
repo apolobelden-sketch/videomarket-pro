@@ -1,16 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoMarket Pro - Favoritos</title>
+    <title>VideoMarket Pro - Tablet C108</title>
     <style>
-        /* Estilo base con colores suaves y formas redondeadas */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
-            /* Fondo degradado suave estilo cielo despejado */
             background: linear-gradient(180deg, #dcf0ff 0%, #ffffff 100%);
             min-height: 100vh;
             display: flex;
@@ -18,7 +17,6 @@
             align-items: center;
         }
 
-        /* Cabecera del Logo */
         .header {
             width: 100%;
             padding: 25px 10px;
@@ -35,7 +33,6 @@
             color: #1a73e8;
             text-transform: uppercase;
             letter-spacing: 1px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
         }
 
         .container {
@@ -46,11 +43,10 @@
             gap: 20px;
         }
 
-        /* Contenedor de Video tipo móvil */
         .video-card {
             width: 100%;
             background: #000;
-            border-radius: 35px; /* Bordes muy redondeados y limpios */
+            border-radius: 35px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(26, 115, 232, 0.2);
             border: 4px solid white;
@@ -63,7 +59,6 @@
             object-fit: cover;
         }
 
-        /* Tarjeta de descripción inferior */
         .info-card {
             background: white;
             padding: 25px;
@@ -73,10 +68,10 @@
         }
 
         .product-title {
-            font-size: 19px;
+            font-size: 22px;
             color: #333;
             margin-bottom: 15px;
-            line-height: 1.3;
+            font-weight: bold;
         }
 
         .btn-mercado-libre {
@@ -90,12 +85,6 @@
             border-radius: 15px;
             font-weight: bold;
             font-size: 17px;
-            transition: 0.3s;
-        }
-
-        .btn-mercado-libre:active {
-            transform: scale(0.98);
-            background: #1e62d0;
         }
     </style>
 </head>
@@ -107,13 +96,13 @@
 
     <div class="container">
         <div class="video-card">
-            <video controls playsinline poster="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4#t=0.1">
+            <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4" type="video/mp4">
             </video>
         </div>
 
         <div class="info-card">
-            <h2 class="product-title">Libro Digital de Animalitos<br>Edición Especial</h2>
+            <h2 class="product-title">Tablet C108 - 10.1"</h2>
             <a href="#" class="btn-mercado-libre">
                 🛒 COMPRAR EN MERCADO LIBRE
             </a>
