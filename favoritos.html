@@ -1,82 +1,124 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoMarket Pro</title>
+    <title>VideoMarket Pro - Favoritos</title>
     <style>
-        /* Estilo general inspirado en tus preferencias de colores suaves */
+        /* Estilo base con colores suaves y formas redondeadas */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body, html { 
-            height: 100%; 
-            font-family: 'Segoe UI', sans-serif;
-            background: #f0f7ff; /* Fondo claro y limpio */
+        body { 
+            font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
+            /* Fondo degradado suave estilo cielo despejado */
+            background: linear-gradient(180deg, #dcf0ff 0%, #ffffff 100%);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .container {
+        /* Cabecera del Logo */
+        .header {
             width: 100%;
-            max-width: 450px;
-            padding: 20px;
+            padding: 25px 10px;
             text-align: center;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            margin-bottom: 20px;
         }
 
-        /* Contenedor del video tipo pantalla completa de móvil */
-        .video-box {
+        .logo-text {
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a73e8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .container {
+            width: 92%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Contenedor de Video tipo móvil */
+        .video-card {
             width: 100%;
             background: #000;
-            border-radius: 25px;
+            border-radius: 35px; /* Bordes muy redondeados y limpios */
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
+            box-shadow: 0 15px 35px rgba(26, 115, 232, 0.2);
+            border: 4px solid white;
         }
 
         video {
             width: 100%;
             display: block;
-            aspect-ratio: 9 / 16; /* Formato vertical */
+            aspect-ratio: 9 / 16;
             object-fit: cover;
         }
 
-        .desc-card {
+        /* Tarjeta de descripción inferior */
+        .info-card {
             background: white;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 25px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
         }
 
-        .btn-ml {
-            display: block;
+        .product-title {
+            font-size: 19px;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .btn-mercado-libre {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: #3483fa;
             color: white;
             text-decoration: none;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 10px;
+            padding: 16px;
+            border-radius: 15px;
             font-weight: bold;
+            font-size: 17px;
+            transition: 0.3s;
+        }
+
+        .btn-mercado-libre:active {
+            transform: scale(0.98);
+            background: #1e62d0;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="video-box">
-        <video controls playsinline>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4" type="video/mp4">
-            Tu navegador no soporta videos.
-        </video>
-    </div>
+    <header class="header">
+        <div class="logo-text">VIDEOMARKET PRO</div>
+    </header>
 
-    <div class="desc-card">
-        <h3>tablet C108 10.1</h3>
-        <p>Edición Especial</p>
-        <a href="#" class="btn-ml">🛒 COMPRAR EN MERCADO LIBRE</a>
+    <div class="container">
+        <div class="video-card">
+            <video controls playsinline poster="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4#t=0.1">
+                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="info-card">
+            <h2 class="product-title">Libro Digital de Animalitos<br>Edición Especial</h2>
+            <a href="#" class="btn-mercado-libre">
+                🛒 COMPRAR EN MERCADO LIBRE
+            </a>
+        </div>
     </div>
-</div>
 
 </body>
 </html>
