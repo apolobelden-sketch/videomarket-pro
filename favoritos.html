@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,115 +6,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VideoMarket Pro - Favoritos</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-        
-        body { 
-            /* Degradado para que los costados no se vean negros y vacíos */
-            background: radial-gradient(circle, #2c3e50 0%, #000000 100%); 
-            color: #fff; 
-            overflow: hidden; 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            /* Fondo con degradado suave y limpio */
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
-            width: 100vw;
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-        }
-
-        .section {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; 
-            align-items: center;
-            scroll-snap-align: start;
-            padding-top: 40px;
+            width: 100%;
+            max-width: 500px; /* Se ve como app en PC, y ocupa todo en móvil */
+            padding: 20px;
+            text-align: center;
         }
 
         .top-bar {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 15px;
+            color: #2c3e50;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #3483fa; /* Color Mercado Libre */
+            letter-spacing: 1px;
         }
 
-        /* Video más grande y centrado */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            background: #000;
+        }
+
         video {
-            width: 92%; 
-            height: 65vh; 
-            object-fit: cover; 
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            border: 2px solid rgba(255,255,255,0.1);
-        }
-
-        .bottom-area {
-            margin-top: -20px; /* Sube los textos para que toquen un poco el video */
-            width: 90%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            z-index: 10;
+            width: 100%;
+            display: block;
+            /* Sin controles para que sea una experiencia limpia */
         }
 
         .product-desc {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px;
-            border-radius: 10px;
-            color: #111;
-            font-size: 15px;
-            font-weight: bold;
-            text-align: center;
-            width: 100%;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: white;
+            margin-top: -20px; /* Efecto de superposición */
+            padding: 20px;
+            border-radius: 20px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-weight: 600;
+            color: #444;
         }
 
-        .btn-ml {
-            width: 100%;
-            padding: 18px;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: bold;
+        .buy-button {
+            display: block;
+            margin-top: 20px;
+            background: #2563eb;
             color: white;
-            background: #3483fa;
             text-decoration: none;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(52, 131, 250, 0.4);
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .buy-button:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="section">
-            <div class="top-bar">💎 RECOMENDADO DEL DÍA 💎</div>
-            
-            <video controls playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4"type="video/mp4">
-            </video>
-            <div class="bottom-area">
-                <div class="product-desc">Libro Digital de Animalitos - Edición Especial</div>
-                <a href="https://mercadolibre.com/sec/13rcPpB" class="btn-ml" target="_blank">🛒 COMPRAR EN MERCADO LIBRE</a>
-            </div>
-        </div>
+<div class="container">
+    <div class="top-bar">💎 RECOMENDADO DEL DÍA 💎</div>
 
-        </div>
+    <div class="video-wrapper">
+        <video id="myVideo" autoplay loop playsinline>
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4" type="video/mp4">
+        </video>
+    </div>
 
-    <script>
-        // Pausar otros videos cuando uno se reproduce
-        const videos = document.querySelectorAll("video");
-        videos.forEach(video => {
-            video.addEventListener("play", () => {
-                videos.forEach(v => { if(v !== video) v.pause(); });
-            });
-        });
-    </script>
+    <div class="product-desc">
+        Libro Digital de Animalitos - Edición Especial
+    </div>
+
+    <a href="#" class="buy-button">
+        🛒 COMPRAR EN MERCADO LIBRE
+    </a>
+</div>
+
+<script>
+    // Intenta quitar el silencio automáticamente después del primer clic del usuario en la pantalla
+    document.body.addEventListener('click', function() {
+        const video = document.getElementById('myVideo');
+        video.muted = false;
+    }, { once: true });
+</script>
 
 </body>
 </html>
