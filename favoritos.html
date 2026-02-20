@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -38,26 +39,21 @@
             margin-top: 20px;
         }
 
-        /* ESTILO DE CADA PRODUCTO */
         .product-item {
             background: white;
             border-radius: 35px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 40px; /* Espacio entre un producto y otro */
+            margin-bottom: 40px;
             border: 2px solid #fff;
-        }
-
-        .video-box {
-            width: 100%;
-            background: #000;
-            line-height: 0;
         }
 
         video {
             width: 100%;
             aspect-ratio: 9 / 16;
             object-fit: cover;
+            display: block;
+            background: #000;
         }
 
         .info-box {
@@ -91,30 +87,41 @@
     <div class="container">
 
         <div class="product-item">
-            <div class="video-box">
-                <video controls playsinline>
-                    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4" type="video/mp4">
-                </video>
-            </div>
+            <video controls playsinline>
+                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4" type="video/mp4">
+            </video>
             <div class="info-box">
                 <h2 class="product-title">Tablet C108 - 10.1"</h2>
-                <a href="AQUÍ_EL_ENLACE_DE_MERCADO_LIBRE_DE_LA_TABLET" class="btn-buy">🛒 COMPRAR TABLET</a>
+                <a href="LINK_AQUÍ" class="btn-buy">🛒 COMPRAR TABLET</a>
             </div>
         </div>
 
         <div class="product-item">
-            <div class="video-box">
-                <video controls playsinline>
-                    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Motorola%20edge.mp4" type="video/mp4">
-                </video>
-            </div>
+            <video controls playsinline>
+                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Motorola%20edge.mp4" type="video/mp4">
+            </video>
             <div class="info-box">
                 <h2 class="product-title">Motorola Edge</h2>
-                <a href="AQUÍ_EL_ENLACE_DE_MERCADO_LIBRE_DEL_MOTO" class="btn-buy">🛒 COMPRAR MOTOROLA</a>
+                <a href="LINK_AQUÍ" class="btn-buy">🛒 COMPRAR MOTOROLA</a>
             </div>
         </div>
 
-        </div>
+    </div>
+
+    <script>
+        const allVideos = document.querySelectorAll('video');
+
+        allVideos.forEach(video => {
+            video.addEventListener('play', () => {
+                // Cuando un video empieza, pausamos todos los demás
+                allVideos.forEach(otherVideo => {
+                    if (otherVideo !== video) {
+                        otherVideo.pause();
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
