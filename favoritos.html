@@ -4,87 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoMarket Pro - Tablet C108</title>
+    <title>VideoMarket Pro - Catálogo</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
+            font-family: 'Arial Rounded MT Bold', sans-serif;
             background: linear-gradient(180deg, #dcf0ff 0%, #ffffff 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding-bottom: 50px;
         }
 
         .header {
             width: 100%;
-            padding: 25px 10px;
+            padding: 25px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.5);
-            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #cce5ff;
         }
 
-        .logo-text {
-            font-size: 26px;
-            font-weight: bold;
-            color: #1a73e8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .logo-text { font-size: 24px; font-weight: bold; color: #1a73e8; text-transform: uppercase; }
 
         .container {
             width: 92%;
-            max-width: 420px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            max-width: 450px;
+            margin-top: 20px;
         }
 
-        .video-card {
-            width: 100%;
-            background: #000;
+        /* ESTILO DE CADA PRODUCTO */
+        .product-item {
+            background: white;
             border-radius: 35px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(26, 115, 232, 0.2);
-            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px; /* Espacio entre un producto y otro */
+            border: 2px solid #fff;
+        }
+
+        .video-box {
+            width: 100%;
+            background: #000;
+            line-height: 0;
         }
 
         video {
             width: 100%;
-            display: block;
             aspect-ratio: 9 / 16;
             object-fit: cover;
         }
 
-        .info-card {
-            background: white;
-            padding: 25px;
-            border-radius: 25px;
+        .info-box {
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
         }
 
         .product-title {
-            font-size: 22px;
+            font-size: 20px;
             color: #333;
             margin-bottom: 15px;
-            font-weight: bold;
         }
 
-        .btn-mercado-libre {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .btn-buy {
+            display: block;
             background: #3483fa;
             color: white;
             text-decoration: none;
-            padding: 16px;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 12px;
             font-weight: bold;
-            font-size: 17px;
         }
     </style>
 </head>
@@ -95,19 +89,32 @@
     </header>
 
     <div class="container">
-        <div class="video-card">
-            <video controls playsinline>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4" type="video/mp4">
-            </video>
+
+        <div class="product-item">
+            <div class="video-box">
+                <video controls playsinline>
+                    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="info-box">
+                <h2 class="product-title">Tablet C108 - 10.1"</h2>
+                <a href="AQUÍ_EL_ENLACE_DE_MERCADO_LIBRE_DE_LA_TABLET" class="btn-buy">🛒 COMPRAR TABLET</a>
+            </div>
         </div>
 
-        <div class="info-card">
-            <h2 class="product-title">Tablet C108 - 10.1"</h2>
-            <a href="https://mercadolibre.com/sec/13rcPpB" class="btn-mercado-libre">
-                🛒 COMPRAR EN MERCADO LIBRE
-            </a>
+        <div class="product-item">
+            <div class="video-box">
+                <video controls playsinline>
+                    <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Motorola%20edge.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="info-box">
+                <h2 class="product-title">Motorola Edge</h2>
+                <a href="AQUÍ_EL_ENLACE_DE_MERCADO_LIBRE_DEL_MOTO" class="btn-buy">🛒 COMPRAR MOTOROLA</a>
+            </div>
         </div>
-    </div>
+
+        </div>
 
 </body>
 </html>
