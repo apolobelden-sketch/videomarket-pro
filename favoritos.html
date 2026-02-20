@@ -4,108 +4,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoMarket Pro - Favoritos</title>
+    <title>VideoMarket Pro</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
-        body {
-            /* Fondo con degradado suave y limpio */
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333;
+        /* Estilo general inspirado en tus preferencias de colores suaves */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body, html { 
+            height: 100%; 
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f7ff; /* Fondo claro y limpio */
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
         }
 
         .container {
             width: 100%;
-            max-width: 500px; /* Se ve como app en PC, y ocupa todo en móvil */
+            max-width: 450px;
             padding: 20px;
             text-align: center;
         }
 
-        .top-bar {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .video-wrapper {
-            position: relative;
+        /* Contenedor del video tipo pantalla completa de móvil */
+        .video-box {
             width: 100%;
+            background: #000;
             border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            background: #000;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
         }
 
         video {
             width: 100%;
             display: block;
-            /* Sin controles para que sea una experiencia limpia */
+            aspect-ratio: 9 / 16; /* Formato vertical */
+            object-fit: cover;
         }
 
-        .product-desc {
+        .desc-card {
             background: white;
-            margin-top: -20px; /* Efecto de superposición */
             padding: 20px;
             border-radius: 20px;
-            position: relative;
-            z-index: 10;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            font-weight: 600;
-            color: #444;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        .buy-button {
+        .btn-ml {
             display: block;
-            margin-top: 20px;
-            background: #2563eb;
+            background: #3483fa;
             color: white;
             text-decoration: none;
             padding: 15px;
-            border-radius: 50px;
+            margin-top: 15px;
+            border-radius: 10px;
             font-weight: bold;
-            transition: transform 0.2s;
-        }
-
-        .buy-button:hover {
-            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="top-bar">💎 RECOMENDADO DEL DÍA 💎</div>
-
-    <div class="video-wrapper">
-        <video id="myVideo" autoplay loop playsinline>
+    <div class="video-box">
+        <video controls playsinline>
             <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet.mp4" type="video/mp4">
+            Tu navegador no soporta videos.
         </video>
     </div>
 
-    <div class="product-desc">
-        Libro Digital de Animalitos - Edición Especial
+    <div class="desc-card">
+        <h3>tablet C108 10.1</h3>
+        <p>Edición Especial</p>
+        <a href="#" class="btn-ml">🛒 COMPRAR EN MERCADO LIBRE</a>
     </div>
-
-    <a href="#" class="buy-button">
-        🛒 COMPRAR EN MERCADO LIBRE
-    </a>
 </div>
-
-<script>
-    // Intenta quitar el silencio automáticamente después del primer clic del usuario en la pantalla
-    document.body.addEventListener('click', function() {
-        const video = document.getElementById('myVideo');
-        video.muted = false;
-    }, { once: true });
-</script>
 
 </body>
 </html>
