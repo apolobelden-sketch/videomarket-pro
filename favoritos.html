@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -84,6 +82,39 @@
             border-radius: 12px;
             font-weight: bold;
         }
+
+        /* --- ESTILOS DEL BOTÓN WHATSAPP --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: 2px solid #ffffff;
+            animation: pulse-green 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.05);
+            background-color: #20ba5a;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
     </style>
 </head>
 <body>
@@ -91,21 +122,21 @@
     <header class="header">
         <div class="logo-text">VIDEOMARKET PRO</div>
     </header>
+
     <div style="width: 92%; max-width: 450px; margin: 20px auto; padding: 20px; background: #ffffff; border-radius: 30px; border: 2px solid #e3f2fd; box-shadow: 0 10px 25px rgba(52, 131, 250, 0.1); text-align: center;">
-    <div style="background: #3483fa; color: white; display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 12px;">
-        SITIO VERIFICADO 2026
+        <div style="background: #3483fa; color: white; display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 12px;">
+            SITIO VERIFICADO 2026
+        </div>
+        <h3 style="color: #333; font-size: 18px; margin-bottom: 8px;">Compra con confianza</h3>
+        <p style="font-size: 14px; color: #666; line-height: 1.5;">
+            Seleccionamos productos de distribuidores oficiales. Tu pago y envío están <b>totalmente protegidos por Mercado Libre</b>.
+        </p>
+        <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px; font-size: 20px;">
+            🛡️ 📦 💳
+        </div>
     </div>
-    <h3 style="color: #333; font-size: 18px; margin-bottom: 8px;">Compra con confianza</h3>
-    <p style="font-size: 14px; color: #666; line-height: 1.5;">
-        Seleccionamos productos de distribuidores oficiales. Tu pago y envío están <b>totalmente protegidos por Mercado Libre</b>.
-    </p>
-    <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px; font-size: 20px;">
-        🛡️ 📦 💳
-    </div>
-</div>
 
     <div class="container">
-
         <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet%20101.mp4" type="video/mp4">
@@ -125,7 +156,8 @@
                 <a href="https://mercadolibre.com/sec/2WA6g3f" class="btn-buy">🛒 COMPRAR MOTOROLA</a>
             </div>
         </div>
-         <div class="product-item">
+
+        <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/oppo%20reno.mp4" type="video/mp4">
             </video>
@@ -134,8 +166,9 @@
                 <p class="product-promo">🎁 Incluye Enco Buds3 de Regalo</p>
                 <a href="https://mercadolibre.com/sec/2jZrEbW" class="btn-buy">🛒 COMPRAR OPPO</a>
             </div>
-       </div>
-           <div class="product-item">
+        </div>
+
+        <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/iPhone%2016.mp4" type="video/mp4">
             </video>
@@ -144,7 +177,8 @@
                 <p class="product-promo"> Distribuidor Autorizado - Garantía Oficial</p>
                 <a href="https://mercadolibre.com/sec/1J41orq" class="btn-buy">🛒 COMPRAR IPHONE 16</a>
             </div>
-           </div>
+        </div>
+
         <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/iPhone%2017.mp4" type="video/mp4">
@@ -155,6 +189,7 @@
                 <a href="https://mercadolibre.com/sec/22L5iDv" class="btn-buy">🛒 COMPRAR IPHONE 17</a>
             </div>
         </div>
+
         <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet%20android.mp4" type="video/mp4">
@@ -165,6 +200,7 @@
                 <a href="https://mercadolibre.com/sec/1unyx6x" class="btn-buy">🛒 COMPRAR TABLET GEMINI</a>
             </div>
         </div>
+
         <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Samsung%20Galaxy.mp4" type="video/mp4">
@@ -175,7 +211,8 @@
                 <a href="https://mercadolibre.com/sec/2eJziAy" class="btn-buy">🛒 COMPRAR GALAXY S25</a>
             </div>
         </div>
-         <div class="product-item">
+
+        <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Galaxy%20tab%20s10.mp4" type="video/mp4">
             </video>
@@ -184,8 +221,9 @@
                 <p class="product-promo">🖋️ Incluye S Pen - Creatividad y Potencia</p>
                 <a href="https://mercadolibre.com/sec/1328rXH" class="btn-buy">🛒 COMPRAR GALAXY TAB</a>
             </div>
-         </div>
-         <div class="product-item">
+        </div>
+
+        <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Xiaomi%20Redmi%2013x.mp4" type="video/mp4">
             </video>
@@ -194,7 +232,8 @@
                 <p class="product-promo">📱 Dual Sim - Color Negro - Modelo 2025</p>
                 <a href="https://mercadolibre.com/sec/1LvbXWM" class="btn-buy">🛒 COMPRAR REDMI 13X</a>
             </div>
-         </div>
+        </div>
+
         <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Samsung%20Galaxy%20Tab%20S10%20Lite.mp4" type="video/mp4">
@@ -205,7 +244,8 @@
                 <a href="https://mercadolibre.com/sec/1BoqjLH" class="btn-buy">🛒 COMPRAR TAB S10 LITE</a>
             </div>
         </div>
-         <div class="product-item">
+
+        <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Samsung%20Galaxy%20A16.mp4" type="video/mp4">
             </video>
@@ -214,8 +254,9 @@
                 <p class="product-promo">📸 Cámara de 50 MP - Pantalla Super AMOLED de 6.7"</p>
                 <a href="https://mercadolibre.com/sec/22DcD8B" class="btn-buy">🛒 COMPRAR GALAXY A16</a>
             </div>
-         </div>
-         <div class="product-item">
+        </div>
+
+        <div class="product-item">
             <video controls playsinline>
                 <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Apple%20Watch%20Series%2011.mp4" type="video/mp4">
             </video>
@@ -258,70 +299,30 @@
                 <a href="https://mercadolibre.com/sec/2TWPvDT" class="btn-buy">🛒 COMPRAR SONY XM6</a>
             </div>
         </div>
-       <div style="text-align: center; margin-bottom: 30px; padding: 15px; background: rgba(255, 255, 255, 0.7); border-radius: 20px; border: 1px dashed #3483fa;">
-    <p style="color: #1a73e8; font-size: 14px; font-weight: bold; margin-bottom: 5px;">🤝 COMPRA CON TOTAL TRANQUILIDAD</p>
-    <p style="color: #555; font-size: 13px;">Todos los enlaces redirigen a la <b>Tienda Oficial de Mercado Libre</b>.</p>
-    <p style="color: #555; font-size: 13px;">🛡️ Tu pago y envío están 100% protegidos por Mercado Pago y Mercado Envíos.</p>
-</div> 
+
+        <div style="text-align: center; margin-bottom: 30px; padding: 15px; background: rgba(255, 255, 255, 0.7); border-radius: 20px; border: 1px dashed #3483fa;">
+            <p style="color: #1a73e8; font-size: 14px; font-weight: bold; margin-bottom: 5px;">🤝 COMPRA CON TOTAL TRANQUILIDAD</p>
+            <p style="color: #555; font-size: 13px;">Todos los enlaces redirigen a la <b>Tienda Oficial de Mercado Libre</b>.</p>
+            <p style="color: #555; font-size: 13px;">🛡️ Tu pago y envío están 100% protegidos por Mercado Pago y Mercado Envíos.</p>
+        </div> 
+
         <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 20px;">
-    <p style="color: #444; margin-bottom: 15px; font-size: 14px;">¿Te gustaron estas ofertas? ¡Pásalas a un amigo!</p>
-    <a href="https://api.whatsapp.com/send?text=¡Mira los nuevos iPhone 17 y Galaxy S25 aquí! 📱 https://apolobelden-sketch.github.io/videomarket-pro/favoritos.html" 
-       style="background: #25d366; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 4px 15px rgba(37,211,102,0.3);">
-       🟢 COMPARTIR CATÁLOGO EN WHATSAPP
-    </a>
+            <p style="color: #444; margin-bottom: 15px; font-size: 14px;">¿Te gustaron estas ofertas? ¡Pásalas a un amigo!</p>
+            <a href="https://api.whatsapp.com/send?text=¡Mira los nuevos iPhone 17 y Galaxy S25 aquí! 📱 https://apolobelden-sketch.github.io/videomarket-pro/favoritos.html" 
+               style="background: #25d366; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 4px 15px rgba(37,211,102,0.3);">
+               🟢 COMPARTIR CATÁLOGO EN WHATSAPP
+            </a>
         </div>
     </div>
+
     <a href="https://wa.me/526311949491?text=Hola!%20Tengo%20una%20duda" class="whatsapp-float" target="_blank">
-    <span>💬 ¿Dudas? Escríbenos</span>
+        <span>💬 ¿Dudas? Escríbenos</span>
     </a>
-/* Botón Flotante de WhatsApp */
-.whatsapp-float {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background-color: #25d366;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
-    z-index: 1000;
-    transition: all 0.3s ease;
-    border: 2px solid #ffffff;
-}
 
-.whatsapp-float:hover {
-    transform: scale(1.05);
-    background-color: #20ba5a;
-    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
-}
-
-/* Icono circular si prefieres que sea solo un círculo */
-.whatsapp-icon {
-    font-size: 20px;
-}
-
-/* Animación de pulso suave */
-@keyframes pulse-green {
-    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
-
-.whatsapp-float {
-    animation: pulse-green 2s infinite;
-}
     <script>
         const allVideos = document.querySelectorAll('video');
-
         allVideos.forEach(video => {
             video.addEventListener('play', () => {
-                // Cuando un video empieza, pausamos todos los demás
                 allVideos.forEach(otherVideo => {
                     if (otherVideo !== video) {
                         otherVideo.pause();
@@ -332,4 +333,4 @@
     </script>
 
 </body>
-</html>
+    </html>
