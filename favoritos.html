@@ -271,7 +271,48 @@
     </a>
         </div>
     </div>
+/* Botón Flotante de WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border: 2px solid #ffffff;
+}
 
+.whatsapp-float:hover {
+    transform: scale(1.05);
+    background-color: #20ba5a;
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+}
+
+/* Icono circular si prefieres que sea solo un círculo */
+.whatsapp-icon {
+    font-size: 20px;
+}
+
+/* Animación de pulso suave */
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-float {
+    animation: pulse-green 2s infinite;
+}
     <script>
         const allVideos = document.querySelectorAll('video');
 
