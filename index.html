@@ -1,291 +1,290 @@
 
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoMarket Pro | Lo más nuevo en México</title>
-
-    <meta name="google-site-verification" content="JDZLXZAhLm5jSLaol7ZbRaNKRUB_jnVo9yyMkmXCuWs" />
-    
-    <meta name="coverage" content="Worldwide">
-    <meta name="distribution" content="Global">
-    <meta name="target" content="all">
-    <meta name="audience" content="all">
-    <meta name="rating" content="general">
-    <meta name="country" content="MX">
-
-    <meta property="og:type" content="business.business">
-    <meta property="og:title" content="VideoMarket Pro | Lo más nuevo en México">
-    <meta property="og:description" content="iPhone 17, Galaxy S25 y más. ¡Haz clic para ver el catálogo!">
-    <meta property="og:image" content="https://tu-sitio.com/foto-de-portada.jpg">
-    <meta property="og:locale" content="es_MX">
-
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-
+    <title>Happy Kids Market - Catálogo Completo 2026</title>
     <style>
-    /* Aquí pega todo el código de tus estilos que ya tenías */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    /* ... el resto de tu diseño de video y botones ... */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            background: #000;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        /* Encabezado */
+        .header {
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo-text { font-size: 18px; font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Secciones de Video */
+        .reel-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            scroll-snap-align: start;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Contenido encima del video */
+        .overlay-content {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .book-title {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .btn-action {
+            width: 90%;
+            max-width: 340px;
+            padding: 14px;
+            border-radius: 50px; /* Estilo más moderno redondeado */
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            font-size: 13px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .btn-buy { background: #0084ff; color: white; box-shadow: 0 4px 15px rgba(0,132,255,0.4); }
+        .btn-pdf { background: rgba(255, 255, 255, 0.15); color: white; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); }
+        .btn-tg { background: #24A1DE; color: white; }
+
+        /* Sección Final Mercado Libre */
+        .ml-market {
+            height: auto;
+            background: #f5f5f5;
+            padding: 80px 20px 40px 20px;
+            scroll-snap-align: start;
+        }
+        .ml-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .ml-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .btn-ml {
+            background: #3483fa;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 12px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            z-index: 1000;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .audio-hint {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            z-index: 20;
+        }
     </style>
 </head>
 <body>
-<div class="section">
-    <div class="top-bar">🎥 PASOS PARA COMPRAR Y DESCARGAR</div>
-    <video controls playsinline style="width: 100%; max-height: 400px; background: #000; border-bottom: 2px solid #eee;">
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/como%20pagar.mp4" type="video/mp4">
-        Tu navegador no soporta la reproducción de video.
-    </video>
-    <div class="bottom-area">
-        <div class="book-info">¡Es muy fácil! Mira el video y adquiere tus libros hoy mismo.</div>
-        <button class="btn telegram" style="background-color: #4CAF50;" onclick="window.scrollTo({top: 600, behavior: 'smooth'});">
-            VER CATÁLOGO DE LIBROS ↓
-        </button>
-    </div>
-</div>
-<div class="section">
-    <div class="top-bar">Happy Kids</div>
-    <video controls playsinline>
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia.mp4" type="video/mp4">
-    </video>
-    <div class="bottom-area">
-        <button class="btn buy" onclick="window.location.href='https://mpago.la/1RG3bht'">💳 COMPRAR AHORA</button>
-        <button class="btn telegram" onclick="window.location.href='https://t.me/mis_libros_gen_bot'">✈️ UNIRSE A TELEGRAM</button>
-        <div class="book-info">Familia - $12MXN</div>
-        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia.pdf'">📘 DESCARGAR PDF</button>
-    </div>
-</div>
 
-<div class="section">
-    <div class="top-bar">Happy Kids</div>
-    <video controls playsinline>
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando.mp4" type="video/mp4">
-    </video>
-    <div class="bottom-area">
-        <button class="btn buy" onclick="window.location.href='https://mpago.la/2jeoHn7'">💳 COMPRAR AHORA</button>
-        <button class="btn telegram" onclick="window.location.href='​https://t.me/mis_libros_gen_bot'">✈️ UNIRSE A TELEGRAM</button>
-        <div class="book-info">Coloreando - $12MXN</div>
-        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando.pdf'">📘 DESCARGAR PDF</button>
-    </div>
-</div>
+    <header class="header">
+        <div class="logo-text">🌸 HAPPY KIDS MARKET 🌸</div>
+    </header>
 
-<div class="section">
-    <div class="top-bar">Happy Kids</div>
-    <video controls playsinline>
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20escribe.mp4" type="video/mp4">
-    </video>
-    <div class="bottom-area">
-        <button class="btn buy" onclick="window.location.href='https://mpago.la/2MimaT4'">💳 COMPRAR AHORA</button>
-        <button class="btn telegram" onclick="window.location.href='​https://t.me/mis_libros_gen_bot'">✈️ UNIRSE A TELEGRAM</button>
-        <div class="book-info">Colorea y Escribe - $12MXN</div>
-        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20escribe.pdf'">📘 DESCARGAR PDF</button>
-    </div>
-</div>
+    <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">📲</a>
 
-<div class="section">
-    <div class="top-bar">Happy Kids</div>
-    <video controls playsinline>
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/animalitos.mp4" type="video/mp4">
-    </video>
-    <div class="bottom-area">
-        <button class="btn buy" onclick="window.location.href='https://mpago.la/1UdbueQ'">💳 COMPRAR AHORA</button>
-        <button class="btn telegram" onclick="window.location.href='https://t.me/mis_libros_gen_bot'">✈️ UNIRSE A TELEGRAM</button>
-        <div class="book-info">Animalitos - $12MXN</div>
-        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/animalitos.pdf'">📘 DESCARGAR PDF</button>
+    <div class="reel-section" onclick="enableAudio()">
+        <div class="audio-hint">🔊 Tocar para audio</div>
+        <video playsinline loop muted>
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/como%20pagar.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-content">
+            <h2 class="book-title">¿Cómo comprar y descargar?</h2>
+            <p style="color: #ddd; font-size: 12px; margin-bottom: 10px;">Mira este video tutorial rápido</p>
+        </div>
     </div>
-</div>
 
-<div class="section">
-    <div class="top-bar">Happy Kids</div>
-    <video controls playsinline>
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/del%201%20al%2010.mp4" type="video/mp4">
-    </video>
-    <div class="bottom-area">
-        <button class="btn buy" onclick="window.location.href='https://mpago.la/2y7fPju'">💳 COMPRAR AHORA</button>
-        <button class="btn telegram" onclick="window.location.href='https://t.me/mis_libros_gen_bot'">✈️ UNIRSE A TELEGRAM</button>
-        <div class="book-info">Del 1 al 10 - $12MXN</div>
-        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/del%201%20al%2010.pdf'">📘 DESCARGAR PDF</button>
+    <div class="reel-section" onclick="enableAudio()">
+        <video playsinline loop muted>
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-content">
+            <h2 class="book-title">Libro de la Familia - $12 MXN</h2>
+            <a href="https://mpago.la/1RG3bht" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia.pdf" class="btn-action btn-pdf">📘 DESCARGAR PDF</a>
+            <a href="https://t.me/mis_libros_gen_bot" class="btn-action btn-tg">✈️ UNIRSE A TELEGRAM</a>
+        </div>
     </div>
-</div>
-<div class="section">
-    <div class="top-bar">🌸 Happy Kids 🌸</div>
-   <video controls playsinline> 
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/emociones.mp4" type="video/mp4">
-    </video>
-    <div class="bottom-area">
-        <div class="book-info">emociones - $12 MXN</div>
-        
-        <button class="btn buy" onclick="window.location.href='https://mpago.la/33QePc8'">💳 ADQUIRIR AHORA</button>
-        
-        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/emociones.pdf'">📘 DESCARGAR MI PDF</button>
-        
-        <button class="btn telegram" onclick="window.location.href='https://t.me/mis_libros_gen_bot'">✈️ GRUPO TELEGRAM</button>
+
+    <div class="reel-section" onclick="enableAudio()">
+        <video playsinline loop muted>
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-content">
+            <h2 class="book-title">Libro Coloreando - $12 MXN</h2>
+            <a href="https://mpago.la/2jeoHn7" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando.pdf" class="btn-action btn-pdf">📘 DESCARGAR PDF</a>
+        </div>
     </div>
-</div> 
-    <div class="section">
-    <div class="top-bar">🌸 Happy Kids 🌸</div>
-    <video controls playsinline>
-        <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/vocales.mp4" type="video/mp4">
-    </video>
-    <div class="bottom-area">
-        <div class="book-info">vocales - $12 MXN</div>
-        
-        <button class="btn buy" onclick="window.location.href='https://mpago.la/1YFVRUk'">💳 COMPRAR AHORA</button>
-        
-        <button class="btn pdf" onclick="window.location.href='https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/vocales.pdf'">📘 DESCARGAR PDF</button>
-        
-        <button class="btn telegram" onclick="window.location.href='https://t.me/mis_libros_gen_bot'">✈️ UNIRSE A TELEGRAM</button>
+
+    <div class="reel-section" onclick="enableAudio()">
+        <video playsinline loop muted>
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20escribe.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-content">
+            <h2 class="book-title">Colorea y Escribe - $12 MXN</h2>
+            <a href="https://mpago.la/2MimaT4" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20escribe.pdf" class="btn-action btn-pdf">📘 DESCARGAR PDF</a>
+        </div>
     </div>
-</div>
-<script>
-    // Mostrar botones si el pago es aprobado
-    window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('status') === 'approved') {
-            document.querySelectorAll('.pdf').forEach(btn => {
-                btn.style.display = 'block';
-            });
-            alert("¡Gracias por tu compra! Ya puedes descargar los PDF.");
+
+    <div class="reel-section" onclick="enableAudio()">
+        <video playsinline loop muted>
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/animalitos.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-content">
+            <h2 class="book-title">Libro Animalitos - $12 MXN</h2>
+            <a href="https://mpago.la/1UdbueQ" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/animalitos.pdf" class="btn-action btn-pdf">📘 DESCARGAR PDF</a>
+        </div>
+    </div>
+
+    <div class="reel-section" onclick="enableAudio()">
+        <video playsinline loop muted>
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/del%201%20al%2010.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-content">
+            <h2 class="book-title">Números del 1 al 10 - $12 MXN</h2>
+            <a href="https://mpago.la/2y7fPju" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/del%201%20al%2010.pdf" class="btn-action btn-pdf">📘 DESCARGAR PDF</a>
+        </div>
+    </div>
+
+    <div class="reel-section" onclick="enableAudio()">
+        <video playsinline loop muted>
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/emociones.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-content">
+            <h2 class="book-title">Mundo de Emociones - $12 MXN</h2>
+            <a href="https://mpago.la/33QePc8" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/emociones.pdf" class="btn-action btn-pdf">📘 DESCARGAR PDF</a>
+        </div>
+    </div>
+
+    <div class="reel-section" onclick="enableAudio()">
+        <video playsinline loop muted>
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/vocales.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-content">
+            <h2 class="book-title">Aprende las Vocales - $12 MXN</h2>
+            <a href="https://mpago.la/1YFVRUk" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
+            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/vocales.pdf" class="btn-action btn-pdf">📘 DESCARGAR PDF</a>
+        </div>
+    </div>
+
+    <div class="ml-market">
+        <h2 style="text-align: center; margin-bottom: 20px;">🎨 Kit de Artista Recomendado 🖍️</h2>
+        <div class="ml-grid">
+            <div class="ml-card"><span>🖍️</span><p>Crayolas</p><a href="https://mercadolibre.com/sec/1TmZVdn" class="btn-ml">Ver</a></div>
+            <div class="ml-card"><span>📱</span><p>Tablet LCD</p><a href="https://mercadolibre.com/sec/1rdq2NQ" class="btn-ml">Ver</a></div>
+            <div class="ml-card"><span>🎨</span><p>Set Arte</p><a href="https://mercadolibre.com/sec/1NQh9g2" class="btn-ml">Ver</a></div>
+            <div class="ml-card"><span>🖌️</span><p>Plumones</p><a href="https://mercadolibre.com/sec/2oFvYnS" class="btn-ml">Ver</a></div>
+        </div>
+    </div>
+
+    <script>
+        // Función para activar audio al tocar
+        function enableAudio() {
+            const allVideos = document.querySelectorAll('video');
+            allVideos.forEach(v => v.muted = false);
+            document.querySelectorAll('.audio-hint').forEach(h => h.style.display = 'none');
         }
-    };
 
-    // Pausar otros videos al reproducir uno
-    const videos = document.querySelectorAll("video");
-    videos.forEach(video => {
-        video.addEventListener("play", () => {
-            videos.forEach(v => { if(v !== video) v.pause(); });
-        });
-    });
-</script>
+        // Control de reproducción automática por scroll
+        const videos = document.querySelectorAll('video');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.play();
+                } else {
+                    entry.target.pause();
+                }
+            });
+        }, { threshold: 0.6 });
 
-<style>
-    .ml-market {
-        background: #f5f5f5;
-        padding: 40px 20px;
-        text-align: center;
-        border-top: 4px solid #fff159; /* Amarillo Mercado Libre */
-        border-radius: 20px 20px 0 0;
-        margin-top: 30px;
-    }
-    .ml-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        max-width: 1000px;
-        margin: 20px auto;
-    }
-    .ml-card {
-        background: white;
-        border-radius: 15px;
-        padding: 20px;
-        border: 1px solid #e6e6e6;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    }
-    .btn-ml {
-        background: #3483fa; /* Azul Mercado Libre */
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: bold;
-        display: inline-block;
-        margin-top: 15px;
-        transition: 0.3s;
-    }
-    .btn-ml:hover { background: #2968c8; }
-.whatsapp-float {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #25d366;
-        color: white;
-        width: 60px;
-        height: 60px;
-        border-radius: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 30px;
-        box-shadow: 2px 4px 10px rgba(0,0,0,0.3);
-        z-index: 1000;
-        text-decoration: none;
-        transition: 0.3s;
-    }
-</style>
-
-<div class="ml-market">
-    <h2 style="color: #333; font-family: sans-serif;">🎨 ¡Completa tu Kit de Artista! 🖍️</h2>
-    <p style="color: #666; font-family: sans-serif;">Materiales recomendados para colorear tus libros digitales.</p>
-    
-    <div class="ml-grid">
-        <div class="ml-card">
-            <span style="font-size: 45px;">🖍️</span>
-            <h3 style="font-family: sans-serif;">Crayolas Lavables</h3>
-            <p style="color: #777; font-size: 14px;">Seguras para niños y fáciles de limpiar de la ropa.</p>
-            <a href="https://mercadolibre.com/sec/1TmZVdn" class="btn-ml" target="_blank">Ver en Mercado Libre</a>
-        </div>
-        <div class="ml-card">
-            <span style="font-size: 45px;">📱</span>
-            <h3 style="font-family: sans-serif;">Tablet de Dibujo LCD</h3>
-            <p style="color: #777; font-size: 14px;">Ideal para practicar trazos infinitas veces.</p>
-            <a href="https://mercadolibre.com/sec/1rdq2NQ" class="btn-ml" target="_blank">Ver en Mercado Libre</a>
-        </div>
-
-        <div class="ml-card">
-            <span style="font-size: 45px;">🎨</span>
-            <h3 style="font-family: sans-serif;">Set de Arte Completo</h3>
-            <p style="color: #777; font-size: 14px;">Todo lo necesario para pintar con acuarelas y óleos.</p>
-            <a href="https://mercadolibre.com/sec/1NQh9g2" class="btn-ml" target="_blank">Ver en Mercado Libre</a>
-        </div>
-
-        <div class="ml-card">
-            <span style="font-size: 45px;">🖍️</span>
-            <h3 style="font-family: sans-serif;">Plumones Punta Pincel</h3>
-            <p style="color: #777; font-size: 14px;">Perfectos para colorear detalles y dibujos grandes.</p>
-            <a href="https://mercadolibre.com/sec/2oFvYnS" class="btn-ml" target="_blank">Ver en Mercado Libre</a>
-        </div>
-
-        <div class="ml-card">
-            <span style="font-size: 45px;">📓</span>
-            <h3 style="font-family: sans-serif;">Libreta de Dibujo Pro</h3>
-            <p style="color: #777; font-size: 14px;">Papel grueso que no se traspasa con los plumones.</p>
-            <a href="https://mercadolibre.com/sec/1k6wbcj" class="btn-ml" target="_blank">Ver en Mercado Libre</a>
-        </div>
-
-        <div class="ml-card">
-            <span style="font-size: 45px;">✏️</span>
-            <h3 style="font-family: sans-serif;">Lápices de Colores</h3>
-            <p style="color: #777; font-size: 14px;">Colores vibrantes para dibujos escolares y arte.</p>
-            <a href="https://mercadolibre.com/sec/32tSeRK" class="btn-ml" target="_blank">Ver en Mercado Libre</a>
-        </div>
-
-        <div class="ml-card">
-            <span style="font-size: 45px;">🏢</span>
-            <h3 style="font-family: sans-serif;">Organizador de Arte</h3>
-            <p style="color: #777; font-size: 14px;">Mantén todos tus colores y pinceles ordenados.</p>
-            <a href="https://mercadolibre.com/sec/23yTjSZ" class="btn-ml" target="_blank">Ver en Mercado Libre</a>
-        </div>
-
-        <div class="ml-card">
-            <span style="font-size: 45px;">🖌️</span>
-            <h3 style="font-family: sans-serif;">Pinceles con Tanque</h3>
-            <p style="color: #777; font-size: 14px;">Dibuja con agua sin derrames ni complicaciones.</p>
-            <a href="TU_LINK_AQUÍ" class="btn-ml" target="_blank">Ver en Mercado Libre</a>
-     </div> 
-</div>
-
-<a href="https://wa.me/526311949491?text=¡Hola!%20Vi%20tu%20página%20de%20Happy%20Kids%20y%20tengo%20una%20duda." class="whatsapp-float" target="_blank">
-    <span>📲</span>
-</a>
-
+        videos.forEach(v => observer.observe(v));
+    </script>
 </body>
-</html>    
-
-        
-
+                </html>
     
 
 
