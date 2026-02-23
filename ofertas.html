@@ -3,38 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofertas Increíbles | Menos de $600 MXN</title>
+    <title>Ofertas Relámpago | Happy Kids Market</title>
+
+    <meta name="description" content="Ahorra con las mejores ofertas en tecnología y accesorios. Calidad garantizada en Mercado Libre México.">
+    <meta name="geo.region" content="MX" />
+    <meta name="robots" content="index, follow">
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body { 
             font-family: 'Arial Rounded MT Bold', sans-serif;
             background: #000;
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
         }
+
+        /* HEADER CON NAVEGACIÓN TRIPLE */
         .header {
             width: 100%;
             padding: 10px;
             text-align: center;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
             position: fixed;
             top: 0;
             z-index: 100;
-            border-bottom: 2px solid #25d366; /* Verde para indicar ahorro */
+            border-bottom: 2px solid #25d366;
         }
-        .logo-text { font-size: 16px; font-weight: bold; color: #fff; text-transform: uppercase; }
-        .nav-buttons { display: flex; gap: 5px; justify-content: center; margin-top: 8px; }
+
+        .logo-text { font-size: 16px; font-weight: bold; color: #fff; text-transform: uppercase; margin-bottom: 8px; }
+
+        .nav-container { display: flex; gap: 8px; justify-content: center; }
+
         .nav-btn { 
-            font-size: 9px; 
+            font-size: 10px; 
             text-decoration: none; 
             color: #fff; 
             border: 1px solid #fff; 
-            padding: 3px 8px; 
-            border-radius: 15px; 
+            padding: 4px 12px; 
+            border-radius: 20px; 
             text-transform: uppercase;
+            font-weight: bold;
         }
 
+        /* ESTILO TIPO REEL */
         .reel-section {
             position: relative;
             width: 100%;
@@ -43,61 +56,120 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
+
         video { width: 100%; height: 100%; object-fit: cover; }
 
         .info-box {
             position: absolute;
-            bottom: 80px;
+            bottom: 90px;
             width: 100%;
             padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
             text-align: center;
+            z-index: 10;
         }
-        .price-tag { background: #25d366; color: #000; display: inline-block; padding: 2px 10px; border-radius: 5px; font-weight: bold; margin-bottom: 5px; }
-        .product-title { color: #fff; font-size: 20px; margin-bottom: 15px; }
+
+        .price-tag { 
+            background: #25d366; 
+            color: #000; 
+            display: inline-block; 
+            padding: 4px 12px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            font-size: 14px; 
+        }
+
+        .product-title { color: #fff; font-size: 20px; margin-bottom: 18px; font-weight: bold; text-shadow: 2px 2px 4px #000; }
         
         .btn-buy {
             display: inline-block;
             width: 85%;
-            padding: 15px;
+            max-width: 320px;
+            padding: 16px;
             background: #fff159;
-            color: #000;
+            color: #333;
             text-decoration: none;
             font-weight: bold;
             border-radius: 12px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 241, 89, 0.4);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 20px;
+            background-color: #25d366;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            z-index: 1000;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .sound-hint {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            z-index: 20;
         }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <div class="logo-text">⚡ OFERTAS RELÁMPAGO ⚡</div>
-        <div class="nav-buttons">
+        <div class="logo-text">⚡ OFERTAS EXCLUSIVAS ⚡</div>
+        <div class="nav-container">
             <a href="index.html" class="nav-btn">📚 Libros</a>
             <a href="favoritos.html" class="nav-btn">📱 Premium</a>
         </div>
     </header>
 
-    <div class="reel-section">
+    <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">📲</a>
+
+    <div class="reel-section" onclick="enableAudio(this)">
+        <div class="sound-hint">🔊 Tocar para audio</div>
         <video playsinline loop muted autoplay>
-            <source src="URL_DE_TU_VIDEO_AUDIFONOS.mp4" type="video/mp4">
+            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Haylou%20S30%20Pro.mp4" type="video/mp4">
         </video>
         <div class="info-box">
-            <div class="price-tag">OFERTA: $350 MXN</div>
-            <h2 class="product-title">Audífonos Bluetooth Pro</h2>
-            <a href="TU_LINK_AFILIADO_ML" class="btn-buy">¡LO QUIERO! 🛒</a>
+            <div class="price-tag">OFERTA RECOMENDADA</div>
+            <h2 class="product-title">Haylou S30 Pro ANC - Gamer & Hi-Fi</h2>
+            <a href="https://meli.la/31SM7wn" class="btn-buy">🛒 COMPRAR EN MERCADO LIBRE</a>
         </div>
     </div>
 
     <script>
+        function enableAudio(element) {
+            const allVideos = document.querySelectorAll('video');
+            allVideos.forEach(v => v.muted = false);
+            document.querySelectorAll('.sound-hint').forEach(h => h.style.display = 'none');
+        }
+
         const videos = document.querySelectorAll('video');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.play();
-                else entry.target.pause();
+                if (entry.isIntersecting) {
+                    entry.target.play();
+                } else {
+                    entry.target.pause();
+                }
             });
         }, { threshold: 0.6 });
+
         videos.forEach(v => observer.observe(v));
     </script>
 </body>
