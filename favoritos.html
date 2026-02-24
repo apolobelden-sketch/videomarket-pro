@@ -3,109 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoMarket Pro - Favoritos</title>
+    <title>VideoMarket Pro - Premium</title>
+    <link href="https://unpkg.com/cloudinary-video-player@1.10.6/dist/cld-video-player.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/cloudinary-video-player@1.10.6/dist/cld-video-player.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body { 
             font-family: 'Arial Rounded MT Bold', sans-serif;
-            background: #000;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
+            background: #000; overflow-y: scroll; scroll-snap-type: y mandatory;
         }
-
         .header {
-            width: 100%;
-            padding: 10px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 90px;
+            width: 100%; padding: 10px; text-align: center;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
+            position: fixed; top: 0; z-index: 100; border-bottom: 1px solid #333;
+            display: flex; flex-direction: column; align-items: center; min-height: 90px;
         }
-
-        .logo-text { font-size: 18px; font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-
+        .logo-text { font-size: 18px; font-weight: bold; color: #fff; text-transform: uppercase; margin-bottom: 8px; }
         nav { display: flex; gap: 5px; }
         nav a { color: #fff; font-size: 9px; text-decoration: none; border: 1px solid #fff; padding: 4px 8px; border-radius: 15px; }
 
-        .container {
-            width: 100%;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
+        .container { width: 100%; max-width: 450px; margin: 0 auto; }
         .product-item {
-            position: relative;
-            width: 100%;
-            height: 100vh; 
-            background: #000;
-            scroll-snap-align: start;
-            overflow: hidden;
-            border-bottom: 2px solid #222;
+            position: relative; width: 100%; height: 100vh; 
+            background: #000; scroll-snap-align: start; overflow: hidden;
         }
-
-        .video-wrapper {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        
+        /* Contenedor del video */
+        .v-container { width: 100%; height: 100%; }
+        video { width: 100%; height: 100%; object-fit: cover; }
 
         .info-box {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+            position: absolute; bottom: 0; left: 0; width: 100%;
             padding: 60px 20px 40px 20px;
             background: linear-gradient(transparent, rgba(0,0,0,0.95));
-            color: white;
-            z-index: 10;
-            pointer-events: none;
+            color: white; z-index: 10; pointer-events: none;
         }
-
         .info-box * { pointer-events: auto; }
-
-        .product-title { font-size: 19px; font-weight: bold; margin-bottom: 6px; }
-        .product-promo { font-size: 13px; color: #ddd; margin-bottom: 18px; }
-
         .btn-buy {
-            display: block;
-            background: #0084ff; 
-            color: white;
-            text-decoration: none;
-            padding: 16px;
-            border-radius: 12px;
-            font-weight: bold;
-            text-align: center;
-            font-size: 16px;
+            display: block; background: #0084ff; color: white;
+            text-decoration: none; padding: 16px; border-radius: 12px;
+            font-weight: bold; text-align: center;
         }
-
         .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: bold;
-            z-index: 1000;
+            position: fixed; bottom: 30px; right: 20px;
+            background-color: #25d366; color: white; padding: 12px 18px;
+            border-radius: 50px; text-decoration: none; z-index: 1000;
         }
     </style>
 </head>
@@ -120,62 +62,64 @@
     </nav>
 </header>
 
-<div class="container" id="reels-container"></div>
+<div class="container" id="feed"></div>
 
-<a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">
-    <span>💬 ¿Dudas? Escríbenos</span>
-</a>
+<a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas?</a>
 
 <script>
+    const cld = cloudinary.VideoPlayer('cld-player', { cloud_name: 'dgdw8fbku' });
     const productos = [
-        { nombre: "Apple iPhone 16", id: "zwenhgzqb182lsu4ib59", promo: " Distribuidor Autorizado", link: "https://mercadolibre.com/sec/1J41orq" },
-        { nombre: "Motorola Edge", id: "fix2f6y371azg8fwswcd", promo: "Diseño premium y velocidad pura.", link: "https://mercadolibre.com/sec/2WA6g3f" },
-        { nombre: "Apple iPhone 17", id: "ct77tvoq0niyfq4wai8e", promo: "Lo más nuevo de Apple.", link: "https://mercadolibre.com/sec/22L5iDv" },
-        { nombre: "Galaxy Watch Ultra", id: "k1nsf8dohydcd0nn6whj", promo: "⛰️ Diseñado para la aventura extrema.", link: "https://mercadolibre.com/sec/1un2Bf4" },
-        { nombre: "Tablet C108 - 10.1\"", id: "k1tbnubjahpwcqo0tovc", promo: "Rendimiento ideal.", link: "https://mercadolibre.com/sec/13rcPpB" },
-        { nombre: "Sony WH-1000XM6", id: "ov0grqjnsjhos3pwihtj", promo: "🎵 Sonido de alta fidelidad.", link: "https://mercadolibre.com/sec/2TWPvDT" }
+        { nombre: "Apple iPhone 16", id: "zwenhgzqb182lsu4ib59", link: "https://mercadolibre.com/sec/1J41orq" },
+        { nombre: "Motorola Edge", id: "fix2f6y371azg8fwswcd", link: "https://mercadolibre.com/sec/2WA6g3f" },
+        { nombre: "Apple iPhone 17", id: "ct77tvoq0niyfq4wai8e", link: "https://mercadolibre.com/sec/22L5iDv" },
+        { nombre: "Galaxy Watch Ultra", id: "k1nsf8dohydcd0nn6whj", link: "https://mercadolibre.com/sec/1un2Bf4" },
+        { nombre: "Tablet C108", id: "k1tbnubjahpwcqo0tovc", link: "https://mercadolibre.com/sec/13rcPpB" },
+        { nombre: "Sony WH-1000XM6", id: "ov0grqjnsjhos3pwihtj", link: "https://mercadolibre.com/sec/2TWPvDT" }
     ];
 
-    const container = document.getElementById('reels-container');
-    let hasInteracted = false;
+    const feed = document.getElementById('feed');
 
     productos.forEach((p, i) => {
         const item = document.createElement('div');
         item.className = 'product-item';
-        item.dataset.vid = p.id;
-        item.dataset.index = i;
         item.innerHTML = `
-            <div class="video-wrapper" id="wrapper-${i}"></div>
+            <div class="v-container">
+                <video id="vid-${i}" class="cld-video-player" playsinline loop muted></video>
+            </div>
             <div class="info-box">
-                <h2 class="product-title">${p.nombre}</h2>
-                <p class="product-promo">${p.promo}</p>
+                <h2 style="margin-bottom:10px">${p.nombre}</h2>
                 <a href="${p.link}" class="btn-buy">Comprar ahora ></a>
             </div>
         `;
-        container.appendChild(item);
+        feed.appendChild(item);
+
+        // Inicializar cada video individualmente con el SDK
+        const player = cloudinary.videoPlayer(`vid-${i}`, {
+            cloud_name: 'dgdw8fbku',
+            autoplayMode: 'on-scroll',
+            controls: true,
+            muted: true
+        });
+        player.source(p.id);
+
+        // Lógica de audio: Al hacer click, quita el mute a TODOS los reproductores
+        item.addEventListener('click', () => {
+            player.muted(!player.muted());
+        });
     });
 
+    // Observador para pausar el sonido de lo que no se ve
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            const i = entry.target.dataset.index;
-            const vid = entry.target.dataset.vid;
-            const wrapper = document.getElementById(`wrapper-${i}`);
-
+            const videoElement = entry.target.querySelector('video');
             if (entry.isIntersecting) {
-                // Si ya hubo interacción (clic), el siguiente video inicia con audio
-                const auto = hasInteracted ? "true" : "false";
-                // Cargamos el iframe de Cloudinary
-                wrapper.innerHTML = `<iframe src="https://player.cloudinary.com/embed/?cloud_name=dgdw8fbku&public_id=${vid}&autoplay=${auto}&controls=true" allow="autoplay; fullscreen"></iframe>`;
+                videoElement.play();
             } else {
-                // AL SALIR DE VISTA: Borramos el iframe para matar el audio al instante
-                wrapper.innerHTML = "";
+                videoElement.pause();
+                videoElement.currentTime = 0; // Reinicia para que no se quede trabado
             }
         });
-    }, { threshold: 0.5 });
-
-    // Detectamos el primer clic para desbloquear el audio automático
-    window.addEventListener('click', () => { hasInteracted = true; }, { once: false });
-    window.addEventListener('touchstart', () => { hasInteracted = true; }, { once: false });
+    }, { threshold: 0.8 });
 
     document.querySelectorAll('.product-item').forEach(item => observer.observe(item));
 </script>
