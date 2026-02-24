@@ -329,28 +329,42 @@
     <a href="https://wa.me/526311949491?text=Hola!%20Tengo%20una%20duda" class="whatsapp-float" target="_blank">
         <span>💬 ¿Dudas? Escríbenos</span>
     </a>
+const SUPABASE_URL = "https://nmdljfwudjkqrzvuuqvq.supabase.co";
+const SUPABASE_KEY = "Sb_publishable_-03fDV0jBU9n-7JLRitWsw_y1J11mPj";
 
-    <script>
-        function enableSound(container) {
-            const allVideos = document.querySelectorAll('video');
-            allVideos.forEach(v => {
-                v.muted = false;
-            });
-            document.querySelectorAll('.sound-hint').forEach(hint => hint.style.display = 'none');
-        }
+async function cargarCatalogo() {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/Videos?select=*`, {
+        headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
+    });
+    const productos = await response.json();
+    const container = document.querySelector('.container');
+    container.innerHTML = ""; // Limpiamos lo viejo
 
-        const videos = document.querySelectorAll('video');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.play();
-                } else {
-                    entry.target.pause();
-                }
-            });
-        }, { threshold: 0.6 });
+    productos.forEach(prod => {
+        const item = document.createElement('div');
+        item.className = 'product-item';
+        item.onclick = () => enableSound(item);
+        
+        // Usamos url_video si existe, sino url_pdf o el link que tengas
+        const linkFinal = prod.url_video || prod.url_pdf;
 
-        videos.forEach(v => observer.observe(v));
-    </script>
+        item.innerHTML = `
+            <div class="sound-hint">🔊 Tocar para audio</div>
+            <video playsinline loop muted>
+                <source src="${linkFinal}" type="video/mp4">
+            </video>
+            <div class="info-box">
+                <h2 class="product-title">${prod.nombre || 'Producto Pro'}</h2>
+                <p class="product-promo">${prod.descripcion || '¡Lo más nuevo!'}</p>
+                <a href="${prod.link_mercadolibre || '#'}" class="btn-buy">Comprar ahora ></a>
+            </div>
+        `;
+        container.appendChild(item);
+        observer.observe(item.querySelector('video'));
+    });
+}
+
+// Llamar a la función al cargar
+cargarCatalogo();
 </body>
                     </html>
