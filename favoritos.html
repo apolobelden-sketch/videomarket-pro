@@ -3,48 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Interactivo</title>
+    <title>Catálogo Pro</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             background-color: #000; color: white; font-family: sans-serif; 
             overflow-y: scroll; scroll-snap-type: y mandatory;
         }
-        .contenedor-reels {
+        .seccion-reel {
             position: relative; width: 100vw; height: 100vh;
-            scroll-snap-align: start; display: flex; align-items: center; justify-content: center;
+            scroll-snap-align: start; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
         }
-        /* El reproductor con controles visibles */
-        .reproductor { width: 100%; height: 100%; }
-        
-        .info {
-            position: absolute; bottom: 110px; left: 20px; z-index: 10;
-            pointer-events: none;
+        /* Ajuste para que el video ocupe todo sin mostrar textos raros */
+        .reproductor-fijo {
+            width: 100%; height: 100%; border: none;
         }
-        .boton-compra {
-            position: absolute; bottom: 40px; left: 20px; right: 80px;
-            background: #FFE600; color: #000; padding: 15px;
+        .capa-info {
+            position: absolute; bottom: 120px; left: 20px; z-index: 5;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+        }
+        .boton-ml {
+            position: absolute; bottom: 40px; left: 20px; right: 90px;
+            background: #FFE600; color: #000; padding: 18px;
             text-align: center; text-decoration: none; font-weight: bold;
-            border-radius: 10px; z-index: 10;
+            border-radius: 15px; z-index: 5; text-transform: uppercase;
         }
-        .whatsapp {
-            position: fixed; bottom: 35px; right: 15px;
-            background: #25d366; width: 55px; height: 55px;
+        .whatsapp-flotante {
+            position: fixed; bottom: 35px; right: 20px;
+            background: #25d366; width: 60px; height: 60px;
             border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; z-index: 100;
+            justify-content: center; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
     </style>
 </head>
 <body>
 
-<a href="https://wa.me/526311949491" class="whatsapp" target="_blank">
+<a href="https://wa.me/526311949491" class="whatsapp-flotante" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35">
 </a>
 
-<div id="pantalla-reels"></div>
+<div id="contenedor-videos"></div>
 
 <script>
-    const listaProductos = [
+    const productos = [
         { nombre: "iPhone 16", id: "zwenhgzqb182lsu4ib59" },
         { nombre: "Motorola edge", id: "fix2f6y371azg8fwswcd" },
         { nombre: "iPhone 17", id: "ct77tvoq0niyfq4wai8e" },
@@ -53,42 +55,36 @@
         { nombre: "Sony WH-1000XM6", id: "ov0grqjnsjhos3pwihtj" }
     ];
 
-    const contenedorPrincipal = document.getElementById('pantalla-reels');
+    const contenedor = document.getElementById('contenedor-videos');
 
-    listaProductos.forEach((p, i) => {
-        const bloque = document.createElement('div');
-        bloque.className = 'contenedor-reels';
-        // Agregamos &controls=true para que el usuario pueda quitar Loop o Mute
-        bloque.innerHTML = `
-            <div id="video-area-${i}" class="reproductor"></div>
-            <div class="info"><h2>${p.nombre}</h2></div>
-            <a href="#" class="boton-compra">🛒 COMPRAR AHORA</a>
+    productos.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.className = 'seccion-reel';
+        div.dataset.id = p.id;
+        div.innerHTML = `
+            <div class="area-video" style="width:100%; height:100%;"></div>
+            <div class="capa-info"><h2>${p.nombre}</h2></div>
+            <a href="#" class="boton-ml">🛍️ Ver en Mercado Libre</a>
         `;
-        contenedorPrincipal.appendChild(bloque);
+        contenedor.appendChild(div);
     });
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            const i = entry.target.dataset.index;
-            const idVideo = entry.target.dataset.id;
-            const area = entry.target.querySelector('.reproductor');
+            const area = entry.target.querySelector('.area-video');
+            const id = entry.target.dataset.id;
 
             if (entry.isIntersecting) {
-                // Insertamos el iframe SOLO cuando está en pantalla
-                // quitamos autoplay para que el usuario le dé Play manual
-                area.innerHTML = `<iframe src="https://player.cloudinary.com/embed/?cloud_name=dgdw8fbku&public_id=${idVideo}&autoplay=false&controls=true" allow="autoplay; fullscreen" style="width:100%; height:100%; border:none;"></iframe>`;
+                // Quitamos "controls=true" y usamos el player estándar para evitar los textos de la izquierda
+                area.innerHTML = `<iframe src="https://player.cloudinary.com/embed/?cloud_name=dgdw8fbku&public_id=${id}&autoplay=false" 
+                    class="reproductor-fijo" allow="autoplay; fullscreen"></iframe>`;
             } else {
-                // Borramos el iframe al salir de pantalla. CERO RUIDO.
-                area.innerHTML = "";
+                area.innerHTML = ""; // Matamos el audio y el video al salir
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.6 });
 
-    document.querySelectorAll('.contenedor-reels').forEach((div, index) => {
-        div.dataset.index = index;
-        div.dataset.id = listaProductos[index].id;
-        observer.observe(div);
-    });
+    document.querySelectorAll('.seccion-reel').forEach(s => observer.observe(s));
 </script>
 
 </body>
