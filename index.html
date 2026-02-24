@@ -121,102 +121,43 @@
     </nav>
 </header>
     <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">📲</a>
+<div id="reels-container"></div>
 
-    <div class="reel-section" onclick="enableAudio()">
-        <div class="audio-hint">🔊 Tocar para audio</div>
-        <video playsinline loop muted>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/como%20pagar.mp4" type="video/mp4">
-        </video>
-        <div class="overlay-content">
-            <h2 class="book-title">¿Cómo comprar y descargar?</h2>
-        </div>
-    </div>
+<script>
+    const SUPABASE_URL = "https://nmdljfwudjkqrzvuuqvq.supabase.co";
+    const SUPABASE_KEY = "Sb_publishable_-03fDV0jBU9n-7JLRitWsw_y1J11mPj";
 
-    <div class="reel-section" onclick="enableAudio()">
-        <video playsinline loop muted>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/familia.mp4" type="video/mp4">
-        </video>
-        <div class="overlay-content">
-            <h2 class="book-title">Libro Familia - $12 MXN</h2>
-            <a href="https://mpago.la/1RG3bht" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
-            <a href="https://t.me/mis_libros_gen_bot" class="btn-action btn-tg">✈️ UNIRSE A TELEGRAM</a>
-            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/familia.pdf" class="btn-action btn-pdf">✅ DESCARGAR PDF</a>
-        </div>
-    </div>
+    async function cargarLibros() {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/Videos?select=*&categoria=eq.libros`, {
+            headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
+        });
+        const libros = await response.json();
+        const container = document.getElementById('reels-container');
+        
+        libros.forEach(libro => {
+            const seccion = document.createElement('div');
+            seccion.className = 'reel-section';
+            seccion.onclick = enableAudio;
+            
+            seccion.innerHTML = `
+                <video playsinline loop muted>
+                    <source src="${libro.url_video}" type="video/mp4">
+                </video>
+                <div class="overlay-content">
+                    <h2 class="book-title">${libro.nombre} - $${libro.precio || '12'} MXN</h2>
+                    <a href="${libro.link_pago}" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
+                    <a href="https://t.me/mis_libros_gen_bot" class="btn-action btn-tg">✈️ UNIRSE A TELEGRAM</a>
+                    <a href="${libro.url_pdf}" class="btn-action btn-pdf">✅ DESCARGAR PDF</a>
+                </div>
+            `;
+            container.appendChild(seccion);
+            observer.observe(seccion.querySelector('video'));
+        });
+    }
+    cargarLibros();
+</script>
 
-    <div class="reel-section" onclick="enableAudio()">
-        <video playsinline loop muted>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/coloreando.mp4" type="video/mp4">
-        </video>
-        <div class="overlay-content">
-            <h2 class="book-title">Libro Coloreando - $12 MXN</h2>
-            <a href="https://mpago.la/2jeoHn7" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
-            <a href="https://t.me/mis_libros_gen_bot" class="btn-action btn-tg">✈️ UNIRSE A TELEGRAM</a>
-            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/coloreando.pdf" class="btn-action btn-pdf">✅ DESCARGAR PDF</a>
-        </div>
-    </div>
-
-    <div class="reel-section" onclick="enableAudio()">
-        <video playsinline loop muted>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/colorea%20y%20escribe.mp4" type="video/mp4">
-        </video>
-        <div class="overlay-content">
-            <h2 class="book-title">Colorea y Escribe - $12 MXN</h2>
-            <a href="https://mpago.la/2MimaT4" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
-            <a href="https://t.me/mis_libros_gen_bot" class="btn-action btn-tg">✈️ UNIRSE A TELEGRAM</a>
-            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/colorea%20y%20escribe.pdf" class="btn-action btn-pdf">✅ DESCARGAR PDF</a>
-        </div>
-    </div>
-
-    <div class="reel-section" onclick="enableAudio()">
-        <video playsinline loop muted>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/animalitos.mp4" type="video/mp4">
-        </video>
-        <div class="overlay-content">
-            <h2 class="book-title">Libro Animalitos - $12 MXN</h2>
-            <a href="https://mpago.la/1UdbueQ" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
-            <a href="https://t.me/mis_libros_gen_bot" class="btn-action btn-tg">✈️ UNIRSE A TELEGRAM</a>
-            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/animalitos.pdf" class="btn-action btn-pdf">✅ DESCARGAR PDF</a>
-        </div>
-    </div>
-
-    <div class="reel-section" onclick="enableAudio()">
-        <video playsinline loop muted>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/del%201%20al%2010.mp4" type="video/mp4">
-        </video>
-        <div class="overlay-content">
-            <h2 class="book-title">Del 1 al 10 - $12 MXN</h2>
-            <a href="https://mpago.la/2y7fPju" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
-            <a href="https://t.me/mis_libros_gen_bot" class="btn-action btn-tg">✈️ UNIRSE A TELEGRAM</a>
-            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/del%201%20al%2010.pdf" class="btn-action btn-pdf">✅ DESCARGAR PDF</a>
-        </div>
-    </div>
-
-    <div class="reel-section" onclick="enableAudio()">
-        <video playsinline loop muted>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/emociones.mp4" type="video/mp4">
-        </video>
-        <div class="overlay-content">
-            <h2 class="book-title">Emociones - $12 MXN</h2>
-            <a href="https://mpago.la/33QePc8" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
-            <a href="https://t.me/mis_libros_gen_bot" class="btn-action btn-tg">✈️ UNIRSE A TELEGRAM</a>
-            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/emociones.pdf" class="btn-action btn-pdf">✅ DESCARGAR PDF</a>
-        </div>
-    </div>
-
-    <div class="reel-section" onclick="enableAudio()">
-        <video playsinline loop muted>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/vocales.mp4" type="video/mp4">
-        </video>
-        <div class="overlay-content">
-            <h2 class="book-title">Las Vocales - $12 MXN</h2>
-            <a href="https://mpago.la/1YFVRUk" class="btn-action btn-buy">💳 COMPRAR AHORA</a>
-            <a href="https://t.me/mis_libros_gen_bot" class="btn-action btn-tg">✈️ UNIRSE A TELEGRAM</a>
-            <a href="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/pdfs/vocales.pdf" class="btn-action btn-pdf">✅ DESCARGAR PDF</a>
-        </div>
-    </div>
-
-    <script>
+    
         // SEGURIDAD: Solo muestra PDF si el pago es aprobado
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
