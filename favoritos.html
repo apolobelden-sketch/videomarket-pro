@@ -1,20 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoMarket Pro - Catálogo Estilo Reel</title>
+    <title>VideoMarket Pro - Catálogo Oficial</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             font-family: 'Arial Rounded MT Bold', sans-serif;
             background: #000;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            color: white;
         }
 
         .header {
@@ -29,29 +25,29 @@
             border-bottom: 1px solid #333;
         }
 
-        .logo-text { font-size: 20px; font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+        .logo-text { font-size: 18px; font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
 
         .container {
             width: 100%;
             max-width: 450px;
-            margin-top: 60px;
+            margin: 90px auto 0 auto;
         }
 
         .product-item {
             position: relative;
             width: 100%;
-            height: 90vh; 
+            height: 85vh; 
             background: #000;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             overflow: hidden;
-            border-bottom: 2px solid #222;
+            border-radius: 15px;
+            border: 1px solid #222;
         }
 
-        video {
+        iframe {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
+            border: none;
         }
 
         .info-box {
@@ -59,24 +55,16 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            padding: 50px 20px 30px 20px;
+            padding: 40px 20px 20px 20px;
             background: linear-gradient(transparent, rgba(0,0,0,0.95));
-            color: white;
             z-index: 10;
         }
 
         .product-title {
             font-size: 19px;
             font-weight: bold;
-            margin-bottom: 6px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-        }
-
-        .product-promo {
-            font-size: 13px;
-            color: #ddd;
-            margin-bottom: 18px;
-            line-height: 1.4;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
         .btn-buy {
@@ -84,287 +72,91 @@
             background: #0084ff; 
             color: white;
             text-decoration: none;
-            padding: 16px;
-            border-radius: 12px;
+            padding: 14px;
+            border-radius: 10px;
             font-weight: bold;
             text-align: center;
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(0,132,255,0.3);
+            font-size: 15px;
         }
+
+        .btn-ml { background: #FFE600; color: #000; }
 
         .whatsapp-float {
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             right: 20px;
             background-color: #25d366;
             color: white;
-            padding: 12px 18px;
+            padding: 12px 20px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-            animation: pulse-green 2s infinite;
-        }
-
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        .sound-hint {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            z-index: 20;
-            pointer-events: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
     </style>
-    <meta name="google-site-verification" content="JDZLXZAhLm5jSLaol7ZbRaNKRUB_jnVo9yyMkmXCuWs" />
-    <meta name="coverage" content="Worldwide">
-<meta name="distribution" content="Global">
-<meta name="target" content="all">
-<meta name="audience" content="all">
-<meta name="rating" content="general">
-<meta name="country" content="MX">
-
-<meta property="og:type" content="business.business">
-<meta property="og:title" content="VideoMarket Pro | Lo más nuevo en México">
-<meta property="og:description" content="iPhone 17, Galaxy S25 y más. ¡Haz clic para ver el catálogo!">
-<meta property="og:image" content="https://tu-sitio.com/foto-de-portada.jpg">
-<meta property="og:locale" content="es_MX">
-
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 </head>
 <body>
 
-<header class="header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; padding: 10px;">
-    <div class="logo-text" style="font-size: 18px; margin-bottom: 8px; color: #fff; font-weight: bold; letter-spacing: 1px;">⚡ VIDEOMARKET PRO ⚡</div>
-    <nav style="display: flex; gap: 5px;">
-        <a href="index.html" style="color: #fff; font-size: 9px; text-decoration: none; border: 1px solid #fff; padding: 4px 8px; border-radius: 15px;">📚 LIBROS</a>
-        <a href="favoritos.html" style="color: #fff; font-size: 9px; text-decoration: none; border: 1px solid #fff; padding: 4px 8px; border-radius: 15px;">📱 PREMIUM</a>
-        <a href="ofertas.html" style="color: #25d366; font-size: 9px; text-decoration: none; border: 1px solid #25d366; padding: 4px 8px; border-radius: 15px; font-weight: bold;">⚡ OFERTAS</a>
-    </nav>
+<header class="header">
+    <div class="logo-text">⚡ VIDEOMARKET PRO ⚡</div>
 </header>
 
-
-    <div class="container">
-        <div class="product-item" onclick="enableSound(this)">
-            <div class="sound-hint">🔊 Tocar para audio</div>
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet%20101.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Tablet C108 - 10.1"</h2>
-                <p class="product-promo">Rendimiento ideal para el día a día.</p>
-                <a href="https://mercadolibre.com/sec/13rcPpB" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Motorola%20edge.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Motorola Edge</h2>
-                <p class="product-promo">Diseño premium y velocidad pura.</p>
-                <a href="https://mercadolibre.com/sec/2WA6g3f" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/oppo%20reno.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Oppo Reno14 F Azul 5g</h2>
-                <p class="product-promo">🎁 Incluye Enco Buds3 de Regalo</p>
-                <a href="https://mercadolibre.com/sec/2jZrEbW" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/iPhone%2016.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Apple iPhone 16 (128 GB)</h2>
-                <p class="product-promo"> Distribuidor Autorizado - Garantía Oficial</p>
-                <a href="https://mercadolibre.com/sec/1J41orq" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/iPhone%2017.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Apple iPhone 17 (256 GB)</h2>
-                <p class="product-promo">Azul Neblina - Lo más nuevo de Apple.</p>
-                <a href="https://mercadolibre.com/sec/22L5iDv" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/tablet%20android.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Tablet Android 15 Gemini Ai</h2>
-                <p class="product-promo">⌨️ Kit Completo: Funda y Accesorios</p>
-                <a href="https://mercadolibre.com/sec/1unyx6x" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Samsung%20Galaxy.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Samsung Galaxy S25</h2>
-                <p class="product-promo">✨ Pantalla Dynamic AMOLED & IA</p>
-                <a href="https://mercadolibre.com/sec/2eJziAy" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Galaxy%20tab%20s10.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Samsung Galaxy Tab S10 FE</h2>
-                <p class="product-promo">🖋️ Incluye S Pen oficial</p>
-                <a href="https://mercadolibre.com/sec/1328rXH" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Xiaomi%20Redmi%2013x.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Xiaomi Redmi 13x (256GB)</h2>
-                <p class="product-promo">📱 Dual Sim - Color Negro</p>
-                <a href="https://mercadolibre.com/sec/1LvbXWM" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Samsung%20Galaxy%20Tab%20S10%20Lite.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Galaxy Tab S10 Lite</h2>
-                <p class="product-promo">🎨 Creatividad sin límites con S Pen.</p>
-                <a href="https://mercadolibre.com/sec/1BoqjLH" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Samsung%20Galaxy%20A16.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Samsung Galaxy A16</h2>
-                <p class="product-promo">📸 Cámara de 50 MP Ultra Pro</p>
-                <a href="https://mercadolibre.com/sec/22DcD8B" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Apple%20Watch%20Series%2011.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Apple Watch Series 11</h2>
-                <p class="product-promo">⌚ Salud y elegancia en tu muñeca.</p>
-                <a href="https://mercadolibre.com/sec/1MNQ9ai" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/AirPods%20Pro.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Apple AirPods Pro (3.ª gen)</h2>
-                <p class="product-promo">🎧 Cancelación de Ruido Activa</p>
-                <a href="https://mercadolibre.com/sec/2oyW1oo" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Samsung%20Galaxy%20Watch%20Ultra.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Galaxy Watch Ultra</h2>
-                <p class="product-promo">⛰️ Diseñado para la aventura extrema.</p>
-                <a href="https://mercadolibre.com/sec/1un2Bf4" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
-
-        <div class="product-item" onclick="enableSound(this)">
-            <video playsinline loop muted>
-                <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Sony%20WH-1000XM6.mp4" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">Sony WH-1000XM6</h2>
-                <p class="product-promo">🎵 Sonido de alta fidelidad.</p>
-                <a href="https://mercadolibre.com/sec/2TWPvDT" class="btn-buy">Comprar ahora ></a>
-            </div>
-        </div>
+<div class="container" id="reels-container">
     </div>
 
-    <a href="https://wa.me/526311949491?text=Hola!%20Tengo%20una%20duda" class="whatsapp-float" target="_blank">
-        <span>💬 ¿Dudas? Escríbenos</span>
-    </a>
-const SUPABASE_URL = "https://nmdljfwudjkqrzvuuqvq.supabase.co";
-const SUPABASE_KEY = "Sb_publishable_-03fDV0jBU9n-7JLRitWsw_y1J11mPj";
+<a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">
+    💬 ¿Dudas? Escríbenos
+</a>
 
-async function cargarCatalogo() {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/Videos?select=*`, {
-        headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
-    });
-    const productos = await response.json();
-    const container = document.querySelector('.container');
-    container.innerHTML = ""; // Limpiamos lo viejo
+<script>
+    // ESTA ES TU NUEVA BASE DE DATOS FÁCIL
+    const DATOS_VIDEOS = [
+      {
+        "nombre": "EMOCIONES - LIBRO PDF",
+        "url_video": "https://player.cloudinary.com/embed/?cloud_name=dgdw8fbku&public_id=ohdvkibds9hxxxescc84",
+        "link_accion": "https://wa.me/526311949491", // Aquí pondrás el link del PDF después
+        "texto_boton": "✅ DESCARGAR PDF",
+        "estilo": ""
+      },
+      {
+        "nombre": "TABLET C108 - 10.1\"",
+        "url_video": "https://player.cloudinary.com/embed/?cloud_name=dgdw8fbku&public_id=zwenhgzqb182lsu4ib59",
+        "link_accion": "https://mercadolibre.com/sec/13rcPpB",
+        "texto_boton": "🛍️ VER EN MERCADO LIBRE",
+        "estilo": "btn-ml"
+      }
+    ];
 
-    productos.forEach(prod => {
-        const item = document.createElement('div');
-        item.className = 'product-item';
-        item.onclick = () => enableSound(item);
-        
-        // Usamos url_video si existe, sino url_pdf o el link que tengas
-        const linkFinal = prod.url_video || prod.url_pdf;
+    function cargarVideos() {
+        const container = document.getElementById('reels-container');
+        container.innerHTML = ""; 
 
-        item.innerHTML = `
-            <div class="sound-hint">🔊 Tocar para audio</div>
-            <video playsinline loop muted>
-                <source src="${linkFinal}" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">${prod.nombre || 'Producto Pro'}</h2>
-                <p class="product-promo">${prod.descripcion || '¡Lo más nuevo!'}</p>
-                <a href="${prod.link_mercadolibre || '#'}" class="btn-buy">Comprar ahora ></a>
-            </div>
-        `;
-        container.appendChild(item);
-        observer.observe(item.querySelector('video'));
-    });
-}
+        DATOS_VIDEOS.forEach(video => {
+            const item = document.createElement('div');
+            item.className = 'product-item';
+            
+            item.innerHTML = `
+                <iframe 
+                    src="${video.url_video}" 
+                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+                <div class="info-box">
+                    <h2 class="product-title">${video.nombre}</h2>
+                    <a href="${video.link_accion}" target="_blank" class="btn-buy ${video.estilo}">
+                        ${video.texto_boton}
+                    </a>
+                </div>
+            `;
+            container.appendChild(item);
+        });
+    }
 
-// Llamar a la función al cargar
-cargarCatalogo();
+    // Iniciar la carga al abrir la página
+    window.onload = cargarVideos;
+</script>
+
 </body>
-                    </html>
+</html>
