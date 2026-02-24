@@ -137,23 +137,55 @@
     </nav>
     </header>
 
-    
-
-    <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">📲</a>
-
-    <div class="reel-section" onclick="enableAudio(this)">
-        <div class="sound-hint">🔊 Tocar para audio</div>
-        <video playsinline loop muted autoplay>
-            <source src="https://nmdljfwudjkqrzvuuqvq.supabase.co/storage/v1/object/public/Videos/Haylou%20S30%20Pro.mp4" type="video/mp4">
-        </video>
-        <div class="info-box">
-            <div class="price-tag">OFERTA RECOMENDADA</div>
-            <h2 class="product-title">Haylou S30 Pro ANC - Gamer & Hi-Fi</h2>
-            <a href="https://meli.la/31SM7wn" class="btn-buy">🛒 COMPRAR EN MERCADO LIBRE</a>
-        </div>
-    </div>
+      <div id="ofertas-container"></div>
 
     <script>
+        const SUPABASE_URL = "https://nmdljfwudjkqrzvuuqvq.supabase.co";
+        const SUPABASE_KEY = "Sb_publishable_-03fDV0jBU9n-7JLRitWsw_y1J11mPj";
+
+        async function cargarOfertas() {
+            // Filtramos solo por la categoría 'ofertas'
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/Videos?select=*&categoria=eq.ofertas`, {
+                headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
+            });
+            const productos = await response.json();
+            const container = document.getElementById('ofertas-container');
+            
+            productos.forEach(prod => {
+                const seccion = document.createElement('div');
+                seccion.className = 'reel-section';
+                seccion.onclick = () => enableAudio();
+                
+                seccion.innerHTML = `
+                    <div class="sound-hint">🔊 Tocar para audio</div>
+                    <video playsinline loop muted>
+                        <source src="${prod.url_video}" type="video/mp4">
+                    </video>
+                    <div class="info-box">
+                        <div class="price-tag">${prod.etiqueta || 'OFERTA RELÁMPAGO'}</div>
+                        <h2 class="product-title">${prod.nombre}</h2>
+                        <a href="${prod.link_mercadolibre}" class="btn-buy">🛒 COMPRAR EN MERCADO LIBRE</a>
+                    </div>
+                `;
+                container.appendChild(seccion);
+                observer.observe(seccion.querySelector('video'));
+            });
+        }
+
+        function enableAudio() {
+            document.querySelectorAll('video').forEach(v => v.muted = false);
+            document.querySelectorAll('.sound-hint').forEach(h => h.style.display = 'none');
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.play();
+                else entry.target.pause();
+            });
+        }, { threshold: 0.6 });
+
+        cargarOfertas();
+    </script>
         function enableAudio(element) {
             const allVideos = document.querySelectorAll('video');
             allVideos.forEach(v => v.muted = false);
