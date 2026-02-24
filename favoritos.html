@@ -27,6 +27,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 90px;
         }
 
         .logo-text { font-size: 18px; font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
@@ -50,7 +51,6 @@
             border-bottom: 2px solid #222;
         }
 
-        /* Contenedor del Iframe de Cloudinary */
         .video-wrapper {
             width: 100%;
             height: 100%;
@@ -74,12 +74,12 @@
             background: linear-gradient(transparent, rgba(0,0,0,0.95));
             color: white;
             z-index: 10;
-            pointer-events: none; /* Para que el click pase al video si tocan el texto */
+            pointer-events: none;
         }
 
         .info-box * { pointer-events: auto; }
 
-        .product-title { font-size: 19px; font-weight: bold; margin-bottom: 6px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+        .product-title { font-size: 19px; font-weight: bold; margin-bottom: 6px; }
         .product-promo { font-size: 13px; color: #ddd; margin-bottom: 18px; }
 
         .btn-buy {
@@ -92,7 +92,6 @@
             font-weight: bold;
             text-align: center;
             font-size: 16px;
-            box-shadow: 0 4px 15px rgba(0,132,255,0.3);
         }
 
         .whatsapp-float {
@@ -107,7 +106,6 @@
             font-size: 13px;
             font-weight: bold;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
     </style>
 </head>
@@ -122,8 +120,7 @@
     </nav>
 </header>
 
-<div class="container" id="reels-container">
-    </div>
+<div class="container" id="reels-container"></div>
 
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">
     <span>💬 ¿Dudas? Escríbenos</span>
@@ -133,16 +130,15 @@
     const productos = [
         { nombre: "Apple iPhone 16", id: "zwenhgzqb182lsu4ib59", promo: " Distribuidor Autorizado", link: "https://mercadolibre.com/sec/1J41orq" },
         { nombre: "Motorola Edge", id: "fix2f6y371azg8fwswcd", promo: "Diseño premium y velocidad pura.", link: "https://mercadolibre.com/sec/2WA6g3f" },
-        { nombre: "Apple iPhone 17", id: "ct77tvoq0niyfq4wai8e", promo: "Lo más nuevo de Apple en tus manos.", link: "https://mercadolibre.com/sec/22L5iDv" },
+        { nombre: "Apple iPhone 17", id: "ct77tvoq0niyfq4wai8e", promo: "Lo más nuevo de Apple.", link: "https://mercadolibre.com/sec/22L5iDv" },
         { nombre: "Galaxy Watch Ultra", id: "k1nsf8dohydcd0nn6whj", promo: "⛰️ Diseñado para la aventura extrema.", link: "https://mercadolibre.com/sec/1un2Bf4" },
-        { nombre: "Tablet C108 - 10.1\"", id: "k1tbnubjahpwcqo0tovc", promo: "Rendimiento ideal para el día a día.", link: "https://mercadolibre.com/sec/13rcPpB" },
+        { nombre: "Tablet C108 - 10.1\"", id: "k1tbnubjahpwcqo0tovc", promo: "Rendimiento ideal.", link: "https://mercadolibre.com/sec/13rcPpB" },
         { nombre: "Sony WH-1000XM6", id: "ov0grqjnsjhos3pwihtj", promo: "🎵 Sonido de alta fidelidad.", link: "https://mercadolibre.com/sec/2TWPvDT" }
     ];
 
     const container = document.getElementById('reels-container');
     let hasInteracted = false;
 
-    // Crear elementos
     productos.forEach((p, i) => {
         const item = document.createElement('div');
         item.className = 'product-item';
@@ -159,7 +155,6 @@
         container.appendChild(item);
     });
 
-    // Observador para manejar el audio y la carga de Cloudinary
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const i = entry.target.dataset.index;
@@ -167,19 +162,19 @@
             const wrapper = document.getElementById(`wrapper-${i}`);
 
             if (entry.isIntersecting) {
-                // Si el usuario ya interactuó, los siguientes inician con audio (autoplay=true)
+                // Si ya hubo interacción (clic), el siguiente video inicia con audio
                 const auto = hasInteracted ? "true" : "false";
-                // Agregamos controls=true para que el usuario pueda quitar el Loop si gusta
+                // Cargamos el iframe de Cloudinary
                 wrapper.innerHTML = `<iframe src="https://player.cloudinary.com/embed/?cloud_name=dgdw8fbku&public_id=${vid}&autoplay=${auto}&controls=true" allow="autoplay; fullscreen"></iframe>`;
             } else {
-                // MUY IMPORTANTE: Borramos el iframe al salir de vista para que el audio muera al instante
+                // AL SALIR DE VISTA: Borramos el iframe para matar el audio al instante
                 wrapper.innerHTML = "";
             }
         });
     }, { threshold: 0.5 });
 
-    // Detectar interacción para habilitar audio en los siguientes videos
-    window.addEventListener('mousedown', () => { hasInteracted = true; }, { once: false });
+    // Detectamos el primer clic para desbloquear el audio automático
+    window.addEventListener('click', () => { hasInteracted = true; }, { once: false });
     window.addEventListener('touchstart', () => { hasInteracted = true; }, { once: false });
 
     document.querySelectorAll('.product-item').forEach(item => observer.observe(item));
