@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -71,13 +70,19 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
 
 <script>
-    // --- PRODUCTO ACTUALIZADO CON DROPI ---
+    // --- LISTA DE PRODUCTOS ACTUALIZADA ---
     const productos = [
         { 
             nombre: "Smartwatch T900 Ultra 2 Suit", 
-            video_id: "k1nsf8dohydcd0nn6whj", // Video del reloj
-            dropi_id: "24601",                 // ID real del proveedor Hyper Moda
-            precio: 599                        // Precio de venta final
+            video_id: "k1nsf8dohydcd0nn6whj", 
+            dropi_id: "24601", 
+            precio: 599 
+        },
+        { 
+            nombre: "Bolso Antirrobo con Candado Pro", 
+            video_id: "bolsa_antirobo_yb2jm7", 
+            dropi_id: "29971", 
+            precio: 699 
         }
     ];
 
@@ -112,7 +117,7 @@
         feed.appendChild(item);
     });
 
-    // --- FUNCIÓN DE PEDIDO POR WHATSAPP (SIN ERRORES DE CONEXIÓN) ---
+    // Función de pedido por WhatsApp
     function realizarPedido(nombreProd, dropiId, precio) {
         const nombre = prompt("¿A qué nombre va el pedido?");
         const tel = prompt("Tu número de teléfono:");
@@ -123,7 +128,6 @@
             return;
         }
 
-        // Creamos el mensaje para el vendedor (tú)
         const mensaje = `¡Hola! Nuevo pedido desde la tienda:%0A%0A` +
                         `*Producto:* ${nombreProd}%0A` +
                         `*ID Dropi:* ${dropiId}%0A` +
@@ -134,8 +138,6 @@
                         `_Pago al recibir en domicilio._`;
 
         const miWhatsapp = "526311949491";
-        
-        // Abre WhatsApp con el mensaje listo
         window.open(`https://wa.me/${miWhatsapp}?text=${mensaje}`, '_blank');
     }
 
