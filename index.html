@@ -2,115 +2,22 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Kids - Emociones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Video 1</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, sans-serif;
-            background: #000; 
-            overflow-y: scroll; 
-            scroll-snap-type: y mandatory;
-        }
-        .header {
-            width: 100%; padding: 10px; text-align: center;
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
-            position: fixed; top: 0; z-index: 100; border-bottom: 3px solid #FFD700;
-        }
-        .logo-text { font-size: 18px; font-weight: bold; color: #FF69B4; }
-        nav { display: flex; gap: 8px; justify-content: center; margin-top: 5px; }
-        nav a { color: #555; font-size: 10px; text-decoration: none; border: 2px solid #FFD700; padding: 4px 10px; border-radius: 20px; font-weight: bold; }
-
-        .container { width: 100%; }
-        .product-item {
-            position: relative; width: 100%; height: 100vh; 
-            scroll-snap-align: start; overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-        }
+        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
         video { width: 100%; height: 100%; object-fit: cover; }
-
-        .info-box {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            padding: 40px 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: #fff; z-index: 10;
-        }
-        .product-title { font-size: 22px; font-weight: bold; margin-bottom: 10px; }
-        .btn-buy {
-            display: block; background: #FF69B4; color: white;
-            text-decoration: none; padding: 15px; border-radius: 30px;
-            font-weight: bold; text-align: center;
-        }
-        .sound-hint {
-            position: absolute; top: 120px; right: 20px;
-            background: rgba(255, 105, 180, 0.8); color: white; padding: 5px 12px;
-            border-radius: 20px; font-size: 12px; z-index: 20;
-        }
+        .btn-pago { position: absolute; bottom: 50px; background: #FF69B4; color: white; padding: 20px 40px; border-radius: 50px; font-family: sans-serif; font-weight: bold; text-decoration: none; }
     </style>
 </head>
 <body>
 
-<header class="header">
-    <div class="logo-text">🌈 HAPPY KIDS 🌈</div>
-    <nav>
-        <a href="index.html">INICIO</a>
-        <a href="favoritos.html">PREMIUM</a>
-        <a href="ofertas.html">OFERTAS</a>
-    </nav>
-</header>
+    <video playsinline autoplay loop muted controls>
+        <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/emociones/vocales_ar1m6u.mp4" type="video/mp4">
+        Tu navegador no soporta video.
+    </video>
 
-<div class="container" id="feed"></div>
-
-<script>
-    const productos = [
-        { nombre: "Aprendiendo las Vocales", id: "vocales_ar1m6u" },
-        { nombre: "Animalitos Divertidos", id: "animalitos_dwothk" },
-        { nombre: "Mi Linda Familia", id: "familia_ed04bv" },
-        { nombre: "Mis Emociones", id: "emociones_m9jt9k" }
-    ];
-
-    const feed = document.getElementById('feed');
-    let globalUnmuted = false;
-
-    productos.forEach((p) => {
-        const item = document.createElement('div');
-        item.className = 'product-item';
-        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/emociones/${p.id}.mp4`;
-        
-        item.innerHTML = `
-            <div class="sound-hint">🔊 Toca para sonido</div>
-            <video playsinline loop muted webkit-playsinline>
-                <source src="${videoUrl}" type="video/mp4">
-            </video>
-            <div class="info-box">
-                <h2 class="product-title">${p.nombre}</h2>
-                <a href="#" class="btn-buy">¡Lo quiero! 🎁</a>
-            </div>
-        `;
-        
-        item.addEventListener('click', () => {
-            globalUnmuted = true;
-            document.querySelectorAll('video').forEach(v => v.muted = false);
-            document.querySelectorAll('.sound-hint').forEach(h => h.style.display = 'none');
-        });
-
-        feed.appendChild(item);
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const video = entry.target.querySelector('video');
-            if (entry.isIntersecting) {
-                video.play();
-                if (globalUnmuted) video.muted = false;
-            } else {
-                video.pause();
-            }
-        });
-    }, { threshold: 0.6 });
-
-    document.querySelectorAll('.product-item').forEach(item => observer.observe(item));
-</script>
+    <a href="#" class="btn-pago">¡LO QUIERO!</a>
 
 </body>
 </html>
