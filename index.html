@@ -1,15 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids - Animalitos</title>
+    <title>Happy Kids - Emociones</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Arial Rounded MT Bold', sans-serif;
-            background: #fff; 
+            background: #fff; /* Fondo claro para niños */
             overflow-y: scroll; scroll-snap-type: y mandatory;
         }
         .header {
@@ -67,12 +66,14 @@
 <div class="container" id="feed"></div>
 
 <script>
+    // Configuración con tus IDs reales de Cloudinary
     const productos = [
-        { nombre: "Aprendiendo las Vocales", id: "vocales", link: "TU_LINK_DE_PAGO_AQUI" },
-        { nombre: "Mis Emociones", id: "emociones", link: "TU_LINK_DE_PAGO_AQUI" },
-        { nombre: "Del 1 al 10", id: "del-1-al-10", link: "TU_LINK_DE_PAGO_AQUI" },
-        { nombre: "Animalitos Divertidos", id: "animalitos", link: "TU_LINK_DE_PAGO_AQUI" },
-        { nombre: "Mi Familia", id: "familia", link: "TU_LINK_DE_PAGO_AQUI" }
+        { nombre: "Aprendiendo las Vocales", id: "vocales_ar1m6u", link: "LINK_DE_PAGO_AQUI" },
+        { nombre: "Animalitos Divertidos", id: "animalitos_dwothk", link: "LINK_DE_PAGO_AQUI" },
+        { nombre: "Mi Linda Familia", id: "familia_ed04bv", link: "LINK_DE_PAGO_AQUI" },
+        { nombre: "Mis Emociones", id: "emociones_m9jt9k", link: "LINK_DE_PAGO_AQUI" },
+        { nombre: "Aprendiendo los Números", id: "del_1_al_10_NUEVOID", link: "LINK_DE_PAGO_AQUI" },
+        { nombre: "Sexto Video", id: "SEXTO_ID_NUEVOID", link: "LINK_DE_PAGO_AQUI" }
     ];
 
     const feed = document.getElementById('feed');
@@ -81,6 +82,8 @@
     productos.forEach((p, i) => {
         const item = document.createElement('div');
         item.className = 'product-item';
+        
+        // URL directa a tu carpeta "emociones" en Cloudinary
         const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/emociones/${p.id}.mp4`;
         
         item.innerHTML = `
@@ -94,6 +97,7 @@
             </div>
         `;
         
+        // Función para activar sonido en todos los videos al tocar
         item.addEventListener('click', () => {
             globalUnmuted = true;
             const allVideos = document.querySelectorAll('video');
@@ -104,6 +108,7 @@
         feed.appendChild(item);
     });
 
+    // Observador para que el video se reproduzca solo cuando esté en pantalla
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
