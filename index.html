@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Arial Rounded MT Bold', sans-serif;
-            background: #fff; /* Fondo claro para niños */
+            background: #fff; 
             overflow-y: scroll; scroll-snap-type: y mandatory;
         }
         .header {
@@ -67,14 +67,12 @@
 <div class="container" id="feed"></div>
 
 <script>
-    // Estos son los IDs que tenías en aquel link de Cloudinary
     const productos = [
-        { nombre: "Cerdito Bailarín", id: "cerdito_id", link: "#" },
-        { nombre: "Conejo Saltarín", id: "conejo_id", link: "#" },
-        { nombre: "Perrito Amigo", id: "perrito_id", link: "#" },
-        { nombre: "Gatito Suave", id: "gatito_id", link: "#" },
-        { nombre: "Patito Divertido", id: "patito_id", link: "#" },
-        { nombre: "Pollito Pío", id: "pollito_id", link: "#" }
+        { nombre: "Aprendiendo las Vocales", id: "vocales", link: "TU_LINK_DE_PAGO_AQUI" },
+        { nombre: "Mis Emociones", id: "emociones", link: "TU_LINK_DE_PAGO_AQUI" },
+        { nombre: "Del 1 al 10", id: "del-1-al-10", link: "TU_LINK_DE_PAGO_AQUI" },
+        { nombre: "Animalitos Divertidos", id: "animalitos", link: "TU_LINK_DE_PAGO_AQUI" },
+        { nombre: "Mi Familia", id: "familia", link: "TU_LINK_DE_PAGO_AQUI" }
     ];
 
     const feed = document.getElementById('feed');
@@ -83,8 +81,7 @@
     productos.forEach((p, i) => {
         const item = document.createElement('div');
         item.className = 'product-item';
-        // Usamos el mismo sistema de URL directa que sí funcionó
-        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
+        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/emociones/${p.id}.mp4`;
         
         item.innerHTML = `
             <div class="sound-hint">🔊 Toca para sonido</div>
