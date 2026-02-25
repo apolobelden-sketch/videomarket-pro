@@ -90,23 +90,32 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas?</a>
 
 <script>
-    // CONFIGURACIÓN CENTRALIZADA
-    const CLOUD_NAME = "dgdw8fbku";
-    const CARPETA = "emociones"; // Tu carpeta única
-    const PDF_FINAL_ID = "nlwvpy6wij8iuym9wgwe"; // El PDF de "del 1 al 10"
-    const WP_LINK = "https://wa.me/526311949491"; // Tu link de pago o WhatsApp
+    // IDs DIRECTOS (Sin carpetas para evitar errores de carga)
+    const productos = [
+        { 
+            nombre: "😊 EMOCIONES", 
+            id: "hvl0roie182j4rhsbbqp", // El video de la uva
+            pdf: "nlwvpy6wij8iuym9wgwe"  // El PDF del 1 al 10
+        },
+        { 
+            nombre: "🐶 ANIMALITOS", 
+            id: "animalitos_dwothk", 
+            pdf: null 
+        },
+        { 
+            nombre: "👨‍👩‍👧‍👦 MI FAMILIA", 
+            id: "familia_ed04bv", 
+            pdf: null 
+        },
+        { 
+            nombre: "🌈 LAS VOCALES", 
+            id: "vocales_ar1m6u", 
+            pdf: null 
+        }
+    ];
 
-    // Detectar si el usuario viene de pagar (Mercado Pago)
     const urlParams = new URLSearchParams(window.location.search);
     const yaPago = urlParams.get('status') === 'approved';
-
-    // Lista de videos con sus IDs de Cloudinary
-    const productos = [
-        { nombre: "😊 EMOCIONES", id: "hvl0roie182j4rhsbbqp" },
-        { nombre: "🐶 ANIMALITOS", id: "animalitos_dwothk" },
-        { nombre: "👨‍👩‍👧‍👦 MI FAMILIA", id: "familia_ed04bv" },
-        { nombre: "🌈 LAS VOCALES", id: "vocales_ar1m6u" }
-    ];
 
     const feed = document.getElementById('feed');
     let globalUnmuted = false;
@@ -115,9 +124,9 @@
         const item = document.createElement('div');
         item.className = 'product-item';
         
-        // Construimos la URL usando la carpeta "emociones" para todo
-        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${CARPETA}/${p.id}.mp4`;
-        const pdfUrl = `https://res.cloudinary.com/dgdw8fbku/image/upload/fl_attachment/${CARPETA}/${PDF_FINAL_ID}.pdf`;
+        // URL sin el prefijo de carpeta para asegurar reproducción inmediata
+        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
+        const pdfUrl = `https://res.cloudinary.com/dgdw8fbku/image/upload/fl_attachment/${p.pdf}.pdf`;
 
         item.innerHTML = `
             <div class="sound-hint">🔊 Toca para audio</div>
@@ -127,11 +136,11 @@
             <div class="info-box">
                 <h2 style="margin-bottom:15px; text-shadow: 2px 2px 4px #000; text-transform: uppercase;">${p.nombre}</h2>
                 
-                ${yaPago ? `
+                ${p.pdf && yaPago ? `
                     <a href="${pdfUrl}" class="btn-download-final">📥 DESCARGAR PDF</a>
                     <p style="font-size:10px; text-align:center; margin-top:8px;">¡Gracias por tu compra!</p>
                 ` : `
-                    <a href="${WP_LINK}" class="btn-buy">¡Lo quiero ahora! ></a>
+                    <a href="https://wa.me/526311949491" class="btn-buy">¡Lo quiero ahora! ></a>
                 `}
             </div>
         `;
@@ -147,7 +156,6 @@
         feed.appendChild(item);
     });
 
-    // Lógica de Reels (Intersection Observer)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
