@@ -96,14 +96,82 @@
 </a>
 
 <script>
-    const productos = [
-        { nombre: "🎨 COLOREA", id: "cuenta_uj2sav", pdf: "colorea_w36fes" },
-        { nombre: "🔢 DEL 1 AL 10", id: "del_1_al_10_r1yeys", pdf: "nlwvpy6wij8iuym9wgwe" },
-        { nombre: "👨‍👩‍👧‍👦 MI FAMILIA", id: "familia_ed04bv", pdf: "familia_1_k3y95b" },
-        { nombre: "😊 EMOCIONES", id: "hvl0roie182j4rhsbbqp", pdf: "emociones_xzdnu1" },
-        { nombre: "🐶 ANIMALITOS", id: "animalitos_dwothk", pdf: "1000053661_mtklxa" },
-        { nombre: "🌈 LAS VOCALES", id: "vocales_ar1m6u", pdf: "vocales_ar1m6u" }
+      const productos = [
+        { 
+            nombre: "🔢 DEL 1 AL 10", 
+            id: "del_1_al_10_r1yeys", 
+            pdf: "nlwvpy6wij8iuym9wgwe",
+            pago: "https://mpago.la/2y7fPju" // Enlace actualizado
+        },
+        { 
+            nombre: "🎨 COLOREA", 
+            id: "cuenta_uj2sav", 
+            pdf: "colorea_w36fes",
+            pago: "https://mpago.la/2y7fPju" 
+        },
+        { 
+            nombre: "👨‍👩‍👧‍👦 MI FAMILIA", 
+            id: "familia_ed04bv", 
+            pdf: "familia_1_k3y95b",
+            pago: "https://mpago.la/2y7fPju" 
+        },
+        { 
+            nombre: "😊 EMOCIONES", 
+            id: "hvl0roie182j4rhsbbqp", 
+            pdf: "emociones_xzdnu1",
+            pago: "https://mpago.la/2MimaT4" 
+        },
+        { 
+            nombre: "🌈 LAS VOCALES", 
+            id: "vocales_ar1m6u", 
+            pdf: "vocales_ar1m6u",
+            pago: "https://mpago.la/1YFVRUk" 
+        },
+        { 
+            nombre: "🐶 ANIMALITOS", 
+            id: "animalitos_dwothk", 
+            pdf: "1000053661_mtklxa",
+            pago: "https://mpago.la/2y7fPju" 
+        }
+    ];  const productos = [
+        { 
+            nombre: "🔢 DEL 1 AL 10", 
+            id: "del_1_al_10_r1yeys", 
+            pdf: "nlwvpy6wij8iuym9wgwe",
+            pago: "https://mpago.la/2y7fPju" // Enlace actualizado
+        },
+        { 
+            nombre: "🎨 COLOREA", 
+            id: "cuenta_uj2sav", 
+            pdf: "colorea_w36fes",
+            pago: "https://mpago.la/2y7fPju" 
+        },
+        { 
+            nombre: "👨‍👩‍👧‍👦 MI FAMILIA", 
+            id: "familia_ed04bv", 
+            pdf: "familia_1_k3y95b",
+            pago: "https://mpago.la/2y7fPju" 
+        },
+        { 
+            nombre: "😊 EMOCIONES", 
+            id: "hvl0roie182j4rhsbbqp", 
+            pdf: "emociones_xzdnu1",
+            pago: "https://mpago.la/2MimaT4" 
+        },
+        { 
+            nombre: "🌈 LAS VOCALES", 
+            id: "vocales_ar1m6u", 
+            pdf: "vocales_ar1m6u",
+            pago: "https://mpago.la/1YFVRUk" 
+        },
+        { 
+            nombre: "🐶 ANIMALITOS", 
+            id: "animalitos_dwothk", 
+            pdf: "1000053661_mtklxa",
+            pago: "https://mpago.la/2y7fPju" 
+        }
     ];
+
 
     const urlParams = new URLSearchParams(window.location.search);
     const yaPago = urlParams.get('status') === 'approved';
