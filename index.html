@@ -11,7 +11,7 @@
             background: #000; overflow-y: scroll; scroll-snap-type: y mandatory;
         }
 
-        /* Header con los 3 Botones exactos */
+        /* Header con los 3 Botones */
         .brand-header {
             position: fixed; top: 0; width: 100%; z-index: 100;
             padding: 15px 10px; text-align: center;
@@ -20,32 +20,17 @@
         
         .logo-text { color: #FFB7C5; font-size: 1.3rem; font-weight: bold; margin-bottom: 12px; }
         
-        nav { 
-            display: flex; 
-            justify-content: center; 
-            gap: 10px; 
-        }
+        nav { display: flex; justify-content: center; gap: 10px; }
         
         nav a { 
-            color: #fff; 
-            font-size: 10px; 
-            text-decoration: none; 
-            border: 1px solid #FFB7C5; 
-            padding: 8px 15px; 
-            border-radius: 20px;
-            font-weight: bold; 
-            text-transform: uppercase;
-            transition: 0.3s;
+            color: #fff; font-size: 10px; text-decoration: none; 
+            border: 1px solid #FFB7C5; padding: 8px 15px; border-radius: 20px;
+            font-weight: bold; text-transform: uppercase;
         }
 
-        /* El botón de la página actual */
-        nav a.active { 
-            background: #FFB7C5; 
-            color: #000; 
-            border-color: #FFB7C5;
-        }
+        nav a.active { background: #FFB7C5; color: #000; }
 
-        /* Estenedor de los Reels */
+        /* Contenedor de Reels */
         .container { width: 100%; max-width: 450px; margin: 0 auto; }
         .product-item {
             position: relative; width: 100%; height: 100vh; 
@@ -72,6 +57,25 @@
             text-decoration: none; padding: 18px; border-radius: 15px;
             font-weight: bold; text-align: center; font-size: 1.2rem;
         }
+
+        /* BOTÓN DE WHATSAPP FLOTANTE */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            z-index: 1000;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
     </style>
 </head>
 <body>
@@ -87,8 +91,11 @@
 
 <div class="container" id="feed"></div>
 
+<a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">
+    <span>💬 WhatsApp</span>
+</a>
+
 <script>
-    // Tu lista coordinada de videos y PDFs para LIBROS
     const productos = [
         { nombre: "🎨 COLOREA", id: "cuenta_uj2sav", pdf: "colorea_w36fes" },
         { nombre: "🔢 DEL 1 AL 10", id: "del_1_al_10_r1yeys", pdf: "nlwvpy6wij8iuym9wgwe" },
@@ -110,9 +117,7 @@
         const pdfUrl = `https://res.cloudinary.com/dgdw8fbku/image/upload/fl_attachment/${p.pdf}.pdf`;
 
         item.innerHTML = `
-            <video playsinline loop muted preload="auto">
-                <source src="${videoUrl}" type="video/mp4">
-            </video>
+            <video playsinline loop muted preload="auto"><source src="${videoUrl}" type="video/mp4"></video>
             <div class="info-box">
                 <h2 style="margin-bottom:15px; text-transform: uppercase;">${p.nombre}</h2>
                 ${yaPago ? `<a href="${pdfUrl}" class="btn-download-final">📥 DESCARGAR PDF</a>` 
@@ -142,6 +147,5 @@
 
     document.querySelectorAll('.product-item').forEach(item => observer.observe(item));
 </script>
-
 </body>
 </html>
