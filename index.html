@@ -3,77 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids - Videos</title>
+    <title>Happy Kids</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #000; overflow-y: scroll; scroll-snap-type: y mandatory; }
-        .video-section {
-            position: relative; width: 100vw; height: 100vh;
-            scroll-snap-align: start; overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-        }
-        video { width: 100%; height: 100%; object-fit: cover; }
-        .btn-comprar {
-            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-            background: #FF69B4; color: white; padding: 15px 35px;
-            border-radius: 50px; font-family: sans-serif; font-weight: bold;
-            text-decoration: none; z-index: 10; border: 2px solid white;
-        }
-        .instruccion-audio {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: white; background: rgba(0,0,0,0.5); padding: 10px 20px;
-            border-radius: 20px; font-family: sans-serif; pointer-events: none;
-            z-index: 5; transition: opacity 0.5s;
-        }
+        body { margin: 0; background: #fff; font-family: sans-serif; text-align: center; }
+        .video-puro { width: 100%; max-width: 400px; margin-bottom: 30px; border-bottom: 5px solid #FFD700; padding-bottom: 20px; }
+        video { width: 90%; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .btn { display: inline-block; background: #FF69B4; color: white; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; margin-top: 10px; }
+        h2 { color: #FF4500; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-    <div class="video-section">
-        <div class="instruccion-audio" id="aviso">🔊 Toca para activar sonido</div>
-        <video playsinline loop muted autoplay>
+    <h1 style="color: #FF69B4; margin: 20px 0;">🌈 MIS VIDEOS 🌈</h1>
+
+    <div class="video-puro">
+        <h2>Las Vocales</h2>
+        <video controls playsinline muted autoplay>
             <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/emociones/vocales_ar1m6u.mp4" type="video/mp4">
         </video>
-        <a href="LINK_DE_PAGO_1" class="btn-comprar">¡LO QUIERO! 🎁</a>
+        <br>
+        <a href="#" class="btn">¡LO QUIERO! 🎁</a>
     </div>
 
-    <div class="video-section">
-        <video playsinline loop muted>
+    <div class="video-puro">
+        <h2>Animalitos</h2>
+        <video controls playsinline muted>
             <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/emociones/animalitos_dwothk.mp4" type="video/mp4">
         </video>
-        <a href="LINK_DE_PAGO_2" class="btn-comprar">¡LO QUIERO! 🎁</a>
+        <br>
+        <a href="#" class="btn">¡LO QUIERO! 🎁</a>
     </div>
 
-    <div class="video-section">
-        <video playsinline loop muted>
+    <div class="video-puro">
+        <h2>La Familia</h2>
+        <video controls playsinline muted>
             <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/emociones/familia_ed04bv.mp4" type="video/mp4">
         </video>
-        <a href="LINK_DE_PAGO_3" class="btn-comprar">¡LO QUIERO! 🎁</a>
+        <br>
+        <a href="#" class="btn">¡LO QUIERO! 🎁</a>
     </div>
 
-    <script>
-        const vids = document.querySelectorAll('video');
-        const aviso = document.getElementById('aviso');
-
-        // Al tocar la pantalla: quita el silencio y esconde el aviso
-        document.body.addEventListener('click', () => {
-            vids.forEach(v => v.muted = false);
-            aviso.style.opacity = '0';
-        });
-
-        // Control de reproducción al hacer scroll (estilo TikTok)
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const video = entry.target.querySelector('video');
-                if (entry.isIntersecting) {
-                    video.play();
-                } else {
-                    video.pause();
-                }
-            });
-        }, { threshold: 0.6 });
-
-        document.querySelectorAll('.video-section').forEach(section => observer.observe(section));
-    </script>
 </body>
 </html>
