@@ -39,7 +39,8 @@
         .btn-buy {
             display: block; background: #0084ff; color: white;
             text-decoration: none; padding: 16px; border-radius: 12px;
-            font-weight: bold; text-align: center;
+            font-weight: bold; text-align: center; border: none; width: 100%;
+            cursor: pointer; font-size: 16px;
         }
         .whatsapp-float {
             position: fixed; bottom: 30px; right: 20px;
@@ -69,23 +70,24 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
 
 <script>
+    // --- LISTA DE PRODUCTOS ---
+    // IMPORTANTE: Cambia 'ID_DE_DROPI' por el número real del producto en Dropi
     const productos = [
-        { nombre: "Apple iPhone 16", id: "zwenhgzqb182lsu4ib59", link: "https://mercadolibre.com/sec/1J41orq" },
-        { nombre: "Motorola Edge", id: "fix2f6y371azg8fwswcd", link: "https://mercadolibre.com/sec/2WA6g3f" },
-        { nombre: "Apple iPhone 17", id: "ct77tvoq0niyfq4wai8e", link: "https://mercadolibre.com/sec/22L5iDv" },
-        { nombre: "Galaxy Watch Ultra", id: "k1nsf8dohydcd0nn6whj", link: "https://mercadolibre.com/sec/1un2Bf4" },
-        { nombre: "Tablet C108", id: "k1tbnubjahpwcqo0tovc", link: "https://mercadolibre.com/sec/13rcPpB" },
-        { nombre: "Sony WH-1000XM6", id: "ov0grqjnsjhos3pwihtj", link: "https://mercadolibre.com/sec/2TWPvDT" }
+        { nombre: "Apple iPhone 16", video_id: "zwenhgzqb182lsu4ib59", dropi_id: "ID_DE_DROPI", precio: 15500 },
+        { nombre: "Motorola Edge", video_id: "fix2f6y371azg8fwswcd", dropi_id: "ID_DE_DROPI", precio: 8900 },
+        { nombre: "Apple iPhone 17", video_id: "ct77tvoq0niyfq4wai8e", dropi_id: "ID_DE_DROPI", precio: 18000 },
+        { nombre: "Galaxy Watch Ultra", video_id: "k1nsf8dohydcd0nn6whj", dropi_id: "ID_DE_DROPI", precio: 4500 },
+        { nombre: "Tablet C108", video_id: "k1tbnubjahpwcqo0tovc", dropi_id: "ID_DE_DROPI", precio: 3200 },
+        { nombre: "Sony WH-1000XM6", video_id: "ov0grqjnsjhos3pwihtj", dropi_id: "ID_DE_DROPI", precio: 5600 }
     ];
 
     const feed = document.getElementById('feed');
     let globalUnmuted = false;
 
-    productos.forEach((p, i) => {
+    productos.forEach((p) => {
         const item = document.createElement('div');
         item.className = 'product-item';
-        // Creamos el link directo al archivo mp4 de Cloudinary
-        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
+        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.video_id}.mp4`;
         
         item.innerHTML = `
             <div class="sound-hint">🔊 Tocar para audio</div>
@@ -94,22 +96,67 @@
             </video>
             <div class="info-box">
                 <h2 style="margin-bottom:10px">${p.nombre}</h2>
-                <a href="${p.link}" class="btn-buy">Comprar ahora ></a>
+                <button onclick="realizarPedido('${p.dropi_id}', ${p.precio})" class="btn-buy">
+                    Pedir ahora y pagar al recibir >
+                </button>
             </div>
         `;
         
-        // Al tocar cualquier parte del video, se activa el audio de TODOS
         item.addEventListener('click', () => {
             globalUnmuted = true;
-            const allVideos = document.querySelectorAll('video');
-            allVideos.forEach(v => v.muted = false);
+            document.querySelectorAll('video').forEach(v => v.muted = false);
             document.querySelectorAll('.sound-hint').forEach(h => h.style.display = 'none');
         });
 
         feed.appendChild(item);
     });
 
-    // CONTROL DE AUDIO Y REPRODUCCIÓN (Scroll Tipo TikTok)
+    // --- FUNCIÓN DE INTEGRACIÓN CON DROPI ---
+    async function realizarPedido(dropiId, precio) {
+        if (dropiId === "ID_DE_DROPI") {
+            alert("Error: Este producto aún no tiene un ID de Dropi válido.");
+            return;
+        }
+
+        const nombre = prompt("¿A qué nombre va el pedido?");
+        const tel = prompt("Tu número de teléfono:");
+        const dir = prompt("Dirección completa (Calle, Número, Colonia, CP y Ciudad):");
+
+        if(!nombre || !tel || !dir) {
+            alert("Debes llenar todos los datos para el envío.");
+            return;
+        }
+
+        const miToken = "EyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBwLmRyb3BpLm14IiwiaWF0IjoxNzcyMDU2OTExLCJleHAiOjQ5Mjc3MzA1MTEsIm5iZiI6MTc3MjA1NjkxMSwianRpIjoibE5UMmZXYzVJWmU2WHNpcSIsInN1YiI6MTI1MjUzLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIiwiYXVkIjoiV09PQ09NRVJDRSIsInRva2VuX3R5cGUiOiJJTlRFR1JBVElPTlMiLCJ3Yl9pZCI6MSwiaW50ZWdyYXRpb25fdHlwZSI6IldPT0NPTUVSQ0UiLCJpbnRlZ3JhdGlvbl90eXBlX2lkIjoxLCJpcF91cmwiOltdLCJpbnRlZ3JhdGlvbl91cmwiOiJodHRwczpcL1wvYXBvbG9iZWxkZW4tc2tldGNoLmdpdGh1Yi5pb1wvdmlkZW9tYXJrZXQtcHJvXC8ifQ.dHKNQiJwajdPnrOL0qiDeta2SuYrP48zhPpAFkIy5g4";
+
+        const payload = {
+            token: miToken,
+            producto_id: dropiId,
+            nombre_cliente: nombre,
+            telefono_cliente: tel,
+            direccion_cliente: dir,
+            precio_venta: precio,
+            metodo_pago: "Pago contra entrega"
+        };
+
+        try {
+            const respuesta = await fetch('https://api.dropi.mx/pedidos/crear', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if(respuesta.ok) {
+                alert("✅ ¡Pedido exitoso! Pagarás al recibir en tu domicilio.");
+            } else {
+                alert("❌ Error al enviar pedido a Dropi. Verifica el ID del producto.");
+            }
+        } catch (e) {
+            alert("Error de conexión. Revisa tu internet.");
+        }
+    }
+
+    // CONTROL DE REPRODUCCIÓN (Scroll Tipo TikTok)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
@@ -118,7 +165,7 @@
                 if (globalUnmuted) video.muted = false;
             } else {
                 video.pause();
-                video.muted = true; // Silencio total al salir para que no se encimen
+                video.muted = true;
             }
         });
     }, { threshold: 0.7 });
