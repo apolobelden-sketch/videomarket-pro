@@ -70,15 +70,14 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
 
 <script>
-    // --- LISTA DE PRODUCTOS ---
-    // IMPORTANTE: Cambia 'ID_DE_DROPI' por el número real del producto en Dropi
+    // --- LISTA DE PRODUCTOS REALES ---
     const productos = [
-        { nombre: "Apple iPhone 16", video_id: "zwenhgzqb182lsu4ib59", dropi_id: "ID_DE_DROPI", precio: 15500 },
-        { nombre: "Motorola Edge", video_id: "fix2f6y371azg8fwswcd", dropi_id: "ID_DE_DROPI", precio: 8900 },
-        { nombre: "Apple iPhone 17", video_id: "ct77tvoq0niyfq4wai8e", dropi_id: "ID_DE_DROPI", precio: 18000 },
-        { nombre: "Galaxy Watch Ultra", video_id: "k1nsf8dohydcd0nn6whj", dropi_id: "ID_DE_DROPI", precio: 4500 },
-        { nombre: "Tablet C108", video_id: "k1tbnubjahpwcqo0tovc", dropi_id: "ID_DE_DROPI", precio: 3200 },
-        { nombre: "Sony WH-1000XM6", video_id: "ov0grqjnsjhos3pwihtj", dropi_id: "ID_DE_DROPI", precio: 5600 }
+        { 
+            nombre: "Smartwatch T900 Ultra 2 Suit", 
+            video_id: "k1nsf8dohydcd0nn6whj", // Video de reloj inteligente
+            dropi_id: "24601",                 // ID real del proveedor Hyper Moda
+            precio: 599                        // Ganancia de $310 pesos
+        }
     ];
 
     const feed = document.getElementById('feed');
@@ -111,13 +110,7 @@
         feed.appendChild(item);
     });
 
-    // --- FUNCIÓN DE INTEGRACIÓN CON DROPI ---
     async function realizarPedido(dropiId, precio) {
-        if (dropiId === "ID_DE_DROPI") {
-            alert("Error: Este producto aún no tiene un ID de Dropi válido.");
-            return;
-        }
-
         const nombre = prompt("¿A qué nombre va el pedido?");
         const tel = prompt("Tu número de teléfono:");
         const dir = prompt("Dirección completa (Calle, Número, Colonia, CP y Ciudad):");
@@ -149,14 +142,13 @@
             if(respuesta.ok) {
                 alert("✅ ¡Pedido exitoso! Pagarás al recibir en tu domicilio.");
             } else {
-                alert("❌ Error al enviar pedido a Dropi. Verifica el ID del producto.");
+                alert("❌ Error al enviar pedido. Verifica el ID del producto en Dropi.");
             }
         } catch (e) {
             alert("Error de conexión. Revisa tu internet.");
         }
     }
 
-    // CONTROL DE REPRODUCCIÓN (Scroll Tipo TikTok)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
