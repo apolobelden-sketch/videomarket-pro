@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -70,19 +71,20 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
 
 <script>
-    // --- LISTA DE PRODUCTOS REALES ---
+    // --- PRODUCTO ACTUALIZADO CON DROPI ---
     const productos = [
         { 
             nombre: "Smartwatch T900 Ultra 2 Suit", 
-            video_id: "k1nsf8dohydcd0nn6whj", // Video de reloj inteligente
+            video_id: "k1nsf8dohydcd0nn6whj", // Video del reloj
             dropi_id: "24601",                 // ID real del proveedor Hyper Moda
-            precio: 599                        // Ganancia de $310 pesos
+            precio: 599                        // Precio de venta final
         }
     ];
 
     const feed = document.getElementById('feed');
     let globalUnmuted = false;
 
+    // Generar la interfaz
     productos.forEach((p) => {
         const item = document.createElement('div');
         item.className = 'product-item';
@@ -95,7 +97,7 @@
             </video>
             <div class="info-box">
                 <h2 style="margin-bottom:10px">${p.nombre}</h2>
-                <button onclick="realizarPedido('${p.dropi_id}', ${p.precio})" class="btn-buy">
+                <button onclick="realizarPedido('${p.nombre}', '${p.dropi_id}', ${p.precio})" class="btn-buy">
                     Pedir ahora y pagar al recibir >
                 </button>
             </div>
@@ -110,45 +112,34 @@
         feed.appendChild(item);
     });
 
-    async function realizarPedido(dropiId, precio) {
+    // --- FUNCIÓN DE PEDIDO POR WHATSAPP (SIN ERRORES DE CONEXIÓN) ---
+    function realizarPedido(nombreProd, dropiId, precio) {
         const nombre = prompt("¿A qué nombre va el pedido?");
         const tel = prompt("Tu número de teléfono:");
         const dir = prompt("Dirección completa (Calle, Número, Colonia, CP y Ciudad):");
 
         if(!nombre || !tel || !dir) {
-            alert("Debes llenar todos los datos para el envío.");
+            alert("Por favor, llena todos los datos para procesar tu envío.");
             return;
         }
 
-        const miToken = "EyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBwLmRyb3BpLm14IiwiaWF0IjoxNzcyMDU2OTExLCJleHAiOjQ5Mjc3MzA1MTEsIm5iZiI6MTc3MjA1NjkxMSwianRpIjoibE5UMmZXYzVJWmU2WHNpcSIsInN1YiI6MTI1MjUzLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIiwiYXVkIjoiV09PQ09NRVJDRSIsInRva2VuX3R5cGUiOiJJTlRFR1JBVElPTlMiLCJ3Yl9pZCI6MSwiaW50ZWdyYXRpb25fdHlwZSI6IldPT0NPTUVSQ0UiLCJpbnRlZ3JhdGlvbl90eXBlX2lkIjoxLCJpcF91cmwiOltdLCJpbnRlZ3JhdGlvbl91cmwiOiJodHRwczpcL1wvYXBvbG9iZWxkZW4tc2tldGNoLmdpdGh1Yi5pb1wvdmlkZW9tYXJrZXQtcHJvXC8ifQ.dHKNQiJwajdPnrOL0qiDeta2SuYrP48zhPpAFkIy5g4";
+        // Creamos el mensaje para el vendedor (tú)
+        const mensaje = `¡Hola! Nuevo pedido desde la tienda:%0A%0A` +
+                        `*Producto:* ${nombreProd}%0A` +
+                        `*ID Dropi:* ${dropiId}%0A` +
+                        `*Precio:* $${precio}%0A%0A` +
+                        `*CLIENTE:* ${nombre}%0A` +
+                        `*TEL:* ${tel}%0A` +
+                        `*DIRECCIÓN:* ${dir}%0A%0A` +
+                        `_Pago al recibir en domicilio._`;
 
-        const payload = {
-            token: miToken,
-            producto_id: dropiId,
-            nombre_cliente: nombre,
-            telefono_cliente: tel,
-            direccion_cliente: dir,
-            precio_venta: precio,
-            metodo_pago: "Pago contra entrega"
-        };
-
-        try {
-            const respuesta = await fetch('https://api.dropi.mx/pedidos/crear', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if(respuesta.ok) {
-                alert("✅ ¡Pedido exitoso! Pagarás al recibir en tu domicilio.");
-            } else {
-                alert("❌ Error al enviar pedido. Verifica el ID del producto en Dropi.");
-            }
-        } catch (e) {
-            alert("Error de conexión. Revisa tu internet.");
-        }
+        const miWhatsapp = "526311949491";
+        
+        // Abre WhatsApp con el mensaje listo
+        window.open(`https://wa.me/${miWhatsapp}?text=${mensaje}`, '_blank');
     }
 
+    // Control de videos tipo TikTok
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
