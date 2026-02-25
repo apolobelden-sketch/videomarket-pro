@@ -1,14 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VideoMarket Pro - Kids Edition</title>
+    <title>Happy Kids - Aprendizaje Divertido</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Arial Rounded MT Bold', sans-serif;
             background: #000; overflow-y: scroll; scroll-snap-type: y mandatory;
+        }
+
+        /* Header fijo */
+        .brand-header {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            padding: 15px; text-align: center;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px);
+            color: #FFB7C5; font-size: 1.5rem; font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
         
         .container { width: 100%; max-width: 450px; margin: 0 auto; }
@@ -20,16 +30,13 @@
         }
         
         video { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            background: #000;
+            width: 100%; height: 100%; object-fit: cover;
         }
 
         .info-box {
             position: absolute; bottom: 0; left: 0; width: 100%;
             padding: 80px 20px 40px 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
             color: white; z-index: 10; pointer-events: none;
         }
         .info-box * { pointer-events: auto; }
@@ -38,14 +45,15 @@
             display: block; background: #FF85A1; color: white;
             text-decoration: none; padding: 18px; border-radius: 15px;
             font-weight: bold; text-align: center; font-size: 1.2rem;
-            box-shadow: 0 4px 15px rgba(255, 133, 161, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 133, 161, 0.4);
         }
 
         .sound-hint {
-            position: absolute; top: 20px; right: 20px;
-            background: rgba(0,0,0,0.6); color: white; padding: 8px 15px;
-            border-radius: 20px; font-size: 12px; z-index: 20;
-            pointer-events: none; border: 1px solid rgba(255,255,255,0.2);
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7); color: white; padding: 15px 25px;
+            border-radius: 30px; font-size: 14px; z-index: 20;
+            pointer-events: none; border: 1px solid rgba(255,255,255,0.3);
         }
 
         .whatsapp-float {
@@ -57,9 +65,11 @@
 </head>
 <body>
 
+<header class="brand-header">✨ HAPPY KIDS ✨</header>
+
 <div class="container" id="feed"></div>
 
-<a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
+<a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas?</a>
 
 <script>
     const productos = [
@@ -72,7 +82,7 @@
     ];
 
     const feed = document.getElementById('feed');
-    let globalUnmuted = false; // Estado global del sonido
+    let globalUnmuted = false;
 
     productos.forEach((p, i) => {
         const item = document.createElement('div');
@@ -81,50 +91,49 @@
         const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
         
         item.innerHTML = `
-            <div class="sound-hint">🔊 Tocar para audio</div>
+            <div class="sound-hint">🔊 Toca para audio</div>
             <video playsinline loop muted preload="auto">
                 <source src="${videoUrl}" type="video/mp4">
             </video>
             <div class="info-box">
-                <h2 style="margin-bottom:15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">${p.nombre}</h2>
+                <h2 style="margin-bottom:15px; text-shadow: 2px 2px 4px #000;">${p.nombre}</h2>
                 <a href="https://wa.me/526311949491" class="btn-buy">¡Lo quiero ahora! ></a>
             </div>
         `;
         
-        // Al tocar el video, activamos el sonido global
         item.addEventListener('click', () => {
             globalUnmuted = true;
             const currentVideo = item.querySelector('video');
-            
-            // Unmute solo al video actual que se tocó
             currentVideo.muted = false;
-            
-            // Ocultar todos los avisos de sonido
+            currentVideo.play();
             document.querySelectorAll('.sound-hint').forEach(h => h.style.display = 'none');
         });
 
         feed.appendChild(item);
     });
 
-    // Lógica principal: Solo un video suena y se reproduce a la vez
+    // LÓGICA DE REPRODUCCIÓN EXCLUSIVA (Solo uno a la vez)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
             
             if (entry.isIntersecting) {
-                // El video entra en pantalla: Reproducir
-                video.play();
-                // Si el usuario ya activó el sonido antes, este video suena
-                if (globalUnmuted) {
-                    video.muted = false;
-                }
+                // EL VIDEO ENTRA: Se reproduce
+                video.play().then(() => {
+                    if (globalUnmuted) {
+                        video.muted = false;
+                    }
+                }).catch(error => console.log("Auto-play bloqueado hasta clic"));
             } else {
-                // El video sale de pantalla: Pausar y Silenciar
+                // EL VIDEO SALE: Se pausa y se silencia de inmediato
                 video.pause();
-                video.muted = true; 
+                video.muted = true;
+                video.currentTime = 0; // Opcional: reinicia el video para que siempre empiece de nuevo
             }
         });
-    }, { threshold: 0.6 }); // 60% del video debe ser visible
+    }, { 
+        threshold: 0.6 // Se activa cuando el 60% del video es visible
+    });
 
     document.querySelectorAll('.product-item').forEach(item => observer.observe(item));
 </script>
