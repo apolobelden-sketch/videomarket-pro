@@ -11,7 +11,7 @@
             background: #000; overflow-y: scroll; scroll-snap-type: y mandatory;
         }
 
-        /* Header con navegación */
+        /* Header Premium */
         .brand-header {
             position: fixed; top: 0; width: 100%; z-index: 100;
             padding: 10px 15px; text-align: center;
@@ -90,41 +90,57 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas?</a>
 
 <script>
-    // IDs DIRECTOS (Sin carpetas para evitar errores de carga)
+    // CONFIGURACIÓN COORDINADA DE VIDEOS Y PDFS
     const productos = [
         { 
-            nombre: "😊 EMOCIONES", 
-            id: "hvl0roie182j4rhsbbqp", // El video de la uva
-            pdf: "nlwvpy6wij8iuym9wgwe"  // El PDF del 1 al 10
-        },
-        { 
-            nombre: "🐶 ANIMALITOS", 
-            id: "animalitos_dwothk", 
-            pdf: null 
+            nombre: "🔢 DEL 1 AL 10", 
+            id: "del_1_al_10_r1yeys", 
+            pdf: "nlwvpy6wij8iuym9wgwe" 
         },
         { 
             nombre: "👨‍👩‍👧‍👦 MI FAMILIA", 
             id: "familia_ed04bv", 
-            pdf: null 
+            pdf: "familia_1_k3y95b" 
+        },
+        { 
+            nombre: "😊 EMOCIONES", 
+            id: "hvl0roie182j4rhsbbqp", 
+            pdf: "emociones_xzdnu1" 
+        },
+        { 
+            nombre: "🎨 COLORES", 
+            id: "colorea_y_escribe_bdvafn", 
+            pdf: "colorea_w36fes" 
+        },
+        { 
+            nombre: "🐶 ANIMALITOS", 
+            id: "animalitos_dwothk", 
+            pdf: "1000053661_mtklxa" 
         },
         { 
             nombre: "🌈 LAS VOCALES", 
             id: "vocales_ar1m6u", 
-            pdf: null 
+            pdf: "vocales_ar1m6u" 
+        },
+        { 
+            nombre: "🚗 TRANSPORTES", 
+            id: "lv_0_20260225082348_ismy9q", 
+            pdf: "del_1_al_10_razimd" // Provisional
         }
     ];
 
+    // Lógica de validación de pago (Mercado Pago redirect)
     const urlParams = new URLSearchParams(window.location.search);
     const yaPago = urlParams.get('status') === 'approved';
 
     const feed = document.getElementById('feed');
     let globalUnmuted = false;
 
+    // Generación del Feed de Reels
     productos.forEach((p) => {
         const item = document.createElement('div');
         item.className = 'product-item';
         
-        // URL sin el prefijo de carpeta para asegurar reproducción inmediata
         const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
         const pdfUrl = `https://res.cloudinary.com/dgdw8fbku/image/upload/fl_attachment/${p.pdf}.pdf`;
 
@@ -136,7 +152,7 @@
             <div class="info-box">
                 <h2 style="margin-bottom:15px; text-shadow: 2px 2px 4px #000; text-transform: uppercase;">${p.nombre}</h2>
                 
-                ${p.pdf && yaPago ? `
+                ${yaPago ? `
                     <a href="${pdfUrl}" class="btn-download-final">📥 DESCARGAR PDF</a>
                     <p style="font-size:10px; text-align:center; margin-top:8px;">¡Gracias por tu compra!</p>
                 ` : `
@@ -145,6 +161,7 @@
             </div>
         `;
         
+        // Control de audio manual al primer toque
         item.addEventListener('click', () => {
             globalUnmuted = true;
             const v = item.querySelector('video');
@@ -156,6 +173,7 @@
         feed.appendChild(item);
     });
 
+    // Lógica de reproducción automática al hacer scroll (Reels style)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
