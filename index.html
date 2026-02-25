@@ -3,151 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kids VSL - Full Screen</title>
+    <title>VideoMarket Pro - Premium Kids</title>
     <style>
-        /* Reset total para efecto Reel */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent; 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            background: #000; overflow-y: scroll; scroll-snap-type: y mandatory;
         }
         
-        body, html { 
-            width: 100%; 
-            height: 100%; 
-            overflow: hidden; 
-            background: #000; /* Fondo negro para que resalte el video */
-            font-family: 'Arial Rounded MT Bold', sans-serif;
+        .container { width: 100%; max-width: 450px; margin: 0 auto; }
+        
+        .product-item {
+            position: relative; width: 100%; height: 100vh; 
+            background: #000; scroll-snap-align: start; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
         }
-
-        /* Contenedor de Scroll Vertical Magnético */
-        .reels-container {
-            width: 100%;
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-        }
-
-        .reel-slide {
-            width: 100%;
-            height: 100vh;
-            scroll-snap-align: start;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
-        }
-
-        /* Video a Pantalla Completa Real */
+        
+        /* Contenedor del Iframe para que actúe como video full */
         .video-container {
             width: 100%;
             height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
+            pointer-events: none; /* Para que el scroll funcione sobre el iframe */
         }
 
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            transform: scale(1.1); /* Elimina posibles bordes del reproductor */
         }
 
-        /* Capa de información sobre el video (Estilo TikTok) */
-        .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 40px 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            z-index: 10;
-            color: white;
-            pointer-events: none; /* Deja que los clics pasen al iframe */
+        .info-box {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 60px 20px 40px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: white; z-index: 10;
         }
 
-        .overlay-content {
-            pointer-events: auto; /* Activa clics solo para el contenido */
+        .btn-buy {
+            display: block; background: #FF85A1; color: white;
+            text-decoration: none; padding: 16px; border-radius: 12px;
+            font-weight: bold; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .reel-title {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .btn-cta {
-            display: inline-block;
-            background: #FF85A1; /* Rosa vibrante */
-            color: white;
-            text-decoration: none;
-            padding: 16px 30px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(255, 133, 161, 0.4);
-        }
-
-        /* Indicador de sonido arriba */
-        .sound-notice {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            pointer-events: none;
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 20px;
+            background-color: #25d366; color: white; padding: 12px 18px;
+            border-radius: 50px; text-decoration: none; z-index: 1000; font-size: 12px;
         }
     </style>
 </head>
 <body>
 
-<div class="reels-container" id="feed">
-    </div>
+<div class="container" id="feed"></div>
+
+<a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
 
 <script>
-    const videos = [
-        { titulo: "🌈 LAS VOCALES", id: "vocales_ar1m6u" },
-        { titulo: "🐶 ANIMALITOS", id: "animalitos_dwothk" },
-        { titulo: "👨‍👩‍👧‍👦 LA FAMILIA", id: "familia_ed04bv" }
+    const productos = [
+        { nombre: "🌈 LAS VOCALES", id: "vocales_ar1m6u" },
+        { nombre: "🐶 ANIMALITOS", id: "animalitos_dwothk" },
+        { nombre: "👨‍👩‍👧‍👦 MI FAMILIA", id: "familia_ed04bv" },
+        { nombre: "🎨 COLORES", id: "v1738272911/colores_placeholder" }, 
+        { nombre: "🔢 NÚMEROS", id: "v1738272911/numeros_placeholder" },
+        { nombre: "🍎 FRUTAS", id: "v1738272911/frutas_placeholder" }
     ];
 
     const feed = document.getElementById('feed');
 
-    videos.forEach((v) => {
-        const slide = document.createElement('section');
-        slide.className = 'reel-slide';
+    productos.forEach((p, i) => {
+        const item = document.createElement('div');
+        item.className = 'product-item';
         
-        // URL de Cloudinary con controles activos para evitar bloqueos
-        const embedUrl = `https://player.cloudinary.com/embed/?cloud_name=dgdw8fbku&public_id=${v.id}&player[autoplay]=false&player[muted]=false&player[controls]=true`;
-
-        slide.innerHTML = `
-            <div class="sound-notice">🔊 Toca Play para escuchar</div>
+        // Usamos el embed con autoplay habilitado por parámetro para el Observer
+        const videoUrl = `https://player.cloudinary.com/embed/?cloud_name=dgdw8fbku&public_id=${p.id}&player[autoplay]=true&player[muted]=true&player[controls]=false&player[loop]=true`;
+        
+        item.innerHTML = `
             <div class="video-container">
-                <iframe 
-                    src="${embedUrl}" 
-                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+                <iframe src="${videoUrl}" allow="autoplay; fullscreen"></iframe>
             </div>
-            <div class="overlay">
-                <div class="overlay-content">
-                    <h2 class="reel-title">${v.titulo}</h2>
-                    <a href="https://wa.me/526311949491" class="btn-cta">ADQUIRIR AHORA ✨</a>
-                </div>
+            <div class="info-box">
+                <h2 style="margin-bottom:15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">${p.nombre}</h2>
+                <a href="https://wa.me/526311949491" class="btn-buy">¡Lo quiero ahora! ></a>
             </div>
         `;
-        feed.appendChild(slide);
+        
+        feed.appendChild(item);
     });
+
+    // Tu lógica de Observer (Mantiene la carga ligera y el scroll fluido)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const iframe = entry.target.querySelector('iframe');
+            if (entry.isIntersecting) {
+                // Al entrar, recargamos el src para asegurar el autoplay
+                const currentSrc = iframe.src;
+                iframe.src = currentSrc; 
+            } else {
+                // Al salir, vaciamos el src para detener el consumo y el audio
+                iframe.src = "";
+            }
+        });
+    }, { threshold: 0.6 });
+
+    document.querySelectorAll('.product-item').forEach(item => observer.observe(item));
 </script>
 
 </body>
