@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Kids - Aprendizaje Divertido</title>
+    <title>Happy Kids - Premium</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -11,28 +11,22 @@
             background: #000; overflow-y: scroll; scroll-snap-type: y mandatory;
         }
 
-        /* Header con Navegación */
+        /* Header con navegación */
         .brand-header {
             position: fixed; top: 0; width: 100%; z-index: 100;
             padding: 10px 15px; text-align: center;
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px);
             display: flex; flex-direction: column; align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .logo-text { 
-            color: #FFB7C5; font-size: 1.3rem; font-weight: bold; 
-            margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        }
-
+        .logo-text { color: #FFB7C5; font-size: 1.2rem; font-weight: bold; margin-bottom: 8px; }
         nav { display: flex; gap: 8px; }
         nav a { 
-            color: #fff; font-size: 10px; text-decoration: none; 
-            border: 1px solid #FFB7C5; padding: 5px 12px; border-radius: 20px;
-            font-weight: bold; transition: 0.3s;
+            color: #fff; font-size: 9px; text-decoration: none; 
+            border: 1px solid #FFB7C5; padding: 6px 12px; border-radius: 20px;
+            font-weight: bold; text-transform: uppercase;
         }
         nav a.active { background: #FFB7C5; color: #000; }
-        nav a.ofertas { color: #25d366; border-color: #25d366; }
 
         .container { width: 100%; max-width: 450px; margin: 0 auto; }
         
@@ -48,14 +42,21 @@
             position: absolute; bottom: 0; left: 0; width: 100%;
             padding: 80px 20px 40px 20px;
             background: linear-gradient(transparent, rgba(0,0,0,0.95));
-            color: white; z-index: 10; pointer-events: none;
+            color: white; z-index: 10;
         }
-        .info-box * { pointer-events: auto; }
 
         .btn-buy {
             display: block; background: #FF85A1; color: white;
             text-decoration: none; padding: 18px; border-radius: 15px;
             font-weight: bold; text-align: center; font-size: 1.2rem;
+        }
+
+        .btn-download-final {
+            display: block; background: #007bff; color: white;
+            text-decoration: none; padding: 18px; border-radius: 15px;
+            font-weight: bold; text-align: center; font-size: 1.2rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
         }
 
         .sound-hint {
@@ -80,7 +81,7 @@
     <nav>
         <a href="index.html">INICIO</a>
         <a href="emociones.html" class="active">📱 PREMIUM</a>
-        <a href="ofertas.html" class="ofertas">⚡ OFERTAS</a>
+        <a href="ofertas.html">⚡ OFERTAS</a>
     </nav>
 </header>
 
@@ -89,56 +90,71 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas?</a>
 
 <script>
+    // CONFIGURACIÓN CENTRALIZADA
+    const CLOUD_NAME = "dgdw8fbku";
+    const CARPETA = "emociones"; // Tu carpeta única
+    const PDF_FINAL_ID = "nlwvpy6wij8iuym9wgwe"; // El PDF de "del 1 al 10"
+    const WP_LINK = "https://wa.me/526311949491"; // Tu link de pago o WhatsApp
+
+    // Detectar si el usuario viene de pagar (Mercado Pago)
+    const urlParams = new URLSearchParams(window.location.search);
+    const yaPago = urlParams.get('status') === 'approved';
+
+    // Lista de videos con sus IDs de Cloudinary
     const productos = [
-        { nombre: "🌈 LAS VOCALES", id: "vocales_ar1m6u" },
+        { nombre: "😊 EMOCIONES", id: "hvl0roie182j4rhsbbqp" },
         { nombre: "🐶 ANIMALITOS", id: "animalitos_dwothk" },
         { nombre: "👨‍👩‍👧‍👦 MI FAMILIA", id: "familia_ed04bv" },
-        { nombre: "🎨 COLORES", id: "v1738272911/colores_placeholder" },
-        { nombre: "🔢 NÚMEROS", id: "v1738272911/numeros_placeholder" },
-        { nombre: "🍎 FRUTAS", id: "v1738272911/frutas_placeholder" }
+        { nombre: "🌈 LAS VOCALES", id: "vocales_ar1m6u" }
     ];
 
     const feed = document.getElementById('feed');
     let globalUnmuted = false;
 
-    productos.forEach((p, i) => {
+    productos.forEach((p) => {
         const item = document.createElement('div');
         item.className = 'product-item';
-        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
         
+        // Construimos la URL usando la carpeta "emociones" para todo
+        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${CARPETA}/${p.id}.mp4`;
+        const pdfUrl = `https://res.cloudinary.com/dgdw8fbku/image/upload/fl_attachment/${CARPETA}/${PDF_FINAL_ID}.pdf`;
+
         item.innerHTML = `
             <div class="sound-hint">🔊 Toca para audio</div>
             <video playsinline loop muted preload="auto">
                 <source src="${videoUrl}" type="video/mp4">
             </video>
             <div class="info-box">
-                <h2 style="margin-bottom:15px; text-shadow: 2px 2px 4px #000;">${p.nombre}</h2>
-                <a href="https://wa.me/526311949491" class="btn-buy">¡Lo quiero ahora! ></a>
+                <h2 style="margin-bottom:15px; text-shadow: 2px 2px 4px #000; text-transform: uppercase;">${p.nombre}</h2>
+                
+                ${yaPago ? `
+                    <a href="${pdfUrl}" class="btn-download-final">📥 DESCARGAR PDF</a>
+                    <p style="font-size:10px; text-align:center; margin-top:8px;">¡Gracias por tu compra!</p>
+                ` : `
+                    <a href="${WP_LINK}" class="btn-buy">¡Lo quiero ahora! ></a>
+                `}
             </div>
         `;
         
         item.addEventListener('click', () => {
             globalUnmuted = true;
-            const currentVideo = item.querySelector('video');
-            currentVideo.muted = false;
-            currentVideo.play();
+            const v = item.querySelector('video');
+            v.muted = false;
+            v.play();
             document.querySelectorAll('.sound-hint').forEach(h => h.style.display = 'none');
         });
 
         feed.appendChild(item);
     });
 
+    // Lógica de Reels (Intersection Observer)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
             if (entry.isIntersecting) {
-                video.play().then(() => {
-                    if (globalUnmuted) video.muted = false;
-                });
+                video.play().then(() => { if (globalUnmuted) video.muted = false; });
             } else {
-                video.pause();
-                video.muted = true;
-                video.currentTime = 0;
+                video.pause(); video.muted = true; video.currentTime = 0;
             }
         });
     }, { threshold: 0.6 });
