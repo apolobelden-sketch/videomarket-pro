@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VideoMarket Pro - Premium Kids</title>
+    <title>VideoMarket Pro - Kids Edition</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -19,31 +19,33 @@
             display: flex; align-items: center; justify-content: center;
         }
         
-        /* Contenedor del Iframe para que actúe como video full */
-        .video-container {
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Para que el scroll funcione sobre el iframe */
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            transform: scale(1.1); /* Elimina posibles bordes del reproductor */
+        video { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            background: #000;
         }
 
         .info-box {
             position: absolute; bottom: 0; left: 0; width: 100%;
-            padding: 60px 20px 40px 20px;
+            padding: 80px 20px 40px 20px;
             background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            color: white; z-index: 10;
+            color: white; z-index: 10; pointer-events: none;
         }
+        .info-box * { pointer-events: auto; }
 
         .btn-buy {
             display: block; background: #FF85A1; color: white;
-            text-decoration: none; padding: 16px; border-radius: 12px;
-            font-weight: bold; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-decoration: none; padding: 18px; border-radius: 15px;
+            font-weight: bold; text-align: center; font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(255, 133, 161, 0.3);
+        }
+
+        .sound-hint {
+            position: absolute; top: 20px; right: 20px;
+            background: rgba(0,0,0,0.6); color: white; padding: 8px 15px;
+            border-radius: 20px; font-size: 12px; z-index: 20;
+            pointer-events: none; border: 1px solid rgba(255,255,255,0.2);
         }
 
         .whatsapp-float {
@@ -64,47 +66,65 @@
         { nombre: "🌈 LAS VOCALES", id: "vocales_ar1m6u" },
         { nombre: "🐶 ANIMALITOS", id: "animalitos_dwothk" },
         { nombre: "👨‍👩‍👧‍👦 MI FAMILIA", id: "familia_ed04bv" },
-        { nombre: "🎨 COLORES", id: "v1738272911/colores_placeholder" }, 
+        { nombre: "🎨 COLORES", id: "v1738272911/colores_placeholder" },
         { nombre: "🔢 NÚMEROS", id: "v1738272911/numeros_placeholder" },
         { nombre: "🍎 FRUTAS", id: "v1738272911/frutas_placeholder" }
     ];
 
     const feed = document.getElementById('feed');
+    let globalUnmuted = false; // Estado global del sonido
 
     productos.forEach((p, i) => {
         const item = document.createElement('div');
         item.className = 'product-item';
         
-        // Usamos el embed con autoplay habilitado por parámetro para el Observer
-        const videoUrl = `https://player.cloudinary.com/embed/?cloud_name=dgdw8fbku&public_id=${p.id}&player[autoplay]=true&player[muted]=true&player[controls]=false&player[loop]=true`;
+        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
         
         item.innerHTML = `
-            <div class="video-container">
-                <iframe src="${videoUrl}" allow="autoplay; fullscreen"></iframe>
-            </div>
+            <div class="sound-hint">🔊 Tocar para audio</div>
+            <video playsinline loop muted preload="auto">
+                <source src="${videoUrl}" type="video/mp4">
+            </video>
             <div class="info-box">
-                <h2 style="margin-bottom:15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">${p.nombre}</h2>
+                <h2 style="margin-bottom:15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">${p.nombre}</h2>
                 <a href="https://wa.me/526311949491" class="btn-buy">¡Lo quiero ahora! ></a>
             </div>
         `;
         
+        // Al tocar el video, activamos el sonido global
+        item.addEventListener('click', () => {
+            globalUnmuted = true;
+            const currentVideo = item.querySelector('video');
+            
+            // Unmute solo al video actual que se tocó
+            currentVideo.muted = false;
+            
+            // Ocultar todos los avisos de sonido
+            document.querySelectorAll('.sound-hint').forEach(h => h.style.display = 'none');
+        });
+
         feed.appendChild(item);
     });
 
-    // Tu lógica de Observer (Mantiene la carga ligera y el scroll fluido)
+    // Lógica principal: Solo un video suena y se reproduce a la vez
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            const iframe = entry.target.querySelector('iframe');
+            const video = entry.target.querySelector('video');
+            
             if (entry.isIntersecting) {
-                // Al entrar, recargamos el src para asegurar el autoplay
-                const currentSrc = iframe.src;
-                iframe.src = currentSrc; 
+                // El video entra en pantalla: Reproducir
+                video.play();
+                // Si el usuario ya activó el sonido antes, este video suena
+                if (globalUnmuted) {
+                    video.muted = false;
+                }
             } else {
-                // Al salir, vaciamos el src para detener el consumo y el audio
-                iframe.src = "";
+                // El video sale de pantalla: Pausar y Silenciar
+                video.pause();
+                video.muted = true; 
             }
         });
-    }, { threshold: 0.6 });
+    }, { threshold: 0.6 }); // 60% del video debe ser visible
 
     document.querySelectorAll('.product-item').forEach(item => observer.observe(item));
 </script>
