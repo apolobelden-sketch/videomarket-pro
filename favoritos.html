@@ -100,6 +100,12 @@
             video_id: "Reflector_Solar_Pro_con_Sensor_de_Movimiento_lxtvgw", 
             dropi_id: "23479", 
             precio: 299 
+        },
+        { 
+            nombre: "✂️ TRIMMER BUDA GOLD - OFERTA $350", 
+            video_id: "patillera_buda_350_ul0lum", 
+            dropi_id: "21653", 
+            precio: 350 
         }
     ];
 
@@ -109,6 +115,7 @@
     productos.forEach((p) => {
         const item = document.createElement('div');
         item.className = 'product-item';
+        // URL de Cloudinary usando el video_id del producto
         const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${encodeURIComponent(p.video_id)}.mp4`;
         
         item.innerHTML = `
