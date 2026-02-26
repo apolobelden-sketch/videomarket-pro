@@ -70,7 +70,6 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
 
 <script>
-    // --- LISTA DE PRODUCTOS ACTUALIZADA ---
     const productos = [
         { 
             nombre: "Smartwatch T900 Ultra 2 Suit", 
@@ -83,13 +82,18 @@
             video_id: "bolsa_antirobo_yb2jm7", 
             dropi_id: "29971", 
             precio: 699 
+        },
+        { 
+            nombre: "Parlante Bluetooth para Ducha", 
+            video_id: "parlante_impermeable_w5cphh", 
+            dropi_id: "2139", 
+            precio: 350 
         }
     ];
 
     const feed = document.getElementById('feed');
     let globalUnmuted = false;
 
-    // Generar la interfaz
     productos.forEach((p) => {
         const item = document.createElement('div');
         item.className = 'product-item';
@@ -117,7 +121,6 @@
         feed.appendChild(item);
     });
 
-    // Función de pedido por WhatsApp
     function realizarPedido(nombreProd, dropiId, precio) {
         const nombre = prompt("¿A qué nombre va el pedido?");
         const tel = prompt("Tu número de teléfono:");
@@ -141,7 +144,6 @@
         window.open(`https://wa.me/${miWhatsapp}?text=${mensaje}`, '_blank');
     }
 
-    // Control de videos tipo TikTok
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
