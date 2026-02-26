@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VideoMarket Pro - Ofertas Relámpago</title>
     <style>
+        /* (Tu estilo CSS se mantiene igual) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Arial Rounded MT Bold', sans-serif;
@@ -36,7 +37,7 @@
             color: white; z-index: 10; pointer-events: none;
         }
         .info-box * { pointer-events: auto; }
-        .product-title { font-size: 19px; font-weight: bold; margin-bottom: 6px; color: #25d366; } /* Color verde para ofertas */
+        .product-title { font-size: 19px; font-weight: bold; margin-bottom: 6px; color: #25d366; }
         
         .btn-buy {
             display: block; background: #25d366; color: #000;
@@ -71,8 +72,13 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
 
 <script>
-    // Lista de productos para OFERTAS (He puesto los mismos 6 IDs de Cloudinary)
+    // Lista de productos actualizada con tu nueva linterna
     const productos = [
+        { 
+            nombre: "⚡ LINTERNA TÁCTICA 120,000 LM", 
+            id: "linterna_tactica_120_xbvaiw", 
+            link: "https://www.mercadolibre.com.mx/p/MLM45288083?pdp_filters=item_id:MLM3521664468#origin=share&sid=share&wid=MLM3521664468&action=copy" 
+        },
         { nombre: "OFERTA: iPhone 16", id: "zwenhgzqb182lsu4ib59", link: "https://mercadolibre.com/sec/1J41orq" },
         { nombre: "OFERTA: Motorola Edge", id: "fix2f6y371azg8fwswcd", link: "https://mercadolibre.com/sec/2WA6g3f" },
         { nombre: "OFERTA: iPhone 17", id: "ct77tvoq0niyfq4wai8e", link: "https://mercadolibre.com/sec/22L5iDv" },
@@ -87,6 +93,7 @@
     productos.forEach((p, i) => {
         const item = document.createElement('div');
         item.className = 'product-item';
+        // Tu URL de Cloudinary configurada con el ID del producto
         const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
         
         item.innerHTML = `
