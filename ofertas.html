@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VideoMarket Pro - Ofertas Relámpago</title>
     <style>
-        /* (Tu estilo CSS se mantiene igual) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Arial Rounded MT Bold', sans-serif;
@@ -37,7 +36,7 @@
             color: white; z-index: 10; pointer-events: none;
         }
         .info-box * { pointer-events: auto; }
-        .product-title { font-size: 19px; font-weight: bold; margin-bottom: 6px; color: #25d366; }
+        .product-title { font-size: 19px; font-weight: bold; margin-bottom: 15px; color: #25d366; }
         
         .btn-buy {
             display: block; background: #25d366; color: #000;
@@ -72,28 +71,45 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
 
 <script>
-    // Lista de productos actualizada con tu nueva linterna
     const productos = [
+        { 
+            nombre: "OFERTA: iPhone 16", 
+            id: "zwenhgzqb182lsu4ib59", 
+            link: "https://meli.la/1KjsKon" 
+        },
+        { 
+            nombre: "OFERTA: iPhone 17", 
+            id: "ct77tvoq0niyfq4wai8e", 
+            link: "https://meli.la/1WYVgpt" 
+        },
+        { 
+            nombre: "OFERTA: Smartwatch 2 Ultra", 
+            id: "k1nsf8dohydcd0nn6whj", 
+            link: "https://meli.la/2u8k2i8" 
+        },
         { 
             nombre: "⚡ LINTERNA TÁCTICA 120,000 LM", 
             id: "linterna_tactica_120_xbvaiw", 
             link: "https://www.mercadolibre.com.mx/p/MLM45288083?pdp_filters=item_id:MLM3521664468#origin=share&sid=share&wid=MLM3521664468&action=copy" 
         },
-        { nombre: "OFERTA: iPhone 16", id: "zwenhgzqb182lsu4ib59", link: "https://mercadolibre.com/sec/1J41orq" },
-        { nombre: "OFERTA: Motorola Edge", id: "fix2f6y371azg8fwswcd", link: "https://mercadolibre.com/sec/2WA6g3f" },
-        { nombre: "OFERTA: iPhone 17", id: "ct77tvoq0niyfq4wai8e", link: "https://mercadolibre.com/sec/22L5iDv" },
-        { nombre: "OFERTA: Watch Ultra", id: "k1nsf8dohydcd0nn6whj", link: "https://mercadolibre.com/sec/1un2Bf4" },
-        { nombre: "OFERTA: Tablet 10.1\"", id: "k1tbnubjahpwcqo0tovc", link: "https://mercadolibre.com/sec/13rcPpB" },
-        { nombre: "OFERTA: Sony WH-1000XM6", id: "ov0grqjnsjhos3pwihtj", link: "https://mercadolibre.com/sec/2TWPvDT" }
+        { 
+            nombre: "OFERTA: Motorola Edge", 
+            id: "fix2f6y371azg8fwswcd", 
+            link: "https://mercadolibre.com/sec/2WA6g3f" 
+        },
+        { 
+            nombre: "OFERTA: Sony WH-1000XM6", 
+            id: "ov0grqjnsjhos3pwihtj", 
+            link: "https://mercadolibre.com/sec/2TWPvDT" 
+        }
     ];
 
     const feed = document.getElementById('feed');
     let globalUnmuted = false;
 
-    productos.forEach((p, i) => {
+    productos.forEach((p) => {
         const item = document.createElement('div');
         item.className = 'product-item';
-        // Tu URL de Cloudinary configurada con el ID del producto
         const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
         
         item.innerHTML = `
@@ -103,7 +119,7 @@
             </video>
             <div class="info-box">
                 <h2 class="product-title">${p.nombre}</h2>
-                <a href="${p.link}" class="btn-buy">¡APROVECHAR OFERTA!</a>
+                <a href="${p.link}" class="btn-buy" target="_blank">¡APROVECHAR OFERTA!</a>
             </div>
         `;
         
