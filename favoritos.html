@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,6 +70,7 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
 
 <script>
+    // --- LISTA DE PRODUCTOS ACTUALIZADA CON 4 PRODUCTOS ---
     const productos = [
         { 
             nombre: "Smartwatch T900 Ultra 2 Suit", 
@@ -86,16 +89,24 @@
             video_id: "parlante_impermeable_w5cphh", 
             dropi_id: "2139", 
             precio: 350 
+        },
+        { 
+            nombre: "Lámpara Solar con Sensor de Movimiento", 
+            video_id: "lámpara_solar_y_censor_eowlc2", 
+            dropi_id: "1689", 
+            precio: 300 
         }
     ];
 
     const feed = document.getElementById('feed');
     let globalUnmuted = false;
 
+    // Generar la interfaz
     productos.forEach((p) => {
         const item = document.createElement('div');
         item.className = 'product-item';
-        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.video_id}.mp4`;
+        // Usamos encodeURIComponent por si el nombre tiene acentos
+        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${encodeURIComponent(p.video_id)}.mp4`;
         
         item.innerHTML = `
             <div class="sound-hint">🔊 Tocar para audio</div>
@@ -119,6 +130,7 @@
         feed.appendChild(item);
     });
 
+    // Función de pedido por WhatsApp
     function realizarPedido(nombreProd, dropiId, precio) {
         const nombre = prompt("¿A qué nombre va el pedido?");
         const tel = prompt("Tu número de teléfono:");
@@ -142,6 +154,7 @@
         window.open(`https://wa.me/${miWhatsapp}?text=${mensaje}`, '_blank');
     }
 
+    // Control de videos tipo TikTok
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
