@@ -1,1 +1,166 @@
-Prueba de conexión exitosa
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoMarket Pro - Ofertas Relámpago</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            background: #000; overflow-y: scroll; scroll-snap-type: y mandatory;
+        }
+        .header {
+            width: 100%; padding: 10px; text-align: center;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
+            position: fixed; top: 0; z-index: 100; border-bottom: 1px solid #333;
+            display: flex; flex-direction: column; align-items: center; min-height: 90px;
+        }
+        .logo-text { font-size: 18px; font-weight: bold; color: #fff; text-transform: uppercase; margin-bottom: 8px; }
+        nav { display: flex; gap: 5px; }
+        nav a { color: #fff; font-size: 9px; text-decoration: none; border: 1px solid #fff; padding: 4px 8px; border-radius: 15px; }
+
+        .container { width: 100%; max-width: 450px; margin: 0 auto; }
+        .product-item {
+            position: relative; width: 100%; height: 100vh; 
+            background: #000; scroll-snap-align: start; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        
+        video { width: 100%; height: 100%; object-fit: cover; }
+
+        .info-box {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 60px 20px 40px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
+            color: white; z-index: 10; pointer-events: none;
+        }
+        .info-box * { pointer-events: auto; }
+        .product-title { font-size: 19px; font-weight: bold; margin-bottom: 15px; color: #25d366; }
+        
+        .btn-buy {
+            display: block; background: #25d366; color: #000;
+            text-decoration: none; padding: 16px; border-radius: 12px;
+            font-weight: bold; text-align: center; text-transform: uppercase;
+        }
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 20px;
+            background-color: #25d366; color: white; padding: 12px 18px;
+            border-radius: 50px; text-decoration: none; z-index: 1000; font-size: 12px;
+        }
+        .sound-hint {
+            position: absolute; top: 110px; right: 20px;
+            background: rgba(37, 211, 102, 0.4); color: white; padding: 5px 10px;
+            border-radius: 20px; font-size: 10px; z-index: 20;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="logo-text">⚡ VIDEOMARKET PRO ⚡</div>
+    <nav>
+        <a href="index.html">📚 LIBROS</a>
+        <a href="favoritos.html">📱 PREMIUM</a>
+        <a href="ofertas.html" style="background: #25d366; color: #000; border-color: #25d366;">⚡ OFERTAS</a>
+    </nav>
+</header>
+
+<div class="container" id="feed"></div>
+
+<a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
+
+<script>
+    const productos = [
+        { 
+            nombre: "🌟 GALAXY S25 FE - ¡Oferta $9,899!", 
+            id: "Samsung_Galaxy_S25_FE_ggualp", 
+            link: "https://meli.la/2mA4qCh" 
+        },
+        { 
+            nombre: "🔥 MOTO G54 256GB - Solo $2,919", 
+            id: "Motorola_Edici%C3%B3n_Premium_nouj95", 
+            link: "https://mercadolibre.com/sec/2WA6g3f" 
+        },
+        { 
+            nombre: "📱 iPHONE 16 - Rebaja $12,500", 
+            id: "zwenhgzqb182lsu4ib59", 
+            link: "https://meli.la/1KjsKon" 
+        },
+        { 
+            nombre: "🚀 iPHONE 17 - ¡Solo $17,500!", 
+            id: "ct77tvoq0niyfq4wai8e", 
+            link: "https://meli.la/1WYVgpt" 
+        },
+        { 
+            nombre: "⌚ WATCH ULTRA - Especial $8,747", 
+            id: "k1nsf8dohydcd0nn6whj", 
+            link: "https://meli.la/2u8k2i8" 
+        },
+        { 
+            nombre: "🎧 SONY XM6 - ¡Bajó a $5,699!", 
+            id: "ov0grqjnsjhos3pwihtj", 
+            link: "https://mercadolibre.com/sec/2TWPvDT" 
+        },
+        { 
+            nombre: "📑 TABLET 10.1\" - Solo $1,249", 
+            id: "k1tbnubjahpwcqo0tovc", 
+            link: "https://mercadolibre.com/sec/13rcPpB" 
+        },
+        { 
+            nombre: "⚡ LINTERNA 120K LM - $489", 
+            id: "linterna_tactica_120_xbvaiw", 
+            link: "https://www.mercadolibre.com.mx/p/MLM45288083?pdp_filters=item_id:MLM3521664468#origin=share&sid=share&wid=MLM3521664468&action=copy" 
+        }
+    ];
+
+    const feed = document.getElementById('feed');
+    let globalUnmuted = false;
+
+    productos.forEach((p) => {
+        const item = document.createElement('div');
+        item.className = 'product-item';
+        // Construcción de la URL de Cloudinary usando tu cloud_name: dgdw8fbku
+        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
+        
+        item.innerHTML = `
+            <div class="sound-hint">🔊 Toca para audio</div>
+            <video playsinline loop muted webkit-playsinline>
+                <source src="${videoUrl}" type="video/mp4">
+            </video>
+            <div class="info-box">
+                <h2 class="product-title">${p.nombre}</h2>
+                <a href="${p.link}" class="btn-buy" target="_blank">¡APROVECHAR OFERTA!</a>
+            </div>
+        `;
+        
+        // Manejo de audio global al hacer clic
+        item.addEventListener('click', () => {
+            globalUnmuted = true;
+            const allVideos = document.querySelectorAll('video');
+            allVideos.forEach(v => v.muted = false);
+            document.querySelectorAll('.sound-hint').forEach(h => h.style.display = 'none');
+        });
+
+        feed.appendChild(item);
+    });
+
+    // Observador para reproducir/pausar videos al hacer scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target.querySelector('video');
+            if (entry.isIntersecting) {
+                video.play();
+                if (globalUnmuted) video.muted = false;
+            } else {
+                video.pause();
+                video.muted = true;
+            }
+        });
+    }, { threshold: 0.7 });
+
+    document.querySelectorAll('.product-item').forEach(item => observer.observe(item));
+</script>
+
+</body>
+</html>Prueba de conexión exitosa
