@@ -71,11 +71,9 @@
 <a href="https://wa.me/526311949491" class="whatsapp-float" target="_blank">💬 ¿Dudas? Escríbenos</a>
 
 <script>
-    <script>
-    <script>
     const productos = [
         { 
-            nombre: "🌟 GALAXY S25 FE - ¡Lanzamiento $9,899!", 
+            nombre: "🌟 GALAXY S25 FE - ¡Oferta $9,899!", 
             id: "Samsung_Galaxy_S25_FE_ggualp", 
             link: "https://meli.la/2mA4qCh" 
         },
@@ -116,19 +114,17 @@
         }
     ];
 
-    // ... resto del código del feed (el que ya tienes)
-</script>
-
     const feed = document.getElementById('feed');
     let globalUnmuted = false;
 
     productos.forEach((p) => {
         const item = document.createElement('div');
         item.className = 'product-item';
+        // Construcción de la URL de Cloudinary usando tu cloud_name: dgdw8fbku
         const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
         
         item.innerHTML = `
-            <div class="sound-hint">🔊 Audio</div>
+            <div class="sound-hint">🔊 Toca para audio</div>
             <video playsinline loop muted webkit-playsinline>
                 <source src="${videoUrl}" type="video/mp4">
             </video>
@@ -138,6 +134,7 @@
             </div>
         `;
         
+        // Manejo de audio global al hacer clic
         item.addEventListener('click', () => {
             globalUnmuted = true;
             const allVideos = document.querySelectorAll('video');
@@ -148,6 +145,7 @@
         feed.appendChild(item);
     });
 
+    // Observador para reproducir/pausar videos al hacer scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target.querySelector('video');
