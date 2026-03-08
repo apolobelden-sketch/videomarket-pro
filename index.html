@@ -140,19 +140,6 @@
     const yaPago = urlParams.get('status') === 'approved';
     const feed = document.getElementById('feed');
     let globalUnmuted = false;
-    // --- INICIO DEL AGENTE DE GUÍA PEDAGÓGICO ---
-const agenteGuia = {
-  metodo: "Singapur",
-  voz: { lang: 'es-MX', rate: 0.9, pitch: 1.1 },
-  instruir: (texto) => {
-    const msg = new SpeechSynthesisUtterance(texto);
-    msg.lang = agenteGuia.voz.lang;
-    msg.rate = agenteGuia.voz.rate;
-    msg.pitch = agenteGuia.voz.pitch;
-    window.speechSynthesis.speak(msg);
-  }
-};
-// --- FIN DEL AGENTE ---
 
     productos.forEach((p) => {
         const item = document.createElement('div');
