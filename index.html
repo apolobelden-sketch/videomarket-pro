@@ -161,14 +161,8 @@ const agenteGuia = {
         const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
         const pdfUrl = `https://res.cloudinary.com/dgdw8fbku/image/upload/fl_attachment/${p.pdf}.pdf`;
 
-        item.innerHTML = `
-            <video playsinline loop muted preload="auto"><source src="${videoUrl}" type="video/mp4"></video>
-            <div class="info-box">
-            item.addEventListener('click', () => {
-  globalUnmuted = true;
-  const v = item.querySelector('video');
-  v.muted = false;
-  v.play();
+        <video playsinline loop muted preload="auto"><source src="${videoUrl}" type="video/mp4"></video>
+        <div class="info-box">
                 <h2 style="margin-bottom:15px; text-transform: uppercase;">${p.nombre}</h2>
                 ${yaPago ? `<a href="${pdfUrl}" class="btn-download-final">📥 DESCARGAR PDF</a>` 
                          : `<a href="https://wa.me/526311949491" class="btn-buy">¡Lo quiero ahora! ></a>`}
