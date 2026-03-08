@@ -169,10 +169,6 @@ const agenteGuia = {
   const v = item.querySelector('video');
   v.muted = false;
   v.play();
-  
-  // Agregamos esto para que el Agente hable:
-  agenteGuia.instruir("¡Genial! Vamos a aprender con " + p.nombre);
-});
                 <h2 style="margin-bottom:15px; text-transform: uppercase;">${p.nombre}</h2>
                 ${yaPago ? `<a href="${pdfUrl}" class="btn-download-final">📥 DESCARGAR PDF</a>` 
                          : `<a href="https://wa.me/526311949491" class="btn-buy">¡Lo quiero ahora! ></a>`}
