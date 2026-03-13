@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -169,51 +169,6 @@
             id: "animalitos_dwothk", 
             pdf: "1000053661_mtklxa",
             pago: "https://mpago.la/2y7fPju" 
-        }
-    ];
+        } });
 
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const yaPago = urlParams.get('status') === 'approved';
-    const feed = document.getElementById('feed');
-    let globalUnmuted = false;
-
-    productos.forEach((p) => {
-        const item = document.createElement('div');
-        item.className = 'product-item';
-        const videoUrl = `https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_auto/${p.id}.mp4`;
-        const pdfUrl = `https://res.cloudinary.com/dgdw8fbku/image/upload/fl_attachment/${p.pdf}.pdf`;
-
-        item.innerHTML = `
-            <video playsinline loop muted preload="auto"><source src="${videoUrl}" type="video/mp4"></video>
-            <div class="info-box">
-                <h2 style="margin-bottom:15px; text-transform: uppercase;">${p.nombre}</h2>
-                ${yaPago ? `<a href="${pdfUrl}" class="btn-download-final">📥 DESCARGAR PDF</a>` 
-                         : `<a href="https://wa.me/526311949491" class="btn-buy">¡Lo quiero ahora! ></a>`}
-            </div>
-        `;
-        
-        item.addEventListener('click', () => {
-            globalUnmuted = true;
-            const v = item.querySelector('video');
-            v.muted = false;
-            v.play();
-        });
-        feed.appendChild(item);
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const video = entry.target.querySelector('video');
-            if (entry.isIntersecting) {
-                video.play().then(() => { if (globalUnmuted) video.muted = false; });
-            } else {
-                video.pause(); video.muted = true;
-            }
-        });
-    }, { threshold: 0.6 });
-
-    document.querySelectorAll('.product-item').forEach(item => observer.observe(item));
-</script>
-</body>
-</html>
+    document.querySelectorAll('.product-item').forEach(item
