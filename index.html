@@ -1,29 +1,71 @@
-name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Kids - Reels</title>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Kids - Reels Educativos</title>
     <style>
+        /* Estilos Base Estilo Reels */
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Arial', sans-serif; }
+        .scroll-container { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
         .reel-container { position: relative; width: 100vw; height: 100vh; scroll-snap-align: start; overflow: hidden; }
         video { width: 100%; height: 100%; object-fit: cover; }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 30%); }
-        .branding { position: absolute; top: 30px; left: 20px; color: #fff; font-size: 26px; font-weight: bold; text-shadow: 2px 2px 5px rgba(0,0,0,0.7); pointer-events: auto; }
-        .btn-compra { position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%); background: #ffeb3b; color: #000; padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; font-size: 18px; cursor: pointer; pointer-events: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        .btn-wa { position: absolute; bottom: 30px; right: 20px; background: #25D366; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; pointer-events: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
-        .scroll-container { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; }
+        
+        /* Capas de diseño */
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 40%); }
+        .branding { position: absolute; top: 30px; left: 20px; color: #fff; font-size: 28px; font-weight: bold; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); pointer-events: auto; }
+        
+        /* Botones principales */
+        .btn-compra { position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%); background: #ffeb3b; color: #000; padding: 18px 40px; border: none; border-radius: 50px; font-weight: bold; font-size: 20px; cursor: pointer; pointer-events: auto; box-shadow: 0 5px 20px rgba(0,0,0,0.6); transition: 0.3s; }
+        .btn-compra:active { transform: translateX(-50%) scale(0.95); }
+
+        /* Modal Selector de Entrega */
+        .modal-entrega { 
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: #fff; padding: 25px; border-radius: 30px; z-index: 2000; text-align: center;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8); width: 85%; max-width: 320px;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translate(-50%, -60%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+        
+        .modal-entrega h3 { color: #333; margin-bottom: 20px; font-size: 22px; }
+        .btn-opcion { display: flex; align-items: center; justify-content: center; margin: 12px 0; padding: 15px; border-radius: 15px; text-decoration: none; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        .btn-tg { background: #0088cc; color: white; }
+        .btn-google { background: #db4437; color: white; }
+        .btn-cerrar { margin-top: 15px; background: none; border: none; color: #888; cursor: pointer; font-size: 14px; }
+
+        /* Icono flotante de contacto rápido */
+        .btn-contact-float { position: absolute; bottom: 30px; right: 20px; background: #fff; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; pointer-events: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
     </style>
 </head>
 <body>
 
+    <div id="selectorEntrega" class="modal-entrega">
+        <h3>¿Dónde recibir tu PDF? ✨</h3>
+        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Elige tu plataforma favorita:</p>
+        
+        <a id="link-tg" href="#" target="_blank" class="btn-opcion btn-tg">
+            🔵 Telegram (Instante)
+        </a>
+        
+        <a id="link-google" href="#" target="_blank" class="btn-opcion btn-google">
+            🔴 Google / Gmail
+        </a>
+        
+        <button class="btn-cerrar" onclick="cerrarSelector()">Tal vez luego</button>
+    </div>
+
     <div class="scroll-container">
+        
         <div class="reel-container">
             <video autoplay muted loop playsinline>
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/del_1_al_10_r1yecn.mp4" type="video/mp4">
             </video>
             <div class="overlay"></div>
             <div class="branding">Happy Kids ✨</div>
-            <button class="btn-compra" onclick="window.open('https://res.cloudinary.com/dgdw8fbku/image/upload/familia_okunis.pdf')">¡Lo quiero! 🎨</button>
-            <div class="btn-wa" onclick="window.open('https://wa.me/TUNUMERO')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35">
-            </div>
+            <button class="btn-compra" onclick="abrirSelector('pack_numeros', 'https://t.me/TuBot_HappyKids?start=pack_1_10', 'https://res.cloudinary.com/dgdw8fbku/image/upload/familia_okunis.pdf')">
+                ¡Lo quiero! 🎨
+            </button>
         </div>
 
         <div class="reel-container">
@@ -32,9 +74,41 @@ name="viewport" content="width=device-width, initial-scale=1.0">
             </video>
             <div class="overlay"></div>
             <div class="branding">Happy Kids ✨</div>
-            <button class="btn-compra" onclick="window.open('https://res.cloudinary.com/dgdw8fbku/image/upload/cuenta_las_manzanas_r5shma.pdf')">¡Pack Números! 🍎</button>
+            <button class="btn-compra" onclick="abrirSelector('pack_manzanas', 'https://t.me/TuBot_HappyKids?start=pack_manzanas', 'https://res.cloudinary.com/dgdw8fbku/image/upload/cuenta_las_manzanas_r5shma.pdf')">
+                ¡Pack Números! 🍎
+            </button>
         </div>
+
     </div>
 
+    <div class="btn-contact-float" onclick="window.open('https://t.me/TuBot_HappyKids')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="30" alt="Telegram">
+    </div>
+
+    <script>
+        const modal = document.getElementById('selectorEntrega');
+        const linkTg = document.getElementById('link-tg');
+        const linkGoogle = document.getElementById('link-google');
+
+        function abrirSelector(producto, urlTelegram, urlGoogle) {
+            // Actualizamos los links según el producto que clickeó
+            linkTg.href = urlTelegram;
+            linkGoogle.href = urlGoogle;
+            
+            // Mostramos el modal
+            modal.style.display = 'block';
+        }
+
+        function cerrarSelector() {
+            modal.style.display = 'none';
+        }
+
+        // Cerrar modal si hace clic fuera de él
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                cerrarSelector();
+            }
+        }
+    </script>
 </body>
 </html>
