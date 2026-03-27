@@ -8,7 +8,15 @@
         * { box-sizing: border-box; touch-action: pan-x pan-y; -webkit-tap-highlight-color: transparent; }
         body { margin: 0; padding: 0; background: #222; display: flex; flex-direction: column; height: 100vh; overflow: hidden; font-family: 'Arial Rounded MT Bold', sans-serif; }
         
-        /* 1. CARRUSEL SUPERIOR (Optimizado para 40 fotos) */
+        /* CABECERA CON BOTÓN REGRESO */
+        #header-drawing {
+            display: flex; align-items: center; background: #fff; height: 7vh; padding: 0 15px; border-bottom: 1px solid #ddd;
+        }
+        .btn-back {
+            text-decoration: none; background: #f0f0f0; color: #333; padding: 6px 12px; border-radius: 15px; font-size: 14px; font-weight: bold; border: 1px solid #ccc;
+        }
+
+        /* 1. CARRUSEL SUPERIOR */
         #carousel-container {
             height: 14vh; background: #fff; border-bottom: 3px solid #25d366;
             display: flex; align-items: center; overflow-x: auto; padding: 10px; gap: 12px;
@@ -46,6 +54,11 @@
 </head>
 <body>
 
+    <div id="header-drawing">
+        <a href="index.html" class="btn-back">🏠 Inicio</a>
+        <span style="margin-left: 15px; font-size: 14px; color: #666;">¡A pintar!</span>
+    </div>
+
     <div id="carousel-container"></div>
 
     <div id="canvas-wrapper">
@@ -73,7 +86,6 @@
     let isDrawing = false;
     let currentTemplateUrl = "";
 
-    // NOMBRES DE ARCHIVOS EXTRAÍDOS DE TUS CAPTURAS
     const misPlantillas = [
         '1_20260212_143632_0000.png', '1_20260212_153720_0000.png', '1_20260217_094136_0000.png', '1_20260314_190631_0000.png',
         '20260314_184050_0000.png', '20260314_184050_0001.png', '20260314_184051_0002.png', '20260314_184051_0003.png',
