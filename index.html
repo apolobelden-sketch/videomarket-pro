@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Kids - Reels</title>
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Arial', sans-serif; }
@@ -22,23 +22,32 @@
         video { width: 100%; height: 100%; object-fit: cover; background: #000; }
         
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 40%); }
+        
+        /* BOTÓN SUPERIOR COLOREAR (No estorba) */
+        .btn-top-draw {
+            position: absolute; top: 25px; right: 20px; z-index: 100;
+            background: rgba(37, 211, 102, 0.85); color: white;
+            padding: 10px 18px; border-radius: 25px; text-decoration: none;
+            font-weight: bold; font-size: 14px; border: 2px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); backdrop-filter: blur(5px);
+        }
+
         .branding { position: absolute; top: 30px; left: 20px; color: #fff; font-size: 26px; font-weight: bold; text-shadow: 2px 2px 5px rgba(0,0,0,0.7); z-index: 10; }
 
+        /* BOTÓN LO QUIERO ÚNICO Y CENTRADO */
         .button-group {
-            position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);
-            display: flex; gap: 10px; z-index: 100; width: 90%; justify-content: center;
+            position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+            z-index: 100; width: 85%;
         }
 
         .btn-main { 
-            padding: 15px 25px; border: none; border-radius: 50px; 
-            font-weight: bold; font-size: 16px; cursor: pointer; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: 0.2s;
+            width: 100%; padding: 18px; border: none; border-radius: 50px; 
+            font-weight: bold; font-size: 18px; cursor: pointer; 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6); transition: 0.2s;
+            background: #ffeb3b; color: #000;
         }
 
-        .btn-lo-quiero { background: #ffeb3b; color: #000; flex: 2; }
-        .btn-actividades { background: rgba(255, 255, 255, 0.2); color: #fff; border: 1px solid #fff; flex: 1; backdrop-filter: blur(5px); }
-        
-        .btn-main:active { transform: scale(0.95); }
+        .btn-main:active { transform: scale(0.95) translateX(-50%); }
 
         .modal-entrega { 
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -51,12 +60,6 @@
 </head>
 <body>
 
-    <div id="modalActividades" class="modal-entrega">
-        <h3 style="color: #333;">Detalles</h3>
-        <p id="desc-actividades" style="color: #666; font-size: 14px;">Cargando detalles...</p>
-        <button onclick="cerrarModal('modalActividades')" style="margin-top:10px; background:#333; color:white; border:none; padding:10px 20px; border-radius:10px; cursor:pointer;">Entendido</button>
-    </div>
-
     <div id="selectorEntrega" class="modal-entrega">
         <h3 style="color: #333;">¿Dónde recibir la información?</h3>
         <a id="link-tg" href="#" target="_blank" class="btn-opcion" style="background: #0088cc;">Enviar por Telegram</a>
@@ -65,89 +68,32 @@
     </div>
 
     <div class="scroll-container">
+        
         <div class="reel-container">
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Cuento_1_El_Leon_Happy_jujtwm.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">El León Valiente ✨</div>
             <div class="button-group">
-                <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=leon1', 'G_LINK_LEON')">¡Lo quiero! 🦁</button>
-                <button class="btn-main btn-actividades" onclick="verActividades('Incluye el cuento interactivo del León y láminas para colorear.')">Detalles</button>
+                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=leon1', 'mailto:correo@gmail.com')">¡LO QUIERO! 🦁</button>
             </div>
         </div>
 
         <div class="reel-container">
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/animalitos_dwothk.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">Animalitos Divertidos ✨</div>
             <div class="button-group">
-                <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=pack1', 'G_LINK_1')">¡Lo quiero! 🎨</button>
-                <button class="btn-main btn-actividades" onclick="verActividades('Pack con 20 páginas de dibujos de granja y selva.')">Detalles</button>
+                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=pack1', 'mailto:correo@gmail.com')">¡LO QUIERO! 🎨</button>
             </div>
         </div>
 
-        <div class="reel-container">
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Samsung_Galaxy_S25_FE_ggualp.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Oferta Tech 📱</div>
-            <div class="button-group">
-                <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=s25fe', 'G_LINK_S25')">¡Me interesa! ⚡</button>
-                <button class="btn-main btn-actividades" onclick="verActividades('Samsung Galaxy S25 FE - Especificaciones Premium a precio de oferta.')">Info Técnica</button>
-            </div>
         </div>
-
-        <div class="reel-container">
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Motorola_Edici%C3%B3n_Premium_nouj95.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Moto Premium ✨</div>
-            <div class="button-group">
-                <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=moto_premium', 'G_LINK_MOTO')">¡Me interesa! 📱</button>
-                <button class="btn-main btn-actividades" onclick="verActividades('Motorola Edición Premium: Pantalla fluida y diseño elegante.')">Info Técnica</button>
-            </div>
-        </div>
-        
-      <div class="reel-container">
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/reloj_curren_8402_tzmw3l.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Curren Luxury ⌚</div>
-            <div class="button-group">
-                <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=curren_8402', 'G_LINK_RELOJ')">¡Lo quiero! 💎</button>
-                <button class="btn-main btn-actividades" onclick="verActividades('Reloj Curren 8402: Diseño elegante, resistente al agua y acabados de lujo.')">Detalles</button>
-            </div>
-    </div> 
-        
-        <div class="reel-container">
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/emociones_rwg9cf.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Mis Emociones ✨</div>
-            <div class="button-group">
-                <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=emociones', 'G_LINK_EMOCIONES')">¡Lo quiero! 😊</button>
-                <button class="btn-main btn-actividades" onclick="verActividades('Pack educativo: Aprende a identificar y manejar las emociones con actividades divertidas.')">Detalles</button>
-            </div>
-    </div>
-        
-        <div class="reel-container">
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/familia_ed04bv.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Mi Familia ✨</div>
-            <div class="button-group">
-                <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=familia', 'G_LINK_FAMILIA')">¡Lo quiero! 🏠</button>
-                <button class="btn-main btn-actividades" onclick="verActividades('Pack Mi Familia: Incluye árbol genealógico interactivo y 15 páginas para colorear.')">Detalles</button>
-            </div>
-    </div>
 
     <script>
         const videos = document.querySelectorAll('.video-reel');
@@ -181,12 +127,7 @@
             document.getElementById('selectorEntrega').style.display = 'block';
         }
 
-        function verActividades(texto) {
-            document.getElementById('desc-actividades').innerText = texto;
-            document.getElementById('modalActividades').style.display = 'block';
-        }
-
         function cerrarModal(id) { document.getElementById(id).style.display = 'none'; }
     </script>
 </body>
-            </html>
+</html>
