@@ -3,51 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Kids - Súper Pizarrón 🎨</title>
+    <title>Happy Kids - Súper Pizarrón de Arte 🎨</title>
     <style>
         * { box-sizing: border-box; touch-action: pan-x pan-y; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; padding: 0; background: #222; display: flex; flex-direction: column; height: 100vh; overflow: hidden; font-family: sans-serif; }
+        body { margin: 0; padding: 0; background: #222; display: flex; flex-direction: column; height: 100vh; overflow: hidden; font-family: 'Arial Rounded MT Bold', sans-serif; }
         
-        /* 1. CARRUSEL SUPERIOR (Deslizamiento ultra suave) */
+        /* 1. CARRUSEL SUPERIOR (Optimizado para 40 fotos) */
         #carousel-container {
-            height: 15vh; background: #fff; border-bottom: 3px solid #25d366;
-            display: flex; align-items: center; 
-            overflow-x: auto; /* Permite scroll manual */
-            overflow-y: hidden;
-            padding: 10px; gap: 12px;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch; /* Suavidad en iOS/Android */
+            height: 14vh; background: #fff; border-bottom: 3px solid #25d366;
+            display: flex; align-items: center; overflow-x: auto; padding: 10px; gap: 12px;
+            scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
         }
-        .template-thumb { 
-            height: 90%; aspect-ratio: 1/1; border-radius: 10px; 
-            border: 3px solid #eee; object-fit: cover; flex-shrink: 0; 
-            cursor: pointer; transition: 0.2s;
-        }
+        .template-thumb { height: 90%; aspect-ratio: 1/1; border-radius: 10px; border: 3px solid #eee; object-fit: cover; flex-shrink: 0; cursor: pointer; }
         .template-thumb.active { border-color: #25d366; transform: scale(1.05); }
 
         /* 2. ÁREA DE DIBUJO */
         #canvas-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; background: #eee; position: relative; }
         canvas { background: white; max-width: 98%; max-height: 98%; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.3); touch-action: none; }
 
-        /* 3. BOTÓN DE HERRAMIENTAS */
+        /* 3. BOTÓN FLOTANTE */
         #btn-tools {
-            position: fixed; bottom: 30px; right: 20px;
-            width: 70px; height: 70px; background: #25d366;
-            border-radius: 50%; border: 5px solid white; font-size: 35px;
+            position: fixed; bottom: 25px; right: 20px; width: 70px; height: 70px; 
+            background: #25d366; border-radius: 50%; border: 4px solid white; font-size: 35px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 1000;
         }
 
-        /* 4. PANEL DE HERRAMIENTAS (El "Teclado") */
+        /* 4. PANEL DE HERRAMIENTAS */
         #toolbar-panel {
             position: fixed; bottom: -100%; left: 0; width: 100%; height: 45vh;
-            background: white; border-top: 5px solid #25d366;
-            display: flex; flex-direction: column; padding: 20px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            z-index: 999; border-radius: 25px 25px 0 0;
+            background: white; border-top: 5px solid #25d366; border-radius: 25px 25px 0 0;
+            display: flex; flex-direction: column; padding: 20px; transition: 0.4s; z-index: 999;
         }
         #toolbar-panel.open { bottom: 0; }
         
-        .palette { display: flex; gap: 15px; overflow-x: auto; margin-bottom: 25px; padding: 10px 5px; }
+        .palette { display: flex; gap: 12px; overflow-x: auto; margin-bottom: 20px; padding: 10px 5px; }
         .color-dot { width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0; border: 3px solid #eee; }
         
         .tool-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
@@ -69,9 +58,9 @@
         <div class="palette" id="palette"></div>
         <div class="tool-grid">
             <button class="tool-btn active" id="btn-brush" onclick="setTool('brush')">✏️ Lápiz</button>
-            <button class="tool-btn" id="btn-eraser" onclick="setTool('eraser')">🧽 Borrador</button>
-            <button class="tool-btn" style="background: #ff4444; color: white;" onclick="confirmarLimpieza()">🗑️ Borrar Todo</button>
-            <button class="tool-btn" style="background: #3498db; color: white;" onclick="toggleTools()">✅ Listo</button>
+            <button class="tool-btn" id="btn-eraser" onclick="setTool('eraser')">🧽 Goma</button>
+            <button class="tool-btn" style="background: #ff4444; color: white;" onclick="confirmarLimpieza()">🗑️ Borrar</button>
+            <button class="tool-btn" style="background: #3498db; color: white;" onclick="descargar()">💾 Guardar</button>
         </div>
     </div>
 
@@ -82,22 +71,28 @@
     let currentColor = '#000000';
     let currentTool = 'brush';
     let isDrawing = false;
+    let currentTemplateUrl = "";
 
-    // Lista de archivos corregida según tus capturas
+    // NOMBRES DE ARCHIVOS EXTRAÍDOS DE TUS CAPTURAS
     const misPlantillas = [
-        '20260319_115832_0000.png', '20260319_115912_0000.png', '20260319_115947_0000.png',
-        '20260319_120007_0000.png', '20260319_120125_0000.png', '20260319_120205_0000.png',
-        '20260314_184050_0000.png', '20260314_190631_0000.png', 'Burro_20260217_113452_0000.png',
-        'Uno_20260217_130621_0000.png'
+        '1_20260212_143632_0000.png', '1_20260212_153720_0000.png', '1_20260217_094136_0000.png', '1_20260314_190631_0000.png',
+        '20260314_184050_0000.png', '20260314_184050_0001.png', '20260314_184051_0002.png', '20260314_184051_0003.png',
+        '20260314_184051_0004.png', '20260314_184051_0005.png', '20260314_184051_0006.png', '20260314_184051_0007.png',
+        '20260314_184051_0008.png', '20260314_184051_0009.png', '20260314_184209_0000.png', '20260314_184210_0001.png',
+        '20260314_184210_0002.png', '20260314_184210_0003.png', '20260314_184210_0004.png', '20260314_184210_0005.png',
+        '20260314_184210_0006.png', '20260314_184210_0007.png', '20260314_184210_0008.png', '20260314_184210_0009.png',
+        '20260314_184924_0000.png', '20260314_184924_0001.png', '20260314_184924_0002.png', '20260314_184925_0003.png',
+        '20260314_184925_0004.png', '20260314_184925_0005.png', '20260314_184925_0006.png', '20260314_184925_0007.png',
+        '20260314_184925_0008.png', '20260314_184925_0009.png', '20260314_184925_0010.png', '20260314_185632_0000.png',
+        '20260314_185632_0001.png', '20260314_185633_0002.png', '20260314_185633_0003.png', '20260314_185633_0004.png'
     ];
 
     function init() {
-        // Cargar imágenes en el carrusel
         misPlantillas.forEach((imgName, i) => {
             const img = document.createElement('img');
             img.src = `plantillas/${imgName}`;
             img.className = 'template-thumb';
-            img.loading = "lazy"; // Carga inteligente para no trabar el cel
+            img.loading = "lazy";
             img.onclick = () => {
                 document.querySelectorAll('.template-thumb').forEach(t => t.classList.remove('active'));
                 img.classList.add('active');
@@ -107,7 +102,6 @@
             if(i === 0) { img.classList.add('active'); loadImg(img.src); }
         });
 
-        // Cargar colores
         const colors = ['#000000', '#FF0000', '#0000FF', '#008000', '#FFFF00', '#FFA500', '#800080', '#FFC0CB'];
         const palette = document.getElementById('palette');
         colors.forEach(c => {
@@ -120,6 +114,7 @@
     }
 
     function loadImg(url) {
+        currentTemplateUrl = url;
         const img = new Image();
         img.src = url;
         img.onload = () => {
@@ -129,7 +124,6 @@
     }
 
     function toggleTools() { document.getElementById('toolbar-panel').classList.toggle('open'); }
-    
     function setTool(t) { 
         currentTool = t; 
         document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
@@ -137,10 +131,15 @@
         if(t === 'brush') toggleTools();
     }
 
-    function confirmarLimpieza() { if(confirm('¿Quieres borrar todo el dibujo?')) { location.reload(); } }
+    function confirmarLimpieza() { if(confirm('¿Limpiar dibujo?')) { loadImg(currentTemplateUrl); toggleTools(); } }
+    function descargar() {
+        const link = document.createElement('a');
+        link.download = 'mi-dibujo-happy-kids.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    }
 
-    // DIBUJO
-    function getXY(e) {
+    function getPos(e) {
         const rect = canvas.getBoundingClientRect();
         return {
             x: (e.touches[0].clientX - rect.left) * (1000 / rect.width),
@@ -150,15 +149,15 @@
 
     canvas.addEventListener('touchstart', (e) => {
         isDrawing = true;
-        const p = getXY(e);
+        const p = getPos(e);
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
     });
 
     canvas.addEventListener('touchmove', (e) => {
         if(!isDrawing) return;
-        const p = getXY(e);
-        ctx.lineWidth = currentTool === 'eraser' ? 50 : 15;
+        const p = getPos(e);
+        ctx.lineWidth = currentTool === 'eraser' ? 50 : 18;
         ctx.lineCap = 'round';
         ctx.strokeStyle = currentTool === 'eraser' ? 'white' : currentColor;
         ctx.lineTo(p.x, p.y);
