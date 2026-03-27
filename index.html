@@ -21,9 +21,7 @@
         
         video { width: 100%; height: 100%; object-fit: cover; background: #000; }
         
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 40%); }
-        
-        /* BOTÓN SUPERIOR COLOREAR (No estorba) */
+        /* BOTÓN SUPERIOR COLOREAR */
         .btn-top-draw {
             position: absolute; top: 25px; right: 20px; z-index: 100;
             background: rgba(37, 211, 102, 0.85); color: white;
@@ -34,7 +32,6 @@
 
         .branding { position: absolute; top: 30px; left: 20px; color: #fff; font-size: 26px; font-weight: bold; text-shadow: 2px 2px 5px rgba(0,0,0,0.7); z-index: 10; }
 
-        /* BOTÓN LO QUIERO ÚNICO Y CENTRADO */
         .button-group {
             position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
             z-index: 100; width: 85%;
@@ -47,7 +44,7 @@
             background: #ffeb3b; color: #000;
         }
 
-        .btn-main:active { transform: scale(0.95) translateX(-50%); }
+        .btn-main:active { transform: scale(0.95); }
 
         .modal-entrega { 
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -77,7 +74,7 @@
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">El León Valiente ✨</div>
             <div class="button-group">
-                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=leon1', 'mailto:correo@gmail.com')">¡LO QUIERO! 🦁</button>
+                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=leon1', 'G_LINK_LEON')">¡LO QUIERO! 🦁</button>
             </div>
         </div>
 
@@ -89,11 +86,71 @@
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">Animalitos Divertidos ✨</div>
             <div class="button-group">
-                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=pack1', 'mailto:correo@gmail.com')">¡LO QUIERO! 🎨</button>
+                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=pack1', 'G_LINK_1')">¡LO QUIERO! 🎨</button>
             </div>
         </div>
 
+        <div class="reel-container">
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
+            <video class="video-reel" loop playsinline muted preload="auto">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Samsung_Galaxy_S25_FE_ggualp.mp4" type="video/mp4">
+            </video>
+            <div class="audio-hint">Toca para sonido 🔊</div>
+            <div class="branding">Oferta Tech 📱</div>
+            <div class="button-group">
+                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=s25fe', 'G_LINK_S25')">¡LO QUIERO! ⚡</button>
+            </div>
         </div>
+
+        <div class="reel-container">
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
+            <video class="video-reel" loop playsinline muted preload="auto">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Motorola_Edici%C3%B3n_Premium_nouj95.mp4" type="video/mp4">
+            </video>
+            <div class="audio-hint">Toca para sonido 🔊</div>
+            <div class="branding">Moto Premium ✨</div>
+            <div class="button-group">
+                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=moto_premium', 'G_LINK_MOTO')">¡LO QUIERO! 📱</button>
+            </div>
+        </div>
+        
+        <div class="reel-container">
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
+            <video class="video-reel" loop playsinline muted preload="auto">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/reloj_curren_8402_tzmw3l.mp4" type="video/mp4">
+            </video>
+            <div class="audio-hint">Toca para sonido 🔊</div>
+            <div class="branding">Curren Luxury ⌚</div>
+            <div class="button-group">
+                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=curren_8402', 'G_LINK_RELOJ')">¡LO QUIERO! 💎</button>
+            </div>
+        </div> 
+        
+        <div class="reel-container">
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
+            <video class="video-reel" loop playsinline muted preload="auto">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/emociones_rwg9cf.mp4" type="video/mp4">
+            </video>
+            <div class="audio-hint">Toca para sonido 🔊</div>
+            <div class="branding">Mis Emociones ✨</div>
+            <div class="button-group">
+                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=emociones', 'G_LINK_EMOCIONES')">¡LO QUIERO! 😊</button>
+            </div>
+        </div>
+        
+        <div class="reel-container">
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
+            <video class="video-reel" loop playsinline muted preload="auto">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/familia_ed04bv.mp4" type="video/mp4">
+            </video>
+            <div class="audio-hint">Toca para sonido 🔊</div>
+            <div class="branding">Mi Familia ✨</div>
+            <div class="button-group">
+                <button class="btn-main" onclick="abrirSelector('https://t.me/TU_BOT?start=familia', 'G_LINK_FAMILIA')">¡LO QUIERO! 🏠</button>
+            </div>
+        </div>
+
+    </div>
 
     <script>
         const videos = document.querySelectorAll('.video-reel');
@@ -130,4 +187,4 @@
         function cerrarModal(id) { document.getElementById(id).style.display = 'none'; }
     </script>
 </body>
-</html>
+                </html>
