@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -53,13 +52,13 @@
 <body>
 
     <div id="modalActividades" class="modal-entrega">
-        <h3 style="color: #333;">Contenido del Pack</h3>
+        <h3 style="color: #333;">Detalles</h3>
         <p id="desc-actividades" style="color: #666; font-size: 14px;">Cargando detalles...</p>
         <button onclick="cerrarModal('modalActividades')" style="margin-top:10px; background:#333; color:white; border:none; padding:10px 20px; border-radius:10px; cursor:pointer;">Entendido</button>
     </div>
 
     <div id="selectorEntrega" class="modal-entrega">
-        <h3 style="color: #333;">¿Dónde recibir tu PDF?</h3>
+        <h3 style="color: #333;">¿Dónde recibir la información?</h3>
         <a id="link-tg" href="#" target="_blank" class="btn-opcion" style="background: #0088cc;">Enviar por Telegram</a>
         <a id="link-google" href="#" target="_blank" class="btn-opcion" style="background: #db4437;">Enviar por Gmail</a>
         <button onclick="cerrarModal('selectorEntrega')" style="margin-top:10px; background:none; border:none; color:gray; cursor:pointer;">Cerrar</button>
@@ -74,7 +73,7 @@
             <div class="branding">El León Valiente ✨</div>
             <div class="button-group">
                 <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=leon1', 'G_LINK_LEON')">¡Lo quiero! 🦁</button>
-                <button class="btn-main btn-actividades" onclick="verActividades('Este pack incluye el cuento del León y 10 páginas interactivas para colorear.')">Actividades</button>
+                <button class="btn-main btn-actividades" onclick="verActividades('Incluye el cuento interactivo del León y láminas para colorear.')">Detalles</button>
             </div>
         </div>
 
@@ -83,22 +82,22 @@
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/animalitos_dwothk.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Happy Kids ✨</div>
+            <div class="branding">Animalitos Divertidos ✨</div>
             <div class="button-group">
                 <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=pack1', 'G_LINK_1')">¡Lo quiero! 🎨</button>
-                <button class="btn-main btn-actividades" onclick="verActividades('Este pack incluye 20 páginas de dibujo, trazos de animales y nombres para colorear.')">Actividades</button>
+                <button class="btn-main btn-actividades" onclick="verActividades('Pack con 20 páginas de dibujos de granja y selva.')">Detalles</button>
             </div>
         </div>
 
         <div class="reel-container">
             <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/cuenta_uj2sav.mp4" type="video/mp4">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Samsung_Galaxy_S25_FE_ggualp.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Happy Kids ✨</div>
+            <div class="branding">Oferta Tech 📱</div>
             <div class="button-group">
-                <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=pack2', 'G_LINK_2')">¡Lo quiero! 🍎</button>
-                <button class="btn-main btn-actividades" onclick="verActividades('Aprende a contar con manzanas: incluye ejercicios de suma básica y reconocimiento de números.')">Actividades</button>
+                <button class="btn-main btn-lo-quiero" onclick="abrirSelector('https://t.me/TU_BOT?start=s25fe', 'G_LINK_S25')">¡Me interesa! ⚡</button>
+                <button class="btn-main btn-actividades" onclick="verActividades('Samsung Galaxy S25 FE - Especificaciones Premium a precio de oferta.')">Info Técnica</button>
             </div>
         </div>
     </div>
@@ -143,4 +142,4 @@
         function cerrarModal(id) { document.getElementById(id).style.display = 'none'; }
     </script>
 </body>
-</html>
+                </html>
