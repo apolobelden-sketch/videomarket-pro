@@ -3,118 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Kids - Súper Pizarrón de Arte 🎨</title>
+    <title>Happy Kids - Súper Pizarrón 🎨</title>
     <style>
         * { box-sizing: border-box; touch-action: none; -webkit-tap-highlight-color: transparent; }
-        body { 
-            margin: 0; padding: 0; background: #222; 
-            display: flex; flex-direction: column; height: 100vh; overflow: hidden;
-            font-family: 'Arial Rounded MT Bold', sans-serif;
-        }
-
-        /* 1. PIZARRÓN GIGANTE (ÁREA DE DIBUJO) */
-        #canvas-wrapper {
-            flex: 1; /* Ocupa todo el espacio disponible */
-            display: flex; justify-content: center; align-items: center;
-            background: #eee; position: relative; overflow: hidden;
-        }
-        canvas { 
-            background: white; max-width: 100%; max-height: 100%;
-            border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            display: block;
-        }
-
-        /* 2. CARRUSEL RÁPIDO E INTELIGENTE (Abajo del pizarrón) */
-        #carousel-container {
-            height: 12vh; background: #fff; border-top: 2px solid #ddd;
-            display: flex; align-items: center; overflow-x: auto; padding: 8px;
-            scroll-snap-type: x mandatory;
-        }
+        body { margin: 0; padding: 0; background: #222; display: flex; flex-direction: column; height: 100vh; overflow: hidden; font-family: 'Arial Rounded MT Bold', sans-serif; }
         
-        .template-thumb { 
-            height: 90%; aspect-ratio: 1/1; 
-            margin-right: 10px; border-radius: 8px; 
-            border: 3px solid #eee; cursor: pointer; transition: 0.2s;
-            object-fit: cover; scroll-snap-align: start;
-            /* Estilo para imágenes no cargadas aún */
-            background-color: #f0f0f0; 
+        /* 1. ÁREA DE DIBUJO */
+        #canvas-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; background: #eee; position: relative; overflow: hidden; }
+        canvas { background: white; max-width: 98%; max-height: 98%; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5); display: block; }
+
+        /* 2. CARRUSEL DE IMÁGENES (Arriba) */
+        #carousel-container {
+            height: 12vh; background: #fff; border-bottom: 2px solid #ddd;
+            display: flex; align-items: center; overflow-x: auto; padding: 8px; gap: 10px;
         }
+        .template-thumb { height: 90%; aspect-ratio: 1/1; border-radius: 8px; border: 3px solid #eee; object-fit: cover; flex-shrink: 0; }
         .template-thumb.active { border-color: #25d366; transform: scale(1.05); }
 
-        /* 3. BOTÓN FLOTANTE DE HERRAMIENTAS */
+        /* 3. BOTÓN FLOTANTE (Para abrir herramientas) */
         #btn-tools {
-            position: fixed; bottom: 15vh; right: 20px;
-            width: 65px; height: 65px; background: #25d366;
-            border-radius: 50%; border: none; font-size: 30px;
+            position: fixed; bottom: 5vh; right: 20px; width: 65px; height: 65px; 
+            background: #25d366; border-radius: 50%; border: none; font-size: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 1000;
         }
 
-        /* 4. TECLADO DE HERRAMIENTAS (PANEL EMERGENTE) */
+        /* 4. TECLADO DE HERRAMIENTAS (Panel emergente) */
         #toolbar-panel {
             position: fixed; bottom: -100%; left: 0; width: 100%; height: 50vh;
             background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px);
             border-top: 5px solid #25d366; border-radius: 20px 20px 0 0;
-            display: flex; flex-direction: column; align-items: center;
-            padding: 15px; transition: bottom 0.4s ease-out; z-index: 900;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; padding: 15px; transition: 0.4s; z-index: 999;
         }
         #toolbar-panel.open { bottom: 0; }
 
-        .palette { display: flex; gap: 8px; overflow-x: auto; width: 100%; justify-content: center; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 2px solid #eee;}
-        .color-dot { width: 35px; height: 35px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 5px rgba(0,0,0,0.2); flex-shrink: 0; }
+        .palette { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 15px; padding: 5px; }
+        .color-dot { width: 45px; height: 45px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 5px rgba(0,0,0,0.2); flex-shrink: 0; }
         .color-dot.active { transform: scale(1.2); border-color: #333; }
 
-        .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; }
-        .tool-btn { 
-            background: #f0f0f0; border: none; border-radius: 12px; padding: 12px; 
-            font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.1s;
-            display: flex; flex-direction: column; align-items: center; gap: 4px;
-        }
-        .tool-btn.active { background: #25d366; color: #fff; }
-        .tool-icon { font-size: 25px; }
+        .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .tool-btn { padding: 15px; border-radius: 12px; border: none; background: #f0f0f0; font-weight: bold; font-size: 14px; }
+        .tool-btn.active { background: #25d366; color: white; }
     </style>
 </head>
 <body>
+
+    <div id="carousel-container"></div>
 
     <div id="canvas-wrapper">
         <canvas id="mainCanvas" width="1000" height="1000"></canvas>
     </div>
 
-    <div id="carousel-container"></div>
-
     <button id="btn-tools" onclick="toggleTools()">🖌️</button>
 
     <div id="toolbar-panel">
-        <div class="palette">
-            <div class="color-dot active" style="background: black;" onclick="setColor('black')"></div>
-            <div class="color-dot" style="background: red;" onclick="setColor('red')"></div>
-            <div class="color-dot" style="background: blue;" onclick="setColor('blue')"></div>
-            <div class="color-dot" style="background: yellow;" onclick="setColor('yellow')"></div>
-            <div class="color-dot" style="background: green;" onclick="setColor('green')"></div>
-            <div class="color-dot" style="background: orange;" onclick="setColor('orange')"></div>
-            <div class="color-dot" style="background: pink;" onclick="setColor('pink')"></div>
-            <div class="color-dot" style="background: purple;" onclick="setColor('purple')"></div>
-        </div>
-
+        <div class="palette" id="palette"></div>
         <div class="tool-grid">
-            <button class="tool-btn active" id="btn-brush" onclick="setTool('brush')">
-                <span class="tool-icon">🖌️</span>Lápiz
-            </button>
-            <button class="tool-btn" id="btn-bucket" onclick="setTool('bucket')">
-                <span class="tool-icon">🪣</span>Balde
-            </button>
-            <button class="tool-btn" id="btn-eraser" onclick="setTool('eraser')">
-                <span class="tool-icon">🧼</span>Borrador
-            </button>
-            <button class="tool-btn" id="btn-rainbow" onclick="setTool('rainbow')">
-                <span class="tool-icon">🌈</span>Arcoíris
-            </button>
-            <button class="tool-btn" style="background: #F44336; color: white;" onclick="clearCanvas()">
-                <span class="tool-icon">🗑️</span>Limpiar
-            </button>
-            <button class="tool-btn" style="background: #2196F3; color: white;" onclick="downloadDrawing()">
-                <span class="tool-icon">💾</span>Guardar
-            </button>
+            <button class="tool-btn active" id="btn-brush" onclick="setTool('brush')">✏️ Lápiz</button>
+            <button class="tool-btn" id="btn-eraser" onclick="setTool('eraser')">🧽 Borrador</button>
+            <button class="tool-btn" style="background: #ff4444; color: white;" onclick="limpiarCanvas()">🗑️ Limpiar</button>
+            <button class="tool-btn" style="background: #3498db; color: white;" onclick="descargarDibujo()">💾 Guardar</button>
+            <button class="tool-btn" onclick="toggleTools()">❌ Cerrar</button>
         </div>
     </div>
 
@@ -122,194 +70,109 @@
     const canvas = document.getElementById('mainCanvas');
     const ctx = canvas.getContext('2d');
     const carousel = document.getElementById('carousel-container');
-    let isDrawing = false;
+    const panel = document.getElementById('toolbar-panel');
     let currentColor = 'black';
     let currentTool = 'brush';
-    let templateImage = new Image();
+    let isDrawing = false;
 
-    // --- CARGA DIFERIDA DE IMÁGENES (LAZY LOADING) ---
+    // LISTA DE TUS ARCHIVOS REALES (Basado en tus capturas)
     const misPlantillas = [
-        'Burro_20260217_113452_0000.png',
-        'Uno_20260217_130621_0000.png',
-        '20260319_115832_0000.png',
-        '20260314_184051_0002.png',
-        '2_20260212_153720_0001.png',
-        '3_20260212_143632_0002.png',
-        '4_20260212_153720_0003.png',
-        '5_20260212_094136_0004.png',
-        '6_20260314_190632_0005.png',
-        '7_20260212_153720_0006.png',
-        '8_20260212_143632_0007.png',
-        '9_20260212_153720_0008.png'
-        // Puedes añadir aquí más nombres de tus archivos
+        '20260319_115832_0000.png', '20260319_115912_0000.png', 
+        '20260319_115947_0000.png', '20260319_120007_0000.png',
+        '20260319_120125_0000.png', '20260319_120205_0000.png',
+        '20260314_184050_0000.png', '20260314_190631_0000.png',
+        'Burro_20260217_113452_0000.png', 'Uno_20260217_130621_0000.png'
     ];
 
-    function generarCarrusel() {
-        misPlantillas.forEach((nombre, index) => {
-            const thumb = document.createElement('img');
-            
-            // EL TRUCO: data-src en lugar de src
-            thumb.setAttribute('data-src', `plantillas/${nombre}`); 
-            thumb.className = 'template-thumb lazy'; // lazy activa el cargador
-            if (index === 0) thumb.classList.add('active');
-            
-            thumb.onclick = () => {
-                document.querySelector('.template-thumb.active')?.classList.remove('active');
-                thumb.classList.add('active');
-                if(thumb.src) loadTemplate(thumb.src); // Solo carga si ya se descargó
+    function init() {
+        // Cargar Carrusel
+        misPlantillas.forEach((imgName, i) => {
+            const img = document.createElement('img');
+            img.src = `plantillas/${imgName}`;
+            img.className = 'template-thumb';
+            img.onclick = () => {
+                document.querySelectorAll('.template-thumb').forEach(t => t.classList.remove('active'));
+                img.classList.add('active');
+                loadImg(img.src);
             };
-            carousel.appendChild(thumb);
+            carousel.appendChild(img);
+            if(i === 0) { img.classList.add('active'); loadImg(img.src); }
+        });
+
+        // Cargar Colores
+        const colors = ['#000000', '#FF0000', '#0000FF', '#008000', '#FFFF00', '#FFA500', '#800080', '#FFC0CB', '#8B4513'];
+        const palette = document.getElementById('palette');
+        colors.forEach(c => {
+            const dot = document.createElement('div');
+            dot.className = 'color-dot';
+            dot.style.background = c;
+            dot.onclick = () => {
+                currentColor = c;
+                document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                if(currentTool === 'eraser') setTool('brush');
+            };
+            palette.appendChild(dot);
         });
     }
 
-    // Configuración del buscador inteligente de imágenes (Intersection Observer)
-    const observer = new Intersection Observer((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                const src = img.getAttribute('data-src');
-                if(!src) return;
-                
-                img.src = src; // Carga la imagen real solo cuando aparece en pantalla
-                img.removeAttribute('data-src');
-                observer.unobserve(img); // Deja de observar esta imagen
-            }
-        });
-    });
-
-    function iniciarLazyLoading() {
-        const images = document.querySelectorAll('.lazy');
-        images.forEach(img => observer.observe(img));
-    }
-
-    function loadTemplate(url) {
-        templateImage.src = url;
-        templateImage.onload = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(templateImage, 0, 0, 1000, 1000);
-            ctx.beginPath();
+    function loadImg(url) {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => {
+            ctx.clearRect(0, 0, 1000, 1000);
+            ctx.drawImage(img, 0, 0, 1000, 1000);
         };
     }
 
-    // Iniciar todo
-    generarCarrusel();
-    iniciarLazyLoading(); // Activa el cargador inteligente
-    
-    // Carga la primera foto si ya está lista en Termux
-    setTimeout(() => {
-        const firstThumb = document.querySelector('.template-thumb');
-        if(firstThumb.src) loadTemplate(firstThumb.src);
-    }, 500);
+    function toggleTools() { panel.classList.toggle('open'); }
 
-    // --- LÓGICA DE HERRAMIENTAS Y DIBUJO ---
-    function toggleTools() { document.getElementById('toolbar-panel').classList.toggle('open'); }
-
-    function setColor(color) {
-        currentColor = color;
-        if (currentTool === 'rainbow' || currentTool === 'eraser') currentTool = 'brush';
-        document.querySelector('.color-dot.active').classList.remove('active');
-        event.target.classList.add('active');
-        updateToolsUI();
+    function setTool(t) { 
+        currentTool = t; 
+        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(`btn-${t}`).classList.add('active');
+        if (t === 'brush') toggleTools(); // Cierra el panel al elegir lápiz para dibujar
     }
 
-    function setTool(tool) {
-        currentTool = tool;
-        updateToolsUI();
-        if (tool !== 'bucket') toggleTools();
-    }
+    function limpiarCanvas() { if(confirm('¿Borrar todo el dibujo?')) { location.reload(); } }
 
-    function updateToolsUI() {
-        document.querySelector('.tool-btn.active')?.classList.remove('active');
-        document.getElementById(`btn-${currentTool}`)?.classList.add('active');
-    }
-
-    function clearCanvas() {
-        if (confirm('¿Borrar dibujo?')) { loadTemplate(templateImage.src); toggleTools(); }
-    }
-
-    // NUEVO: Función para guardar el dibujo en el celular
-    function downloadDrawing() {
-        if (!confirm('¿Quieres guardar tu dibujo en el celular?')) return;
-        
-        // Crear un enlace invisible de descarga
+    function descargarDibujo() {
         const link = document.createElement('a');
-        link.download = `happy_kids_arte_${Date.now()}.png`; // Nombre del archivo
-        link.href = canvas.toDataURL(); // Convierte canvas a imagen base64
-        link.click(); // Simula el click
-        toggleTools();
+        link.download = 'mi-dibujo-happy-kids.png';
+        link.href = canvas.toDataURL();
+        link.click();
     }
 
-    function getCoords(e) {
+    // Eventos de dibujo para celular
+    function getPos(e) {
         const rect = canvas.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        return { x: (clientX - rect.left) * (1000 / rect.width), y: (clientY - rect.top) * (1000 / rect.height) };
+        return {
+            x: (e.touches[0].clientX - rect.left) * (1000 / rect.width),
+            y: (e.touches[0].clientY - rect.top) * (1000 / rect.height)
+        };
     }
 
-    function startDrawing(e) {
+    canvas.addEventListener('touchstart', (e) => {
         isDrawing = true;
-        const {x, y} = getCoords(e);
-        if (currentTool === 'bucket') { floodFill(x, y, currentColor); return; }
-        ctx.beginPath(); ctx.moveTo(x, y);
-    }
+        const pos = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+    });
 
-    function draw(e) {
-        if (!isDrawing || currentTool === 'bucket') return;
-        e.preventDefault();
-        const {x, y} = getCoords(e);
-        ctx.lineJoin = 'round'; ctx.lineCap = 'round';
-        
-        if (currentTool === 'brush' || currentTool === 'eraser') {
-            ctx.lineWidth = 15;
-            ctx.strokeStyle = currentTool === 'eraser' ? '#FFFFFF' : currentColor;
-            ctx.lineTo(x, y); ctx.stroke();
-        } else if (currentTool === 'rainbow') {
-            ctx.lineWidth = 15;
-            ctx.strokeStyle = `hsl(${Date.now() % 360}, 100%, 50%)`;
-            ctx.lineTo(x, y); ctx.stroke();
-        }
-    }
+    canvas.addEventListener('touchmove', (e) => {
+        if(!isDrawing) return;
+        const pos = getPos(e);
+        ctx.lineWidth = currentTool === 'eraser' ? 40 : 15;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = currentTool === 'eraser' ? 'white' : currentColor;
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+    });
 
-    function stopDrawing() { isDrawing = false; }
+    canvas.addEventListener('touchend', () => isDrawing = false);
 
-    canvas.addEventListener('touchstart', startDrawing);
-    canvas.addEventListener('touchmove', draw);
-    canvas.addEventListener('touchend', stopDrawing);
-
-    // --- FLOOD FILL (BALDE) ---
-    function floodFill(startX, startY, fillCol) {
-        startX = Math.floor(startX); startY = Math.floor(startY);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imageData.data;
-        const width = canvas.width; const height = canvas.height;
-        const startPos = (startY * width + startX) * 4;
-        const targetR = data[startPos], targetG = data[startPos + 1], targetB = data[startPos + 2], targetA = data[startPos + 3];
-
-        const tempCtx = document.createElement('canvas').getContext('2d');
-        tempCtx.fillStyle = fillCol;
-        const fillHex = tempCtx.fillStyle;
-        const r = parseInt(fillHex.slice(1, 3), 16), g = parseInt(fillHex.slice(3, 5), 16), b = parseInt(fillHex.slice(5, 7), 16);
-
-        if (targetR === r && targetG === g && targetB === b) return;
-
-        const pixelStack = [[startX, startY]];
-        while (pixelStack.length > 0) {
-            const [x, y] = pixelStack.pop();
-            let pos = (y * width + x) * 4;
-            while (y-- >= 0 && matchColor(pos)) { pos -= width * 4; }
-            pos += width * 4;
-            let reachLeft = false, reachRight = false;
-            while (y++ < height - 1 && matchColor(pos)) {
-                colorPixel(pos);
-                if (x > 0) { if (matchColor(pos - 4)) { if (!reachLeft) { pixelStack.push([x - 1, y]); reachLeft = true; } } else if (reachLeft) reachLeft = false; }
-                if (x < width - 1) { if (matchColor(pos + 4)) { if (!reachRight) { pixelStack.push([x + 1, y]); reachRight = true; } } else if (reachRight) reachRight = false; }
-                pos += width * 4;
-            }
-        }
-        ctx.putImageData(imageData, 0, 0);
-        function matchColor(pos) { return data[pos] === targetR && data[pos+1] === targetG && data[pos+2] === targetB; }
-        function colorPixel(pos) { data[pos] = r; data[pos+1] = g; data[pos+2] = b; data[pos+3] = 255; }
-    }
+    init();
 </script>
 </body>
 </html>
