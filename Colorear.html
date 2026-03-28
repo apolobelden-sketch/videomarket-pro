@@ -8,15 +8,18 @@
         * { box-sizing: border-box; touch-action: pan-x pan-y; -webkit-tap-highlight-color: transparent; }
         body { margin: 0; padding: 0; background: #222; display: flex; flex-direction: column; height: 100vh; overflow: hidden; font-family: 'Arial Rounded MT Bold', sans-serif; }
         
-        /* CABECERA CON BOTÓN REGRESO */
+        /* CABECERA ACTUALIZADA */
         #header-drawing {
-            display: flex; align-items: center; background: #fff; height: 7vh; padding: 0 15px; border-bottom: 1px solid #ddd;
+            display: flex; align-items: center; justify-content: space-between; background: #fff; height: 8vh; padding: 0 15px; border-bottom: 2px solid #ddd;
         }
-        .btn-back {
-            text-decoration: none; background: #f0f0f0; color: #333; padding: 6px 12px; border-radius: 15px; font-size: 14px; font-weight: bold; border: 1px solid #ccc;
+        .nav-group { display: flex; gap: 8px; }
+        .btn-nav {
+            text-decoration: none; padding: 8px 12px; border-radius: 15px; font-size: 13px; font-weight: bold; border: 1px solid #ccc; display: flex; align-items: center;
         }
+        .btn-back { background: #f0f0f0; color: #333; }
+        .btn-math-head { background: #ff9800; color: white; border-color: #e68a00; }
 
-        /* 1. CARRUSEL SUPERIOR */
+        /* CARRUSEL */
         #carousel-container {
             height: 14vh; background: #fff; border-bottom: 3px solid #25d366;
             display: flex; align-items: center; overflow-x: auto; padding: 10px; gap: 12px;
@@ -25,20 +28,20 @@
         .template-thumb { height: 90%; aspect-ratio: 1/1; border-radius: 10px; border: 3px solid #eee; object-fit: cover; flex-shrink: 0; cursor: pointer; }
         .template-thumb.active { border-color: #25d366; transform: scale(1.05); }
 
-        /* 2. ÁREA DE DIBUJO */
+        /* ÁREA DE DIBUJO */
         #canvas-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; background: #eee; position: relative; }
         canvas { background: white; max-width: 98%; max-height: 98%; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.3); touch-action: none; }
 
-        /* 3. BOTÓN FLOTANTE */
+        /* BOTÓN FLOTANTE */
         #btn-tools {
             position: fixed; bottom: 25px; right: 20px; width: 70px; height: 70px; 
             background: #25d366; border-radius: 50%; border: 4px solid white; font-size: 35px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 1000;
         }
 
-        /* 4. PANEL DE HERRAMIENTAS */
+        /* PANEL DE HERRAMIENTAS */
         #toolbar-panel {
-            position: fixed; bottom: -100%; left: 0; width: 100%; height: 45vh;
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 50vh;
             background: white; border-top: 5px solid #25d366; border-radius: 25px 25px 0 0;
             display: flex; flex-direction: column; padding: 20px; transition: 0.4s; z-index: 999;
         }
@@ -47,16 +50,20 @@
         .palette { display: flex; gap: 12px; overflow-x: auto; margin-bottom: 20px; padding: 10px 5px; }
         .color-dot { width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0; border: 3px solid #eee; }
         
-        .tool-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .tool-btn { padding: 18px; border-radius: 15px; border: none; background: #f0f0f0; font-weight: bold; font-size: 16px; }
+        .tool-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .tool-btn { padding: 15px; border-radius: 15px; border: none; background: #f0f0f0; font-weight: bold; font-size: 15px; text-decoration: none; text-align: center; color: #333; }
         .tool-btn.active { background: #25d366; color: white; }
+        .btn-math-panel { background: #ff9800 !important; color: white !important; grid-column: span 2; font-size: 18px; }
     </style>
 </head>
 <body>
 
     <div id="header-drawing">
-        <a href="index.html" class="btn-back">🏠 Inicio</a>
-        <span style="margin-left: 15px; font-size: 14px; color: #666;">¡A pintar!</span>
+        <div class="nav-group">
+            <a href="index.html" class="btn-nav btn-back">🏠 Inicio</a>
+            <a href="Matematica.html" class="btn-nav btn-math-head">🍕 Matemática</a>
+        </div>
+        <span style="font-size: 14px; font-weight: bold; color: #25d366;">Happy Kids Art ✨</span>
     </div>
 
     <div id="carousel-container"></div>
@@ -72,8 +79,9 @@
         <div class="tool-grid">
             <button class="tool-btn active" id="btn-brush" onclick="setTool('brush')">✏️ Lápiz</button>
             <button class="tool-btn" id="btn-eraser" onclick="setTool('eraser')">🧽 Goma</button>
-            <button class="tool-btn" style="background: #ff4444; color: white;" onclick="confirmarLimpieza()">🗑️ Borrar</button>
+            <button class="tool-btn" style="background: #ff4444; color: white;" onclick="confirmarLimpieza()">🗑️ Limpiar</button>
             <button class="tool-btn" style="background: #3498db; color: white;" onclick="descargar()">💾 Guardar</button>
+            <a href="Matematica.html" class="tool-btn btn-math-panel">🎮 ¡JUGAR MATEMÁTICA! 🍕</a>
         </div>
     </div>
 
