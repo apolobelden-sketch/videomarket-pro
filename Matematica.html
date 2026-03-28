@@ -11,7 +11,7 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         h1 { color:#ff5722; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        .btn { display:block; margin:12px auto; padding:15px; width:85%; border:none; border-radius:25px; background:#4caf50; color:#fff; font-size:18px; font-weight:bold; box-shadow: 0 4px 0 #388e3c; cursor:pointer; }
+        .btn { display:block; margin:12px auto; padding:15px; width:85%; border:none; border-radius:25px; background:#4caf50; color:#fff; font-size:18px; font-weight:bold; box-shadow: 0 4px 0 #388e3c; cursor:pointer; text-decoration: none; }
         .btn-volver { background:#f44336; box-shadow: 0 4px 0 #d32f2f; margin-top: 30px; }
         
         /* Contenedor de Figuras */
@@ -21,7 +21,13 @@
 
         input { padding:12px; font-size:24px; width:80px; text-align:center; border-radius:15px; border:3px solid #ff9800; outline: none; }
         .feedback { font-size:24px; margin:15px; font-weight: bold; height: 30px; }
-        .score-box { font-size: 20px; background: #fff; padding: 10px; border-radius: 15px; display: inline-block; margin-top: 10px; }
+        .score-box { font-size: 20px; background: #fff; padding: 10px; border-radius: 15px; display: inline-block; margin-top: 10px; margin-bottom: 20px; }
+
+        /* Estilos nuevos para navegación footer */
+        .nav-footer { margin-top: 30px; padding-top: 20px; border-top: 2px dashed #ccc; display: flex; flex-direction: column; align-items: center; }
+        .btn-nav { width: 70%; padding: 12px; border-radius: 50px; text-decoration: none; font-weight: bold; margin: 8px 0; font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-colorear { background: #ff9800; color: white; border: 2px solid #fff; }
+        .btn-home { background: #000; color: white; }
     </style>
 </head>
 <body>
@@ -31,25 +37,27 @@
     <div class="visual-container">
         <span class="emoji-item">🍎</span><span class="emoji-item">🚀</span><span class="emoji-item">🦖</span><span class="emoji-item">🍕</span>
     </div>
+    
     <button class="btn" onclick="openGame('suma')">🍎 Suma de Frutas</button>
     <button class="btn" onclick="openGame('resta')">🚀 Resta Espacial</button>
     <button class="btn" onclick="openGame('conteo')">🦖 Cuenta Dinos</button>
     <button class="btn" onclick="openGame('fraccion')">🍕 Rebanadas de Pizza</button>
 
     <div class="score-box">⭐ Puntos: <span id="score">0</span></div>
+
+    <div class="nav-footer">
+        <a href="Colorear.html" class="btn-nav btn-colorear">🎨 Ir a Colorear</a>
+        <a href="index.html" class="btn-nav btn-home">🏠 Regresar a Reels</a>
+    </div>
 </div>
 
 <div id="game" class="screen">
     <h1 id="titulo"></h1>
-    
     <div class="visual-container" id="contenedor-visual"></div>
-
     <input id="respuesta" type="number" placeholder="?">
     <button class="btn" style="background:#2196f3; box-shadow: 0 4px 0 #1976d2;" onclick="verificar()">Revisar ✅</button>
-
     <div class="feedback" id="feedback"></div>
-
-    <button class="btn btn-volver" onclick="volver()">⬅ Salir</button>
+    <button class="btn btn-volver" onclick="volver()">⬅ Salir al Menú</button>
 </div>
 
 <script>
@@ -70,7 +78,7 @@ function generar(){
     document.getElementById("respuesta").value = "";
     document.getElementById("feedback").innerHTML = "";
     
-    let n1 = Math.floor(Math.random()*5) + 1; // Máximo 5 para que quepan bien
+    let n1 = Math.floor(Math.random()*5) + 1; 
     let n2 = Math.floor(Math.random()*4) + 1;
     let emoji = "";
 
@@ -86,12 +94,11 @@ function generar(){
     if(juego === "resta"){
         emoji = "🚀";
         document.getElementById("titulo").innerText = "Resta de Cohetes";
-        // Para resta, siempre n1 debe ser mayor
         let num1 = Math.max(n1, n2) + 2;
         let num2 = Math.min(n1, n2);
         dibujarEmojis(num1, emoji, contenedor);
         contenedor.innerHTML += '<span class="operator">-</span>';
-        contenedor.innerHTML += `<span style="font-size:30px; color:#666;">(Quita ${num2})</span>`;
+        contenedor.innerHTML += `<span style="font-size:25px; color:#666;">(Quita ${num2})</span>`;
         correcta = num1 - num2;
     }
 
