@@ -1,130 +1,166 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Kids - Matemática 🍕</title>
-    <style>
-        * { box-sizing: border-box; touch-action: none; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; padding: 0; background: #FF9800; font-family: 'Arial Rounded MT Bold', sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
-        
-        #header-mate { background: #fff; height: 8vh; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 3px solid #E65100; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 100; }
-        .btn-back { text-decoration: none; background: #FF5722; color: white; padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 14px; border: 2px solid #fff; }
-        #score-board { font-size: 20px; color: #333; font-weight: bold; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Kids - Matemática Pro</title>
 
-        #game-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 20px; position: relative; }
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f0f4f8;
+    text-align:center;
+}
 
-        #challenge-text { background: rgba(255,255,255,0.9); padding: 15px 25px; border-radius: 30px; font-size: 24px; color: #333; border: 3px solid #E65100; box-shadow: 0 5px 15px rgba(0,0,0,0.2); text-align: center; max-width: 90%; }
-        #target-number { font-size: 32px; color: #E65100; font-weight: bold; margin: 0 5px; }
+.screen { display:none; padding:20px; }
+.active { display:block; }
 
-        #drop-zone { width: 280px; height: 280px; background: url('https://res.cloudinary.com/dgdw8fbku/image/upload/v1711223456/plato_v6u5r6.png') no-repeat center; background-size: contain; position: relative; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
-        #drop-zone.hover { transform: scale(1.1); filter: brightness(1.2); }
-        
-        #pizza-complete { width: 90%; height: 90%; background: url('https://res.cloudinary.com/dgdw8fbku/image/upload/v1711223456/pizza_completa_s8y5r2.png') no-repeat center; background-size: contain; position: absolute; opacity: 0; transform: scale(0.5); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        #pizza-complete.show { opacity: 1; transform: scale(1); }
+h1 { color:#ff5722; }
 
-        #drag-zone { width: 100%; height: 20vh; display: flex; justify-content: center; gap: 15px; padding: 10px; background: rgba(255,255,255,0.3); border-radius: 20px 20px 0 0; }
-        .slice { width: 65px; height: 85px; background: url('https://res.cloudinary.com/dgdw8fbku/image/upload/v1711223456/rebanada_v2_j4r7f8.png') no-repeat center; background-size: contain; cursor: grab; position: relative; z-index: 10; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
-        .slice.dragging { opacity: 0.5; transform: scale(1.2) rotate(10deg); cursor: grabbing; z-index: 1000; }
+.btn {
+    display:block;
+    margin:15px auto;
+    padding:15px;
+    width:80%;
+    border:none;
+    border-radius:20px;
+    background:#4caf50;
+    color:#fff;
+    font-size:18px;
+    font-weight:bold;
+}
 
-        .confetti { position: absolute; width: 10px; height: 10px; background: #fff; border-radius: 50%; opacity: 0; animation: confetti-fall 1s ease-out forwards; }
-        @keyframes confetti-fall { 0% { opacity: 1; transform: translateY(0) rotate(0deg); } 100% { opacity: 0; transform: translateY(200px) rotate(720deg); } }
-    </style>
+.card {
+    background:#fff;
+    padding:20px;
+    border-radius:20px;
+    margin:10px;
+    box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+.big {
+    font-size:40px;
+    margin:20px;
+}
+
+input {
+    padding:10px;
+    font-size:20px;
+    width:100px;
+    text-align:center;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+
+.feedback {
+    font-size:22px;
+    margin:15px;
+}
+
+</style>
 </head>
+
 <body>
 
-    <div id="header-mate">
-        <a href="Colorear.html" class="btn-back">⬅ Volver</a>
-        <div style="font-weight: bold; color: #E65100;">MATEMÁTICA 🍕</div>
-        <div id="score-board">🏆 <span id="points">0</span></div>
-    </div>
+<!-- MENÚ -->
+<div id="menu" class="screen active">
+    <h1>🍕 Aventura Matemática</h1>
 
-    <div id="game-area">
-        <div id="challenge-text">¡Pon <span id="target-number">?</span> rebanadas en el plato!</div>
-        <div id="drop-zone"><div id="pizza-complete"></div></div>
-        <div id="drag-zone">
-            <div class="slice" draggable="true" id="s1"></div>
-            <div class="slice" draggable="true" id="s2"></div>
-            <div class="slice" draggable="true" id="s3"></div>
-            <div class="slice" draggable="true" id="s4"></div>
-            <div class="slice" draggable="true" id="s5"></div>
-        </div>
-    </div>
+    <button class="btn" onclick="openGame('suma')">🍎 Suma</button>
+    <button class="btn" onclick="openGame('resta')">🚀 Resta</button>
+    <button class="btn" onclick="openGame('conteo')">🦖 Conteo</button>
+    <button class="btn" onclick="openGame('fraccion')">🍕 Fracciones</button>
+
+    <h3>⭐ Puntos: <span id="score">0</span></h3>
+</div>
+
+<!-- JUEGO -->
+<div id="game" class="screen">
+    <h1 id="titulo"></h1>
+
+    <div class="big" id="pregunta"></div>
+
+    <input id="respuesta" type="number">
+    <button class="btn" onclick="verificar()">Responder</button>
+
+    <div class="feedback" id="feedback"></div>
+
+    <button class="btn" onclick="volver()">⬅ Volver</button>
+</div>
 
 <script>
-    let points = 0;
-    let targetAmount;
-    let currentInPlate = 0;
-    const dropZone = document.getElementById('drop-zone');
-    const pizzaComplete = document.getElementById('pizza-complete');
-    const pointsDisplay = document.getElementById('points');
-    const targetDisplay = document.getElementById('target-number');
-    const slices = document.querySelectorAll('.slice');
+let juego = "";
+let n1 = 0;
+let n2 = 0;
+let score = 0;
+let correcta = 0;
 
-    function nextChallenge() {
-        currentInPlate = 0;
-        targetAmount = Math.floor(Math.random() * 3) + 2; 
-        targetDisplay.innerText = targetAmount;
-        pizzaComplete.classList.remove('show');
-        slices.forEach(s => {
-            s.style.display = 'block';
-            s.style.position = 'static';
-        });
+function openGame(tipo){
+    juego = tipo;
+    document.getElementById("menu").classList.remove("active");
+    document.getElementById("game").classList.add("active");
+    document.getElementById("feedback").innerHTML="";
+    document.getElementById("respuesta").value="";
+    generar();
+}
+
+function generar(){
+    n1 = Math.floor(Math.random()*10);
+    n2 = Math.floor(Math.random()*10);
+
+    if(juego==="suma"){
+        document.getElementById("titulo").innerHTML="🍎 Suma";
+        document.getElementById("pregunta").innerHTML=`${n1} + ${n2}`;
+        correcta = n1 + n2;
     }
 
-    slices.forEach(slice => {
-        slice.addEventListener('dragstart', dragStart);
-        slice.addEventListener('touchstart', touchStart, {passive: false});
-        slice.addEventListener('touchmove', touchMove, {passive: false});
-        slice.addEventListener('touchend', touchEnd);
-    });
-
-    function dragStart(e) { e.dataTransfer.setData('text/plain', this.id); }
-
-    let draggedSlice = null;
-    let touchOffsetX, touchOffsetY;
-
-    function touchStart(e) {
-        draggedSlice = this;
-        const touch = e.touches[0];
-        const rect = draggedSlice.getBoundingClientRect();
-        touchOffsetX = touch.clientX - rect.left;
-        touchOffsetY = touch.clientY - rect.top;
+    if(juego==="resta"){
+        document.getElementById("titulo").innerHTML="🚀 Resta";
+        document.getElementById("pregunta").innerHTML=`${n1} - ${n2}`;
+        correcta = n1 - n2;
     }
 
-    function touchMove(e) {
-        if (!draggedSlice) return;
-        const touch = e.touches[0];
-        draggedSlice.style.position = 'fixed';
-        draggedSlice.style.left = (touch.clientX - touchOffsetX) + 'px';
-        draggedSlice.style.top = (touch.clientY - touchOffsetY) + 'px';
-        e.preventDefault();
+    if(juego==="conteo"){
+        document.getElementById("titulo").innerHTML="🦖 Cuenta";
+        let emojis = "🦖".repeat(n1);
+        document.getElementById("pregunta").innerHTML=emojis;
+        correcta = n1;
     }
 
-    function touchEnd(e) {
-        if (!draggedSlice) return;
-        const touch = e.changedTouches[0];
-        const dzRect = dropZone.getBoundingClientRect();
-        if (touch.clientX > dzRect.left && touch.clientX < dzRect.right &&
-            touch.clientY > dzRect.top && touch.clientY < dzRect.bottom) {
-            handleSuccessfulDrop(draggedSlice);
-        } else {
-            draggedSlice.style.position = 'static';
-        }
-        draggedSlice = null;
+    if(juego==="fraccion"){
+        document.getElementById("titulo").innerHTML="🍕 Fracción";
+        let total = 4;
+        let parte = Math.floor(Math.random()*4)+1;
+        document.getElementById("pregunta").innerHTML=`¿Cuántas partes de ${total}? (muestra ${parte})`;
+        correcta = parte;
+    }
+}
+
+function verificar(){
+    let user = parseInt(document.getElementById("respuesta").value);
+
+    if(user === correcta){
+        document.getElementById("feedback").innerHTML="🎉 Correcto!";
+        score++;
+    } else {
+        document.getElementById("feedback").innerHTML="❌ Era " + correcta;
     }
 
-    function handleSuccessfulDrop(slice) {
-        slice.style.display = 'none';
-        currentInPlate++;
-        if (currentInPlate === targetAmount) {
-            points += 10;
-            pointsDisplay.innerText = points;
-            pizzaComplete.classList.add('show');
-            setTimeout(nextChallenge, 2000);
-        }
-    }
-    nextChallenge();
+    document.getElementById("score").innerHTML=score;
+
+    setTimeout(()=>{
+        document.getElementById("respuesta").value="";
+        document.getElementById("feedback").innerHTML="";
+        generar();
+    },1500);
+}
+
+function volver(){
+    document.getElementById("game").classList.remove("active");
+    document.getElementById("menu").classList.add("active");
+}
 </script>
+
 </body>
 </html>
