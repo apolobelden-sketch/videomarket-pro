@@ -36,33 +36,24 @@
             z-index: 100; width: 85%;
         }
 
+        /* Colores dinámicos para identificar el destino */
         .btn-main { 
             width: 100%; padding: 18px; border: none; border-radius: 50px; 
             font-weight: bold; font-size: 18px; cursor: pointer; 
             box-shadow: 0 6px 20px rgba(0,0,0,0.6); transition: 0.2s;
-            background: #ffeb3b; color: #000;
         }
+
+        /* Estilo para Telegram (Físico) */
+        .btn-fisico { background: #0088cc; color: #fff; }
+        /* Estilo para Drive (Digital) */
+        .btn-digital { background: #34a853; color: #fff; }
 
         .btn-main:active { transform: scale(0.95); }
 
-        .modal-entrega { 
-            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: white; padding: 25px; border-radius: 20px; z-index: 2000; text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 85%; max-width: 320px;
-        }
-        .btn-opcion { display: block; margin: 12px 0; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: bold; color: white; font-size: 16px; }
         .audio-hint { position: absolute; top: 80px; left: 20px; color: white; font-size: 14px; background: rgba(0,0,0,0.6); padding: 8px 15px; border-radius: 20px; pointer-events: none; z-index: 10; }
     </style>
 </head>
 <body>
-
-    <div id="selectorEntrega" class="modal-entrega">
-        <h3 style="color: #333; margin-bottom: 5px;">¿Cómo quieres tu libro?</h3>
-        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Selecciona una opción:</p>
-        <a id="link-tg" href="#" target="_blank" class="btn-opcion" style="background: #0088cc;">📱 Por Telegram</a>
-        <a id="link-google" href="#" target="_blank" class="btn-opcion" style="background: #34a853;">📂 Descarga Directa (Drive)</a>
-        <button onclick="cerrarModal('selectorEntrega')" style="margin-top:10px; background:none; border:none; color:gray; cursor:pointer; font-weight:bold;">Cerrar</button>
-    </div>
 
     <div class="scroll-container">
         
@@ -74,7 +65,7 @@
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">El León Valiente ✨</div>
             <div class="button-group">
-                <button class="btn-main" onclick="gestionarPedido('digital', 'leon1', 'https://drive.google.com/drive/u/0/folders/TU_ID_DRIVE')">¡LO QUIERO! 🦁</button>
+                <button class="btn-main btn-digital" onclick="gestionarPedido('digital', '', 'https://drive.google.com/drive/u/0/folders/TU_ID_DRIVE')">¡DESCARGAR PDF! 🦁</button>
             </div>
         </div>
 
@@ -86,7 +77,7 @@
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">Animalitos Divertidos ✨</div>
             <div class="button-group">
-                <button class="btn-main" onclick="gestionarPedido('digital', 'pack1', 'https://drive.google.com/drive/u/0/folders/TU_ID_DRIVE')">¡LO QUIERO! 🎨</button>
+                <button class="btn-main btn-digital" onclick="gestionarPedido('digital', '', 'https://drive.google.com/drive/u/0/folders/TU_ID_DRIVE')">¡DESCARGAR PDF! 🎨</button>
             </div>
         </div>
 
@@ -98,7 +89,7 @@
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">Oferta Tech 📱</div>
             <div class="button-group">
-                <button class="btn-main" onclick="gestionarPedido('fisico', 's25fe')">¡LO QUIERO! ⚡</button>
+                <button class="btn-main btn-fisico" onclick="gestionarPedido('fisico', 's25fe')">¡PEDIR POR TELEGRAM! ⚡</button>
             </div>
         </div>
 
@@ -110,7 +101,7 @@
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">Moto Premium ✨</div>
             <div class="button-group">
-                <button class="btn-main" onclick="gestionarPedido('fisico', 'moto_premium')">¡LO QUIERO! 📱</button>
+                <button class="btn-main btn-fisico" onclick="gestionarPedido('fisico', 'moto_premium')">¡PEDIR POR TELEGRAM! 📱</button>
             </div>
         </div>
         
@@ -122,7 +113,7 @@
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">Curren Luxury ⌚</div>
             <div class="button-group">
-                <button class="btn-main" onclick="gestionarPedido('fisico', 'curren_8402')">¡LO QUIERO! 💎</button>
+                <button class="btn-main btn-fisico" onclick="gestionarPedido('fisico', 'curren_8402')">¡PEDIR POR TELEGRAM! 💎</button>
             </div>
         </div> 
         
@@ -134,7 +125,7 @@
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">Mis Emociones ✨</div>
             <div class="button-group">
-                <button class="btn-main" onclick="gestionarPedido('digital', 'emociones', 'https://drive.google.com/drive/u/0/folders/TU_ID_DRIVE')">¡LO QUIERO! 😊</button>
+                <button class="btn-main btn-digital" onclick="gestionarPedido('digital', '', 'https://drive.google.com/drive/u/0/folders/TU_ID_DRIVE')">¡DESCARGAR PDF! 😊</button>
             </div>
         </div>
         
@@ -146,7 +137,7 @@
             <div class="audio-hint">Toca para sonido 🔊</div>
             <div class="branding">Mi Familia ✨</div>
             <div class="button-group">
-                <button class="btn-main" onclick="gestionarPedido('digital', 'familia', 'https://drive.google.com/drive/u/0/folders/TU_ID_DRIVE')">¡LO QUIERO! 🏠</button>
+                <button class="btn-main btn-digital" onclick="gestionarPedido('digital', '', 'https://drive.google.com/drive/u/0/folders/TU_ID_DRIVE')">¡DESCARGAR PDF! 🏠</button>
             </div>
         </div>
 
@@ -178,22 +169,16 @@
             });
         });
 
-        // LÓGICA INTELIGENTE: FÍSICO vs DIGITAL
+        // LÓGICA DE DESTINO ÚNICO
         function gestionarPedido(tipo, idProducto, urlDrive = '') {
-            const urlTelegram = `https://t.me/NubeMagica_Aviso_bot?start=${idProducto}`;
-            
             if (tipo === 'fisico') {
-                // Si es físico (celular/reloj), va DIRECTO a Telegram sin preguntar
-                window.open(urlTelegram, '_blank');
+                // EXCLUSIVO TELEGRAM PARA TELÉFONOS/RELOJES
+                window.open(`https://t.me/NubeMagica_Aviso_bot?start=${idProducto}`, '_blank');
             } else {
-                // Si es digital (libro), abre el selector para que elijan Telegram o Drive
-                document.getElementById('link-tg').href = urlTelegram;
-                document.getElementById('link-google').href = urlDrive;
-                document.getElementById('selectorEntrega').style.display = 'block';
+                // EXCLUSIVO DRIVE PARA LIBROS PDF
+                window.open(urlDrive, '_blank');
             }
         }
-
-        function cerrarModal(id) { document.getElementById(id).style.display = 'none'; }
     </script>
 </body>
                 </html>
