@@ -1,98 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Kids - Matemática Pro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Kids - Matemática Visual</title>
+    <style>
+        body { margin:0; font-family: 'Arial Rounded MT Bold', sans-serif; background:#f0f4f8; text-align:center; color: #333; }
+        .screen { display:none; padding:20px; animation: fadeIn 0.5s; }
+        .active { display:block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-<style>
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#f0f4f8;
-    text-align:center;
-}
+        h1 { color:#ff5722; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .btn { display:block; margin:12px auto; padding:15px; width:85%; border:none; border-radius:25px; background:#4caf50; color:#fff; font-size:18px; font-weight:bold; box-shadow: 0 4px 0 #388e3c; cursor:pointer; }
+        .btn-volver { background:#f44336; box-shadow: 0 4px 0 #d32f2f; margin-top: 30px; }
+        
+        /* Contenedor de Figuras */
+        .visual-container { background:#fff; padding:20px; border-radius:30px; margin:20px auto; min-height:120px; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; border: 3px dashed #ff9800; max-width: 90%; }
+        .emoji-item { font-size: 45px; margin: 5px; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1)); }
+        .operator { font-size: 40px; margin: 0 15px; color: #ff5722; font-weight: bold; }
 
-.screen { display:none; padding:20px; }
-.active { display:block; }
-
-h1 { color:#ff5722; }
-
-.btn {
-    display:block;
-    margin:15px auto;
-    padding:15px;
-    width:80%;
-    border:none;
-    border-radius:20px;
-    background:#4caf50;
-    color:#fff;
-    font-size:18px;
-    font-weight:bold;
-}
-
-.card {
-    background:#fff;
-    padding:20px;
-    border-radius:20px;
-    margin:10px;
-    box-shadow:0 5px 10px rgba(0,0,0,0.1);
-}
-
-.big {
-    font-size:40px;
-    margin:20px;
-}
-
-input {
-    padding:10px;
-    font-size:20px;
-    width:100px;
-    text-align:center;
-    border-radius:10px;
-    border:1px solid #ccc;
-}
-
-.feedback {
-    font-size:22px;
-    margin:15px;
-}
-
-</style>
+        input { padding:12px; font-size:24px; width:80px; text-align:center; border-radius:15px; border:3px solid #ff9800; outline: none; }
+        .feedback { font-size:24px; margin:15px; font-weight: bold; height: 30px; }
+        .score-box { font-size: 20px; background: #fff; padding: 10px; border-radius: 15px; display: inline-block; margin-top: 10px; }
+    </style>
 </head>
-
 <body>
 
-<!-- MENÚ -->
 <div id="menu" class="screen active">
     <h1>🍕 Aventura Matemática</h1>
+    <div class="visual-container">
+        <span class="emoji-item">🍎</span><span class="emoji-item">🚀</span><span class="emoji-item">🦖</span><span class="emoji-item">🍕</span>
+    </div>
+    <button class="btn" onclick="openGame('suma')">🍎 Suma de Frutas</button>
+    <button class="btn" onclick="openGame('resta')">🚀 Resta Espacial</button>
+    <button class="btn" onclick="openGame('conteo')">🦖 Cuenta Dinos</button>
+    <button class="btn" onclick="openGame('fraccion')">🍕 Rebanadas de Pizza</button>
 
-    <button class="btn" onclick="openGame('suma')">🍎 Suma</button>
-    <button class="btn" onclick="openGame('resta')">🚀 Resta</button>
-    <button class="btn" onclick="openGame('conteo')">🦖 Conteo</button>
-    <button class="btn" onclick="openGame('fraccion')">🍕 Fracciones</button>
-
-    <h3>⭐ Puntos: <span id="score">0</span></h3>
+    <div class="score-box">⭐ Puntos: <span id="score">0</span></div>
 </div>
 
-<!-- JUEGO -->
 <div id="game" class="screen">
     <h1 id="titulo"></h1>
+    
+    <div class="visual-container" id="contenedor-visual"></div>
 
-    <div class="big" id="pregunta"></div>
-
-    <input id="respuesta" type="number">
-    <button class="btn" onclick="verificar()">Responder</button>
+    <input id="respuesta" type="number" placeholder="?">
+    <button class="btn" style="background:#2196f3; box-shadow: 0 4px 0 #1976d2;" onclick="verificar()">Revisar ✅</button>
 
     <div class="feedback" id="feedback"></div>
 
-    <button class="btn" onclick="volver()">⬅ Volver</button>
+    <button class="btn btn-volver" onclick="volver()">⬅ Salir</button>
 </div>
 
 <script>
 let juego = "";
-let n1 = 0;
-let n2 = 0;
 let score = 0;
 let correcta = 0;
 
@@ -100,60 +61,77 @@ function openGame(tipo){
     juego = tipo;
     document.getElementById("menu").classList.remove("active");
     document.getElementById("game").classList.add("active");
-    document.getElementById("feedback").innerHTML="";
-    document.getElementById("respuesta").value="";
     generar();
 }
 
 function generar(){
-    n1 = Math.floor(Math.random()*10);
-    n2 = Math.floor(Math.random()*10);
+    const contenedor = document.getElementById("contenedor-visual");
+    contenedor.innerHTML = "";
+    document.getElementById("respuesta").value = "";
+    document.getElementById("feedback").innerHTML = "";
+    
+    let n1 = Math.floor(Math.random()*5) + 1; // Máximo 5 para que quepan bien
+    let n2 = Math.floor(Math.random()*4) + 1;
+    let emoji = "";
 
-    if(juego==="suma"){
-        document.getElementById("titulo").innerHTML="🍎 Suma";
-        document.getElementById("pregunta").innerHTML=`${n1} + ${n2}`;
+    if(juego === "suma"){
+        emoji = "🍎";
+        document.getElementById("titulo").innerText = "Suma las Manzanas";
+        dibujarEmojis(n1, emoji, contenedor);
+        contenedor.innerHTML += '<span class="operator">+</span>';
+        dibujarEmojis(n2, emoji, contenedor);
         correcta = n1 + n2;
     }
 
-    if(juego==="resta"){
-        document.getElementById("titulo").innerHTML="🚀 Resta";
-        document.getElementById("pregunta").innerHTML=`${n1} - ${n2}`;
-        correcta = n1 - n2;
+    if(juego === "resta"){
+        emoji = "🚀";
+        document.getElementById("titulo").innerText = "Resta de Cohetes";
+        // Para resta, siempre n1 debe ser mayor
+        let num1 = Math.max(n1, n2) + 2;
+        let num2 = Math.min(n1, n2);
+        dibujarEmojis(num1, emoji, contenedor);
+        contenedor.innerHTML += '<span class="operator">-</span>';
+        contenedor.innerHTML += `<span style="font-size:30px; color:#666;">(Quita ${num2})</span>`;
+        correcta = num1 - num2;
     }
 
-    if(juego==="conteo"){
-        document.getElementById("titulo").innerHTML="🦖 Cuenta";
-        let emojis = "🦖".repeat(n1);
-        document.getElementById("pregunta").innerHTML=emojis;
-        correcta = n1;
+    if(juego === "conteo"){
+        emoji = "🦖";
+        document.getElementById("titulo").innerText = "¿Cuántos Dinos hay?";
+        let num = Math.floor(Math.random()*9) + 1;
+        dibujarEmojis(num, emoji, contenedor);
+        correcta = num;
     }
 
-    if(juego==="fraccion"){
-        document.getElementById("titulo").innerHTML="🍕 Fracción";
-        let total = 4;
-        let parte = Math.floor(Math.random()*4)+1;
-        document.getElementById("pregunta").innerHTML=`¿Cuántas partes de ${total}? (muestra ${parte})`;
-        correcta = parte;
+    if(juego === "fraccion"){
+        emoji = "🍕";
+        document.getElementById("titulo").innerText = "Cuenta las Rebanadas";
+        let num = Math.floor(Math.random()*6) + 1;
+        dibujarEmojis(num, emoji, contenedor);
+        correcta = num;
+    }
+}
+
+function dibujarEmojis(cantidad, emoji, elemento){
+    for(let i=0; i<cantidad; i++){
+        elemento.innerHTML += `<span class="emoji-item">${emoji}</span>`;
     }
 }
 
 function verificar(){
     let user = parseInt(document.getElementById("respuesta").value);
+    let f = document.getElementById("feedback");
 
     if(user === correcta){
-        document.getElementById("feedback").innerHTML="🎉 Correcto!";
-        score++;
+        f.innerHTML = "🎉 ¡Genial! ✨";
+        f.style.color = "#4caf50";
+        score += 10;
+        document.getElementById("score").innerText = score;
+        setTimeout(generar, 1500);
     } else {
-        document.getElementById("feedback").innerHTML="❌ Era " + correcta;
+        f.innerHTML = "❌ ¡Casi! Cuenta otra vez";
+        f.style.color = "#f44336";
     }
-
-    document.getElementById("score").innerHTML=score;
-
-    setTimeout(()=>{
-        document.getElementById("respuesta").value="";
-        document.getElementById("feedback").innerHTML="";
-        generar();
-    },1500);
 }
 
 function volver(){
