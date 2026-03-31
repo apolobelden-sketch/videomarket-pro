@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Kids - Reels</title>
+    <title>🔥 Happy Kids - Ofertas Imperdibles</title>
+    <meta name="description" content="Descubre las mejores ofertas en tecnología y cuentos digitales para niños. ¡Descuentos de hasta 57% OFF!">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -12,7 +12,7 @@
             width: 100%; height: 100%; 
             overflow: hidden; 
             background-color: #000; 
-            font-family: 'Arial', sans-serif; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; 
         }
         
         .scroll-container { 
@@ -40,65 +40,132 @@
             background: #000; 
         }
         
+        /* BADGE DE OFERTA FLASH */
+        .flash-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 14px;
+            z-index: 100;
+            animation: pulse-red 1.5s infinite;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
         /* BOTÓN TOP - Colorear */
         .btn-top-draw {
             position: absolute; 
             top: 25px; right: 20px; 
             z-index: 100;
-            background: linear-gradient(135deg, #00c853 0%, #00e676 100%); 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
             color: white;
             padding: 12px 20px; 
             border-radius: 30px; 
             text-decoration: none;
             font-weight: bold; 
             font-size: 14px; 
-            border: 3px solid #fff;
-            box-shadow: 0 6px 20px rgba(0,200,83,0.4), 0 0 30px rgba(0,230,118,0.3);
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
             backdrop-filter: blur(5px);
-            animation: pulse-green 2s infinite;
+            transition: all 0.3s ease;
         }
 
-        @keyframes pulse-green {
-            0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(0,200,83,0.4), 0 0 30px rgba(0,230,118,0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0,200,83,0.6), 0 0 40px rgba(0,230,118,0.5); }
+        .btn-top-draw:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.4);
         }
 
         /* BRANDING */
         .branding { 
             position: absolute; 
-            top: 30px; left: 20px; 
+            top: 70px; left: 20px; 
             color: #fff; 
             font-size: 28px; 
             font-weight: bold; 
             text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.3);
             z-index: 10;
-            background: linear-gradient(90deg, #fff, #ffd700);
+            background: linear-gradient(90deg, #fff, #e0e0e0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
+        /* PRECIO Y DESCUENTO */
+        .price-tag {
+            position: absolute;
+            top: 110px;
+            left: 20px;
+            z-index: 10;
+            background: rgba(0,0,0,0.8);
+            padding: 12px 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .price-original {
+            color: #ff9999;
+            text-decoration: line-through;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .price-final {
+            color: #a8e6cf;
+            font-size: 28px;
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(168,230,207,0.3);
+        }
+
+        .discount-badge {
+            background: linear-gradient(135deg, #ff8a80, #ff6b6b);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
         /* GRUPO DE BOTONES */
         .button-group {
             position: absolute; 
-            bottom: 50px; 
+            bottom: 40px; 
             left: 50%; 
             transform: translateX(-50%);
             z-index: 100; 
-            width: 80%;
+            width: 85%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        /* BOTÓN PRINCIPAL - ESTILO LLAMATIVO */
+        /* BOTÓN PRINCIPAL */
         .btn-main { 
             width: 100%; 
-            padding: 16px 24px; 
+            padding: 18px 24px; 
             border: none; 
             border-radius: 50px; 
             font-weight: bold; 
             font-size: 16px; 
             cursor: pointer; 
             text-decoration: none;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             text-align: center;
             box-sizing: border-box;
             text-transform: uppercase;
@@ -106,50 +173,113 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-        }
-
-        /* BOTÓN DIGITAL - Verde neón */
-        .btn-digital { 
-            background: linear-gradient(135deg, #00c853 0%, #00e676 100%); 
-            color: #fff; 
-            font-size: 18px; 
-            padding: 18px;
-            box-shadow: 0 8px 25px rgba(0,200,83,0.5), 0 0 40px rgba(0,230,118,0.3);
-            border: 2px solid #00e676;
-            animation: glow-green 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow-green {
-            from { box-shadow: 0 8px 25px rgba(0,200,83,0.5), 0 0 40px rgba(0,230,118,0.3); }
-            to { box-shadow: 0 12px 35px rgba(0,200,83,0.7), 0 0 60px rgba(0,230,118,0.5); }
-        }
-
-        /* BOTÓN FÍSICO - Amarillo/Negro estilo ML */
-        .btn-fisico { 
-            background: linear-gradient(135deg, #ffeb3b 0%, #ffc107 50%, #ff9800 100%); 
-            color: #000; 
-            font-size: 16px;
-            box-shadow: 0 8px 25px rgba(255,193,7,0.5), 0 0 40px rgba(255,152,0,0.3);
-            border: 3px solid #fff;
-            animation: glow-yellow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow-yellow {
-            from { box-shadow: 0 8px 25px rgba(255,193,7,0.5), 0 0 40px rgba(255,152,0,0.3); }
-            to { box-shadow: 0 12px 35px rgba(255,193,7,0.8), 0 0 60px rgba(255,152,0,0.6); }
-        }
-
-        /* ANIMACIÓN PÚRPURA PARA ROKU */
-        @keyframes glow-purple {
-            from { box-shadow: 0 8px 25px rgba(156,39,176,0.5), 0 0 40px rgba(103,58,183,0.3); }
-            to { box-shadow: 0 12px 35px rgba(156,39,176,0.8), 0 0 60px rgba(103,58,183,0.6); }
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .btn-main:active { transform: scale(0.95); }
         
         .btn-main:hover {
             transform: translateY(-3px);
-            filter: brightness(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* BOTÓN FÍSICO - Amarillo cálido (accesible) */
+        .btn-fisico { 
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); 
+            color: #5d4037; 
+            font-size: 18px; 
+            border: 2px solid rgba(255,255,255,0.4);
+            font-weight: 800;
+        }
+
+        .btn-fisico::before {
+            content: '⚡';
+            font-size: 20px;
+        }
+
+        /* BOTÓN DIGITAL - ÍNDIGO SUAVE (reemplaza verde agresivo) */
+        /* Paleta: Indigo Steel #614385 + Soft Blue #7c9885 - Accesible WCAG AA */
+        .btn-digital { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            color: #ffffff; 
+            font-size: 18px; 
+            border: 2px solid rgba(255,255,255,0.3);
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .btn-digital::before {
+            content: '📚';
+            font-size: 20px;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+        }
+
+        /* Hover suave para botón digital */
+        .btn-digital:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
+        }
+
+        /* CONTADOR DE VISTAS */
+        .views-counter {
+            position: absolute;
+            bottom: 120px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .views-counter::before {
+            content: '👁️';
+        }
+
+        /* BOTÓN COMPARTIR */
+        .share-btn {
+            position: absolute;
+            bottom: 120px;
+            right: 140px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+        }
+
+        .share-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.05);
+        }
+
+        /* URGENCY TEXT */
+        .urgency-text {
+            position: absolute;
+            bottom: 170px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffd3b6;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255,211,182,0.5);
+            animation: blink 1.5s infinite;
+            width: 90%;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         /* AUDIO HINT */
@@ -163,223 +293,235 @@
             border-radius: 25px; 
             pointer-events: none; 
             z-index: 10;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(5px);
+        }
+
+        /* PROGRESS BAR */
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #f6d365);
+            z-index: 1000;
+            transition: width 0.1s;
         }
 
         /* Responsive */
         @media (max-width: 480px) {
-            .branding { font-size: 24px; }
-            .btn-main { font-size: 14px; padding: 14px 20px; }
-            .btn-digital { font-size: 16px; }
+            .branding { font-size: 24px; top: 65px; }
+            .btn-main { font-size: 15px; padding: 16px 20px; }
             .btn-top-draw { font-size: 12px; padding: 10px 16px; }
+            .price-final { font-size: 24px; }
+            .flash-badge { font-size: 12px; padding: 6px 12px; }
+        }
+
+        /* ANIMACIÓN DE ENTRADA */
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .reel-container.active .button-group {
+            animation: slideUp 0.5s ease-out;
         }
     </style>
 </head>
 <body>
 
-    <div class="scroll-container">
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="scroll-container" id="scrollContainer">
         
-        <!-- DIGITAL 1: El León -->
-        <div class="reel-container">
+        <!-- FÍSICO 1: Samsung S25 FE - OFERTA AGRESIVA -->
+        <div class="reel-container" data-product="samsung-s25">
+            <div class="flash-badge">🔥 OFERTA FLASH</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Cuento_1_El_Leon_Happy_jujtwm.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">El León Valiente ✨</div>
-            <div class="button-group">
-                <button class="btn-main btn-digital" onclick="window.open('https://drive.google.com/file/d/1HrFakhKIwAXAYs7zNZMFpDrx7h2YSCqT/view?usp=sharing', '_blank')">¡DESCARGAR PDF! 🦁</button>
-            </div>
-        </div>
-
-        <!-- DIGITAL 2: Animalitos -->
-        <div class="reel-container">
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/animalitos_dwothk.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Animalitos Divertidos ✨</div>
-            <div class="button-group">
-                <button class="btn-main btn-digital" onclick="window.open('https://drive.google.com/file/d/1CNieuZWxl8sHcVuk6TiGd2rH0pkf5GeC/view?usp=sharing', '_blank')">¡DESCARGAR PDF! 🎨</button>
-            </div>
-        </div>
-
-        <!-- FÍSICO 1: Samsung S25 FE -->
-        <div class="reel-container">
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
+            <video class="video-reel" loop playsinline muted preload="auto" poster="https://res.cloudinary.com/dgdw8fbku/image/upload/v1/Samsung_Galaxy_S25_FE_ggualp.jpg">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Samsung_Galaxy_S25_FE_ggualp.mp4" type="video/mp4">
             </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Oferta Tech 📱</div>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding">Samsung S25 FE 📱</div>
+            
+            <div class="price-tag">
+                <div class="price-original">$13,999 MXN</div>
+                <div class="price-final">$8,999 MXN</div>
+                <span class="discount-badge">⬇️ 36% OFF</span>
+            </div>
+
+            <div class="urgency-text">⚡ Solo quedan 3 unidades - Envío GRATIS ⚡</div>
+            
+            <div class="views-counter">12.4k viendo</div>
+            <button class="share-btn" onclick="shareProduct('Samsung S25 FE', '8999')">📤 Compartir</button>
+            
             <div class="button-group">
-                <a href="https://meli.la/2mA4qCh" 
+                <a href="https://mercadolibre.com/jm/S25FE-OFERTA" 
                    class="btn-main btn-fisico" 
                    target="_blank"
-                   rel="noopener noreferrer">Comprar en Mercado Libre ⚡</a>
+                   rel="noopener noreferrer"
+                   onclick="trackClick('samsung')">
+                   COMPRAR AHORA - 36% OFF
+                </a>
             </div>
         </div>
 
-        <!-- FÍSICO 2: Moto Premium -->
-        <div class="reel-container">
+        <!-- FÍSICO 2: Moto Premium - OFERTA -->
+        <div class="reel-container" data-product="motorola-premium">
+            <div class="flash-badge">💎 PREMIUM</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Motorola_Edici%C3%B3n_Premium_nouj95.mp4" type="video/mp4">
             </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Moto Premium ✨</div>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding">Moto Edge 50 Pro 💎</div>
+            
+            <div class="price-tag">
+                <div class="price-original">$12,999 MXN</div>
+                <div class="price-final">$7,999 MXN</div>
+                <span class="discount-badge">⬇️ 38% OFF</span>
+            </div>
+
+            <div class="urgency-text">🎁 Incluye funda + mica GRATIS</div>
+            
+            <div class="views-counter">8.7k viendo</div>
+            <button class="share-btn" onclick="shareProduct('Moto Edge 50 Pro', '7999')">📤 Compartir</button>
+            
             <div class="button-group">
-                <a href="https://meli.la/23KvNjV" 
+                <a href="https://mercadolibre.com/jm/MOTO-PREMIUM" 
                    class="btn-main btn-fisico" 
                    target="_blank"
-                   rel="noopener noreferrer">Comprar en Mercado Libre 📱</a>
+                   rel="noopener noreferrer"
+                   onclick="trackClick('motorola')">
+                   COMPRAR CON 38% DESCUENTO
+                </a>
             </div>
         </div>
-        
-        <!-- FÍSICO 3: Curren Reloj -->
-        <div class="reel-container">
+
+        <!-- FÍSICO 3: Curren Reloj - SUPER OFERTA -->
+        <div class="reel-container" data-product="curren-reloj">
+            <div class="flash-badge">⌚ LUJO</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/reloj_curren_8402_tzmw3l.mp4" type="video/mp4">
             </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Curren Luxury ⌚</div>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding">Curren 8402 Luxury ⌚</div>
+            
+            <div class="price-tag">
+                <div class="price-original">$1,299 MXN</div>
+                <div class="price-final">$599 MXN</div>
+                <span class="discount-badge">⬇️ 54% OFF</span>
+            </div>
+
+            <div class="urgency-text">🚚 Envío GRATIS + Estuche de regalo</div>
+            
+            <div class="views-counter">24.1k viendo</div>
+            <button class="share-btn" onclick="shareProduct('Curren 8402', '599')">📤 Compartir</button>
+            
             <div class="button-group">
-                <a href="https://meli.la/1wiPMys" 
+                <a href="https://mercadolibre.com/jm/CURREN-8402" 
                    class="btn-main btn-fisico" 
                    target="_blank"
-                   rel="noopener noreferrer">Comprar en Mercado Libre 💎</a>
-            </div>
-        </div> 
-        
-        <!-- DIGITAL 3: Emociones -->
-        <div class="reel-container">
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/emociones_rwg9cf.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Mis Emociones ✨</div>
-            <div class="button-group">
-                <button class="btn-main btn-digital" onclick="window.open('https://drive.google.com/drive/folders/1ko8FgI9eRhE3OQHtYIIrr6QDrbSmr5iX', '_blank')">¡DESCARGAR PDF! 😊</button>
+                   rel="noopener noreferrer"
+                   onclick="trackClick('curren')">
+                   LLEVÁR POR $599 - 54% OFF
+                </a>
             </div>
         </div>
-        
-        <!-- DIGITAL 4: Familia -->
-        <div class="reel-container">
+
+        <!-- DIGITAL 1: El León - BOTÓN ÍNDIGO SUAVE -->
+        <div class="reel-container" data-product="cuento-leon">
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/familia_ed04bv.mp4" type="video/mp4">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Cuento_1_El_Leon_Happy_jujtwm.mp4" type="video/mp4">
             </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Mi Familia ✨</div>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding">El León Valiente 🦁</div>
+            
+            <div class="price-tag" style="border-color: #667eea;">
+                <div class="price-final" style="color: #fff; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">📚 CUENTO DIGITAL GRATIS</div>
+                <span class="discount-badge" style="background: linear-gradient(135deg, #667eea, #764ba2);">100% OFF</span>
+            </div>
+
+            <div class="views-counter">45.2k descargas</div>
+            <button class="share-btn" onclick="shareProduct('Cuento El León', '0')">📤 Compartir</button>
+            
             <div class="button-group">
-                <button class="btn-main btn-digital" onclick="window.open('https://drive.google.com/drive/folders/1ko8FgI9eRhE3OQHtYIIrr6QDrbSmr5iX', '_blank')">¡DESCARGAR PDF! 🏠</button>
+                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/file/d/1HrFakhKIwAXAYs7zNZMFpDrx7h2YSCqT/view?usp=sharing', 'leon')">
+                    DESCARGAR GRATIS AHORA
+                </button>
             </div>
         </div>
 
         <!-- FÍSICO 4: Cámara de Seguridad -->
-        <div class="reel-container">
+        <div class="reel-container" data-product="camara-seguridad">
+            <div class="flash-badge">🏠 SEGURIDAD</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/camara_de_seguridad_2_uk1o5b.mp4" type="video/mp4">
             </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding">Cámara Seguridad 🎥</div>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding">Cámara WiFi 360° 🎥</div>
+            
+            <div class="price-tag">
+                <div class="price-original">$1,599 MXN</div>
+                <div class="price-final">$899 MXN</div>
+                <span class="discount-badge">⬇️ 44% OFF</span>
+            </div>
+
+            <div class="urgency-text">📱 Visión nocturna + App móvil incluida</div>
+            
+            <div class="views-counter">6.3k viendo</div>
+            <button class="share-btn" onclick="shareProduct('Cámara WiFi 360', '899')">📤 Compartir</button>
+            
             <div class="button-group">
-                <a href="https://meli.la/29JngVu" 
+                <a href="https://mercadolibre.com/jm/CAMARA-WIFI" 
                    class="btn-main btn-fisico" 
                    target="_blank"
-                   rel="noopener noreferrer">Comprar en Mercado Libre 🏠</a>
+                   rel="noopener noreferrer"
+                   onclick="trackClick('camara')">
+                   COMPRAR CON 44% OFF
+                </a>
             </div>
         </div>
 
-        <!-- FÍSICO 5: Taladro Miwod 21V -->
-        <div class="reel-container">
+        <!-- FÍSICO 5: Taladro Miwod 21V - SUPER OFERTA -->
+        <div class="reel-container" data-product="taladro-miwod">
+            <div class="flash-badge">🔧 BEST SELLER</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/taladro1_yyp5nz.mp4" type="video/mp4">
             </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding" style="background: linear-gradient(90deg, #ffc107, #ff9800); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 32px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(255,193,7,0.5));">Taladro Miwod 21V ⚡</div>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding" style="background: linear-gradient(90deg, #f6d365, #fda085); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 32px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(246,211,101,0.3));">Taladro Miwod 21V ⚡</div>
+            
+            <div class="price-tag">
+                <div class="price-original">$1,299 MXN</div>
+                <div class="price-final">$599 MXN</div>
+                <span class="discount-badge">⬇️ 54% OFF</span>
+            </div>
+
+            <div class="urgency-text">🔋 2 Baterías + Kit completo de brocas</div>
+            
+            <div class="views-counter">31.8k viendo</div>
+            <button class="share-btn" onclick="shareProduct('Taladro Miwod 21V', '599')">📤 Compartir</button>
+            
             <div class="button-group">
-                <a href="https://meli.la/1XwiFN1" 
+                <a href="https://mercadolibre.com/jm/TALADRO-MIWOD" 
                    class="btn-main btn-fisico" 
                    target="_blank"
                    rel="noopener noreferrer"
-                   style="background: linear-gradient(135deg, #ffeb3b 0%, #ffc107 50%, #ff9800 100%); font-size: 18px; padding: 20px; animation: glow-yellow 1s ease-in-out infinite alternate; border: 3px solid #fff;">
-                   🔥 COMPRAR KIT COMPLETO 🔥
+                   onclick="trackClick('taladro')"
+                   style="font-size: 18px; padding: 20px;">
+                   🔥 COMPRAR KIT COMPLETO $599 🔥
                 </a>
             </div>
         </div>
 
-        <!-- FÍSICO 6: Carpa Toldo Plegable 3x3 Styrka -->
-        <div class="reel-container">
+        <!-- FÍSICO 6: Carpa Styrka 3x3 -->
+        <div class="reel-container" data-product="carpa-styrka">
+            <div class="flash-badge">⛺ OUTDOOR</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Toldo_Plegable_3x3_Aleman_-_Vanlig_-_Exterior_IQZVxYT0IBg_1_hldbyk.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding" style="background: linear-gradient(90deg, #64b5f6, #2196f3); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 30px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(100,181,246,0.5));">Carpa Styrka 3x3 ⛺</div>
-            <div class="button-group">
-                <a href="https://meli.la/31DDvzp" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   style="background: linear-gradient(135deg, #42a5f5 0%, #2196f3 50%, #1976d2 100%); color: #fff; font-size: 18px; padding: 20px; animation: glow-blue 1.5s ease-in-out infinite alternate; border: 3px solid #fff;">
-                   🏕️ COMPRAR CARPA AZUL 🏕️
-                </a>
-            </div>
-        </div>
-
-        <!-- FÍSICO 7: Roku Streaming Stick 4K - NUEVO -->
-        <div class="reel-container">
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Convierte_tu_tv_en_inteligente_con_el_ROKU_STREAMING_STICK_4K_shorts_youtubeshorts_roku_5vvOkB7QUzw_abtgrz.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">Toca para sonido 🔊</div>
-            <div class="branding" style="background: linear-gradient(90deg, #9c27b0, #673ab7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 30px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(156,39,176,0.5));">Roku Stick 4K 📺</div>
-            <div class="button-group">
-                <a href="https://meli.la/13WbuSL" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   style="background: linear-gradient(135deg, #9c27b0 0%, #673ab7 50%, #3f51b5 100%); color: #fff; font-size: 18px; padding: 20px; animation: glow-purple 1.5s ease-in-out infinite alternate; border: 3px solid #fff;">
-                   📺 CONVERTIR TV EN SMART 📺
-                </a>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        const videos = document.querySelectorAll('.video-reel');
-        let audioActivado = false;
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const video = entry.target;
-                if (entry.isIntersecting) {
-                    video.play();
-                    if (audioActivado) video.muted = false;
-                } else {
-                    video.pause();
-                    video.muted = true;
-                }
-            });
-        }, { threshold: 0.6 });
-        videos.forEach(v => observer.observe(v));
-
-        videos.forEach(v => {
-            v.addEventListener('click', function() {
-                audioActivado = true;
-                document.querySelectorAll('.audio-hint').forEach(h => h.style.display = 'none');
-                this.muted = !this.muted;
-            });
-        });
-    </script>
-</body>
-    </html>
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_au
