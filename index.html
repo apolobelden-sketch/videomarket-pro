@@ -40,7 +40,6 @@
             background: #000; 
         }
         
-        /* BADGE DE OFERTA FLASH */
         .flash-badge {
             position: absolute;
             top: 20px;
@@ -63,7 +62,6 @@
             50% { transform: scale(1.05); }
         }
 
-        /* BOTÓN TOP - Colorear */
         .btn-top-draw {
             position: absolute; 
             top: 25px; right: 20px; 
@@ -86,7 +84,6 @@
             box-shadow: 0 6px 20px rgba(102,126,234,0.4);
         }
 
-        /* BRANDING */
         .branding { 
             position: absolute; 
             top: 70px; left: 20px; 
@@ -101,7 +98,6 @@
             background-clip: text;
         }
 
-        /* PRECIO Y DESCUENTO */
         .price-tag {
             position: absolute;
             top: 110px;
@@ -139,7 +135,6 @@
             margin-top: 5px;
         }
 
-        /* GRUPO DE BOTONES */
         .button-group {
             position: absolute; 
             bottom: 40px; 
@@ -152,7 +147,6 @@
             gap: 10px;
         }
 
-        /* BOTÓN PRINCIPAL */
         .btn-main { 
             width: 100%; 
             padding: 18px 24px; 
@@ -183,7 +177,6 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
-        /* BOTÓN FÍSICO - Amarillo cálido (accesible) */
         .btn-fisico { 
             background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); 
             color: #5d4037; 
@@ -197,8 +190,6 @@
             font-size: 20px;
         }
 
-        /* BOTÓN DIGITAL - ÍNDIGO SUAVE (reemplaza verde agresivo) */
-        /* Paleta: Indigo Steel #614385 + Soft Blue #7c9885 - Accesible WCAG AA */
         .btn-digital { 
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
             color: #ffffff; 
@@ -214,13 +205,11 @@
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
         }
 
-        /* Hover suave para botón digital */
         .btn-digital:hover {
             background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
             box-shadow: 0 8px 25px rgba(102,126,234,0.4);
         }
 
-        /* CONTADOR DE VISTAS */
         .views-counter {
             position: absolute;
             bottom: 120px;
@@ -241,7 +230,6 @@
             content: '👁️';
         }
 
-        /* BOTÓN COMPARTIR */
         .share-btn {
             position: absolute;
             bottom: 120px;
@@ -262,7 +250,6 @@
             transform: scale(1.05);
         }
 
-        /* URGENCY TEXT */
         .urgency-text {
             position: absolute;
             bottom: 170px;
@@ -282,7 +269,6 @@
             50% { opacity: 0.8; }
         }
 
-        /* AUDIO HINT */
         .audio-hint { 
             position: absolute; 
             top: 80px; left: 20px; 
@@ -297,7 +283,6 @@
             backdrop-filter: blur(5px);
         }
 
-        /* PROGRESS BAR */
         .progress-bar {
             position: absolute;
             top: 0;
@@ -308,7 +293,6 @@
             transition: width 0.1s;
         }
 
-        /* Responsive */
         @media (max-width: 480px) {
             .branding { font-size: 24px; top: 65px; }
             .btn-main { font-size: 15px; padding: 16px 20px; }
@@ -317,7 +301,6 @@
             .flash-badge { font-size: 12px; padding: 6px 12px; }
         }
 
-        /* ANIMACIÓN DE ENTRADA */
         @keyframes slideUp {
             from { transform: translateY(100%); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
@@ -334,7 +317,7 @@
 
     <div class="scroll-container" id="scrollContainer">
         
-        <!-- FÍSICO 1: Samsung S25 FE - OFERTA AGRESIVA -->
+        <!-- FÍSICO 1: Samsung S25 FE -->
         <div class="reel-container" data-product="samsung-s25">
             <div class="flash-badge">🔥 OFERTA FLASH</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
@@ -366,7 +349,7 @@
             </div>
         </div>
 
-        <!-- FÍSICO 2: Moto Premium - OFERTA -->
+        <!-- FÍSICO 2: Moto Premium -->
         <div class="reel-container" data-product="motorola-premium">
             <div class="flash-badge">💎 PREMIUM</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
@@ -398,7 +381,7 @@
             </div>
         </div>
 
-        <!-- FÍSICO 3: Curren Reloj - SUPER OFERTA -->
+        <!-- FÍSICO 3: Curren Reloj -->
         <div class="reel-container" data-product="curren-reloj">
             <div class="flash-badge">⌚ LUJO</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
@@ -430,7 +413,7 @@
             </div>
         </div>
 
-        <!-- DIGITAL 1: El León - BOTÓN ÍNDIGO SUAVE -->
+        <!-- DIGITAL 1: El León -->
         <div class="reel-container" data-product="cuento-leon">
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
@@ -484,9 +467,7 @@
                    COMPRAR CON 44% OFF
                 </a>
             </div>
-        </div>
-
-        <!-- FÍSICO 5: Taladro Miwod 21V - SUPER OFERTA -->
+    </div>        <!-- FÍSICO 5: Taladro Miwod 21V -->
         <div class="reel-container" data-product="taladro-miwod">
             <div class="flash-badge">🔧 BEST SELLER</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
@@ -524,4 +505,271 @@
             <div class="flash-badge">⛺ OUTDOOR</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_au
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Toldo_Plegable_3x3_Aleman_-_Vanlig_-_Exterior_IQZVxYT0IBg_1_hldbyk.mp4" type="video/mp4">
+            </video>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding" style="background: linear-gradient(90deg, #84fab0, #8fd3f4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 30px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(132,250,176,0.3));">Carpa Styrka 3x3 ⛺</div>
+            
+            <div class="price-tag">
+                <div class="price-original">$1,950 MXN</div>
+                <div class="price-final">$799 MXN</div>
+                <span class="discount-badge">⬇️ 59% OFF</span>
+            </div>
+
+            <div class="urgency-text">🌧️ Impermeable + UV Protection + Bolsa incluida</div>
+            
+            <div class="views-counter">15.2k viendo</div>
+            <button class="share-btn" onclick="shareProduct('Carpa Styrka 3x3', '799')">📤 Compartir</button>
+            
+            <div class="button-group">
+                <a href="https://mercadolibre.com/jm/CARPA-STYRKA" 
+                   class="btn-main btn-fisico" 
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   onclick="trackClick('carpa')"
+                   style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; font-size: 18px; padding: 20px;">
+                   🏕️ COMPRAR CARPA $799 - 59% OFF 🏕️
+                </a>
+            </div>
+        </div>
+
+        <!-- FÍSICO 7: Roku Streaming Stick 4K -->
+        <div class="reel-container" data-product="roku-4k">
+            <div class="flash-badge">📺 SMART TV</div>
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
+            <video class="video-reel" loop playsinline muted preload="auto">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Convierte_tu_tv_en_inteligente_con_el_ROKU_STREAMING_STICK_4K_shorts_youtubeshorts_roku_5vvOkB7QUzw_abtgrz.mp4" type="video/mp4">
+            </video>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding" style="background: linear-gradient(90deg, #a18cd1, #fbc2eb); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 30px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(161,140,209,0.3));">Roku Stick 4K 📺</div>
+            
+            <div class="price-tag">
+                <div class="price-original">$1,499 MXN</div>
+                <div class="price-final">$999 MXN</div>
+                <span class="discount-badge">⬇️ 33% OFF</span>
+            </div>
+
+            <div class="urgency-text">🎬 Netflix, Disney+, Prime Video ready</div>
+            
+            <div class="views-counter">9.1k viendo</div>
+            <button class="share-btn" onclick="shareProduct('Roku Stick 4K', '999')">📤 Compartir</button>
+            
+            <div class="button-group">
+                <a href="https://mercadolibre.com/jm/ROKU-4K" 
+                   class="btn-main btn-fisico" 
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   onclick="trackClick('roku')"
+                   style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff;">
+                   📺 CONVERTIR TV EN SMART $999 📺
+                </a>
+            </div>
+        </div>
+
+        <!-- DIGITAL 2: Animalitos -->
+        <div class="reel-container" data-product="cuento-animalitos">
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
+            <video class="video-reel" loop playsinline muted preload="auto">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/animalitos_dwothk.mp4" type="video/mp4">
+            </video>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding">Animalitos Divertidos 🐾</div>
+            
+            <div class="price-tag" style="border-color: #667eea;">
+                <div class="price-final" style="color: #fff; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">📚 CUENTO DIGITAL GRATIS</div>
+                <span class="discount-badge" style="background: linear-gradient(135deg, #667eea, #764ba2);">100% OFF</span>
+            </div>
+
+            <div class="views-counter">38.7k descargas</div>
+            <button class="share-btn" onclick="shareProduct('Cuento Animalitos', '0')">📤 Compartir</button>
+            
+            <div class="button-group">
+                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/file/d/1CNieuZWxl8sHcVuk6TiGd2rH0pkf5GeC/view?usp=sharing', 'animalitos')">
+                    DESCARGAR GRATIS AHORA
+                </button>
+            </div>
+        </div>
+
+        <!-- DIGITAL 3: Emociones -->
+        <div class="reel-container" data-product="cuento-emociones">
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
+            <video class="video-reel" loop playsinline muted preload="auto">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/emociones_rwg9cf.mp4" type="video/mp4">
+            </video>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding">Mis Emociones 😊</div>
+            
+            <div class="price-tag" style="border-color: #667eea;">
+                <div class="price-final" style="color: #fff; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">📚 CUENTO DIGITAL GRATIS</div>
+                <span class="discount-badge" style="background: linear-gradient(135deg, #667eea, #764ba2);">100% OFF</span>
+            </div>
+
+            <div class="views-counter">52.1k descargas</div>
+            <button class="share-btn" onclick="shareProduct('Cuento Emociones', '0')">📤 Compartir</button>
+            
+            <div class="button-group">
+                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/drive/folders/1ko8FgI9eRhE3OQHtYIIrr6QDrbSmr5iX', 'emociones')">
+                    DESCARGAR GRATIS AHORA
+                </button>
+            </div>
+        </div>
+
+        <!-- DIGITAL 4: Familia -->
+        <div class="reel-container" data-product="cuento-familia">
+            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
+            <video class="video-reel" loop playsinline muted preload="auto">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/familia_ed04bv.mp4" type="video/mp4">
+            </video>
+            <div class="audio-hint">🔊 Toca para sonido</div>
+            <div class="branding">Mi Familia 🏠</div>
+            
+            <div class="price-tag" style="border-color: #667eea;">
+                <div class="price-final" style="color: #fff; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">📚 CUENTO DIGITAL GRATIS</div>
+                <span class="discount-badge" style="background: linear-gradient(135deg, #667eea, #764ba2);">100% OFF</span>
+            </div>
+
+            <div class="views-counter">41.3k descargas</div>
+            <button class="share-btn" onclick="shareProduct('Cuento Familia', '0')">📤 Compartir</button>
+            
+            <div class="button-group">
+                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/drive/folders/1ko8FgI9eRhE3OQHtYIIrr6QDrbSmr5iX', 'familia')">
+                    DESCARGAR GRATIS AHORA
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Gestión de videos
+        const videos = document.querySelectorAll('.video-reel');
+        const containers = document.querySelectorAll('.reel-container');
+        let audioActivado = false;
+
+        // Intersection Observer para videos
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                const container = video.closest('.reel-container');
+                
+                if (entry.isIntersecting) {
+                    video.play();
+                    if (audioActivado) video.muted = false;
+                    container.classList.add('active');
+                    updateProgress(Array.from(containers).indexOf(container));
+                } else {
+                    video.pause();
+                    video.muted = true;
+                    container.classList.remove('active');
+                }
+            });
+        }, { threshold: 0.6 });
+
+        videos.forEach(v => observer.observe(v));
+
+        // Activar audio al tocar
+        videos.forEach(v => {
+            v.addEventListener('click', function() {
+                audioActivado = true;
+                document.querySelectorAll('.audio-hint').forEach(h => h.style.display = 'none');
+                this.muted = !this.muted;
+                createHeartEffect(this);
+            });
+        });
+
+        // Crear efecto de corazón
+        function createHeartEffect(element) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.cssText = 'position:absolute;font-size:50px;animation:float-up 1s ease-out;pointer-events:none;z-index:1000;left:50%;top:50%;transform:translate(-50%,-50%);';
+            element.parentElement.appendChild(heart);
+            setTimeout(() => heart.remove(), 1000);
+        }
+
+        // Barra de progreso
+        function updateProgress(index) {
+            const bar = document.getElementById('progressBar');
+            bar.style.width = (((index + 1) / containers.length) * 100) + '%';
+        }
+
+        // Función de compartir
+        function shareProduct(name, price) {
+            const text = price === '0' 
+                ? `📚 Descarga GRATIS "${name}" en Happy Kids! 🎨\n\nPerfecto para los peques 👶\n`
+                : `🔥 OFERTA IMPERDIBLE 🔥\n\n${name} a solo $${price} MXN\n⬇️ Descuento exclusivo\n\n¡Apúrate antes de que se acabe! ⚡`;
+            
+            if (navigator.share) {
+                navigator.share({ title: 'Happy Kids - Ofertas', text: text, url: window.location.href })
+                    .then(() => showNotification('¡Gracias por compartir! 🎉'))
+                    .catch(() => copyToClipboard(text));
+            } else {
+                copyToClipboard(text);
+            }
+        }
+
+        // Copiar al portapapeles
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text + '\n' + window.location.href)
+                .then(() => showNotification('¡Link copiado! Pega en WhatsApp 📱'));
+        }
+
+        // Notificación toast
+        function showNotification(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.9);color:white;padding:16px 24px;border-radius:30px;font-weight:bold;z-index:10000;animation:slide-up 0.3s ease-out;border:2px solid #667eea;';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Tracking de clicks
+        function trackClick(product) {
+            console.log('Click en producto:', product);
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click_producto', { 'product_name': product, 'value': 1 });
+            }
+        }
+
+        // Descargar PDF con tracking
+        function downloadPDF(url, name) {
+            trackClick('download_' + name);
+            window.open(url, '_blank');
+            showNotification('¡Abriendo cuento! 📖✨');
+        }
+
+        // Doble tap para "me gusta"
+        let lastTap = 0;
+        containers.forEach(container => {
+            container.addEventListener('touchend', (e) => {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTap;
+                if (tapLength < 300 && tapLength > 0) {
+                    createHeartEffect(container);
+                    if (navigator.vibrate) navigator.vibrate(50);
+                }
+                lastTap = currentTime;
+            });
+        });
+
+        // Precargar siguiente video
+        const preloadObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const nextVideo = entry.target.querySelector('video');
+                    if (nextVideo && nextVideo.readyState === 0) nextVideo.load();
+                }
+            });
+        }, { rootMargin: '100px' });
+
+        containers.forEach(c => preloadObserver.observe(c));
+
+        // Animaciones CSS
+        const style = document.createElement('style');
+        style.textContent = '@keyframes float-up{0%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(-50%,-200%) scale(1.5);opacity:0}}@keyframes slide-up{from{transform:translate(-50%,100%);opacity:0}to{transform:translate(-50%,0);opacity:1}}';
+        document.head.appendChild(style);
+
+        // Inicializar
+        updateProgress(0);
+    </script>
+</body>
+                    </html>
