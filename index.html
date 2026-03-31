@@ -339,7 +339,7 @@
             <button class="share-btn" onclick="shareProduct('Samsung S25 FE', '8999')">📤 Compartir</button>
             
             <div class="button-group">
-                <a href="https://mercadolibre.com/jm/S25FE-OFERTA" 
+                <a href="https://meli.la/2mA4qCh" 
                    class="btn-main btn-fisico" 
                    target="_blank"
                    rel="noopener noreferrer"
@@ -371,7 +371,7 @@
             <button class="share-btn" onclick="shareProduct('Moto Edge 50 Pro', '7999')">📤 Compartir</button>
             
             <div class="button-group">
-                <a href="https://mercadolibre.com/jm/MOTO-PREMIUM" 
+                <a href="https://meli.la/23KvNjV" 
                    class="btn-main btn-fisico" 
                    target="_blank"
                    rel="noopener noreferrer"
@@ -403,7 +403,7 @@
             <button class="share-btn" onclick="shareProduct('Curren 8402', '599')">📤 Compartir</button>
             
             <div class="button-group">
-                <a href="https://mercadolibre.com/jm/CURREN-8402" 
+                <a href="https://meli.la/1wiPMys" 
                    class="btn-main btn-fisico" 
                    target="_blank"
                    rel="noopener noreferrer"
@@ -459,7 +459,7 @@
             <button class="share-btn" onclick="shareProduct('Cámara WiFi 360', '899')">📤 Compartir</button>
             
             <div class="button-group">
-                <a href="https://mercadolibre.com/jm/CAMARA-WIFI" 
+                <a href="https://meli.la/29JngVu" 
                    class="btn-main btn-fisico" 
                    target="_blank"
                    rel="noopener noreferrer"
@@ -467,7 +467,7 @@
                    COMPRAR CON 44% OFF
                 </a>
             </div>
-    </div>        <!-- FÍSICO 5: Taladro Miwod 21V -->
+        </div>        <!-- FÍSICO 5: Taladro Miwod 21V -->
         <div class="reel-container" data-product="taladro-miwod">
             <div class="flash-badge">🔧 BEST SELLER</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
@@ -489,7 +489,7 @@
             <button class="share-btn" onclick="shareProduct('Taladro Miwod 21V', '599')">📤 Compartir</button>
             
             <div class="button-group">
-                <a href="https://mercadolibre.com/jm/TALADRO-MIWOD" 
+                <a href="https://meli.la/1XwiFN1" 
                    class="btn-main btn-fisico" 
                    target="_blank"
                    rel="noopener noreferrer"
@@ -522,7 +522,7 @@
             <button class="share-btn" onclick="shareProduct('Carpa Styrka 3x3', '799')">📤 Compartir</button>
             
             <div class="button-group">
-                <a href="https://mercadolibre.com/jm/CARPA-STYRKA" 
+                <a href="https://meli.la/31DDvzp" 
                    class="btn-main btn-fisico" 
                    target="_blank"
                    rel="noopener noreferrer"
@@ -555,7 +555,7 @@
             <button class="share-btn" onclick="shareProduct('Roku Stick 4K', '999')">📤 Compartir</button>
             
             <div class="button-group">
-                <a href="https://mercadolibre.com/jm/ROKU-4K" 
+                <a href="https://meli.la/13WbuSL" 
                    class="btn-main btn-fisico" 
                    target="_blank"
                    rel="noopener noreferrer"
@@ -641,12 +641,10 @@
     </div>
 
     <script>
-        // Gestión de videos
         const videos = document.querySelectorAll('.video-reel');
         const containers = document.querySelectorAll('.reel-container');
         let audioActivado = false;
 
-        // Intersection Observer para videos
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const video = entry.target;
@@ -667,7 +665,6 @@
 
         videos.forEach(v => observer.observe(v));
 
-        // Activar audio al tocar
         videos.forEach(v => {
             v.addEventListener('click', function() {
                 audioActivado = true;
@@ -677,7 +674,6 @@
             });
         });
 
-        // Crear efecto de corazón
         function createHeartEffect(element) {
             const heart = document.createElement('div');
             heart.innerHTML = '❤️';
@@ -686,13 +682,11 @@
             setTimeout(() => heart.remove(), 1000);
         }
 
-        // Barra de progreso
         function updateProgress(index) {
             const bar = document.getElementById('progressBar');
             bar.style.width = (((index + 1) / containers.length) * 100) + '%';
         }
 
-        // Función de compartir
         function shareProduct(name, price) {
             const text = price === '0' 
                 ? `📚 Descarga GRATIS "${name}" en Happy Kids! 🎨\n\nPerfecto para los peques 👶\n`
@@ -707,13 +701,11 @@
             }
         }
 
-        // Copiar al portapapeles
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text + '\n' + window.location.href)
                 .then(() => showNotification('¡Link copiado! Pega en WhatsApp 📱'));
         }
 
-        // Notificación toast
         function showNotification(message) {
             const toast = document.createElement('div');
             toast.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.9);color:white;padding:16px 24px;border-radius:30px;font-weight:bold;z-index:10000;animation:slide-up 0.3s ease-out;border:2px solid #667eea;';
@@ -722,7 +714,6 @@
             setTimeout(() => toast.remove(), 3000);
         }
 
-        // Tracking de clicks
         function trackClick(product) {
             console.log('Click en producto:', product);
             if (typeof gtag !== 'undefined') {
@@ -730,14 +721,12 @@
             }
         }
 
-        // Descargar PDF con tracking
         function downloadPDF(url, name) {
             trackClick('download_' + name);
             window.open(url, '_blank');
             showNotification('¡Abriendo cuento! 📖✨');
         }
 
-        // Doble tap para "me gusta"
         let lastTap = 0;
         containers.forEach(container => {
             container.addEventListener('touchend', (e) => {
@@ -751,7 +740,6 @@
             });
         });
 
-        // Precargar siguiente video
         const preloadObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -763,12 +751,10 @@
 
         containers.forEach(c => preloadObserver.observe(c));
 
-        // Animaciones CSS
         const style = document.createElement('style');
         style.textContent = '@keyframes float-up{0%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(-50%,-200%) scale(1.5);opacity:0}}@keyframes slide-up{from{transform:translate(-50%,100%);opacity:0}to{transform:translate(-50%,0);opacity:1}}';
         document.head.appendChild(style);
 
-        // Inicializar
         updateProgress(0);
     </script>
 </body>
