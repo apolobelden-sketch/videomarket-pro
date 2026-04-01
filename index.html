@@ -293,6 +293,98 @@
             transition: width 0.1s;
         }
 
+        /* ===== ESTILOS DEL CARRUSEL ===== */
+        .carousel-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 20px;
+            filter: drop-shadow(0 10px 30px rgba(0,212,255,0.2));
+        }
+        
+        .carousel-dots {
+            position: absolute;
+            bottom: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+        
+        .dot.active {
+            background: #00d4ff;
+            border-color: #00d4ff;
+            box-shadow: 0 0 10px #00d4ff;
+        }
+        
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+            z-index: 20;
+        }
+        
+        .carousel-prev:hover, .carousel-next:hover {
+            background: rgba(0,212,255,0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-prev { left: 20px; }
+        .carousel-next { right: 20px; }
+
+        @keyframes glow-blue {
+            from { box-shadow: 0 0 5px #00d4ff, 0 0 10px #00d4ff; }
+            to { box-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff; }
+        }
+
         @media (max-width: 480px) {
             .branding { font-size: 24px; top: 65px; }
             .btn-main { font-size: 15px; padding: 16px 20px; }
@@ -348,9 +440,7 @@
                    ⌚ COMPRAR WATCH ULTRA $8,999 ⌚
                 </a>
             </div>
-        </div>       
-        
-        <!-- 🆕 NUEVO: Nautica Voyage - PRIMERO -->
+        </div>        <!-- 🆕 NUEVO: Nautica Voyage - PRIMERO -->
         <div class="reel-container" data-product="nautica-voyage">
             <div class="flash-badge">🌊 PERFUME TOP</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
@@ -705,13 +795,11 @@
                    📺 CONVERTIR TV EN SMART $500 📺
                 </a>
             </div>
-        </div>
-
-        <!-- DIGITAL 1: El León -->
+        </div>        <!-- DIGITAL 1: El León -->
         <div class="reel-container" data-product="cuento-leon">
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
             <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Cuento_1_El_Leon_Happy_jujtwm.mp4" type="video/mp4">
+                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Cuento_1_El_Leon_Happy_jujt8n.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
             <div class="branding">El León Valiente 🦁</div>
@@ -725,11 +813,11 @@
             <button class="share-btn" onclick="shareProduct('Cuento El León', '0')">📤 Compartir</button>
             
             <div class="button-group">
-                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/file/d/1HrFakhKIwAXAYs7zNZMFpDrx7h2YSCqT/view?usp=sharing', 'leon')">
+                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/file/d/1HrFakhKiWAXAMPLE/view', 'leon')">
                     DESCARGAR GRATIS AHORA
                 </button>
             </div>
-        </div>      
+        </div>
 
         <!-- DIGITAL 2: Animalitos -->
         <div class="reel-container" data-product="cuento-animalitos">
@@ -749,7 +837,7 @@
             <button class="share-btn" onclick="shareProduct('Cuento Animalitos', '0')">📤 Compartir</button>
             
             <div class="button-group">
-                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/file/d/1CNieuZWxl8sHcVuk6TiGd2rH0pkf5GeC/view?usp=sharing', 'animalitos')">
+                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/file/d/1CNieuZWxI8sEXAMPLE/view', 'animalitos')">
                     DESCARGAR GRATIS AHORA
                 </button>
             </div>
@@ -801,7 +889,9 @@
                     DESCARGAR GRATIS AHORA
                 </button>
             </div>
-        </div>        <!-- 🆕 NUEVO: Cargador GaN 20W 1HORA - Carrusel de Fotos -->
+        </div>
+
+        <!-- 🆕 NUEVO: Cargador GaN 20W 1HORA - Carrusel de Fotos -->
         <div class="reel-container" data-product="cargador-gan-20w">
             <div class="flash-badge">⚡ #1 MÁS VENDIDO</div>
             <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
@@ -940,6 +1030,81 @@
             console.log('Click en producto:', product);
         }
 
+        // ===== FUNCIONES DEL CARRUSEL =====
+        let slideIntervals = {};
+        
+        function showSlide(n, carouselId) {
+            let carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+            let slides = carousel.getElementsByClassName('carousel-slide');
+            let dots = carousel.getElementsByClassName('dot');
+            
+            if (n > slides.length) n = 1;
+            if (n < 1) n = slides.length;
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+            
+            slides[n-1].classList.add('active');
+            dots[n-1].classList.add('active');
+            
+            carousel.dataset.currentSlide = n;
+        }
+        
+        function changeSlide(n, carouselId) {
+            let carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+            let current = parseInt(carousel.dataset.currentSlide || 1);
+            showSlide(current + n, carouselId);
+            resetInterval(carouselId);
+        }
+        
+        function currentSlide(n, carouselId) {
+            showSlide(n, carouselId);
+            resetInterval(carouselId);
+        }
+        
+        function resetInterval(carouselId) {
+            if (slideIntervals[carouselId]) {
+                clearInterval(slideIntervals[carouselId]);
+            }
+            startCarousel(carouselId);
+        }
+        
+        function startCarousel(carouselId) {
+            slideIntervals[carouselId] = setInterval(() => {
+                let carousel = document.getElementById(carouselId);
+                if (carousel) {
+                    let current = parseInt(carousel.dataset.currentSlide || 1);
+                    let slides = carousel.getElementsByClassName('carousel-slide');
+                    showSlide(current + 1 > slides.length ? 1 : current + 1, carouselId);
+                }
+            }, 4000);
+        }
+        
+        // Observador para iniciar/detener carrusel según visibilidad
+        const carouselObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startCarousel(entry.target.id);
+                } else {
+                    if (slideIntervals[entry.target.id]) {
+                        clearInterval(slideIntervals[entry.target.id]);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('carousel-cargador');
+            if (carousel) carouselObserver.observe(carousel);
+        });
+
         document.addEventListener('keydown', (e) => {
             const container = document.querySelector('.scroll-container');
             const itemHeight = window.innerHeight;
@@ -953,4 +1118,4 @@
     </script>
 
 </body>
-              </html>
+                    </html>
