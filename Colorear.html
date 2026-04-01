@@ -3,57 +3,460 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#25d366">
+    <meta name="description" content="Pizarrón de arte interactivo para niños - Happy Kids">
     <title>Happy Kids - Súper Pizarrón de Arte 🎨</title>
+    
+    <!-- Preconnect para mejor rendimiento -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
     <style>
-        * { box-sizing: border-box; touch-action: pan-x pan-y; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; padding: 0; background: #222; display: flex; flex-direction: column; height: 100vh; overflow: hidden; font-family: 'Arial Rounded MT Bold', sans-serif; }
+        * { 
+            box-sizing: border-box; 
+            touch-action: pan-x pan-y; 
+            -webkit-tap-highlight-color: transparent; 
+            user-select: none;
+            -webkit-user-select: none;
+        }
         
-        /* CABECERA ACTUALIZADA */
+        :root {
+            --primary: #25d366;
+            --secondary: #ff9800;
+            --danger: #ff4444;
+            --info: #3498db;
+            --dark: #222;
+            --light: #f0f0f0;
+        }
+        
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: var(--dark); 
+            display: flex; 
+            flex-direction: column; 
+            height: 100vh; 
+            overflow: hidden; 
+            font-family: 'Arial Rounded MT Bold', 'Comic Sans MS', cursive, sans-serif; 
+        }
+        
+        /* CABECERA MEJORADA */
         #header-drawing {
-            display: flex; align-items: center; justify-content: space-between; background: #fff; height: 8vh; padding: 0 15px; border-bottom: 2px solid #ddd;
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); 
+            height: 8vh; 
+            padding: 0 15px; 
+            border-bottom: 3px solid var(--primary);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .nav-group { display: flex; gap: 8px; }
+        
+        .nav-group { 
+            display: flex; 
+            gap: 8px; 
+        }
+        
         .btn-nav {
-            text-decoration: none; padding: 8px 12px; border-radius: 15px; font-size: 13px; font-weight: bold; border: 1px solid #ccc; display: flex; align-items: center;
+            text-decoration: none; 
+            padding: 8px 14px; 
+            border-radius: 20px; 
+            font-size: 13px; 
+            font-weight: bold; 
+            border: 2px solid transparent;
+            display: flex; 
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .btn-back { background: #f0f0f0; color: #333; }
-        .btn-math-head { background: #ff9800; color: white; border-color: #e68a00; }
+        
+        .btn-nav:active { transform: scale(0.95); }
+        
+        .btn-back { 
+            background: var(--light); 
+            color: #333; 
+            border-color: #ddd;
+        }
+        
+        .btn-back:hover { background: #e0e0e0; }
+        
+        .btn-math-head { 
+            background: var(--secondary); 
+            color: white; 
+            border-color: #e68a00;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 152, 0, 0); }
+        }
 
-        /* CARRUSEL */
+        /* CARRUSEL MEJORADO */
         #carousel-container {
-            height: 14vh; background: #fff; border-bottom: 3px solid #25d366;
-            display: flex; align-items: center; overflow-x: auto; padding: 10px; gap: 12px;
-            scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+            height: 16vh; 
+            background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%); 
+            border-bottom: 4px solid var(--primary);
+            display: flex; 
+            align-items: center; 
+            overflow-x: auto; 
+            padding: 10px; 
+            gap: 15px;
+            scroll-behavior: smooth; 
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
         }
-        .template-thumb { height: 90%; aspect-ratio: 1/1; border-radius: 10px; border: 3px solid #eee; object-fit: cover; flex-shrink: 0; cursor: pointer; }
-        .template-thumb.active { border-color: #25d366; transform: scale(1.05); }
+        
+        #carousel-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        #carousel-container::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
+        .template-thumb { 
+            height: 85%; 
+            aspect-ratio: 1/1; 
+            border-radius: 12px; 
+            border: 3px solid #e0e0e0; 
+            object-fit: cover; 
+            flex-shrink: 0; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .template-thumb:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .template-thumb.active { 
+            border-color: var(--primary); 
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+        }
 
-        /* ÁREA DE DIBUJO */
-        #canvas-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; background: #eee; position: relative; }
-        canvas { background: white; max-width: 98%; max-height: 98%; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.3); touch-action: none; }
+        /* ÁREA DE DIBUJO MEJORADA */
+        #canvas-wrapper { 
+            flex: 1; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: linear-gradient(135deg, #e0e0e0 0%, #f0f0f0 100%); 
+            position: relative; 
+            overflow: hidden;
+        }
+        
+        #canvas-container {
+            position: relative;
+            width: 98%;
+            height: 98%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        canvas { 
+            background: white; 
+            max-width: 100%; 
+            max-height: 100%; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            cursor: crosshair;
+            touch-action: none;
+        }
 
-        /* BOTÓN FLOTANTE */
+        /* CONTROLES DE ZOOM */
+        #zoom-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 100;
+        }
+        
+        .zoom-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .zoom-btn:active { transform: scale(0.9); }
+
+        /* BOTÓN FLOTANTE MEJORADO */
         #btn-tools {
-            position: fixed; bottom: 25px; right: 20px; width: 70px; height: 70px; 
-            background: #25d366; border-radius: 50%; border: 4px solid white; font-size: 35px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 1000;
+            position: fixed; 
+            bottom: 25px; 
+            right: 20px; 
+            width: 65px; 
+            height: 65px; 
+            background: linear-gradient(135deg, var(--primary) 0%, #128c7e 100%); 
+            border-radius: 50%; 
+            border: 4px solid white; 
+            font-size: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3); 
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        
+        #btn-tools:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        #btn-tools:active { transform: scale(0.95); }
 
-        /* PANEL DE HERRAMIENTAS */
+        /* PANEL DE HERRAMIENTAS MEJORADO */
         #toolbar-panel {
-            position: fixed; bottom: -100%; left: 0; width: 100%; height: 50vh;
-            background: white; border-top: 5px solid #25d366; border-radius: 25px 25px 0 0;
-            display: flex; flex-direction: column; padding: 20px; transition: 0.4s; z-index: 999;
+            position: fixed; 
+            bottom: -100%; 
+            left: 0; 
+            width: 100%; 
+            height: 55vh;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
+            border-top: 5px solid var(--primary); 
+            border-radius: 25px 25px 0 0;
+            display: flex; 
+            flex-direction: column; 
+            padding: 20px; 
+            transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            z-index: 999;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
         }
+        
         #toolbar-panel.open { bottom: 0; }
         
-        .palette { display: flex; gap: 12px; overflow-x: auto; margin-bottom: 20px; padding: 10px 5px; }
-        .color-dot { width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0; border: 3px solid #eee; }
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
         
-        .tool-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .tool-btn { padding: 15px; border-radius: 15px; border: none; background: #f0f0f0; font-weight: bold; font-size: 15px; text-decoration: none; text-align: center; color: #333; }
-        .tool-btn.active { background: #25d366; color: white; }
-        .btn-math-panel { background: #ff9800 !important; color: white !important; grid-column: span 2; font-size: 18px; }
+        .panel-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .btn-close-panel {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        /* PALETA DE COLORES MEJORADA */
+        .palette-section {
+            margin-bottom: 15px;
+        }
+        
+        .section-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .palette { 
+            display: flex; 
+            gap: 10px; 
+            overflow-x: auto; 
+            padding: 10px 5px;
+            scrollbar-width: none;
+        }
+        
+        .palette::-webkit-scrollbar { display: none; }
+        
+        .color-dot { 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            flex-shrink: 0; 
+            border: 3px solid white; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .color-dot:hover { transform: scale(1.1); }
+        
+        .color-dot.active::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .color-dot.active {
+            transform: scale(1.15);
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+
+        /* SLIDER DE TAMAÑO */
+        .size-section {
+            margin-bottom: 15px;
+        }
+        
+        .size-slider {
+            width: 100%;
+            height: 40px;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #ddd 0%, var(--primary) 100%);
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .size-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* GRID DE HERRAMIENTAS MEJORADO */
+        .tool-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 10px;
+            margin-top: auto;
+        }
+        
+        .tool-btn { 
+            padding: 12px; 
+            border-radius: 12px; 
+            border: none; 
+            background: var(--light); 
+            font-weight: bold; 
+            font-size: 14px; 
+            text-decoration: none; 
+            text-align: center; 
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tool-btn:active { transform: scale(0.95); }
+        
+        .tool-btn.active { 
+            background: var(--primary); 
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-undo { background: #9b59b6 !important; color: white !important; }
+        .btn-redo { background: #9b59b6 !important; color: white !important; opacity: 0.5; }
+        .btn-redo.active { opacity: 1; }
+        
+        .btn-clear { 
+            background: var(--danger) !important; 
+            color: white !important; 
+        }
+        
+        .btn-save { 
+            background: var(--info) !important; 
+            color: white !important; 
+        }
+        
+        .btn-math-panel { 
+            background: var(--secondary) !important; 
+            color: white !important; 
+            grid-column: span 2; 
+            font-size: 16px;
+            animation: glow 2s infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 152, 0, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 152, 0, 0.8); }
+        }
+
+        /* INDICADOR DE CARGA */
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 20px;
+            font-size: 18px;
+            z-index: 2000;
+            display: none;
+        }
+        
+        .loading.show { display: block; }
+
+        /* TOAST NOTIFICATIONS */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            z-index: 2000;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* MODO FULLSCREEN */
+        .fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+        }
     </style>
 </head>
 <body>
@@ -63,36 +466,79 @@
             <a href="index.html" class="btn-nav btn-back">🏠 Inicio</a>
             <a href="Matematica.html" class="btn-nav btn-math-head">🍕 Matemática</a>
         </div>
-        <span style="font-size: 14px; font-weight: bold; color: #25d366;">Happy Kids Art ✨</span>
+        <span style="font-size: 14px; font-weight: bold; color: var(--primary);">Happy Kids Art ✨</span>
     </div>
 
     <div id="carousel-container"></div>
 
     <div id="canvas-wrapper">
-        <canvas id="mainCanvas" width="1000" height="1000"></canvas>
+        <div id="canvas-container">
+            <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Pantalla completa">⛶</button>
+            <div id="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()" title="Acercar">+</button>
+                <button class="zoom-btn" onclick="resetZoom()" title="Reset">⟲</button>
+                <button class="zoom-btn" onclick="zoomOut()" title="Alejar">-</button>
+            </div>
+            <canvas id="mainCanvas" width="1000" height="1000"></canvas>
+        </div>
     </div>
 
     <button id="btn-tools" onclick="toggleTools()">🖌️</button>
 
     <div id="toolbar-panel">
-        <div class="palette" id="palette"></div>
+        <div class="panel-header">
+            <span class="panel-title">🎨 Herramientas de Dibujo</span>
+            <button class="btn-close-panel" onclick="toggleTools()">✕</button>
+        </div>
+        
+        <div class="palette-section">
+            <div class="section-label">Colores</div>
+            <div class="palette" id="palette"></div>
+        </div>
+        
+        <div class="size-section">
+            <div class="section-label">Tamaño del pincel: <span id="size-value">18</span>px</div>
+            <input type="range" class="size-slider" id="brush-size" min="1" max="50" value="18" oninput="updateBrushSize(this.value)">
+        </div>
+        
         <div class="tool-grid">
             <button class="tool-btn active" id="btn-brush" onclick="setTool('brush')">✏️ Lápiz</button>
             <button class="tool-btn" id="btn-eraser" onclick="setTool('eraser')">🧽 Goma</button>
-            <button class="tool-btn" style="background: #ff4444; color: white;" onclick="confirmarLimpieza()">🗑️ Limpiar</button>
-            <button class="tool-btn" style="background: #3498db; color: white;" onclick="descargar()">💾 Guardar</button>
+            <button class="tool-btn btn-undo" id="btn-undo" onclick="undo()" disabled>↩️ Deshacer</button>
+            <button class="tool-btn btn-redo" id="btn-redo" onclick="redo()" disabled>↪️ Rehacer</button>
+            <button class="tool-btn btn-clear" onclick="confirmarLimpieza()">🗑️ Limpiar</button>
+            <button class="tool-btn btn-save" onclick="descargar()">💾 Guardar</button>
             <a href="Matematica.html" class="tool-btn btn-math-panel">🎮 ¡JUGAR MATEMÁTICA! 🍕</a>
         </div>
     </div>
 
-<script>
+    <div class="loading" id="loading">Cargando...</div>
+    <div class="toast" id="toast"></div><script>
+    // CONFIGURACIÓN Y ESTADO
     const canvas = document.getElementById('mainCanvas');
     const ctx = canvas.getContext('2d');
     const carousel = document.getElementById('carousel-container');
+    
     let currentColor = '#000000';
     let currentTool = 'brush';
+    let brushSize = 18;
     let isDrawing = false;
     let currentTemplateUrl = "";
+    let scale = 1;
+    let panX = 0;
+    let panY = 0;
+    
+    // HISTORIAL PARA UNDO/REDO
+    let history = [];
+    let historyStep = -1;
+    const MAX_HISTORY = 20;
+    
+    // PALETA DE COLORES EXTENDIDA
+    const colors = [
+        '#000000', '#FF0000', '#0000FF', '#008000', '#FFFF00', 
+        '#FFA500', '#800080', '#FFC0CB', '#00CED1', '#FF1493',
+        '#32CD32', '#FFD700', '#FF6347', '#4169E1', '#8B4513'
+    ];
 
     const misPlantillas = [
         '1_20260212_143632_0000.png', '1_20260212_153720_0000.png', '1_20260217_094136_0000.png', '1_20260314_190631_0000.png',
@@ -107,85 +553,301 @@
         '20260314_185632_0001.png', '20260314_185633_0002.png', '20260314_185633_0003.png', '20260314_185633_0004.png'
     ];
 
+    // INICIALIZACIÓN
     function init() {
+        // Crear paleta de colores
+        const palette = document.getElementById('palette');
+        colors.forEach((c, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'color-dot';
+            dot.style.background = c;
+            if (c === currentColor) dot.classList.add('active');
+            dot.onclick = () => selectColor(c, dot);
+            palette.appendChild(dot);
+        });
+
+        // Cargar plantillas
         misPlantillas.forEach((imgName, i) => {
             const img = document.createElement('img');
             img.src = `plantillas/${imgName}`;
             img.className = 'template-thumb';
             img.loading = "lazy";
-            img.onclick = () => {
-                document.querySelectorAll('.template-thumb').forEach(t => t.classList.remove('active'));
-                img.classList.add('active');
-                loadImg(img.src);
+            img.alt = `Plantilla ${i + 1}`;
+            
+            img.onerror = () => {
+                img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23ddd" width="100" height="100"/><text x="50" y="50" text-anchor="middle" fill="%23999">Error</text></svg>';
             };
+            
+            img.onclick = () => selectTemplate(img, img.src);
             carousel.appendChild(img);
-            if(i === 0) { img.classList.add('active'); loadImg(img.src); }
+            
+            if (i === 0) { 
+                img.classList.add('active'); 
+                loadImg(img.src); 
+            }
         });
 
-        const colors = ['#000000', '#FF0000', '#0000FF', '#008000', '#FFFF00', '#FFA500', '#800080', '#FFC0CB'];
-        const palette = document.getElementById('palette');
-        colors.forEach(c => {
-            const dot = document.createElement('div');
-            dot.className = 'color-dot';
-            dot.style.background = c;
-            dot.onclick = () => { currentColor = c; toggleTools(); };
-            palette.appendChild(dot);
-        });
+        // Guardar estado inicial
+        saveState();
+        
+        // Event listeners mejorados
+        setupEventListeners();
+    }
+
+    function selectColor(color, element) {
+        currentColor = color;
+        currentTool = 'brush';
+        updateToolButtons();
+        
+        document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+        element.classList.add('active');
+    }
+
+    function selectTemplate(imgElement, url) {
+        document.querySelectorAll('.template-thumb').forEach(t => t.classList.remove('active'));
+        imgElement.classList.add('active');
+        loadImg(url);
+        showToast('Plantilla cargada ✨');
     }
 
     function loadImg(url) {
+        showLoading(true);
         currentTemplateUrl = url;
         const img = new Image();
+        img.crossOrigin = "anonymous";
         img.src = url;
+        
         img.onload = () => {
             ctx.clearRect(0, 0, 1000, 1000);
             ctx.drawImage(img, 0, 0, 1000, 1000);
+            saveState();
+            showLoading(false);
+        };
+        
+        img.onerror = () => {
+            showToast('Error al cargar imagen ❌');
+            showLoading(false);
         };
     }
 
-    function toggleTools() { document.getElementById('toolbar-panel').classList.toggle('open'); }
-    function setTool(t) { 
-        currentTool = t; 
-        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(`btn-${t}`).classList.add('active');
-        if(t === 'brush') toggleTools();
-    }
-
-    function confirmarLimpieza() { if(confirm('¿Limpiar dibujo?')) { loadImg(currentTemplateUrl); toggleTools(); } }
-    function descargar() {
-        const link = document.createElement('a');
-        link.download = 'mi-dibujo-happy-kids.png';
-        link.href = canvas.toDataURL();
-        link.click();
+    // SISTEMA DE DIBUJO MEJORADO
+    function setupEventListeners() {
+        // Mouse
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+        
+        // Touch
+        canvas.addEventListener('touchstart', handleTouchStart, {passive: false});
+        canvas.addEventListener('touchmove', handleTouchMove, {passive: false});
+        canvas.addEventListener('touchend', stopDrawing);
+        
+        // Prevenir scroll al dibujar
+        canvas.addEventListener('touchstart', (e) => e.preventDefault(), {passive: false});
     }
 
     function getPos(e) {
         const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        
         return {
-            x: (e.touches[0].clientX - rect.left) * (1000 / rect.width),
-            y: (e.touches[0].clientY - rect.top) * (1000 / rect.height)
+            x: (clientX - rect.left) * (1000 / rect.width),
+            y: (clientY - rect.top) * (1000 / rect.height)
         };
     }
 
-    canvas.addEventListener('touchstart', (e) => {
+    function startDrawing(e) {
         isDrawing = true;
         const p = getPos(e);
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
-    });
-
-    canvas.addEventListener('touchmove', (e) => {
-        if(!isDrawing) return;
-        const p = getPos(e);
-        ctx.lineWidth = currentTool === 'eraser' ? 50 : 18;
+        
+        // Configurar estilo
+        ctx.lineWidth = currentTool === 'eraser' ? brushSize * 2 : brushSize;
         ctx.lineCap = 'round';
-        ctx.strokeStyle = currentTool === 'eraser' ? 'white' : currentColor;
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = currentTool === 'eraser' ? '#ffffff' : currentColor;
+        
+        // Punto inicial
         ctx.lineTo(p.x, p.y);
         ctx.stroke();
+    }
+
+    function draw(e) {
+        if (!isDrawing) return;
+        const p = getPos(e);
+        
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+    }
+
+    function stopDrawing() {
+        if (isDrawing) {
+            isDrawing = false;
+            ctx.closePath();
+            saveState();
+        }
+    }
+
+    function handleTouchStart(e) {
+        e.preventDefault();
+        startDrawing(e);
+    }
+
+    function handleTouchMove(e) {
+        e.preventDefault();
+        draw(e);
+    }
+
+    // HISTORIAL UNDO/REDO
+    function saveState() {
+        historyStep++;
+        if (historyStep < history.length) {
+            history.length = historyStep;
+        }
+        history.push(canvas.toDataURL());
+        if (history.length > MAX_HISTORY) {
+            history.shift();
+            historyStep--;
+        }
+        updateUndoRedoButtons();
+    }
+
+    function undo() {
+        if (historyStep > 0) {
+            historyStep--;
+            restoreState();
+            showToast('Deshacer ↩️');
+        }
+    }
+
+    function redo() {
+        if (historyStep < history.length - 1) {
+            historyStep++;
+            restoreState();
+            showToast('Rehacer ↪️');
+        }
+    }
+
+    function restoreState() {
+        const img = new Image();
+        img.src = history[historyStep];
+        img.onload = () => {
+            ctx.clearRect(0, 0, 1000, 1000);
+            ctx.drawImage(img, 0, 0);
+        };
+        updateUndoRedoButtons();
+    }
+
+    function updateUndoRedoButtons() {
+        document.getElementById('btn-undo').disabled = historyStep <= 0;
+        document.getElementById('btn-redo').disabled = historyStep >= history.length - 1;
+        
+        document.getElementById('btn-redo').classList.toggle('active', historyStep < history.length - 1);
+    }
+
+    // HERRAMIENTAS
+    function toggleTools() { 
+        document.getElementById('toolbar-panel').classList.toggle('open'); 
+    }
+
+    function setTool(tool) { 
+        currentTool = tool;
+        updateToolButtons();
+        if (tool === 'brush') toggleTools();
+    }
+
+    function updateToolButtons() {
+        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(`btn-${currentTool}`)?.classList.add('active');
+    }
+
+    function updateBrushSize(size) {
+        brushSize = parseInt(size);
+        document.getElementById('size-value').textContent = size;
+    }
+
+    function confirmarLimpieza() { 
+        if (confirm('¿Limpiar todo el dibujo? Esta acción no se puede deshacer.')) { 
+            loadImg(currentTemplateUrl);
+            showToast('Lienzo limpiado 🧽');
+        }
+    }
+
+    function descargar() {
+        try {
+            const link = document.createElement('a');
+            link.download = `mi-dibujo-happy-kids-${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            showToast('¡Imagen guardada! 💾');
+        } catch (e) {
+            showToast('Error al guardar ❌');
+        }
+    }
+
+    // ZOOM Y PAN
+    function zoomIn() {
+        scale = Math.min(scale * 1.2, 3);
+        applyTransform();
+    }
+
+    function zoomOut() {
+        scale = Math.max(scale / 1.2, 0.5);
+        applyTransform();
+    }
+
+    function resetZoom() {
+        scale = 1;
+        panX = 0;
+        panY = 0;
+        applyTransform();
+    }
+
+    function applyTransform() {
+        canvas.style.transform = `scale(${scale}) translate(${panX}px, ${panY}px)`;
+    }
+
+    // FULLSCREEN
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    // UTILIDADES
+    function showLoading(show) {
+        document.getElementById('loading').classList.toggle('show', show);
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // ATAJOS DE TECLADO
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey || e.metaKey) {
+            if (e.key === 'z') {
+                e.preventDefault();
+                undo();
+            } else if (e.key === 'y' || (e.key === 'z' && e.shiftKey)) {
+                e.preventDefault();
+                redo();
+            } else if (e.key === 's') {
+                e.preventDefault();
+                descargar();
+            }
+        }
     });
 
-    canvas.addEventListener('touchend', () => isDrawing = false);
-
+    // INICIAR
     init();
 </script>
 </body>
