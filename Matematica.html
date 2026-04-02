@@ -3,149 +3,909 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Kids - Matemática Visual</title>
+    <meta name="description" content="Happy Kids - Juegos matemáticos interactivos para niños. Aprende sumas, restas, conteo y fracciones de forma divertida.">
+    <meta name="theme-color" content="#FF6B6B">
+    <title>Happy Kids - Matemática Visual 🎨</title>
+    
     <style>
-        body { margin:0; font-family: 'Arial Rounded MT Bold', sans-serif; background:#f0f4f8; text-align:center; color: #333; }
-        .screen { display:none; padding:20px; animation: fadeIn 0.5s; }
-        .active { display:block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* ===== VARIABLES Y RESET ===== */
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2C3E50;
+            --light: #F7F9FC;
+            --success: #95E1D3;
+            --error: #FF6B6B;
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --shadow-hover: 0 15px 40px rgba(0,0,0,0.2);
+            --radius: 25px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-        h1 { color:#ff5722; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        .btn { display:block; margin:12px auto; padding:15px; width:85%; border:none; border-radius:25px; background:#4caf50; color:#fff; font-size:18px; font-weight:bold; box-shadow: 0 4px 0 #388e3c; cursor:pointer; text-decoration: none; }
-        .btn-volver { background:#f44336; box-shadow: 0 4px 0 #d32f2f; margin-top: 30px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ===== CONTENEDOR PRINCIPAL ===== */
+        .app-container {
+            background: var(--light);
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            max-width: 500px;
+            width: 100%;
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #FF8E53 100%);
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 26px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ===== SISTEMA DE PANTALLAS ===== */
+        .screen {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* ===== SCORE BOARD ===== */
+        .score-board {
+            background: white;
+            border-radius: var(--radius);
+            padding: 15px 25px;
+            margin: 20px auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--dark);
+            border: 3px solid var(--accent);
+        }
+
+        .score-board span {
+            color: var(--primary);
+            font-size: 24px;
+        }
+
+        /* ===== MENÚ DE JUEGOS ===== */
+        .games-grid {
+            display: grid;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            transition: var(--transition);
+        }
+
+        .game-card:hover, .game-card:active {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .game-card.suma::before { background: #FF6B6B; }
+        .game-card.suma { border-color: #FF6B6B; }
         
-        /* Contenedor de Figuras */
-        .visual-container { background:#fff; padding:20px; border-radius:30px; margin:20px auto; min-height:120px; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; border: 3px dashed #ff9800; max-width: 90%; }
-        .emoji-item { font-size: 45px; margin: 5px; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1)); }
-        .operator { font-size: 40px; margin: 0 15px; color: #ff5722; font-weight: bold; }
+        .game-card.resta::before { background: #4ECDC4; }
+        .game-card.resta { border-color: #4ECDC4; }
+        
+        .game-card.conteo::before { background: #95E1D3; }
+        .game-card.conteo { border-color: #95E1D3; }
+        
+        .game-card.fraccion::before { background: #F7DC6F; }
+        .game-card.fraccion { border-color: #F7DC6F; }
 
-        input { padding:12px; font-size:24px; width:80px; text-align:center; border-radius:15px; border:3px solid #ff9800; outline: none; }
-        .feedback { font-size:24px; margin:15px; font-weight: bold; height: 30px; }
-        .score-box { font-size: 20px; background: #fff; padding: 10px; border-radius: 15px; display: inline-block; margin-top: 10px; margin-bottom: 20px; }
+        .game-icon {
+            font-size: 35px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
 
-        /* Estilos nuevos para navegación footer */
-        .nav-footer { margin-top: 30px; padding-top: 20px; border-top: 2px dashed #ccc; display: flex; flex-direction: column; align-items: center; }
-        .btn-nav { width: 70%; padding: 12px; border-radius: 50px; text-decoration: none; font-weight: bold; margin: 8px 0; font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .btn-colorear { background: #ff9800; color: white; border: 2px solid #fff; }
-        .btn-home { background: #000; color: white; }
+        .game-card:hover .game-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .game-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .game-info p {
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+
+        /* ===== ÁREA DE JUEGO ===== */
+        .game-area {
+            text-align: center;
+        }
+
+        .game-title {
+            font-size: 22px;
+            color: var(--dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Contenedor Visual Mejorado */
+        .visual-container {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 20px;
+            margin: 20px 0;
+            min-height: 150px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border: 4px dashed var(--accent);
+            position: relative;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .visual-container::after {
+            content: '✨';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 30px;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .emoji-item {
+            font-size: 40px;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+            transition: transform 0.2s;
+        }
+
+        .emoji-item:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0) rotate(-180deg); }
+            to { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        .operator {
+            font-size: 35px;
+            margin: 0 15px;
+            color: var(--primary);
+            font-weight: bold;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .hint-text {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* ===== INPUT Y CONTROLES ===== */
+        .input-section {
+            margin: 25px 0;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .number-input {
+            width: 100px;
+            height: 70px;
+            font-size: 32px;
+            text-align: center;
+            border: 4px solid var(--secondary);
+            border-radius: 20px;
+            outline: none;
+            transition: var(--transition);
+            font-weight: bold;
+            color: var(--dark);
+            background: white;
+        }
+
+        .number-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(255,107,107,0.3);
+            transform: scale(1.05);
+        }
+
+        /* Botones */
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary) 0%, #44A08D 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 rgba(0,0,0,0.2), 0 10px 20px rgba(78,205,196,0.4);
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, var(--primary) 0%, #FF8E53 100%);
+            color: white;
+            font-size: 20px;
+            padding: 18px 40px;
+        }
+
+        .btn-check:hover {
+            box-shadow: 0 8px 0 rgba(0,0,0,0.2), 0 10px 25px rgba(255,107,107,0.4);
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+            color: white;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        /* ===== FEEDBACK ===== */
+        .feedback {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-radius: 15px;
+            padding: 15px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .feedback.success {
+            background: var(--success);
+            color: #2c5f2d;
+        }
+
+        .feedback.error {
+            background: #fadbd8;
+            color: #c0392b;
+        }
+
+        .feedback.hint {
+            background: var(--accent);
+            color: #8e6c00;
+        }
+
+        /* ===== BARRA DE PROGRESO ===== */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* ===== NAVEGACIÓN FOOTER ===== */
+        .nav-footer {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 3px dashed #bdc3c7;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .nav-btn.colorear {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .nav-btn.home {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        /* ===== EFECTOS DE CELEBRACIÓN ===== */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 1000;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .app-container {
+                border-radius: 0;
+                min-height: 100vh;
+            }
+            
+            body {
+                padding: 0;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .emoji-item {
+                font-size: 35px;
+            }
+        }
+
+        /* ===== LOADING ===== */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        /* ===== STREAK COUNTER ===== */
+        .streak {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        .streak.active {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            animation: pulse 0.5s;
+        }
     </style>
 </head>
+
 <body>
+    <div class="app-container">
+        <!-- Streak Counter -->
+        <div class="streak" id="streak">
+            🔥 <span id="streak-count">0</span>
+        </div>
 
-<div id="menu" class="screen active">
-    <h1>🍕 Aventura Matemática</h1>
-    <div class="visual-container">
-        <span class="emoji-item">🍎</span><span class="emoji-item">🚀</span><span class="emoji-item">🦖</span><span class="emoji-item">🍕</span>
-    </div>
-    
-    <button class="btn" onclick="openGame('suma')">🍎 Suma de Frutas</button>
-    <button class="btn" onclick="openGame('resta')">🚀 Resta Espacial</button>
-    <button class="btn" onclick="openGame('conteo')">🦖 Cuenta Dinos</button>
-    <button class="btn" onclick="openGame('fraccion')">🍕 Rebanadas de Pizza</button>
+        <!-- HEADER -->
+        <div class="header">
+            <span class="header-icon">🎓</span>
+            <h1>Happy Kids Math</h1>
+        </div>
 
-    <div class="score-box">⭐ Puntos: <span id="score">0</span></div>
+        <!-- PANTALLA DE MENÚ -->
+        <div id="menu" class="screen active">
+            <div style="text-align: center;">
+                <div class="score-board">
+                    ⭐ Puntos: <span id="score">0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress" style="width: 0%"></div>
+                </div>
+            </div>
 
-    <div class="nav-footer">
-        <a href="Colorear.html" class="btn-nav btn-colorear">🎨 Ir a Colorear</a>
-        <a href="index.html" class="btn-nav btn-home">🏠 Regresar a Reels</a>
-    </div>
-</div>
+            <div class="games-grid">
+                <div class="game-card suma" onclick="openGame('suma')">
+                    <div class="game-icon">🍎</div>
+                    <div class="game-info">
+                        <h3>Suma de Frutas</h3>
+                        <p>Sumas hasta 10</p>
+                    </div>
+                </div>
 
-<div id="game" class="screen">
-    <h1 id="titulo"></h1>
-    <div class="visual-container" id="contenedor-visual"></div>
-    <input id="respuesta" type="number" placeholder="?">
-    <button class="btn" style="background:#2196f3; box-shadow: 0 4px 0 #1976d2;" onclick="verificar()">Revisar ✅</button>
-    <div class="feedback" id="feedback"></div>
-    <button class="btn btn-volver" onclick="volver()">⬅ Salir al Menú</button>
-</div>
+                <div class="game-card resta" onclick="openGame('resta')">
+                    <div class="game-icon">🚀</div>
+                    <div class="game-info">
+                        <h3>Resta Espacial</h3>
+                        <p>Restas divertidas</p>
+                    </div>
+                </div>
 
-<script>
-let juego = "";
-let score = 0;
-let correcta = 0;
+                <div class="game-card conteo" onclick="openGame('conteo')">
+                    <div class="game-icon">🦖</div>
+                    <div class="game-info">
+                        <h3>Cuenta Dinos</h3>
+                        <p>Conteo 1-10</p>
+                    </div>
+                </div>
 
-function openGame(tipo){
-    juego = tipo;
-    document.getElementById("menu").classList.remove("active");
-    document.getElementById("game").classList.add("active");
-    generar();
-}
+                <div class="game-card fraccion" onclick="openGame('fraccion')">
+                    <div class="game-icon">🍕</div>
+                    <div class="game-info">
+                        <h3>Rebanadas de Pizza</h3>
+                        <p>Primeras fracciones</p>
+                    </div>
+                </div>
+            </div>
 
-function generar(){
-    const contenedor = document.getElementById("contenedor-visual");
-    contenedor.innerHTML = "";
-    document.getElementById("respuesta").value = "";
-    document.getElementById("feedback").innerHTML = "";
-    
-    let n1 = Math.floor(Math.random()*5) + 1; 
-    let n2 = Math.floor(Math.random()*4) + 1;
-    let emoji = "";
+            <div class="nav-footer">
+                <a href="Colorear.html" class="nav-btn colorear">
+                    🎨 Ir a Colorear
+                </a>
+                <a href="index.html" class="nav-btn home">
+                    🏠 Volver a Reels
+                </a>
+            </div>
+        </div>
 
-    if(juego === "suma"){
-        emoji = "🍎";
-        document.getElementById("titulo").innerText = "Suma las Manzanas";
-        dibujarEmojis(n1, emoji, contenedor);
-        contenedor.innerHTML += '<span class="operator">+</span>';
-        dibujarEmojis(n2, emoji, contenedor);
-        correcta = n1 + n2;
-    }
+        <!-- PANTALLA DE JUEGO -->
+        <div id="game" class="screen">
+            <div class="game-area">
+                <h2 class="game-title" id="titulo"></h2>
+                
+                <div class="visual-container" id="contenedor-visual"></div>
+                
+                <div class="input-section">
+                    <div class="input-group">
+                        <input 
+                            type="number" 
+                            id="respuesta" 
+                            class="number-input" 
+                            placeholder="?" 
+                            min="0" 
+                            max="20"
+                            inputmode="numeric"
+                        >
+                    </div>
+                </div>
 
-    if(juego === "resta"){
-        emoji = "🚀";
-        document.getElementById("titulo").innerText = "Resta de Cohetes";
-        let num1 = Math.max(n1, n2) + 2;
-        let num2 = Math.min(n1, n2);
-        dibujarEmojis(num1, emoji, contenedor);
-        contenedor.innerHTML += '<span class="operator">-</span>';
-        contenedor.innerHTML += `<span style="font-size:25px; color:#666;">(Quita ${num2})</span>`;
-        correcta = num1 - num2;
-    }
+                <button class="btn btn-check" onclick="verificar()">
+                    ✅ Revisar
+                </button>
 
-    if(juego === "conteo"){
-        emoji = "🦖";
-        document.getElementById("titulo").innerText = "¿Cuántos Dinos hay?";
-        let num = Math.floor(Math.random()*9) + 1;
-        dibujarEmojis(num, emoji, contenedor);
-        correcta = num;
-    }
+                <div class="feedback" id="feedback"></div>
 
-    if(juego === "fraccion"){
-        emoji = "🍕";
-        document.getElementById("titulo").innerText = "Cuenta las Rebanadas";
-        let num = Math.floor(Math.random()*6) + 1;
-        dibujarEmojis(num, emoji, contenedor);
-        correcta = num;
-    }
-}
+                <button class="btn btn-back" onclick="volver()">
+                    ⬅ Volver al Menú
+                </button>
+            </div>
+        </div>
+    </div>    <script>
+        // ===== ESTADO DEL JUEGO =====
+        const state = {
+            juego: '',
+            score: parseInt(localStorage.getItem('happyKidsScore')) || 0,
+            correcta: 0,
+            racha: parseInt(localStorage.getItem('happyKidsStreak')) || 0,
+            totalJugadas: 0,
+            emojiActual: '',
+            nivel: 1
+        };
 
-function dibujarEmojis(cantidad, emoji, elemento){
-    for(let i=0; i<cantidad; i++){
-        elemento.innerHTML += `<span class="emoji-item">${emoji}</span>`;
-    }
-}
+        // ===== CONFIGURACIÓN DE JUEGOS =====
+        const juegos = {
+            suma: {
+                titulo: '🍎 Suma las Manzanas',
+                emoji: '🍎',
+                color: '#FF6B6B',
+                min: 1,
+                max: 5,
+                descripcion: 'Suma las manzanas rojas'
+            },
+            resta: {
+                titulo: '🚀 Resta Cohetes',
+                emoji: '🚀',
+                color: '#4ECDC4',
+                min: 1,
+                max: 4,
+                descripcion: 'Cuenta los cohetes que quedan'
+            },
+            conteo: {
+                titulo: '🦖 Cuenta los Dinos',
+                emoji: '🦖',
+                color: '#95E1D3',
+                min: 1,
+                max: 9,
+                descripcion: '¿Cuántos dinosaurios ves?'
+            },
+            fraccion: {
+                titulo: '🍕 Rebanadas de Pizza',
+                emoji: '🍕',
+                color: '#F7DC6F',
+                min: 1,
+                max: 6,
+                descripcion: 'Cuenta las rebanadas'
+            }
+        };
 
-function verificar(){
-    let user = parseInt(document.getElementById("respuesta").value);
-    let f = document.getElementById("feedback");
+        // ===== INICIALIZACIÓN =====
+        document.addEventListener('DOMContentLoaded', () => {
+            actualizarScore();
+            actualizarProgreso();
+            
+            // Permitir Enter para verificar
+            document.getElementById('respuesta').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') verificar();
+            });
+        });
 
-    if(user === correcta){
-        f.innerHTML = "🎉 ¡Genial! ✨";
-        f.style.color = "#4caf50";
-        score += 10;
-        document.getElementById("score").innerText = score;
-        setTimeout(generar, 1500);
-    } else {
-        f.innerHTML = "❌ ¡Casi! Cuenta otra vez";
-        f.style.color = "#f44336";
-    }
-}
+        // ===== NAVEGACIÓN =====
+        function openGame(tipo) {
+            state.juego = tipo;
+            const config = juegos[tipo];
+            
+            // Animación de transición
+            document.getElementById('menu').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('game').classList.add('active');
+                document.getElementById('titulo').innerHTML = config.titulo;
+                generar();
+            }, 100);
+        }
 
-function volver(){
-    document.getElementById("game").classList.remove("active");
-    document.getElementById("menu").classList.add("active");
-}
-</script>
+        function volver() {
+            document.getElementById('game').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('menu').classList.add('active');
+                actualizarProgreso();
+            }, 100);
+        }
 
+        // ===== GENERADOR DE PROBLEMAS =====
+        function generar() {
+            const contenedor = document.getElementById('contenedor-visual');
+            const input = document.getElementById('respuesta');
+            const feedback = document.getElementById('feedback');
+            const config = juegos[state.juego];
+            
+            // Limpiar
+            contenedor.innerHTML = '';
+            input.value = '';
+            feedback.innerHTML = '';
+            feedback.className = 'feedback';
+            input.focus();
+            
+            let n1, n2, numMayor, numMenor;
+
+            switch(state.juego) {
+                case 'suma':
+                    n1 = random(config.min, config.max);
+                    n2 = random(1, 4);
+                    state.correcta = n1 + n2;
+                    
+                    dibujarEmojis(n1, config.emoji, contenedor);
+                    contenedor.innerHTML += `<span class="operator">+</span>`;
+                    dibujarEmojis(n2, config.emoji, contenedor);
+                    break;
+
+                case 'resta':
+                    n1 = random(3, 8);
+                    n2 = random(1, Math.min(n1 - 1, 4));
+                    state.correcta = n1 - n2;
+                    
+                    dibujarEmojis(n1, config.emoji, contenedor);
+                    contenedor.innerHTML += `<span class="operator">-</span>`;
+                    contenedor.innerHTML += `<div class="hint-text">(Quita ${n2})</div>`;
+                    break;
+
+                case 'conteo':
+                    n1 = random(config.min, config.max);
+                    state.correcta = n1;
+                    dibujarEmojis(n1, config.emoji, contenedor);
+                    break;
+
+                case 'fraccion':
+                    n1 = random(config.min, config.max);
+                    state.correcta = n1;
+                    dibujarEmojis(n1, config.emoji, contenedor);
+                    break;
+            }
+            
+            state.emojiActual = config.emoji;
+        }
+
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function dibujarEmojis(cantidad, emoji, elemento) {
+            const container = document.createElement('div');
+            container.style.display = 'flex';
+            container.style.flexWrap = 'wrap';
+            container.style.justifyContent = 'center';
+            container.style.gap = '8px';
+            container.style.width = '100%';
+            
+            for (let i = 0; i < cantidad; i++) {
+                const span = document.createElement('span');
+                span.className = 'emoji-item';
+                span.textContent = emoji;
+                span.style.animationDelay = `${i * 0.1}s`;
+                container.appendChild(span);
+            }
+            
+            elemento.appendChild(container);
+        }
+
+        // ===== VERIFICACIÓN =====
+        function verificar() {
+            const input = document.getElementById('respuesta');
+            const feedback = document.getElementById('feedback');
+            const user = parseInt(input.value);
+            
+            if (isNaN(user)) {
+                mostrarFeedback('❌ Escribe un número', 'hint');
+                input.focus();
+                return;
+            }
+            
+            if (user === state.correcta) {
+                // Correcto
+                state.score += 10 + (state.racha * 2);
+                state.racha++;
+                state.totalJugadas++;
+                
+                guardarEstado();
+                actualizarScore();
+                mostrarRacha();
+                mostrarFeedback('🎉 ¡Excelente! ✨', 'success');
+                crearConfeti();
+                
+                // Animación de celebración
+                document.querySelectorAll('.emoji-item').forEach((emoji, i) => {
+                    setTimeout(() => {
+                        emoji.style.transform = 'scale(1.3) rotate(360deg)';
+                    }, i * 50);
+                });
+                
+                setTimeout(generar, 1800);
+            } else {
+                // Incorrecto
+                state.racha = 0;
+                ocultarRacha();
+                guardarEstado();
+                
+                const mensajes = [
+                    '❌ ¡Casi! Intenta de nuevo',
+                    '🤔 Cuenta con cuidado',
+                    '💪 No te rindas'
+                ];
+                mostrarFeedback(mensajes[Math.floor(Math.random() * mensajes.length)], 'error');
+                
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        function mostrarFeedback(texto, tipo) {
+            const feedback = document.getElementById('feedback');
+            feedback.innerHTML = texto;
+            feedback.className = `feedback ${tipo}`;
+        }
+
+        // ===== SISTEMA DE RACHAS =====
+        function mostrarRacha() {
+            const streakEl = document.getElementById('streak');
+            const streakCount = document.getElementById('streak-count');
+            
+            if (state.racha > 1) {
+                streakCount.textContent = state.racha;
+                streakEl.classList.add('active');
+            }
+        }
+
+        function ocultarRacha() {
+            document.getElementById('streak').classList.remove('active');
+        }
+
+        // ===== CONFETI =====
+        function crearConfeti() {
+            const colores = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#f093fb'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confeti = document.createElement('div');
+                    confeti.className = 'confetti';
+                    confeti.style.left = Math.random() * 100 + 'vw';
+                    confeti.style.background = colores[Math.floor(Math.random() * colores.length)];
+                    confeti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confeti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(confeti);
+                    
+                    setTimeout(() => confeti.remove(), 4000);
+                }, i * 50);
+            }
+        }
+
+        // ===== UTILIDADES =====
+        function actualizarScore() {
+            document.getElementById('score').textContent = state.score;
+        }
+
+        function actualizarProgreso() {
+            const progreso = Math.min((state.totalJugadas / 20) * 100, 100);
+            document.getElementById('progress').style.width = progreso + '%';
+        }
+
+        function guardarEstado() {
+            localStorage.setItem('happyKidsScore', state.score);
+            localStorage.setItem('happyKidsStreak', state.racha);
+        }
+
+        // ===== PREVENIR ZOOM EN INPUTS (iOS) =====
+        document.addEventListener('gesturestart', (e) => e.preventDefault());
+    </script>
 </body>
 </html>
