@@ -53,7 +53,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Navbar */
         .navbar {
             background: linear-gradient(135deg, var(--math-primary) 0%, #FF8E53 100%);
             padding: 20px;
@@ -71,10 +70,7 @@
             gap: 8px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
+        .nav-links { display: flex; gap: 8px; }
 
         .nav-btn {
             padding: 8px 14px;
@@ -87,11 +83,8 @@
             transition: var(--math-transition);
         }
 
-        .nav-btn:hover {
-            background: rgba(255,255,255,0.3);
-        }
+        .nav-btn:hover { background: rgba(255,255,255,0.3); }
 
-        /* Screens */
         .screen {
             display: none;
             padding: 25px;
@@ -105,7 +98,6 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* Score */
         .score-board {
             background: white;
             border-radius: 20px;
@@ -122,7 +114,6 @@
 
         .score-board span { color: var(--math-primary); font-size: 24px; }
 
-        /* Games Grid */
         .games-grid { display: grid; gap: 15px; margin: 20px 0; }
 
         .game-card {
@@ -177,7 +168,6 @@
         .game-info h3 { font-size: 18px; margin-bottom: 5px; }
         .game-info p { font-size: 13px; color: #7f8c8d; }
 
-        /* Game Area */
         .game-area { text-align: center; }
 
         .game-title {
@@ -240,7 +230,6 @@
 
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-        /* Input */
         .input-section { margin: 25px 0; }
 
         .number-input {
@@ -262,7 +251,6 @@
             transform: scale(1.05);
         }
 
-        /* Buttons */
         .btn {
             padding: 15px 30px;
             border: none;
@@ -292,7 +280,6 @@
             font-size: 16px;
         }
 
-        /* Feedback */
         .feedback {
             font-size: 22px;
             font-weight: 800;
@@ -315,7 +302,6 @@
         .feedback.success { background: var(--math-success); color: #2c5f2d; }
         .feedback.error { background: #fadbd8; color: #c0392b; }
 
-        /* Confetti */
         .confetti {
             position: fixed;
             width: 12px;
@@ -329,7 +315,6 @@
             to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
 
-        /* Streak */
         .streak {
             position: absolute;
             top: 20px;
@@ -346,7 +331,6 @@
 
         .streak.active { display: flex; align-items: center; gap: 5px; animation: pulse 0.5s; }
 
-        /* Footer Nav */
         .nav-footer {
             margin-top: 30px;
             padding-top: 25px;
@@ -376,7 +360,6 @@
         .btn-colorear { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         .btn-home { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
 
-        /* Responsive */
         @media (max-width: 480px) {
             .app-container { border-radius: 0; min-height: 100vh; }
             body { padding: 0; }
@@ -397,7 +380,6 @@
             </div>
         </nav>
 
-        <!-- MENU -->
         <div id="menu" class="screen active">
             <div style="text-align: center;">
                 <div class="score-board">⭐ Puntos: <span id="score">0</span></div>
@@ -440,7 +422,6 @@
             </div>
         </div>
 
-        <!-- GAME -->
         <div id="game" class="screen">
             <div class="game-area">
                 <h2 class="game-title" id="titulo"></h2>
@@ -455,8 +436,7 @@
         </div>
     </div>
 
-    <script>
-        const state = {
+    <script>        const state = {
             juego: '',
             score: parseInt(localStorage.getItem('hk_math_score')) || 0,
             correcta: 0,
@@ -588,4 +568,36 @@
 
         function mostrarRacha() {
             if (state.racha > 1) {
-                document.getElementById('
+                document.getElementById('streak').classList.add('active');
+                document.getElementById('streak-count').textContent = state.racha;
+            }
+        }
+
+        function ocultarRacha() {
+            document.getElementById('streak').classList.remove('active');
+        }
+
+        function actualizarScore() {
+            document.getElementById('score').textContent = state.score;
+        }
+
+        function crearConfeti() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#f093fb'];
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        window.addEventListener('error', (e) => {
+            console.error('[Happy Kids Math Error]', e.error);
+        });
+    </script>
+</body>
+</html>
