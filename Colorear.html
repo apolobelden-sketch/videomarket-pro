@@ -4,302 +4,406 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#25d366">
-    <meta name="description" content="Pizarrón de arte interactivo para niños - Happy Kids">
-    <title>Happy Kids - Súper Pizarrón de Arte 🎨</title>
+    <meta name="description" content="Súper Pizarrón de Arte Happy Kids - Dibuja, colorea y diviértete">
+    <title>🎨 Happy Kids - Súper Pizarrón de Arte</title>
     
-    <!-- Preconnect para mejor rendimiento -->
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        * { 
-            box-sizing: border-box; 
-            touch-action: pan-x pan-y; 
-            -webkit-tap-highlight-color: transparent; 
+        /* ===== VARIABLES ===== */
+        :root {
+            --art-primary: #25d366;
+            --art-secondary: #ff9800;
+            --art-danger: #ff4444;
+            --art-info: #3498db;
+            --art-purple: #9b59b6;
+            --art-dark: #1a1a2e;
+            --art-light: #f8f9fa;
+            
+            --art-gradient: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            --art-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            --art-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== RESET ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: pan-x pan-y;
             user-select: none;
             -webkit-user-select: none;
         }
-        
-        :root {
-            --primary: #25d366;
-            --secondary: #ff9800;
-            --danger: #ff4444;
-            --info: #3498db;
-            --dark: #222;
-            --light: #f0f0f0;
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--art-dark);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            color: white;
         }
-        
-        body { 
-            margin: 0; 
-            padding: 0; 
-            background: var(--dark); 
-            display: flex; 
-            flex-direction: column; 
-            height: 100vh; 
-            overflow: hidden; 
-            font-family: 'Arial Rounded MT Bold', 'Comic Sans MS', cursive, sans-serif; 
-        }
-        
-        /* CABECERA MEJORADA */
-        #header-drawing {
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); 
-            height: 8vh; 
-            padding: 0 15px; 
-            border-bottom: 3px solid var(--primary);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .nav-group { 
-            display: flex; 
-            gap: 8px; 
-        }
-        
-        .btn-nav {
-            text-decoration: none; 
-            padding: 8px 14px; 
-            border-radius: 20px; 
-            font-size: 13px; 
-            font-weight: bold; 
-            border: 2px solid transparent;
-            display: flex; 
+
+        /* ===== NAVBAR UNIFICADO ===== */
+        .navbar {
+            display: flex;
             align-items: center;
-            gap: 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            justify-content: space-between;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            height: 70px;
+            padding: 0 15px;
+            border-bottom: 3px solid var(--art-primary);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
-        
-        .btn-nav:active { transform: scale(0.95); }
-        
-        .btn-back { 
-            background: var(--light); 
-            color: #333; 
+
+        .nav-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 800;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--art-transition);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .nav-btn-home {
+            background: var(--art-light);
+            color: #333;
             border-color: #ddd;
         }
-        
-        .btn-back:hover { background: #e0e0e0; }
-        
-        .btn-math-head { 
-            background: var(--secondary); 
-            color: white; 
-            border-color: #e68a00;
-            animation: pulse 2s infinite;
+
+        .nav-btn-home:hover {
+            background: #e8e8e8;
         }
-        
-        @keyframes pulse {
+
+        .nav-btn-library {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .nav-btn-math {
+            background: var(--art-secondary);
+            color: white;
+            border-color: #e68a00;
+            animation: pulse-math 2s infinite;
+        }
+
+        @keyframes pulse-math {
             0%, 100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4); }
             50% { box-shadow: 0 0 0 10px rgba(255, 152, 0, 0); }
         }
 
-        /* CARRUSEL MEJORADO */
-        #carousel-container {
-            height: 16vh; 
-            background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%); 
-            border-bottom: 4px solid var(--primary);
-            display: flex; 
-            align-items: center; 
-            overflow-x: auto; 
-            padding: 10px; 
-            gap: 15px;
-            scroll-behavior: smooth; 
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) transparent;
-        }
-        
-        #carousel-container::-webkit-scrollbar {
-            height: 6px;
-        }
-        
-        #carousel-container::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-        
-        .template-thumb { 
-            height: 85%; 
-            aspect-ratio: 1/1; 
-            border-radius: 12px; 
-            border: 3px solid #e0e0e0; 
-            object-fit: cover; 
-            flex-shrink: 0; 
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .template-thumb:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .template-thumb.active { 
-            border-color: var(--primary); 
-            transform: scale(1.08);
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+        .nav-brand {
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            color: var(--art-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* ÁREA DE DIBUJO MEJORADA */
-        #canvas-wrapper { 
-            flex: 1; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background: linear-gradient(135deg, #e0e0e0 0%, #f0f0f0 100%); 
-            position: relative; 
-            overflow: hidden;
+        /* ===== CARRUSEL DE PLANTILLAS ===== */
+        .carousel-section {
+            height: 130px;
+            background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
+            border-bottom: 4px solid var(--art-primary);
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            padding: 10px 15px;
+            gap: 15px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--art-primary) transparent;
+            flex-shrink: 0;
         }
-        
-        #canvas-container {
-            position: relative;
-            width: 98%;
-            height: 98%;
+
+        .carousel-section::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .carousel-section::-webkit-scrollbar-thumb {
+            background: var(--art-primary);
+            border-radius: 10px;
+        }
+
+        .template-thumb {
+            height: 100px;
+            width: 100px;
+            border-radius: 16px;
+            border: 3px solid #e0e0e0;
+            object-fit: cover;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: var(--art-transition);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .template-thumb:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .template-thumb.active {
+            border-color: var(--art-primary);
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.4);
+        }
+
+        /* ===== ÁREA DE DIBUJO ===== */
+        .canvas-section {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: linear-gradient(135deg, #2d3436 0%, #1a1a2e 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 15px;
         }
-        
-        canvas { 
-            background: white; 
-            max-width: 100%; 
-            max-height: 100%; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1000px;
+        }
+
+        #mainCanvas {
+            background: white;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
             cursor: crosshair;
             touch-action: none;
         }
 
-        /* CONTROLES DE ZOOM */
-        #zoom-controls {
+        /* Controles de Zoom */
+        .zoom-controls {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 8px;
             z-index: 100;
         }
-        
+
         .zoom-btn {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             border: none;
             background: white;
-            font-size: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            font-size: 22px;
+            box-shadow: var(--art-shadow);
             cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .zoom-btn:active { transform: scale(0.9); }
-
-        /* BOTÓN FLOTANTE MEJORADO */
-        #btn-tools {
-            position: fixed; 
-            bottom: 25px; 
-            right: 20px; 
-            width: 65px; 
-            height: 65px; 
-            background: linear-gradient(135deg, var(--primary) 0%, #128c7e 100%); 
-            border-radius: 50%; 
-            border: 4px solid white; 
-            font-size: 30px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3); 
-            z-index: 1000;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--art-transition);
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
-        #btn-tools:hover {
-            transform: scale(1.1) rotate(15deg);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-        }
-        
-        #btn-tools:active { transform: scale(0.95); }
 
-        /* PANEL DE HERRAMIENTAS MEJORADO */
-        #toolbar-panel {
-            position: fixed; 
-            bottom: -100%; 
-            left: 0; 
-            width: 100%; 
-            height: 55vh;
-            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
-            border-top: 5px solid var(--primary); 
-            border-radius: 25px 25px 0 0;
-            display: flex; 
-            flex-direction: column; 
-            padding: 20px; 
-            transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-            z-index: 999;
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+        .zoom-btn:hover {
+            transform: scale(1.1);
+            background: var(--art-primary);
+            color: white;
         }
-        
-        #toolbar-panel.open { bottom: 0; }
-        
+
+        .zoom-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Botón Fullscreen */
+        .fullscreen-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            font-size: 20px;
+            box-shadow: var(--art-shadow);
+            cursor: pointer;
+            z-index: 100;
+            transition: var(--art-transition);
+        }
+
+        .fullscreen-btn:hover {
+            transform: scale(1.1);
+            background: var(--art-info);
+            color: white;
+        }
+
+        /* ===== BOTÓN FLOTANTE DE HERRAMIENTAS ===== */
+        .fab-tools {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 70px;
+            height: 70px;
+            background: var(--art-gradient);
+            border-radius: 50%;
+            border: 4px solid white;
+            font-size: 32px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: var(--art-transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fab-pulse 2s infinite;
+        }
+
+        @keyframes fab-pulse {
+            0%, 100% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 8px 40px rgba(37, 211, 102, 0.6); }
+        }
+
+        .fab-tools:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        .fab-tools:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== PANEL DE HERRAMIENTAS ===== */
+        .tools-panel {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            height: 60vh;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+            border-top: 5px solid var(--art-primary);
+            border-radius: 30px 30px 0 0;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+            transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            box-shadow: 0 -10px 50px rgba(0,0,0,0.2);
+        }
+
+        .tools-panel.open {
+            bottom: 0;
+        }
+
         .panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
         }
-        
+
         .panel-title {
-            font-size: 18px;
-            font-weight: bold;
+            font-family: 'Fredoka One', cursive;
+            font-size: 22px;
             color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        
+
         .btn-close-panel {
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
-            padding: 5px;
-        }
-        
-        /* PALETA DE COLORES MEJORADA */
-        .palette-section {
-            margin-bottom: 15px;
-        }
-        
-        .section-label {
-            font-size: 12px;
             color: #666;
-            margin-bottom: 8px;
-            font-weight: bold;
-            text-transform: uppercase;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: var(--art-transition);
         }
-        
-        .palette { 
-            display: flex; 
-            gap: 10px; 
-            overflow-x: auto; 
-            padding: 10px 5px;
+
+        .btn-close-panel:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        /* Paleta de Colores */
+        .palette-section {
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .palette {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 5px;
             scrollbar-width: none;
         }
-        
-        .palette::-webkit-scrollbar { display: none; }
-        
-        .color-dot { 
-            width: 45px; 
-            height: 45px; 
-            border-radius: 50%; 
-            flex-shrink: 0; 
-            border: 3px solid white; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+        .palette::-webkit-scrollbar {
+            display: none;
+        }
+
+        .color-dot {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: var(--art-transition);
             position: relative;
         }
-        
-        .color-dot:hover { transform: scale(1.1); }
-        
+
+        .color-dot:hover {
+            transform: scale(1.15);
+        }
+
+        .color-dot.active {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 4px var(--art-primary);
+        }
+
         .color-dot.active::after {
             content: '✓';
             position: absolute;
@@ -307,548 +411,877 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-        }
-        
-        .color-dot.active {
-            transform: scale(1.15);
-            box-shadow: 0 0 0 3px var(--primary);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* SLIDER DE TAMAÑO */
+        /* Slider de Tamaño */
         .size-section {
-            margin-bottom: 15px;
-        }
-        
-        .size-slider {
-            width: 100%;
-            height: 40px;
-            -webkit-appearance: none;
-            background: linear-gradient(to right, #ddd 0%, var(--primary) 100%);
-            border-radius: 20px;
-            outline: none;
-        }
-        
-        .size-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid var(--primary);
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
         }
 
-        /* GRID DE HERRAMIENTAS MEJORADO */
-        .tool-grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 10px;
-            margin-top: auto;
+        .size-display {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
         }
-        
-        .tool-btn { 
-            padding: 12px; 
-            border-radius: 12px; 
-            border: none; 
-            background: var(--light); 
-            font-weight: bold; 
-            font-size: 14px; 
-            text-decoration: none; 
-            text-align: center; 
-            color: #333;
-            cursor: pointer;
-            transition: all 0.2s;
+
+        .size-preview {
+            width: 60px;
+            height: 60px;
+            background: #f0f0f0;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
-        .tool-btn:active { transform: scale(0.95); }
-        
-        .tool-btn.active { 
-            background: var(--primary); 
+
+        .size-preview-dot {
+            background: var(--art-primary);
+            border-radius: 50%;
+            transition: var(--art-transition);
+        }
+
+        .size-slider {
+            flex: 1;
+            height: 45px;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #ddd 0%, var(--art-primary) 100%);
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .size-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--art-primary);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Grid de Herramientas */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .tool-btn {
+            padding: 15px;
+            border-radius: 16px;
+            border: none;
+            background: #f0f0f0;
+            font-weight: 800;
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--art-transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #333;
+        }
+
+        .tool-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .tool-btn:active {
+            transform: scale(0.98);
+        }
+
+        .tool-btn.active {
+            background: var(--art-primary);
             color: white;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
-        
-        .btn-undo { background: #9b59b6 !important; color: white !important; }
-        .btn-redo { background: #9b59b6 !important; color: white !important; opacity: 0.5; }
-        .btn-redo.active { opacity: 1; }
-        
-        .btn-clear { 
-            background: var(--danger) !important; 
-            color: white !important; 
+
+        .tool-btn-undo, .tool-btn-redo {
+            background: var(--art-purple) !important;
+            color: white !important;
         }
-        
-        .btn-save { 
-            background: var(--info) !important; 
-            color: white !important; 
+
+        .tool-btn-redo:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
         }
-        
-        .btn-math-panel { 
-            background: var(--secondary) !important; 
-            color: white !important; 
-            grid-column: span 2; 
-            font-size: 16px;
-            animation: glow 2s infinite;
+
+        .tool-btn-clear {
+            background: var(--art-danger) !important;
+            color: white !important;
         }
-        
-        @keyframes glow {
+
+        .tool-btn-save {
+            background: var(--art-info) !important;
+            color: white !important;
+        }
+
+        .tool-btn-math {
+            background: var(--art-secondary) !important;
+            color: white !important;
+            grid-column: span 2;
+            font-size: 17px;
+            animation: glow-math 2s infinite;
+        }
+
+        @keyframes glow-math {
             0%, 100% { box-shadow: 0 0 5px rgba(255, 152, 0, 0.5); }
             50% { box-shadow: 0 0 20px rgba(255, 152, 0, 0.8); }
         }
 
-        /* INDICADOR DE CARGA */
+        /* ===== LOADING Y TOAST ===== */
         .loading {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 20px 40px;
-            border-radius: 20px;
-            font-size: 18px;
-            z-index: 2000;
-            display: none;
-        }
-        
-        .loading.show { display: block; }
-
-        /* TOAST NOTIFICATIONS */
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
             background: rgba(0,0,0,0.9);
             color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-weight: bold;
+            padding: 25px 40px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 700;
+            z-index: 2000;
+            display: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0,0,0,0.95);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 35px;
+            font-weight: 800;
+            font-size: 15px;
             z-index: 2000;
             opacity: 0;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid var(--art-primary);
+            backdrop-filter: blur(10px);
         }
-        
+
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
 
-        /* MODO FULLSCREEN */
-        .fullscreen-btn {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            background: white;
-            font-size: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-            z-index: 100;
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .navbar {
+                height: 60px;
+                padding: 0 10px;
+            }
+
+            .nav-btn span:not(:first-child) {
+                display: none;
+            }
+
+            .nav-brand {
+                font-size: 16px;
+            }
+
+            .carousel-section {
+                height: 110px;
+            }
+
+            .template-thumb {
+                height: 85px;
+                width: 85px;
+            }
+
+            .fab-tools {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+            }
+
+            .tools-panel {
+                height: 65vh;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div id="header-drawing">
+    <!-- NAVBAR -->
+    <nav class="navbar">
         <div class="nav-group">
-            <a href="index.html" class="btn-nav btn-back">🏠 Inicio</a>
-            <a href="Matematica.html" class="btn-nav btn-math-head">🍕 Matemática</a>
+            <a href="index.html" class="nav-btn nav-btn-home">
+                <span>🏠</span>
+                <span>Inicio</span>
+            </a>
+            <a href="dashboard.html" class="nav-btn nav-btn-library">
+                <span>📚</span>
+                <span>Biblioteca</span>
+            </a>
         </div>
-        <span style="font-size: 14px; font-weight: bold; color: var(--primary);">Happy Kids Art ✨</span>
-    </div>
+        <div class="nav-brand">
+            <span>🎨</span>
+            <span>Happy Art</span>
+        </div>
+        <a href="matematicas.html" class="nav-btn nav-btn-math">
+            <span>🧮</span>
+            <span>Matemática</span>
+        </a>
+    </nav>
 
-    <div id="carousel-container"></div>
+    <!-- CARRUSEL DE PLANTILLAS -->
+    <div class="carousel-section" id="carouselContainer"></div>
 
-    <div id="canvas-wrapper">
-        <div id="canvas-container">
+    <!-- ÁREA DE DIBUJO -->
+    <section class="canvas-section">
+        <div class="canvas-container">
             <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Pantalla completa">⛶</button>
-            <div id="zoom-controls">
+            
+            <div class="zoom-controls">
                 <button class="zoom-btn" onclick="zoomIn()" title="Acercar">+</button>
                 <button class="zoom-btn" onclick="resetZoom()" title="Reset">⟲</button>
-                <button class="zoom-btn" onclick="zoomOut()" title="Alejar">-</button>
+                <button class="zoom-btn" onclick="zoomOut()" title="Alejar">−</button>
             </div>
+            
             <canvas id="mainCanvas" width="1000" height="1000"></canvas>
         </div>
-    </div>
+    </section>
 
-    <button id="btn-tools" onclick="toggleTools()">🖌️</button>
+    <!-- BOTÓN FLOTANTE -->
+    <button class="fab-tools" onclick="toggleTools()" title="Herramientas">🖌️</button>
 
-    <div id="toolbar-panel">
+    <!-- PANEL DE HERRAMIENTAS -->
+    <div class="tools-panel" id="toolsPanel">
         <div class="panel-header">
-            <span class="panel-title">🎨 Herramientas de Dibujo</span>
+            <span class="panel-title">🎨 Herramientas</span>
             <button class="btn-close-panel" onclick="toggleTools()">✕</button>
         </div>
         
         <div class="palette-section">
-            <div class="section-label">Colores</div>
-            <div class="palette" id="palette"></div>
+            <div class="section-label">🌈 Colores</div>
+            <div class="palette" id="paletteContainer"></div>
         </div>
         
         <div class="size-section">
-            <div class="section-label">Tamaño del pincel: <span id="size-value">18</span>px</div>
-            <input type="range" class="size-slider" id="brush-size" min="1" max="50" value="18" oninput="updateBrushSize(this.value)">
+            <div class="section-label">🖌️ Tamaño del pincel</div>
+            <div class="size-display">
+                <div class="size-preview">
+                    <div class="size-preview-dot" id="sizePreview" style="width: 18px; height: 18px;"></div>
+                </div>
+                <input type="range" class="size-slider" id="brushSize" min="1" max="50" value="18" 
+                       oninput="updateBrushSize(this.value)">
+            </div>
         </div>
         
-        <div class="tool-grid">
-            <button class="tool-btn active" id="btn-brush" onclick="setTool('brush')">✏️ Lápiz</button>
-            <button class="tool-btn" id="btn-eraser" onclick="setTool('eraser')">🧽 Goma</button>
-            <button class="tool-btn btn-undo" id="btn-undo" onclick="undo()" disabled>↩️ Deshacer</button>
-            <button class="tool-btn btn-redo" id="btn-redo" onclick="redo()" disabled>↪️ Rehacer</button>
-            <button class="tool-btn btn-clear" onclick="confirmarLimpieza()">🗑️ Limpiar</button>
-            <button class="tool-btn btn-save" onclick="descargar()">💾 Guardar</button>
-            <a href="Matematica.html" class="tool-btn btn-math-panel">🎮 ¡JUGAR MATEMÁTICA! 🍕</a>
+        <div class="tools-grid">
+            <button class="tool-btn active" id="btnBrush" onclick="setTool('brush')">
+                ✏️ Lápiz
+            </button>
+            <button class="tool-btn" id="btnEraser" onclick="setTool('eraser')">
+                🧽 Goma
+            </button>
+            <button class="tool-btn tool-btn-undo" id="btnUndo" onclick="undo()" disabled>
+                ↩️ Deshacer
+            </button>
+            <button class="tool-btn tool-btn-redo" id="btnRedo" onclick="redo()" disabled><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Happy Kids Math - Juegos matemáticos interactivos para niños">
+    <meta name="theme-color" content="#FF6B6B">
+    <title>🧮 Happy Kids - Matemática Mágica</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --math-primary: #FF6B6B;
+            --math-secondary: #4ECDC4;
+            --math-accent: #FFE66D;
+            --math-success: #95E1D3;
+            --math-dark: #2C3E50;
+            --math-light: #F7F9FC;
+            --math-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --math-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --math-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--math-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            color: var(--math-dark);
+        }
+
+        .app-container {
+            background: var(--math-light);
+            border-radius: 30px;
+            box-shadow: var(--math-shadow);
+            max-width: 500px;
+            width: 100%;
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, var(--math-primary) 0%, #FF8E53 100%);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: 'Fredoka One', cursive;
+            color: white;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            padding: 8px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            background: rgba(255,255,255,0.2);
+            transition: var(--math-transition);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Screens */
+        .screen {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .screen.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Score */
+        .score-board {
+            background: white;
+            border-radius: 20px;
+            padding: 15px 25px;
+            margin: 0 auto 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 18px;
+            font-weight: 800;
+            border: 3px solid var(--math-accent);
+        }
+
+        .score-board span { color: var(--math-primary); font-size: 24px; }
+
+        /* Games Grid */
+        .games-grid { display: grid; gap: 15px; margin: 20px 0; }
+
+        .game-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--math-transition);
+            border: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            transition: var(--math-transition);
+        }
+
+        .game-card:hover { transform: translateY(-3px); box-shadow: var(--math-shadow); }
+
+        .game-card.suma::before { background: #FF6B6B; }
+        .game-card.suma { border-color: #FF6B6B; }
+        .game-card.resta::before { background: #4ECDC4; }
+        .game-card.resta { border-color: #4ECDC4; }
+        .game-card.conteo::before { background: #95E1D3; }
+        .game-card.conteo { border-color: #95E1D3; }
+        .game-card.fraccion::before { background: #F7DC6F; }
+        .game-card.fraccion { border-color: #F7DC6F; }
+
+        .game-icon {
+            font-size: 35px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--math-light);
+            border-radius: 15px;
+            transition: var(--math-transition);
+        }
+
+        .game-card:hover .game-icon { transform: scale(1.1) rotate(5deg); }
+
+        .game-info h3 { font-size: 18px; margin-bottom: 5px; }
+        .game-info p { font-size: 13px; color: #7f8c8d; }
+
+        /* Game Area */
+        .game-area { text-align: center; }
+
+        .game-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 22px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .visual-container {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 20px;
+            margin: 20px 0;
+            min-height: 150px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border: 4px dashed var(--math-accent);
+            position: relative;
+        }
+
+        .visual-container::after {
+            content: '✨';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 30px;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .emoji-item {
+            font-size: 40px;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+            transition: transform 0.2s;
+        }
+
+        .emoji-item:hover { transform: scale(1.2) rotate(10deg); }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0) rotate(-180deg); }
+            to { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        .operator {
+            font-size: 35px;
+            margin: 0 15px;
+            color: var(--math-primary);
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+        /* Input */
+        .input-section { margin: 25px 0; }
+
+        .number-input {
+            width: 120px;
+            height: 80px;
+            font-size: 36px;
+            text-align: center;
+            border: 4px solid var(--math-secondary);
+            border-radius: 20px;
+            outline: none;
+            font-weight: 800;
+            color: var(--math-dark);
+            transition: var(--math-transition);
+        }
+
+        .number-input:focus {
+            border-color: var(--math-primary);
+            box-shadow: 0 0 20px rgba(255,107,107,0.3);
+            transform: scale(1.05);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: var(--math-transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
+
+        .btn-check {
+            background: linear-gradient(135deg, var(--math-primary) 0%, #FF8E53 100%);
+            color: white;
+            font-size: 20px;
+            padding: 18px 40px;
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+            color: white;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        /* Feedback */
+        .feedback {
+            font-size: 22px;
+            font-weight: 800;
+            margin: 20px 0;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-radius: 15px;
+            padding: 15px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .feedback.success { background: var(--math-success); color: #2c5f2d; }
+        .feedback.error { background: #fadbd8; color: #c0392b; }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            top: -10px;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 1000;
+        }
+
+        @keyframes confetti-fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Streak */
+        .streak {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        .streak.active { display: flex; align-items: center; gap: 5px; animation: pulse 0.5s; }
+
+        /* Footer Nav */
+        .nav-footer {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 3px dashed #bdc3c7;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-footer-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 16px;
+            transition: var(--math-transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            color: white;
+        }
+
+        .nav-footer-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+        .btn-colorear { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .btn-home { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .app-container { border-radius: 0; min-height: 100vh; }
+            body { padding: 0; }
+            .game-title { font-size: 20px; }
+            .emoji-item { font-size: 35px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="streak" id="streak">🔥 <span id="streak-count">0</span></div>
+
+        <nav class="navbar">
+            <div class="nav-brand">🎓 Happy Math</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn">🔥 Ofertas</a>
+                <a href="dashboard.html" class="nav-btn">📚 Libros</a>
+            </div>
+        </nav>
+
+        <!-- MENU -->
+        <div id="menu" class="screen active">
+            <div style="text-align: center;">
+                <div class="score-board">⭐ Puntos: <span id="score">0</span></div>
+            </div>
+
+            <div class="games-grid">
+                <div class="game-card suma" onclick="openGame('suma')">
+                    <div class="game-icon">🍎</div>
+                    <div class="game-info">
+                        <h3>Suma de Frutas</h3>
+                        <p>Sumas hasta 10</p>
+                    </div>
+                </div>
+                <div class="game-card resta" onclick="openGame('resta')">
+                    <div class="game-icon">🚀</div>
+                    <div class="game-info">
+                        <h3>Resta Espacial</h3>
+                        <p>Restas divertidas</p>
+                    </div>
+                </div>
+                <div class="game-card conteo" onclick="openGame('conteo')">
+                    <div class="game-icon">🦖</div>
+                    <div class="game-info">
+                        <h3>Cuenta Dinos</h3>
+                        <p>Conteo 1-10</p>
+                    </div>
+                </div>
+                <div class="game-card fraccion" onclick="openGame('fraccion')">
+                    <div class="game-icon">🍕</div>
+                    <div class="game-info">
+                        <h3>Rebanadas de Pizza</h3>
+                        <p>Primeras fracciones</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-footer">
+                <a href="colorear.html" class="nav-footer-btn btn-colorear">🎨 Ir a Colorear</a>
+                <a href="index.html" class="nav-footer-btn btn-home">🏠 Volver a Ofertas</a>
+            </div>
+        </div>
+
+        <!-- GAME -->
+        <div id="game" class="screen">
+            <div class="game-area">
+                <h2 class="game-title" id="titulo"></h2>
+                <div class="visual-container" id="contenedor-visual"></div>
+                <div class="input-section">
+                    <input type="number" id="respuesta" class="number-input" placeholder="?" min="0" max="20" inputmode="numeric">
+                </div>
+                <button class="btn btn-check" onclick="verificar()">✅ Revisar</button>
+                <div class="feedback" id="feedback"></div>
+                <button class="btn btn-back" onclick="volver()">⬅ Volver al Menú</button>
+            </div>
         </div>
     </div>
 
-    <div class="loading" id="loading">Cargando...</div>
-    <div class="toast" id="toast"></div><script>
-    // CONFIGURACIÓN Y ESTADO
-    const canvas = document.getElementById('mainCanvas');
-    const ctx = canvas.getContext('2d');
-    const carousel = document.getElementById('carousel-container');
-    
-    let currentColor = '#000000';
-    let currentTool = 'brush';
-    let brushSize = 18;
-    let isDrawing = false;
-    let currentTemplateUrl = "";
-    let scale = 1;
-    let panX = 0;
-    let panY = 0;
-    
-    // HISTORIAL PARA UNDO/REDO
-    let history = [];
-    let historyStep = -1;
-    const MAX_HISTORY = 20;
-    
-    // PALETA DE COLORES EXTENDIDA
-    const colors = [
-        '#000000', '#FF0000', '#0000FF', '#008000', '#FFFF00', 
-        '#FFA500', '#800080', '#FFC0CB', '#00CED1', '#FF1493',
-        '#32CD32', '#FFD700', '#FF6347', '#4169E1', '#8B4513'
-    ];
+    <script>
+        const state = {
+            juego: '',
+            score: parseInt(localStorage.getItem('hk_math_score')) || 0,
+            correcta: 0,
+            racha: parseInt(localStorage.getItem('hk_math_streak')) || 0
+        };
 
-    const misPlantillas = [
-        '1_20260212_143632_0000.png', '1_20260212_153720_0000.png', '1_20260217_094136_0000.png', '1_20260314_190631_0000.png',
-        '20260314_184050_0000.png', '20260314_184050_0001.png', '20260314_184051_0002.png', '20260314_184051_0003.png',
-        '20260314_184051_0004.png', '20260314_184051_0005.png', '20260314_184051_0006.png', '20260314_184051_0007.png',
-        '20260314_184051_0008.png', '20260314_184051_0009.png', '20260314_184209_0000.png', '20260314_184210_0001.png',
-        '20260314_184210_0002.png', '20260314_184210_0003.png', '20260314_184210_0004.png', '20260314_184210_0005.png',
-        '20260314_184210_0006.png', '20260314_184210_0007.png', '20260314_184210_0008.png', '20260314_184210_0009.png',
-        '20260314_184924_0000.png', '20260314_184924_0001.png', '20260314_184924_0002.png', '20260314_184925_0003.png',
-        '20260314_184925_0004.png', '20260314_184925_0005.png', '20260314_184925_0006.png', '20260314_184925_0007.png',
-        '20260314_184925_0008.png', '20260314_184925_0009.png', '20260314_184925_0010.png', '20260314_185632_0000.png',
-        '20260314_185632_0001.png', '20260314_185633_0002.png', '20260314_185633_0003.png', '20260314_185633_0004.png'
-    ];
+        const juegos = {
+            suma: { titulo: '🍎 Suma las Manzanas', emoji: '🍎', min: 1, max: 5 },
+            resta: { titulo: '🚀 Resta Cohetes', emoji: '🚀', min: 1, max: 4 },
+            conteo: { titulo: '🦖 Cuenta los Dinos', emoji: '🦖', min: 1, max: 9 },
+            fraccion: { titulo: '🍕 Rebanadas de Pizza', emoji: '🍕', min: 1, max: 6 }
+        };
 
-    // INICIALIZACIÓN
-    function init() {
-        // Crear paleta de colores
-        const palette = document.getElementById('palette');
-        colors.forEach((c, index) => {
-            const dot = document.createElement('div');
-            dot.className = 'color-dot';
-            dot.style.background = c;
-            if (c === currentColor) dot.classList.add('active');
-            dot.onclick = () => selectColor(c, dot);
-            palette.appendChild(dot);
+        document.addEventListener('DOMContentLoaded', () => {
+            actualizarScore();
+            document.getElementById('respuesta').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') verificar();
+            });
         });
 
-        // Cargar plantillas
-        misPlantillas.forEach((imgName, i) => {
-            const img = document.createElement('img');
-            img.src = `plantillas/${imgName}`;
-            img.className = 'template-thumb';
-            img.loading = "lazy";
-            img.alt = `Plantilla ${i + 1}`;
+        function openGame(tipo) {
+            state.juego = tipo;
+            const config = juegos[tipo];
+            document.getElementById('menu').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('game').classList.add('active');
+                document.getElementById('titulo').innerHTML = config.titulo;
+                generar();
+            }, 100);
+        }
+
+        function volver() {
+            document.getElementById('game').classList.remove('active');
+            setTimeout(() => document.getElementById('menu').classList.add('active'), 100);
+        }
+
+        function generar() {
+            const contenedor = document.getElementById('contenedor-visual');
+            const input = document.getElementById('respuesta');
+            const feedback = document.getElementById('feedback');
+            const config = juegos[state.juego];
             
-            img.onerror = () => {
-                img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23ddd" width="100" height="100"/><text x="50" y="50" text-anchor="middle" fill="%23999">Error</text></svg>';
-            };
-            
-            img.onclick = () => selectTemplate(img, img.src);
-            carousel.appendChild(img);
-            
-            if (i === 0) { 
-                img.classList.add('active'); 
-                loadImg(img.src); 
-            }
-        });
+            contenedor.innerHTML = '';
+            input.value = '';
+            feedback.innerHTML = '';
+            feedback.className = 'feedback';
+            input.focus();
 
-        // Guardar estado inicial
-        saveState();
-        
-        // Event listeners mejorados
-        setupEventListeners();
-    }
+            let n1, n2;
 
-    function selectColor(color, element) {
-        currentColor = color;
-        currentTool = 'brush';
-        updateToolButtons();
-        
-        document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
-        element.classList.add('active');
-    }
-
-    function selectTemplate(imgElement, url) {
-        document.querySelectorAll('.template-thumb').forEach(t => t.classList.remove('active'));
-        imgElement.classList.add('active');
-        loadImg(url);
-        showToast('Plantilla cargada ✨');
-    }
-
-    function loadImg(url) {
-        showLoading(true);
-        currentTemplateUrl = url;
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.src = url;
-        
-        img.onload = () => {
-            ctx.clearRect(0, 0, 1000, 1000);
-            ctx.drawImage(img, 0, 0, 1000, 1000);
-            saveState();
-            showLoading(false);
-        };
-        
-        img.onerror = () => {
-            showToast('Error al cargar imagen ❌');
-            showLoading(false);
-        };
-    }
-
-    // SISTEMA DE DIBUJO MEJORADO
-    function setupEventListeners() {
-        // Mouse
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-        canvas.addEventListener('mouseout', stopDrawing);
-        
-        // Touch
-        canvas.addEventListener('touchstart', handleTouchStart, {passive: false});
-        canvas.addEventListener('touchmove', handleTouchMove, {passive: false});
-        canvas.addEventListener('touchend', stopDrawing);
-        
-        // Prevenir scroll al dibujar
-        canvas.addEventListener('touchstart', (e) => e.preventDefault(), {passive: false});
-    }
-
-    function getPos(e) {
-        const rect = canvas.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        
-        return {
-            x: (clientX - rect.left) * (1000 / rect.width),
-            y: (clientY - rect.top) * (1000 / rect.height)
-        };
-    }
-
-    function startDrawing(e) {
-        isDrawing = true;
-        const p = getPos(e);
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        
-        // Configurar estilo
-        ctx.lineWidth = currentTool === 'eraser' ? brushSize * 2 : brushSize;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.strokeStyle = currentTool === 'eraser' ? '#ffffff' : currentColor;
-        
-        // Punto inicial
-        ctx.lineTo(p.x, p.y);
-        ctx.stroke();
-    }
-
-    function draw(e) {
-        if (!isDrawing) return;
-        const p = getPos(e);
-        
-        ctx.lineTo(p.x, p.y);
-        ctx.stroke();
-    }
-
-    function stopDrawing() {
-        if (isDrawing) {
-            isDrawing = false;
-            ctx.closePath();
-            saveState();
-        }
-    }
-
-    function handleTouchStart(e) {
-        e.preventDefault();
-        startDrawing(e);
-    }
-
-    function handleTouchMove(e) {
-        e.preventDefault();
-        draw(e);
-    }
-
-    // HISTORIAL UNDO/REDO
-    function saveState() {
-        historyStep++;
-        if (historyStep < history.length) {
-            history.length = historyStep;
-        }
-        history.push(canvas.toDataURL());
-        if (history.length > MAX_HISTORY) {
-            history.shift();
-            historyStep--;
-        }
-        updateUndoRedoButtons();
-    }
-
-    function undo() {
-        if (historyStep > 0) {
-            historyStep--;
-            restoreState();
-            showToast('Deshacer ↩️');
-        }
-    }
-
-    function redo() {
-        if (historyStep < history.length - 1) {
-            historyStep++;
-            restoreState();
-            showToast('Rehacer ↪️');
-        }
-    }
-
-    function restoreState() {
-        const img = new Image();
-        img.src = history[historyStep];
-        img.onload = () => {
-            ctx.clearRect(0, 0, 1000, 1000);
-            ctx.drawImage(img, 0, 0);
-        };
-        updateUndoRedoButtons();
-    }
-
-    function updateUndoRedoButtons() {
-        document.getElementById('btn-undo').disabled = historyStep <= 0;
-        document.getElementById('btn-redo').disabled = historyStep >= history.length - 1;
-        
-        document.getElementById('btn-redo').classList.toggle('active', historyStep < history.length - 1);
-    }
-
-    // HERRAMIENTAS
-    function toggleTools() { 
-        document.getElementById('toolbar-panel').classList.toggle('open'); 
-    }
-
-    function setTool(tool) { 
-        currentTool = tool;
-        updateToolButtons();
-        if (tool === 'brush') toggleTools();
-    }
-
-    function updateToolButtons() {
-        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(`btn-${currentTool}`)?.classList.add('active');
-    }
-
-    function updateBrushSize(size) {
-        brushSize = parseInt(size);
-        document.getElementById('size-value').textContent = size;
-    }
-
-    function confirmarLimpieza() { 
-        if (confirm('¿Limpiar todo el dibujo? Esta acción no se puede deshacer.')) { 
-            loadImg(currentTemplateUrl);
-            showToast('Lienzo limpiado 🧽');
-        }
-    }
-
-    function descargar() {
-        try {
-            const link = document.createElement('a');
-            link.download = `mi-dibujo-happy-kids-${Date.now()}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            showToast('¡Imagen guardada! 💾');
-        } catch (e) {
-            showToast('Error al guardar ❌');
-        }
-    }
-
-    // ZOOM Y PAN
-    function zoomIn() {
-        scale = Math.min(scale * 1.2, 3);
-        applyTransform();
-    }
-
-    function zoomOut() {
-        scale = Math.max(scale / 1.2, 0.5);
-        applyTransform();
-    }
-
-    function resetZoom() {
-        scale = 1;
-        panX = 0;
-        panY = 0;
-        applyTransform();
-    }
-
-    function applyTransform() {
-        canvas.style.transform = `scale(${scale}) translate(${panX}px, ${panY}px)`;
-    }
-
-    // FULLSCREEN
-    function toggleFullscreen() {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
-        } else {
-            document.exitFullscreen();
-        }
-    }
-
-    // UTILIDADES
-    function showLoading(show) {
-        document.getElementById('loading').classList.toggle('show', show);
-    }
-
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2000);
-    }
-
-    // ATAJOS DE TECLADO
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey || e.metaKey) {
-            if (e.key === 'z') {
-                e.preventDefault();
-                undo();
-            } else if (e.key === 'y' || (e.key === 'z' && e.shiftKey)) {
-                e.preventDefault();
-                redo();
-            } else if (e.key === 's') {
-                e.preventDefault();
-                descargar();
+            switch(state.juego) {
+                case 'suma':
+                    n1 = random(config.min, config.max);
+                    n2 = random(1, 4);
+                    state.correcta = n1 + n2;
+                    dibujarEmojis(n1, config.emoji, contenedor);
+                    contenedor.innerHTML += '<span class="operator">+</span>';
+                    dibujarEmojis(n2, config.emoji, contenedor);
+                    break;
+                case 'resta':
+                    n1 = random(3, 8);
+                    n2 = random(1, Math.min(n1 - 1, 4));
+                    state.correcta = n1 - n2;
+                    dibujarEmojis(n1, config.emoji, contenedor);
+                    contenedor.innerHTML += '<span class="operator">-</span>';
+                    break;
+                case 'conteo':
+                case 'fraccion':
+                    n1 = random(config.min, config.max);
+                    state.correcta = n1;
+                    dibujarEmojis(n1, config.emoji, contenedor);
+                    break;
             }
         }
-    });
 
-    // INICIAR
-    init();
-</script>
-</body>
-</html>
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function dibujarEmojis(cantidad, emoji, elemento) {
+            const container = document.createElement('div');
+            container.style.cssText = 'display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%;';
+            for (let i = 0; i < cantidad; i++) {
+                const span = document.createElement('span');
+                span.className = 'emoji-item';
+                span.textContent = emoji;
+                span.style.animationDelay = `${i * 0.1}s`;
+                container.appendChild(span);
+            }
+            elemento.appendChild(container);
+        }
+
+        function verificar() {
+            const input = document.getElementById('respuesta');
+            const feedback = document.getElementById('feedback');
+            const user = parseInt(input.value);
+
+            if (isNaN(user)) {
+                mostrarFeedback('❌ Escribe un número', 'error');
+                input.focus();
+                return;
+            }
+
+            if (user === state.correcta) {
+                state.score += 10 + (state.racha * 2);
+                state.racha++;
+                localStorage.setItem('hk_math_score', state.score);
+                localStorage.setItem('hk_math_streak', state.racha);
+                actualizarScore();
+                mostrarRacha();
+                mostrarFeedback('🎉 ¡Excelente! ✨', 'success');
+                crearConfeti();
+                setTimeout(generar, 1800);
+            } else {
+                state.racha = 0;
+                localStorage.setItem('hk_math_streak', 0);
+                ocultarRacha();
+                mostrarFeedback('❌ ¡Casi! Intenta de nuevo', 'error');
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        function mostrarFeedback(texto, tipo) {
+            const feedback = document.getElementById('feedback');
+            feedback.innerHTML = texto;
+            feedback.className = `feedback ${tipo}`;
+        }
+
+        function mostrarRacha() {
+            if (state.racha > 1) {
+                document.getElementById('
+           
