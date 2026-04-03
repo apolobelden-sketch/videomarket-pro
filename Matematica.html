@@ -3,50 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Happy Kids - Juegos matemáticos interactivos para niños. Aprende sumas, restas, conteo y fracciones de forma divertida.">
+    <meta name="description" content="Happy Kids Math - Juegos matemáticos interactivos para niños">
     <meta name="theme-color" content="#FF6B6B">
-    <title>Happy Kids - Matemática Visual 🎨</title>
+    <title>🧮 Happy Kids - Matemática Mágica</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== VARIABLES Y RESET ===== */
         :root {
-            --primary: #FF6B6B;
-            --secondary: #4ECDC4;
-            --accent: #FFE66D;
-            --dark: #2C3E50;
-            --light: #F7F9FC;
-            --success: #95E1D3;
-            --error: #FF6B6B;
-            --shadow: 0 10px 30px rgba(0,0,0,0.15);
-            --shadow-hover: 0 15px 40px rgba(0,0,0,0.2);
-            --radius: 25px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --math-primary: #FF6B6B;
+            --math-secondary: #4ECDC4;
+            --math-accent: #FFE66D;
+            --math-success: #95E1D3;
+            --math-dark: #2C3E50;
+            --math-light: #F7F9FC;
+            --math-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --math-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --math-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Nunito', sans-serif;
+            background: var(--math-gradient);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            color: var(--dark);
-            overflow-x: hidden;
+            padding: 15px;
+            color: var(--math-dark);
         }
 
-        /* ===== CONTENEDOR PRINCIPAL ===== */
         .app-container {
-            background: var(--light);
+            background: var(--math-light);
             border-radius: 30px;
-            box-shadow: var(--shadow);
+            box-shadow: var(--math-shadow);
             max-width: 500px;
             width: 100%;
             min-height: 600px;
@@ -60,104 +53,90 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== HEADER ===== */
-        .header {
-            background: linear-gradient(135deg, var(--primary) 0%, #FF8E53 100%);
-            padding: 25px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, var(--math-primary) 0%, #FF8E53 100%);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.3;
-        }
-
-        .header h1 {
+        .nav-brand {
+            font-family: 'Fredoka One', cursive;
             color: white;
-            font-size: 26px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            position: relative;
-            z-index: 1;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .header-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-            display: block;
-            animation: bounce 2s infinite;
+        .nav-links {
+            display: flex;
+            gap: 8px;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .nav-btn {
+            padding: 8px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            background: rgba(255,255,255,0.2);
+            transition: var(--math-transition);
         }
 
-        /* ===== SISTEMA DE PANTALLAS ===== */
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Screens */
         .screen {
             display: none;
             padding: 25px;
             animation: fadeIn 0.4s ease-out;
         }
 
-        .screen.active {
-            display: block;
-        }
+        .screen.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* ===== SCORE BOARD ===== */
+        /* Score */
         .score-board {
             background: white;
-            border-radius: var(--radius);
+            border-radius: 20px;
             padding: 15px 25px;
-            margin: 20px auto;
+            margin: 0 auto 20px;
             display: inline-flex;
             align-items: center;
             gap: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             font-size: 18px;
-            font-weight: bold;
-            color: var(--dark);
-            border: 3px solid var(--accent);
+            font-weight: 800;
+            border: 3px solid var(--math-accent);
         }
 
-        .score-board span {
-            color: var(--primary);
-            font-size: 24px;
-        }
+        .score-board span { color: var(--math-primary); font-size: 24px; }
 
-        /* ===== MENÚ DE JUEGOS ===== */
-        .games-grid {
-            display: grid;
-            gap: 15px;
-            margin: 25px 0;
-        }
+        /* Games Grid */
+        .games-grid { display: grid; gap: 15px; margin: 20px 0; }
 
         .game-card {
             background: white;
             border-radius: 20px;
             padding: 20px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--math-transition);
             border: 3px solid transparent;
-            position: relative;
-            overflow: hidden;
-            text-align: left;
             display: flex;
             align-items: center;
             gap: 15px;
+            position: relative;
+            overflow: hidden;
         }
 
         .game-card::before {
@@ -167,23 +146,17 @@
             top: 0;
             width: 5px;
             height: 100%;
-            transition: var(--transition);
+            transition: var(--math-transition);
         }
 
-        .game-card:hover, .game-card:active {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
+        .game-card:hover { transform: translateY(-3px); box-shadow: var(--math-shadow); }
 
         .game-card.suma::before { background: #FF6B6B; }
         .game-card.suma { border-color: #FF6B6B; }
-        
         .game-card.resta::before { background: #4ECDC4; }
         .game-card.resta { border-color: #4ECDC4; }
-        
         .game-card.conteo::before { background: #95E1D3; }
         .game-card.conteo { border-color: #95E1D3; }
-        
         .game-card.fraccion::before { background: #F7DC6F; }
         .game-card.fraccion { border-color: #F7DC6F; }
 
@@ -194,34 +167,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--light);
+            background: var(--math-light);
             border-radius: 15px;
-            transition: var(--transition);
+            transition: var(--math-transition);
         }
 
-        .game-card:hover .game-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
+        .game-card:hover .game-icon { transform: scale(1.1) rotate(5deg); }
 
-        .game-info h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-            color: var(--dark);
-        }
+        .game-info h3 { font-size: 18px; margin-bottom: 5px; }
+        .game-info p { font-size: 13px; color: #7f8c8d; }
 
-        .game-info p {
-            font-size: 13px;
-            color: #7f8c8d;
-        }
-
-        /* ===== ÁREA DE JUEGO ===== */
-        .game-area {
-            text-align: center;
-        }
+        /* Game Area */
+        .game-area { text-align: center; }
 
         .game-title {
+            font-family: 'Fredoka One', cursive;
             font-size: 22px;
-            color: var(--dark);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -229,7 +190,6 @@
             gap: 10px;
         }
 
-        /* Contenedor Visual Mejorado */
         .visual-container {
             background: white;
             border-radius: 25px;
@@ -241,9 +201,8 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            border: 4px dashed var(--accent);
+            border: 4px dashed var(--math-accent);
             position: relative;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .visual-container::after {
@@ -255,10 +214,7 @@
             animation: spin 3s linear infinite;
         }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         .emoji-item {
             font-size: 40px;
@@ -267,9 +223,7 @@
             transition: transform 0.2s;
         }
 
-        .emoji-item:hover {
-            transform: scale(1.2) rotate(10deg);
-        }
+        .emoji-item:hover { transform: scale(1.2) rotate(10deg); }
 
         @keyframes popIn {
             from { opacity: 0; transform: scale(0) rotate(-180deg); }
@@ -279,97 +233,56 @@
         .operator {
             font-size: 35px;
             margin: 0 15px;
-            color: var(--primary);
+            color: var(--math-primary);
             font-weight: bold;
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
             animation: pulse 1.5s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-        .hint-text {
-            font-size: 16px;
-            color: #7f8c8d;
-            margin-top: 10px;
-            font-style: italic;
-        }
-
-        /* ===== INPUT Y CONTROLES ===== */
-        .input-section {
-            margin: 25px 0;
-        }
-
-        .input-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+        /* Input */
+        .input-section { margin: 25px 0; }
 
         .number-input {
-            width: 100px;
-            height: 70px;
-            font-size: 32px;
+            width: 120px;
+            height: 80px;
+            font-size: 36px;
             text-align: center;
-            border: 4px solid var(--secondary);
+            border: 4px solid var(--math-secondary);
             border-radius: 20px;
             outline: none;
-            transition: var(--transition);
-            font-weight: bold;
-            color: var(--dark);
-            background: white;
+            font-weight: 800;
+            color: var(--math-dark);
+            transition: var(--math-transition);
         }
 
         .number-input:focus {
-            border-color: var(--primary);
+            border-color: var(--math-primary);
             box-shadow: 0 0 20px rgba(255,107,107,0.3);
             transform: scale(1.05);
         }
 
-        /* Botones */
+        /* Buttons */
         .btn {
             padding: 15px 30px;
             border: none;
             border-radius: 50px;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--math-transition);
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
             box-shadow: 0 6px 0 rgba(0,0,0,0.2);
         }
 
-        .btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 rgba(0,0,0,0.2);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--secondary) 0%, #44A08D 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 0 rgba(0,0,0,0.2), 0 10px 20px rgba(78,205,196,0.4);
-        }
+        .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
 
         .btn-check {
-            background: linear-gradient(135deg, var(--primary) 0%, #FF8E53 100%);
+            background: linear-gradient(135deg, var(--math-primary) 0%, #FF8E53 100%);
             color: white;
             font-size: 20px;
             padding: 18px 40px;
-        }
-
-        .btn-check:hover {
-            box-shadow: 0 8px 0 rgba(0,0,0,0.2), 0 10px 25px rgba(255,107,107,0.4);
         }
 
         .btn-back {
@@ -379,10 +292,10 @@
             font-size: 16px;
         }
 
-        /* ===== FEEDBACK ===== */
+        /* Feedback */
         .feedback {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 800;
             margin: 20px 0;
             min-height: 40px;
             display: flex;
@@ -399,39 +312,41 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        .feedback.success {
-            background: var(--success);
-            color: #2c5f2d;
+        .feedback.success { background: var(--math-success); color: #2c5f2d; }
+        .feedback.error { background: #fadbd8; color: #c0392b; }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            top: -10px;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 1000;
         }
 
-        .feedback.error {
-            background: #fadbd8;
-            color: #c0392b;
+        @keyframes confetti-fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
 
-        .feedback.hint {
-            background: var(--accent);
-            color: #8e6c00;
+        /* Streak */
+        .streak {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: none;
         }
 
-        /* ===== BARRA DE PROGRESO ===== */
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #ecf0f1;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 15px 0;
-        }
+        .streak.active { display: flex; align-items: center; gap: 5px; animation: pulse 0.5s; }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            transition: width 0.5s ease;
-        }
-
-        /* ===== NAVEGACIÓN FOOTER ===== */
+        /* Footer Nav */
         .nav-footer {
             margin-top: 30px;
             padding-top: 25px;
@@ -441,7 +356,7 @@
             gap: 12px;
         }
 
-        .nav-btn {
+        .nav-footer-btn {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -449,121 +364,43 @@
             padding: 14px 25px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 800;
             font-size: 16px;
-            transition: var(--transition);
+            transition: var(--math-transition);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-
-        .nav-btn.colorear {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
         }
 
-        .nav-btn.home {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-        }
+        .nav-footer-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
 
-        /* ===== EFECTOS DE CELEBRACIÓN ===== */
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            top: -10px;
-            animation: confetti-fall 3s linear forwards;
-            z-index: 1000;
-        }
+        .btn-colorear { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .btn-home { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
 
-        @keyframes confetti-fall {
-            to {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* ===== RESPONSIVE ===== */
+        /* Responsive */
         @media (max-width: 480px) {
-            .app-container {
-                border-radius: 0;
-                min-height: 100vh;
-            }
-            
-            body {
-                padding: 0;
-            }
-            
-            .header h1 {
-                font-size: 22px;
-            }
-            
-            .emoji-item {
-                font-size: 35px;
-            }
-        }
-
-        /* ===== LOADING ===== */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        /* ===== STREAK COUNTER ===== */
-        .streak {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            display: none;
-        }
-
-        .streak.active {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            animation: pulse 0.5s;
+            .app-container { border-radius: 0; min-height: 100vh; }
+            body { padding: 0; }
+            .game-title { font-size: 20px; }
+            .emoji-item { font-size: 35px; }
         }
     </style>
 </head>
-
 <body>
     <div class="app-container">
-        <!-- Streak Counter -->
-        <div class="streak" id="streak">
-            🔥 <span id="streak-count">0</span>
-        </div>
+        <div class="streak" id="streak">🔥 <span id="streak-count">0</span></div>
 
-        <!-- HEADER -->
-        <div class="header">
-            <span class="header-icon">🎓</span>
-            <h1>Happy Kids Math</h1>
-        </div>
+        <nav class="navbar">
+            <div class="nav-brand">🎓 Happy Math</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn">🔥 Ofertas</a>
+                <a href="dashboard.html" class="nav-btn">📚 Libros</a>
+            </div>
+        </nav>
 
-        <!-- PANTALLA DE MENÚ -->
+        <!-- MENU -->
         <div id="menu" class="screen active">
             <div style="text-align: center;">
-                <div class="score-board">
-                    ⭐ Puntos: <span id="score">0</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress" style="width: 0%"></div>
-                </div>
+                <div class="score-board">⭐ Puntos: <span id="score">0</span></div>
             </div>
 
             <div class="games-grid">
@@ -574,7 +411,6 @@
                         <p>Sumas hasta 10</p>
                     </div>
                 </div>
-
                 <div class="game-card resta" onclick="openGame('resta')">
                     <div class="game-icon">🚀</div>
                     <div class="game-info">
@@ -582,7 +418,6 @@
                         <p>Restas divertidas</p>
                     </div>
                 </div>
-
                 <div class="game-card conteo" onclick="openGame('conteo')">
                     <div class="game-icon">🦖</div>
                     <div class="game-info">
@@ -590,7 +425,6 @@
                         <p>Conteo 1-10</p>
                     </div>
                 </div>
-
                 <div class="game-card fraccion" onclick="openGame('fraccion')">
                     <div class="game-icon">🍕</div>
                     <div class="game-info">
@@ -601,112 +435,51 @@
             </div>
 
             <div class="nav-footer">
-                <a href="Colorear.html" class="nav-btn colorear">
-                    🎨 Ir a Colorear
-                </a>
-                <a href="index.html" class="nav-btn home">
-                    🏠 Volver a Reels
-                </a>
+                <a href="colorear.html" class="nav-footer-btn btn-colorear">🎨 Ir a Colorear</a>
+                <a href="index.html" class="nav-footer-btn btn-home">🏠 Volver a Ofertas</a>
             </div>
         </div>
 
-        <!-- PANTALLA DE JUEGO -->
+        <!-- GAME -->
         <div id="game" class="screen">
             <div class="game-area">
                 <h2 class="game-title" id="titulo"></h2>
-                
                 <div class="visual-container" id="contenedor-visual"></div>
-                
                 <div class="input-section">
-                    <div class="input-group">
-                        <input 
-                            type="number" 
-                            id="respuesta" 
-                            class="number-input" 
-                            placeholder="?" 
-                            min="0" 
-                            max="20"
-                            inputmode="numeric"
-                        >
-                    </div>
+                    <input type="number" id="respuesta" class="number-input" placeholder="?" min="0" max="20" inputmode="numeric">
                 </div>
-
-                <button class="btn btn-check" onclick="verificar()">
-                    ✅ Revisar
-                </button>
-
+                <button class="btn btn-check" onclick="verificar()">✅ Revisar</button>
                 <div class="feedback" id="feedback"></div>
-
-                <button class="btn btn-back" onclick="volver()">
-                    ⬅ Volver al Menú
-                </button>
+                <button class="btn btn-back" onclick="volver()">⬅ Volver al Menú</button>
             </div>
         </div>
-    </div>    <script>
-        // ===== ESTADO DEL JUEGO =====
+    </div>
+
+    <script>
         const state = {
             juego: '',
-            score: parseInt(localStorage.getItem('happyKidsScore')) || 0,
+            score: parseInt(localStorage.getItem('hk_math_score')) || 0,
             correcta: 0,
-            racha: parseInt(localStorage.getItem('happyKidsStreak')) || 0,
-            totalJugadas: 0,
-            emojiActual: '',
-            nivel: 1
+            racha: parseInt(localStorage.getItem('hk_math_streak')) || 0
         };
 
-        // ===== CONFIGURACIÓN DE JUEGOS =====
         const juegos = {
-            suma: {
-                titulo: '🍎 Suma las Manzanas',
-                emoji: '🍎',
-                color: '#FF6B6B',
-                min: 1,
-                max: 5,
-                descripcion: 'Suma las manzanas rojas'
-            },
-            resta: {
-                titulo: '🚀 Resta Cohetes',
-                emoji: '🚀',
-                color: '#4ECDC4',
-                min: 1,
-                max: 4,
-                descripcion: 'Cuenta los cohetes que quedan'
-            },
-            conteo: {
-                titulo: '🦖 Cuenta los Dinos',
-                emoji: '🦖',
-                color: '#95E1D3',
-                min: 1,
-                max: 9,
-                descripcion: '¿Cuántos dinosaurios ves?'
-            },
-            fraccion: {
-                titulo: '🍕 Rebanadas de Pizza',
-                emoji: '🍕',
-                color: '#F7DC6F',
-                min: 1,
-                max: 6,
-                descripcion: 'Cuenta las rebanadas'
-            }
+            suma: { titulo: '🍎 Suma las Manzanas', emoji: '🍎', min: 1, max: 5 },
+            resta: { titulo: '🚀 Resta Cohetes', emoji: '🚀', min: 1, max: 4 },
+            conteo: { titulo: '🦖 Cuenta los Dinos', emoji: '🦖', min: 1, max: 9 },
+            fraccion: { titulo: '🍕 Rebanadas de Pizza', emoji: '🍕', min: 1, max: 6 }
         };
 
-        // ===== INICIALIZACIÓN =====
         document.addEventListener('DOMContentLoaded', () => {
             actualizarScore();
-            actualizarProgreso();
-            
-            // Permitir Enter para verificar
             document.getElementById('respuesta').addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') verificar();
             });
         });
 
-        // ===== NAVEGACIÓN =====
         function openGame(tipo) {
             state.juego = tipo;
             const config = juegos[tipo];
-            
-            // Animación de transición
             document.getElementById('menu').classList.remove('active');
             setTimeout(() => {
                 document.getElementById('game').classList.add('active');
@@ -717,63 +490,46 @@
 
         function volver() {
             document.getElementById('game').classList.remove('active');
-            setTimeout(() => {
-                document.getElementById('menu').classList.add('active');
-                actualizarProgreso();
-            }, 100);
+            setTimeout(() => document.getElementById('menu').classList.add('active'), 100);
         }
 
-        // ===== GENERADOR DE PROBLEMAS =====
         function generar() {
             const contenedor = document.getElementById('contenedor-visual');
             const input = document.getElementById('respuesta');
             const feedback = document.getElementById('feedback');
             const config = juegos[state.juego];
             
-            // Limpiar
             contenedor.innerHTML = '';
             input.value = '';
             feedback.innerHTML = '';
             feedback.className = 'feedback';
             input.focus();
-            
-            let n1, n2, numMayor, numMenor;
+
+            let n1, n2;
 
             switch(state.juego) {
                 case 'suma':
                     n1 = random(config.min, config.max);
                     n2 = random(1, 4);
                     state.correcta = n1 + n2;
-                    
                     dibujarEmojis(n1, config.emoji, contenedor);
-                    contenedor.innerHTML += `<span class="operator">+</span>`;
+                    contenedor.innerHTML += '<span class="operator">+</span>';
                     dibujarEmojis(n2, config.emoji, contenedor);
                     break;
-
                 case 'resta':
                     n1 = random(3, 8);
                     n2 = random(1, Math.min(n1 - 1, 4));
                     state.correcta = n1 - n2;
-                    
                     dibujarEmojis(n1, config.emoji, contenedor);
-                    contenedor.innerHTML += `<span class="operator">-</span>`;
-                    contenedor.innerHTML += `<div class="hint-text">(Quita ${n2})</div>`;
+                    contenedor.innerHTML += '<span class="operator">-</span>';
                     break;
-
                 case 'conteo':
-                    n1 = random(config.min, config.max);
-                    state.correcta = n1;
-                    dibujarEmojis(n1, config.emoji, contenedor);
-                    break;
-
                 case 'fraccion':
                     n1 = random(config.min, config.max);
                     state.correcta = n1;
                     dibujarEmojis(n1, config.emoji, contenedor);
                     break;
             }
-            
-            state.emojiActual = config.emoji;
         }
 
         function random(min, max) {
@@ -782,12 +538,7 @@
 
         function dibujarEmojis(cantidad, emoji, elemento) {
             const container = document.createElement('div');
-            container.style.display = 'flex';
-            container.style.flexWrap = 'wrap';
-            container.style.justifyContent = 'center';
-            container.style.gap = '8px';
-            container.style.width = '100%';
-            
+            container.style.cssText = 'display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%;';
             for (let i = 0; i < cantidad; i++) {
                 const span = document.createElement('span');
                 span.className = 'emoji-item';
@@ -795,55 +546,35 @@
                 span.style.animationDelay = `${i * 0.1}s`;
                 container.appendChild(span);
             }
-            
             elemento.appendChild(container);
         }
 
-        // ===== VERIFICACIÓN =====
         function verificar() {
             const input = document.getElementById('respuesta');
             const feedback = document.getElementById('feedback');
             const user = parseInt(input.value);
-            
+
             if (isNaN(user)) {
-                mostrarFeedback('❌ Escribe un número', 'hint');
+                mostrarFeedback('❌ Escribe un número', 'error');
                 input.focus();
                 return;
             }
-            
+
             if (user === state.correcta) {
-                // Correcto
                 state.score += 10 + (state.racha * 2);
                 state.racha++;
-                state.totalJugadas++;
-                
-                guardarEstado();
+                localStorage.setItem('hk_math_score', state.score);
+                localStorage.setItem('hk_math_streak', state.racha);
                 actualizarScore();
                 mostrarRacha();
                 mostrarFeedback('🎉 ¡Excelente! ✨', 'success');
                 crearConfeti();
-                
-                // Animación de celebración
-                document.querySelectorAll('.emoji-item').forEach((emoji, i) => {
-                    setTimeout(() => {
-                        emoji.style.transform = 'scale(1.3) rotate(360deg)';
-                    }, i * 50);
-                });
-                
                 setTimeout(generar, 1800);
             } else {
-                // Incorrecto
                 state.racha = 0;
+                localStorage.setItem('hk_math_streak', 0);
                 ocultarRacha();
-                guardarEstado();
-                
-                const mensajes = [
-                    '❌ ¡Casi! Intenta de nuevo',
-                    '🤔 Cuenta con cuidado',
-                    '💪 No te rindas'
-                ];
-                mostrarFeedback(mensajes[Math.floor(Math.random() * mensajes.length)], 'error');
-                
+                mostrarFeedback('❌ ¡Casi! Intenta de nuevo', 'error');
                 input.value = '';
                 input.focus();
             }
@@ -855,57 +586,6 @@
             feedback.className = `feedback ${tipo}`;
         }
 
-        // ===== SISTEMA DE RACHAS =====
         function mostrarRacha() {
-            const streakEl = document.getElementById('streak');
-            const streakCount = document.getElementById('streak-count');
-            
             if (state.racha > 1) {
-                streakCount.textContent = state.racha;
-                streakEl.classList.add('active');
-            }
-        }
-
-        function ocultarRacha() {
-            document.getElementById('streak').classList.remove('active');
-        }
-
-        // ===== CONFETI =====
-        function crearConfeti() {
-            const colores = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#f093fb'];
-            
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const confeti = document.createElement('div');
-                    confeti.className = 'confetti';
-                    confeti.style.left = Math.random() * 100 + 'vw';
-                    confeti.style.background = colores[Math.floor(Math.random() * colores.length)];
-                    confeti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                    confeti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                    document.body.appendChild(confeti);
-                    
-                    setTimeout(() => confeti.remove(), 4000);
-                }, i * 50);
-            }
-        }
-
-        // ===== UTILIDADES =====
-        function actualizarScore() {
-            document.getElementById('score').textContent = state.score;
-        }
-
-        function actualizarProgreso() {
-            const progreso = Math.min((state.totalJugadas / 20) * 100, 100);
-            document.getElementById('progress').style.width = progreso + '%';
-        }
-
-        function guardarEstado() {
-            localStorage.setItem('happyKidsScore', state.score);
-            localStorage.setItem('happyKidsStreak', state.racha);
-        }
-
-        // ===== PREVENIR ZOOM EN INPUTS (iOS) =====
-        document.addEventListener('gesturestart', (e) => e.preventDefault());
-    </script>
-</body>
-</html>
+                document.getElementById('
