@@ -7,15 +7,11 @@
     <meta name="description" content="Súper Pizarrón de Arte Happy Kids - Dibuja, colorea y diviértete">
     <title>🎨 Happy Kids - Súper Pizarrón de Arte</title>
     
-    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== VARIABLES ===== */
         :root {
             --art-primary: #25d366;
             --art-secondary: #ff9800;
@@ -24,13 +20,11 @@
             --art-purple: #9b59b6;
             --art-dark: #1a1a2e;
             --art-light: #f8f9fa;
-            
             --art-gradient: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
             --art-shadow: 0 10px 30px rgba(0,0,0,0.2);
             --art-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ===== RESET ===== */
         *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -51,7 +45,6 @@
             color: white;
         }
 
-        /* ===== NAVBAR UNIFICADO ===== */
         .navbar {
             display: flex;
             align-items: center;
@@ -64,10 +57,7 @@
             flex-shrink: 0;
         }
 
-        .nav-group {
-            display: flex;
-            gap: 10px;
-        }
+        .nav-group { display: flex; gap: 10px; }
 
         .nav-btn {
             text-decoration: none;
@@ -88,28 +78,10 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .nav-btn-home {
-            background: var(--art-light);
-            color: #333;
-            border-color: #ddd;
-        }
-
-        .nav-btn-home:hover {
-            background: #e8e8e8;
-        }
-
-        .nav-btn-library {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: transparent;
-        }
-
-        .nav-btn-math {
-            background: var(--art-secondary);
-            color: white;
-            border-color: #e68a00;
-            animation: pulse-math 2s infinite;
-        }
+        .nav-btn-home { background: var(--art-light); color: #333; border-color: #ddd; }
+        .nav-btn-home:hover { background: #e8e8e8; }
+        .nav-btn-library { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .nav-btn-math { background: var(--art-secondary); color: white; border-color: #e68a00; animation: pulse-math 2s infinite; }
 
         @keyframes pulse-math {
             0%, 100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4); }
@@ -125,7 +97,6 @@
             gap: 8px;
         }
 
-        /* ===== CARRUSEL DE PLANTILLAS ===== */
         .carousel-section {
             height: 130px;
             background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
@@ -142,14 +113,8 @@
             flex-shrink: 0;
         }
 
-        .carousel-section::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .carousel-section::-webkit-scrollbar-thumb {
-            background: var(--art-primary);
-            border-radius: 10px;
-        }
+        .carousel-section::-webkit-scrollbar { height: 6px; }
+        .carousel-section::-webkit-scrollbar-thumb { background: var(--art-primary); border-radius: 10px; }
 
         .template-thumb {
             height: 100px;
@@ -164,18 +129,9 @@
             background: white;
         }
 
-        .template-thumb:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
+        .template-thumb:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .template-thumb.active { border-color: var(--art-primary); transform: scale(1.1); box-shadow: 0 0 25px rgba(37, 211, 102, 0.4); }
 
-        .template-thumb.active {
-            border-color: var(--art-primary);
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(37, 211, 102, 0.4);
-        }
-
-        /* ===== ÁREA DE DIBUJO ===== */
         .canvas-section {
             flex: 1;
             display: flex;
@@ -207,7 +163,6 @@
             touch-action: none;
         }
 
-        /* Controles de Zoom */
         .zoom-controls {
             position: absolute;
             top: 15px;
@@ -233,17 +188,9 @@
             justify-content: center;
         }
 
-        .zoom-btn:hover {
-            transform: scale(1.1);
-            background: var(--art-primary);
-            color: white;
-        }
+        .zoom-btn:hover { transform: scale(1.1); background: var(--art-primary); color: white; }
+        .zoom-btn:active { transform: scale(0.95); }
 
-        .zoom-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Botón Fullscreen */
         .fullscreen-btn {
             position: absolute;
             top: 15px;
@@ -260,13 +207,8 @@
             transition: var(--art-transition);
         }
 
-        .fullscreen-btn:hover {
-            transform: scale(1.1);
-            background: var(--art-info);
-            color: white;
-        }
+        .fullscreen-btn:hover { transform: scale(1.1); background: var(--art-info); color: white; }
 
-        /* ===== BOTÓN FLOTANTE DE HERRAMIENTAS ===== */
         .fab-tools {
             position: fixed;
             bottom: 25px;
@@ -292,16 +234,8 @@
             50% { box-shadow: 0 8px 40px rgba(37, 211, 102, 0.6); }
         }
 
-        .fab-tools:hover {
-            transform: scale(1.1) rotate(15deg);
-        }
-
-        .fab-tools:active {
-            transform: scale(0.95);
-        }
-
-        /* ===== PANEL DE HERRAMIENTAS ===== */
-        .tools-panel {
+        .fab-tools:hover { transform: scale(1.1) rotate(15deg); }
+        .fab-tools:active { transform: scale(0.95); }        .tools-panel {
             position: fixed;
             bottom: -100%;
             left: 0;
@@ -318,9 +252,7 @@
             box-shadow: 0 -10px 50px rgba(0,0,0,0.2);
         }
 
-        .tools-panel.open {
-            bottom: 0;
-        }
+        .tools-panel.open { bottom: 0; }
 
         .panel-header {
             display: flex;
@@ -352,15 +284,9 @@
             transition: var(--art-transition);
         }
 
-        .btn-close-panel:hover {
-            background: #f0f0f0;
-            color: #333;
-        }
+        .btn-close-panel:hover { background: #f0f0f0; color: #333; }
 
-        /* Paleta de Colores */
-        .palette-section {
-            margin-bottom: 20px;
-        }
+        .palette-section { margin-bottom: 20px; }
 
         .section-label {
             font-size: 13px;
@@ -379,9 +305,7 @@
             scrollbar-width: none;
         }
 
-        .palette::-webkit-scrollbar {
-            display: none;
-        }
+        .palette::-webkit-scrollbar { display: none; }
 
         .color-dot {
             width: 50px;
@@ -395,15 +319,8 @@
             position: relative;
         }
 
-        .color-dot:hover {
-            transform: scale(1.15);
-        }
-
-        .color-dot.active {
-            transform: scale(1.2);
-            box-shadow: 0 0 0 4px var(--art-primary);
-        }
-
+        .color-dot:hover { transform: scale(1.15); }
+        .color-dot.active { transform: scale(1.2); box-shadow: 0 0 0 4px var(--art-primary); }
         .color-dot.active::after {
             content: '✓';
             position: absolute;
@@ -416,33 +333,10 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* Slider de Tamaño */
-        .size-section {
-            margin-bottom: 20px;
-        }
-
-        .size-display {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 10px;
-        }
-
-        .size-preview {
-            width: 60px;
-            height: 60px;
-            background: #f0f0f0;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .size-preview-dot {
-            background: var(--art-primary);
-            border-radius: 50%;
-            transition: var(--art-transition);
-        }
+        .size-section { margin-bottom: 20px; }
+        .size-display { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+        .size-preview { width: 60px; height: 60px; background: #f0f0f0; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+        .size-preview-dot { background: var(--art-primary); border-radius: 50%; transition: var(--art-transition); }
 
         .size-slider {
             flex: 1;
@@ -464,7 +358,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        /* Grid de Herramientas */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -488,40 +381,13 @@
             color: #333;
         }
 
-        .tool-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        }
-
-        .tool-btn:active {
-            transform: scale(0.98);
-        }
-
-        .tool-btn.active {
-            background: var(--art-primary);
-            color: white;
-        }
-
-        .tool-btn-undo, .tool-btn-redo {
-            background: var(--art-purple) !important;
-            color: white !important;
-        }
-
-        .tool-btn-redo:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .tool-btn-clear {
-            background: var(--art-danger) !important;
-            color: white !important;
-        }
-
-        .tool-btn-save {
-            background: var(--art-info) !important;
-            color: white !important;
-        }
-
+        .tool-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+        .tool-btn:active { transform: scale(0.98); }
+        .tool-btn.active { background: var(--art-primary); color: white; }
+        .tool-btn-undo, .tool-btn-redo { background: var(--art-purple) !important; color: white !important; }
+        .tool-btn-redo:disabled { opacity: 0.4; cursor: not-allowed; }
+        .tool-btn-clear { background: var(--art-danger) !important; color: white !important; }
+        .tool-btn-save { background: var(--art-info) !important; color: white !important; }
         .tool-btn-math {
             background: var(--art-secondary) !important;
             color: white !important;
@@ -535,7 +401,6 @@
             50% { box-shadow: 0 0 20px rgba(255, 152, 0, 0.8); }
         }
 
-        /* ===== LOADING Y TOAST ===== */
         .loading {
             position: fixed;
             top: 50%;
@@ -552,9 +417,7 @@
             backdrop-filter: blur(10px);
         }
 
-        .loading.show {
-            display: block;
-        }
+        .loading.show { display: block; }
 
         .toast {
             position: fixed;
@@ -574,133 +437,78 @@
             backdrop-filter: blur(10px);
         }
 
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
-            .navbar {
-                height: 60px;
-                padding: 0 10px;
-            }
-
-            .nav-btn span:not(:first-child) {
-                display: none;
-            }
-
-            .nav-brand {
-                font-size: 16px;
-            }
-
-            .carousel-section {
-                height: 110px;
-            }
-
-            .template-thumb {
-                height: 85px;
-                width: 85px;
-            }
-
-            .fab-tools {
-                width: 60px;
-                height: 60px;
-                font-size: 28px;
-            }
-
-            .tools-panel {
-                height: 65vh;
-                padding: 20px;
-            }
+            .navbar { height: 60px; padding: 0 10px; }
+            .nav-btn span:not(:first-child) { display: none; }
+            .nav-brand { font-size: 16px; }
+            .carousel-section { height: 110px; }
+            .template-thumb { height: 85px; width: 85px; }
+            .fab-tools { width: 60px; height: 60px; font-size: 28px; }
+            .tools-panel { height: 65vh; padding: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-group">
-            <a href="index.html" class="nav-btn nav-btn-home">
-                <span>🏠</span>
-                <span>Inicio</span>
-            </a>
-            <a href="dashboard.html" class="nav-btn nav-btn-library">
-                <span>📚</span>
-                <span>Biblioteca</span>
-            </a>
+            <a href="index.html" class="nav-btn nav-btn-home"><span>🏠</span><span>Inicio</span></a>
+            <a href="dashboard.html" class="nav-btn nav-btn-library"><span>📚</span><span>Biblioteca</span></a>
         </div>
-        <div class="nav-brand">
-            <span>🎨</span>
-            <span>Happy Art</span>
-        </div>
-        <a href="matematicas.html" class="nav-btn nav-btn-math">
-            <span>🧮</span>
-            <span>Matemática</span>
-        </a>
+        <div class="nav-brand"><span>🎨</span><span>Happy Art</span></div>
+        <a href="matematicas.html" class="nav-btn nav-btn-math"><span>🧮</span><span>Matemática</span></a>
     </nav>
 
-    <!-- CARRUSEL DE PLANTILLAS -->
     <div class="carousel-section" id="carouselContainer"></div>
 
-    <!-- ÁREA DE DIBUJO -->
     <section class="canvas-section">
         <div class="canvas-container">
             <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Pantalla completa">⛶</button>
-            
             <div class="zoom-controls">
                 <button class="zoom-btn" onclick="zoomIn()" title="Acercar">+</button>
                 <button class="zoom-btn" onclick="resetZoom()" title="Reset">⟲</button>
                 <button class="zoom-btn" onclick="zoomOut()" title="Alejar">−</button>
             </div>
-            
             <canvas id="mainCanvas" width="1000" height="1000"></canvas>
         </div>
     </section>
 
-    <!-- BOTÓN FLOTANTE -->
     <button class="fab-tools" onclick="toggleTools()" title="Herramientas">🖌️</button>
 
-    <!-- PANEL DE HERRAMIENTAS -->
     <div class="tools-panel" id="toolsPanel">
         <div class="panel-header">
             <span class="panel-title">🎨 Herramientas</span>
             <button class="btn-close-panel" onclick="toggleTools()">✕</button>
         </div>
-        
         <div class="palette-section">
             <div class="section-label">🌈 Colores</div>
             <div class="palette" id="paletteContainer"></div>
         </div>
-        
         <div class="size-section">
             <div class="section-label">🖌️ Tamaño del pincel</div>
             <div class="size-display">
-                <div class="size-preview">
-                    <div class="size-preview-dot" id="sizePreview" style="width: 18px; height: 18px;"></div>
-                </div>
-                <input type="range" class="size-slider" id="brushSize" min="1" max="50" value="18" 
-                       oninput="updateBrushSize(this.value)">
+                <div class="size-preview"><div class="size-preview-dot" id="sizePreview" style="width: 18px; height: 18px;"></div></div>
+                <input type="range" class="size-slider" id="brushSize" min="1" max="50" value="18" oninput="updateBrushSize(this.value)">
             </div>
         </div>
-        
         <div class="tools-grid">
-            <button class="tool-btn active" id="btnBrush" onclick="setTool('brush')">
-                ✏️ Lápiz
-            </button>
-            <button class="tool-btn" id="btnEraser" onclick="setTool('eraser')">
-                🧽 Goma
-            </button>
-            <button class="tool-btn tool-btn-undo" id="btnUndo" onclick="undo()" disabled>
-                ↩️ Deshacer
-            </button>
-            <button class="tool-btn tool-btn-redo" id="btnRedo" onclick="redo()" disabled>
-               <!-- JAVASCRIPT -->
-    <script>
-        // ===== CONFIGURACIÓN =====
-        const canvas = document.getElementById('mainCanvas');
+            <button class="tool-btn active" id="btnBrush" onclick="setTool('brush')">✏️ Lápiz</button>
+            <button class="tool-btn" id="btnEraser" onclick="setTool('eraser')">🧽 Goma</button>
+            <button class="tool-btn tool-btn-undo" id="btnUndo" onclick="undo()" disabled>↩️ Deshacer</button>
+            <button class="tool-btn tool-btn-redo" id="btnRedo" onclick="redo()" disabled>↪️ Rehacer</button>
+            <button class="tool-btn tool-btn-clear" onclick="confirmClear()">🗑️ Limpiar</button>
+            <button class="tool-btn tool-btn-save" onclick="downloadArt()">💾 Guardar</button>
+            <button class="tool-btn tool-btn-math" onclick="window.location.href='matematicas.html'">🧮 Ir a Matemática</button>
+        </div>
+    </div>
+
+    <div class="loading" id="loading">Cargando... ⏳</div>
+    <div class="toast" id="toast"></div>
+
+    <script>        const canvas = document.getElementById('mainCanvas');
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
         
-        // Estado
         let currentColor = '#000000';
         let currentTool = 'brush';
         let brushSize = 18;
@@ -708,12 +516,10 @@
         let currentTemplate = '';
         let scale = 1;
         
-        // Historial para Undo/Redo
         const MAX_HISTORY = 30;
         let history = [];
         let historyStep = -1;
         
-        // Paleta de colores
         const COLORS = [
             '#000000', '#FF0000', '#0000FF', '#008000', '#FFFF00',
             '#FFA500', '#800080', '#FFC0CB', '#00CED1', '#FF1493',
@@ -721,7 +527,6 @@
             '#FFFFFF', '#808080', '#40E0D0', '#EE82EE', '#F5DEB3'
         ];
         
-        // Plantillas disponibles
         const PLANTILLAS = [
             '1_20260212_143632_0000.png', '1_20260212_153720_0000.png',
             '1_20260217_094136_0000.png', '1_20260314_190631_0000.png',
@@ -745,18 +550,16 @@
             '20260314_185633_0003.png', '20260314_185633_0004.png'
         ];
 
-        // ===== INICIALIZACIÓN =====
         function init() {
             renderPalette();
             renderTemplates();
             setupEventListeners();
-            saveState(); // Estado inicial en blanco
+            saveState();
         }
 
-        // Renderizar paleta
         function renderPalette() {
             const container = document.getElementById('paletteContainer');
-            COLORS.forEach((color, index) => {
+            COLORS.forEach((color) => {
                 const dot = document.createElement('div');
                 dot.className = 'color-dot';
                 dot.style.background = color;
@@ -766,7 +569,6 @@
             });
         }
 
-        // Renderizar plantillas
         function renderTemplates() {
             const container = document.getElementById('carouselContainer');
             PLANTILLAS.forEach((filename, index) => {
@@ -775,14 +577,11 @@
                 img.className = 'template-thumb';
                 img.loading = 'lazy';
                 img.alt = `Plantilla ${index + 1}`;
-                
                 img.onerror = () => {
                     img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23ddd" width="100" height="100"/><text x="50" y="50" text-anchor="middle" fill="%23999" font-size="12">Error</text></svg>';
                 };
-                
                 img.onclick = () => loadTemplate(img, filename);
                 container.appendChild(img);
-                
                 if (index === 0) {
                     img.classList.add('active');
                     loadImage(`plantillas/${filename}`);
@@ -790,12 +589,10 @@
             });
         }
 
-        // ===== SELECCIÓN =====
         function selectColor(color, element) {
             currentColor = color;
             currentTool = 'brush';
             updateToolButtons();
-            
             document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
             element.classList.add('active');
         }
@@ -813,34 +610,26 @@
             const img = new Image();
             img.crossOrigin = 'anonymous';
             img.src = url;
-            
             img.onload = () => {
                 ctx.clearRect(0, 0, 1000, 1000);
                 ctx.drawImage(img, 0, 0, 1000, 1000);
                 saveState();
                 showLoading(false);
             };
-            
             img.onerror = () => {
                 showToast('Error al cargar imagen ❌');
                 showLoading(false);
             };
         }
 
-        // ===== DIBUJO =====
         function setupEventListeners() {
-            // Mouse
             canvas.addEventListener('mousedown', startDrawing);
             canvas.addEventListener('mousemove', draw);
             canvas.addEventListener('mouseup', stopDrawing);
             canvas.addEventListener('mouseout', stopDrawing);
-            
-            // Touch
             canvas.addEventListener('touchstart', handleTouch, { passive: false });
             canvas.addEventListener('touchmove', handleTouch, { passive: false });
             canvas.addEventListener('touchend', stopDrawing);
-            
-            // Teclado
             document.addEventListener('keydown', handleKeyboard);
         }
 
@@ -848,7 +637,6 @@
             const rect = canvas.getBoundingClientRect();
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            
             return {
                 x: (clientX - rect.left) * (1000 / rect.width),
                 y: (clientY - rect.top) * (1000 / rect.height)
@@ -858,15 +646,12 @@
         function startDrawing(e) {
             isDrawing = true;
             const pos = getPosition(e);
-            
             ctx.beginPath();
             ctx.moveTo(pos.x, pos.y);
-            
             ctx.lineWidth = currentTool === 'eraser' ? brushSize * 2 : brushSize;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.strokeStyle = currentTool === 'eraser' ? '#ffffff' : currentColor;
-            
             ctx.lineTo(pos.x, pos.y);
             ctx.stroke();
         }
@@ -892,13 +677,9 @@
             else if (e.type === 'touchmove') draw(e);
         }
 
-        // ===== HISTORIAL (UNDO/REDO) =====
         function saveState() {
             historyStep++;
-            if (historyStep < history.length) {
-                history.length = historyStep;
-            }
-            
+            if (historyStep < history.length) history.length = historyStep;
             history.push(canvas.toDataURL('image/png'));
             if (history.length > MAX_HISTORY) {
                 history.shift();
@@ -938,7 +719,6 @@
             document.getElementById('btnRedo').disabled = historyStep >= history.length - 1;
         }
 
-        // ===== HERRAMIENTAS =====
         function toggleTools() {
             document.getElementById('toolsPanel').classList.toggle('open');
         }
@@ -986,7 +766,6 @@
             }
         }
 
-        // ===== ZOOM =====
         function zoomIn() {
             scale = Math.min(scale * 1.2, 3);
             applyZoom();
@@ -1007,7 +786,6 @@
             canvas.style.transition = 'transform 0.3s ease';
         }
 
-        // ===== FULLSCREEN =====
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(() => {});
@@ -1016,7 +794,6 @@
             }
         }
 
-        // ===== TECLADO =====
         function handleKeyboard(e) {
             if (e.ctrlKey || e.metaKey) {
                 switch(e.key.toLowerCase()) {
@@ -1036,7 +813,6 @@
             }
         }
 
-        // ===== UTILIDADES =====
         function showLoading(show) {
             document.getElementById('loading').classList.toggle('show', show);
         }
@@ -1048,13 +824,11 @@
             setTimeout(() => toast.classList.remove('show'), 2000);
         }
 
-        // ===== INICIAR =====
         init();
 
-        // Error handling
         window.addEventListener('error', (e) => {
             console.error('[Happy Kids Art Error]', e.error);
         });
     </script>
 </body>
-            </html>
+</html>
