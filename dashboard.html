@@ -10,16 +10,13 @@
     
     <title>📚 Biblioteca Happy Kids - Zona VIP</title>
     
-    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com">
     
-    <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== VARIABLES BIBLIOTECA VIP ===== */
         :root {
             --vip-primary: #667eea;
             --vip-secondary: #764ba2;
@@ -40,7 +37,6 @@
             --vip-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ===== RESET ===== */
         *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -62,7 +58,6 @@
             line-height: 1.6;
         }
 
-        /* ===== NAVBAR VIP ===== */
         .navbar {
             position: fixed;
             top: 0;
@@ -143,7 +138,6 @@
             background: rgba(255,255,255,0.2);
         }
 
-        /* ===== CONTENIDO PRINCIPAL ===== */
         .main-content {
             padding-top: 90px;
             padding-bottom: 40px;
@@ -153,7 +147,6 @@
             padding-right: 20px;
         }
 
-        /* ===== HEADER DE BIENVENIDA ===== */
         .welcome-header {
             text-align: center;
             padding: 30px 20px;
@@ -221,7 +214,6 @@
             50% { box-shadow: 0 0 0 15px rgba(102, 126, 234, 0); }
         }
 
-        /* ===== SECCIONES ===== */
         .section {
             margin-bottom: 50px;
         }
@@ -251,7 +243,6 @@
             font-weight: 600;
         }
 
-        /* ===== GRID DE CUENTOS ===== */
         .cuentos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -374,7 +365,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        /* ===== SECCIÓN ACTIVIDADES ===== */
         .actividades-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -447,7 +437,6 @@
             z-index: 1;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             padding: 40px 20px;
@@ -490,7 +479,6 @@
             color: rgba(255,255,255,0.4);
         }
 
-        /* ===== MODAL DE VIDEO ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -539,7 +527,6 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .navbar {
                 height: 65px;
@@ -584,7 +571,6 @@
             }
         }
 
-        /* ===== UTILIDADES ===== */
         .hidden { display: none !important; }
         
         .loading-pulse {
@@ -598,7 +584,6 @@
     </style>
 </head>
 <body>
-    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="logo">
             <span class="logo-icon">📚</span>
@@ -616,10 +601,7 @@
         </div>
     </nav>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="main-content">
-        
-        <!-- BIENVENIDA -->
         <header class="welcome-header">
             <h1 class="welcome-title">¡Bienvenido a tu Biblioteca! 🎉</h1>
             <p class="welcome-subtitle">Descubre cuentos mágicos, videos educativos y actividades divertidas para los peques</p>
@@ -628,35 +610,24 @@
             </div>
         </header>
 
-        <!-- SECCIÓN: CUENTOS DIGITALES -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">
-                    📖 Cuentos Digitales
-                </h2>
+                <h2 class="section-title">📖 Cuentos Digitales</h2>
                 <span class="section-count">4 disponibles</span>
             </div>
-            
-            <div class="cuentos-grid" id="cuentosGrid">
-                <!-- Los cuentos se generan con JavaScript -->
-            </div>
+            <div class="cuentos-grid" id="cuentosGrid"></div>
         </section>
 
-        <!-- SECCIÓN: ACTIVIDADES INTERACTIVAS -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">
-                    🎮 Actividades Divertidas
-                </h2>
+                <h2 class="section-title">🎮 Actividades Divertidas</h2>
             </div>
-            
             <div class="actividades-grid">
                 <a href="colorear.html" class="actividad-card colorear">
                     <span class="actividad-icon">🎨</span>
                     <h3 class="actividad-title">Súper Pizarrón</h3>
                     <p class="actividad-desc">Dibuja y colorea con plantillas mágicas</p>
                 </a>
-                
                 <a href="matematicas.html" class="actividad-card matematicas">
                     <span class="actividad-icon">🧮</span>
                     <h3 class="actividad-title">Matemática Mágica</h3>
@@ -664,10 +635,8 @@
                 </a>
             </div>
         </section>
-
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-logo">📚 Happy Kids</div>
         <div class="footer-links">
@@ -678,7 +647,6 @@
         <p class="footer-copy">© 2025 Happy Kids - Todos los derechos reservados</p>
     </footer>
 
-    <!-- MODAL PARA VIDEOS -->
     <div class="modal-overlay" id="videoModal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -686,4 +654,133 @@
                 <source src="" type="video/mp4">
             </video>
         </div>
-  </div>
+    </div>
+
+    <script>        // Datos de los cuentos
+        const cuentos = [
+            {
+                id: 1,
+                titulo: "El León y el Ratón",
+                desc: "Un cuento sobre la amistad inesperada",
+                video: "videos/leon-raton.mp4",
+                poster: "posters/leon-raton.jpg",
+                badge: "🦁 Clásico"
+            },
+            {
+                id: 2,
+                titulo: "La Tortuga y la Liebre",
+                desc: "La constancia vence a la velocidad",
+                video: "videos/tortuga-liebre.mp4",
+                poster: "posters/tortuga-liebre.jpg",
+                badge: "🏃 Fábula"
+            },
+            {
+                id: 3,
+                titulo: "Los Tres Cerditos",
+                desc: "Trabajo duro y perseverancia",
+                video: "videos/tres-cerditos.mp4",
+                poster: "posters/tres-cerditos.jpg",
+                badge: "🐷 Popular"
+            },
+            {
+                id: 4,
+                titulo: "Caperucita Roja",
+                desc: "No hables con desconocidos",
+                video: "videos/caperucita.mp4",
+                poster: "posters/caperucita.jpg",
+                badge: "🎀 Cuenta"
+            }
+        ];
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCuentos();
+            setupNavbarScroll();
+        });
+
+        // Renderizar cuentos
+        function renderCuentos() {
+            const grid = document.getElementById('cuentosGrid');
+            
+            cuentos.forEach(cuento => {
+                const card = document.createElement('div');
+                card.className = 'cuento-card';
+                card.innerHTML = `
+                    <div class="cuento-badge">${cuento.badge}</div>
+                    <video class="cuento-video" poster="${cuento.poster}" preload="metadata">
+                        <source src="${cuento.video}" type="video/mp4">
+                    </video>
+                    <div class="cuento-info">
+                        <h3 class="cuento-title">${cuento.titulo}</h3>
+                        <p class="cuento-desc">${cuento.desc}</p>
+                        <div class="cuento-actions">
+                            <button class="btn-cuento btn-cuento-primary" onclick="playVideo('${cuento.video}')">
+                                ▶ Ver Cuento
+                            </button>
+                            <button class="btn-cuento btn-cuento-secondary" onclick="downloadCuento('${cuento.video}', '${cuento.titulo}')">
+                                ⬇ Descargar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Reproducir video en modal
+        function playVideo(src) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            
+            video.querySelector('source').src = src;
+            video.load();
+            modal.classList.add('active');
+            video.play().catch(() => {
+                console.log('Autoplay bloqueado, usuario debe iniciar');
+            });
+        }
+
+        // Cerrar modal
+        function closeModal(event) {
+            if (!event || event.target === document.getElementById('videoModal') || event.target.closest('.modal-close')) {
+                const modal = document.getElementById('videoModal');
+                const video = document.getElementById('modalVideo');
+                
+                video.pause();
+                video.currentTime = 0;
+                modal.classList.remove('active');
+            }
+        }
+
+        // Descargar cuento
+        function downloadCuento(src, titulo) {
+            const link = document.createElement('a');
+            link.href = src;
+            link.download = `${titulo.replace(/\s+/g, '-').toLowerCase()}.mp4`;
+            link.click();
+        }
+
+        // Navbar scroll effect
+        function setupNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Error handling
+        window.addEventListener('error', (e) => {
+            console.error('[Happy Kids Library Error]', e.error);
+        });
+    </script>
+</body>
+</html>
