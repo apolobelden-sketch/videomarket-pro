@@ -3,297 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🔥 Happy Kids - Ofertas Imperdibles</title>
-    <meta name="description" content="Descubre las mejores ofertas en tecnología y cuentos digitales para niños. ¡Descuentos de hasta 67% OFF!">
+    <meta name="description" content="Happy Kids - Las mejores ofertas en tecnología y cuentos digitales para niños. Descuentos exclusivos hasta 67% OFF">
+    <meta name="theme-color" content="#FF6B6B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>🔥 Happy Kids - Ofertas Imperdibles | Tecnología y Cuentos para Niños</title>
+    
+    <!-- Preconnect para performance -->
+    <link rel="preconnect" href="https://res.cloudinary.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fuentes optimizadas -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body, html { 
-            width: 100%; height: 100%; 
-            overflow: hidden; 
-            background-color: #000; 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; 
+        /* ===== VARIABLES GLOBALES ===== */
+        :root {
+            /* Paleta Happy Kids Pro */
+            --hk-primary: #FF6B6B;
+            --hk-secondary: #4ECDC4;
+            --hk-accent: #FFE66D;
+            --hk-success: #95E1D3;
+            --hk-warning: #F38181;
+            --hk-info: #AA96DA;
+            --hk-dark: #2D3436;
+            --hk-light: #F9F9F9;
+            --hk-white: #FFFFFF;
+            
+            /* Gradientes */
+            --hk-gradient-primary: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
+            --hk-gradient-vip: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --hk-gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            
+            /* Sombras */
+            --hk-shadow-sm: 0 2px 10px rgba(0,0,0,0.1);
+            --hk-shadow-md: 0 4px 20px rgba(0,0,0,0.15);
+            --hk-shadow-lg: 0 10px 40px rgba(0,0,0,0.2);
+            --hk-shadow-glow: 0 0 20px rgba(255,107,107,0.4);
+            
+            /* Transiciones */
+            --hk-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        .scroll-container { 
-            height: 100vh; width: 100vw; 
-            overflow-y: scroll; 
-            scroll-snap-type: y mandatory; 
+
+        /* ===== RESET Y BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #000;
+            color: var(--hk-white);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== CONTENEDOR PRINCIPAL SCROLL ===== */
+        .scroll-container {
+            height: 100vh;
+            width: 100vw;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-        
-        .reel-container { 
-            position: relative; 
-            width: 100vw; height: 100vh; 
-            scroll-snap-align: start; 
-            scroll-snap-stop: always; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ===== REEL/SLIDE INDIVIDUAL ===== */
+        .reel-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
+            background: var(--hk-gradient-dark);
         }
-        
-        video { 
-            width: 100%; height: 100%; 
-            object-fit: cover; 
-            background: #000; 
+
+        /* ===== VIDEO ===== */
+        .video-reel {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #000;
+            will-change: transform;
         }
-        
+
+        /* ===== BARRA DE PROGRESO ===== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--hk-gradient-primary);
+            z-index: 10000;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(255,107,107,0.5);
+        }
+
+        /* ===== BADGES Y ETIQUETAS ===== */
         .flash-badge {
             position: absolute;
             top: 20px;
             left: 20px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            background: var(--hk-gradient-primary);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 18px;
+            border-radius: 25px;
             font-weight: 900;
-            font-size: 14px;
+            font-size: 13px;
             z-index: 100;
-            animation: pulse-red 1.5s infinite;
-            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            animation: pulse-badge 2s infinite;
+            box-shadow: var(--hk-shadow-md);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            font-family: 'Poppins', sans-serif;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        @keyframes pulse-red {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes pulse-badge {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(255,107,107,0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 25px rgba(255,107,107,0.6); }
         }
 
-        .btn-top-draw {
-            position: absolute; 
-            top: 25px; right: 20px; 
+        /* ===== BOTÓN TOP (NAVEGACIÓN) ===== */
+        .btn-top-nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             z-index: 100;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            background: var(--hk-gradient-vip);
             color: white;
-            padding: 12px 20px; 
-            border-radius: 30px; 
+            padding: 12px 20px;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: bold; 
-            font-size: 14px; 
+            font-weight: 700;
+            font-size: 14px;
             border: 2px solid rgba(255,255,255,0.3);
-            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
+            box-shadow: var(--hk-shadow-md);
+            backdrop-filter: blur(10px);
+            transition: var(--hk-transition);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .btn-top-draw:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+        .btn-top-nav:hover, .btn-top-nav:active {
+            transform: translateY(-3px);
+            box-shadow: var(--hk-shadow-lg);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
         }
 
-        .branding { 
-            position: absolute; 
-            top: 70px; left: 20px; 
-            color: #fff; 
-            font-size: 28px; 
-            font-weight: bold; 
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.3);
+        /* ===== BRANDING ===== */
+        .branding {
+            position: absolute;
+            top: 75px;
+            left: 20px;
+            color: var(--hk-white);
+            font-size: 28px;
+            font-weight: 900;
             z-index: 10;
+            font-family: 'Poppins', sans-serif;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
             background: linear-gradient(90deg, #fff, #e0e0e0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.2;
+            max-width: 80%;
         }
 
+        /* ===== PRECIO ===== */
         .price-tag {
             position: absolute;
-            top: 110px;
+            top: 120px;
             left: 20px;
             z-index: 10;
-            background: rgba(0,0,0,0.8);
-            padding: 12px 20px;
-            border-radius: 15px;
+            background: rgba(0,0,0,0.85);
+            padding: 15px 20px;
+            border-radius: 20px;
             border: 2px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            box-shadow: var(--hk-shadow-lg);
         }
 
         .price-original {
             color: #ff9999;
             text-decoration: line-through;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
+            display: block;
         }
 
         .price-final {
-            color: #a8e6cf;
-            font-size: 28px;
+            color: var(--hk-success);
+            font-size: 32px;
             font-weight: 900;
-            text-shadow: 0 0 10px rgba(168,230,207,0.3);
-        }
-
-        .discount-badge {
-            background: linear-gradient(135deg, #ff8a80, #ff6b6b);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: bold;
-            display: inline-block;
+            text-shadow: 0 0 15px rgba(149,225,211,0.4);
+            font-family: 'Poppins', sans-serif;
+            display: block;
             margin-top: 5px;
         }
 
-        .button-group {
-            position: absolute; 
-            bottom: 40px; 
-            left: 50%; 
-            transform: translateX(-50%);
-            z-index: 100; 
-            width: 85%;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .btn-main { 
-            width: 100%; 
-            padding: 18px 24px; 
-            border: none; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            font-size: 16px; 
-            cursor: pointer; 
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-align: center;
-            box-sizing: border-box;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn-main:active { transform: scale(0.95); }
-        
-        .btn-main:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-
-        .btn-fisico { 
-            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); 
-            color: #5d4037; 
-            font-size: 18px; 
-            border: 2px solid rgba(255,255,255,0.4);
+        .discount-badge {
+            background: var(--hk-gradient-primary);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 14px;
             font-weight: 800;
+            display: inline-block;
+            margin-top: 8px;
+            box-shadow: var(--hk-shadow-sm);
         }
 
-        .btn-fisico::before {
-            content: '⚡';
-            font-size: 20px;
-        }
-
-        .btn-digital { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            color: #ffffff; 
-            font-size: 18px; 
-            border: 2px solid rgba(255,255,255,0.3);
+        /* ===== URGENCIA ===== */
+        .urgency-text {
+            position: absolute;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffd3b6;
+            font-size: 15px;
             font-weight: 700;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            text-align: center;
+            text-shadow: 0 0 15px rgba(255,211,182,0.6);
+            animation: blink-urgency 2s infinite;
+            width: 90%;
+            z-index: 10;
+            padding: 10px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
         }
 
-        .btn-digital::before {
-            content: '📚';
-            font-size: 20px;
-            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+        @keyframes blink-urgency {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
         }
 
-        .btn-digital:hover {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
-        }
-
+        /* ===== CONTADOR DE VISTAS ===== */
         .views-counter {
             position: absolute;
-            bottom: 120px;
+            bottom: 130px;
             right: 20px;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.75);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 18px;
+            border-radius: 25px;
             font-size: 14px;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 6px;
-            backdrop-filter: blur(5px);
+            gap: 8px;
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
+            z-index: 10;
         }
 
         .views-counter::before {
             content: '👁️';
+            font-size: 16px;
         }
 
+        /* ===== BOTÓN COMPARTIR ===== */
         .share-btn {
             position: absolute;
-            bottom: 120px;
-            right: 140px;
+            bottom: 130px;
+            right: 150px;
             background: rgba(255,255,255,0.15);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 18px;
+            border-radius: 25px;
             font-size: 14px;
+            font-weight: 700;
             cursor: pointer;
             border: 2px solid rgba(255,255,255,0.3);
-            backdrop-filter: blur(5px);
-            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            transition: var(--hk-transition);
+            z-index: 10;
         }
 
-        .share-btn:hover {
+        .share-btn:hover, .share-btn:active {
             background: rgba(255,255,255,0.25);
             transform: scale(1.05);
         }
 
-        .urgency-text {
+        /* ===== HINT DE AUDIO ===== */
+        .audio-hint {
             position: absolute;
-            bottom: 170px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #ffd3b6;
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-            text-shadow: 0 0 10px rgba(255,211,182,0.5);
-            animation: blink 1.5s infinite;
-            width: 90%;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-
-        .audio-hint { 
-            position: absolute; 
-            top: 80px; left: 20px; 
-            color: white; 
-            font-size: 14px; 
-            background: rgba(0,0,0,0.7); 
-            padding: 10px 18px; 
-            border-radius: 25px; 
-            pointer-events: none; 
+            top: 85px;
+            left: 20px;
+            color: white;
+            font-size: 13px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 18px;
+            border-radius: 25px;
+            pointer-events: none;
             z-index: 10;
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(5px);
+            animation: fadeOut 5s forwards;
+            animation-delay: 3s;
         }
 
-        .progress-bar {
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        /* ===== BOTONES PRINCIPALES ===== */
+        .button-group {
+            position: absolute;
+            bottom: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: 88%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-main {
+            width: 100%;
+            padding: 18px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--hk-transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--hk-shadow-md);
+            font-family: 'Poppins', sans-serif;
+            will-change: transform;
+        }
+
+        .btn-main::before {
+            content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #f6d365);
-            z-index: 1000;
-            transition: width 0.1s;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
         }
 
-        /* ===== ESTILOS DEL CARRUSEL ===== */
+        .btn-main:hover::before {
+            left: 100%;
+        }
+
+        .btn-main:active {
+            transform: scale(0.96) translateX(-52%);
+        }
+
+        /* Botón Físico */
+        .btn-fisico {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            color: #5d4037;
+            font-size: 17px;
+            border: 3px solid rgba(255,255,255,0.4);
+        }
+
+        .btn-fisico:hover {
+            transform: translateY(-3px) translateX(-52%);
+            box-shadow: var(--hk-shadow-lg);
+        }
+
+        /* Botón Digital */
+        .btn-digital {
+            background: var(--hk-gradient-vip);
+            color: white;
+            font-size: 17px;
+            border: 3px solid rgba(255,255,255,0.3);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .btn-digital:hover {
+            box-shadow: 0 8px 30px rgba(102,126,234,0.5);
+        }
+
+        /* ===== CARRUSEL DE IMÁGENES ===== */
         .carousel-container {
             position: absolute;
             top: 0;
@@ -301,9 +425,9 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: var(--hk-gradient-dark);
         }
-        
+
         .carousel-slide {
             position: absolute;
             top: 0;
@@ -316,11 +440,11 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .carousel-slide.active {
             opacity: 1;
         }
-        
+
         .carousel-slide img {
             width: 100%;
             height: 100%;
@@ -328,800 +452,448 @@
             padding: 20px;
             filter: drop-shadow(0 10px 30px rgba(0,212,255,0.2));
         }
-        
+
         .carousel-dots {
             position: absolute;
             bottom: 200px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 10px;
+            gap: 12px;
             z-index: 20;
         }
-        
+
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: rgba(255,255,255,0.3);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--hk-transition);
             border: 2px solid rgba(255,255,255,0.5);
         }
-        
+
         .dot.active {
             background: #00d4ff;
             border-color: #00d4ff;
-            box-shadow: 0 0 10px #00d4ff;
+            box-shadow: 0 0 15px #00d4ff;
+            transform: scale(1.2);
         }
-        
+
         .carousel-prev, .carousel-next {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             color: white;
             border: none;
-            padding: 15px 20px;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
             font-size: 20px;
             border-radius: 50%;
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(255,255,255,0.2);
-            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: var(--hk-transition);
             z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
+
         .carousel-prev:hover, .carousel-next:hover {
             background: rgba(0,212,255,0.3);
             transform: translateY(-50%) scale(1.1);
         }
-        
+
         .carousel-prev { left: 20px; }
         .carousel-next { right: 20px; }
+
+        /* ===== ANIMACIONES ===== */
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
         @keyframes glow-blue {
             from { box-shadow: 0 0 5px #00d4ff, 0 0 10px #00d4ff; }
             to { box-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff; }
         }
 
+        @keyframes glow-gold {
+            from { box-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37; }
+            to { box-shadow: 0 0 20px #d4af37, 0 0 30px #d4af37; }
+        }
+
+        @keyframes glow-silver {
+            from { box-shadow: 0 0 5px #c0c0c0, 0 0 10px #c0c0c0; }
+            to { box-shadow: 0 0 20px #c0c0c0, 0 0 30px #c0c0c0; }
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
-            .branding { font-size: 24px; top: 65px; }
+            .branding { font-size: 24px; top: 70px; }
             .btn-main { font-size: 15px; padding: 16px 20px; }
-            .btn-top-draw { font-size: 12px; padding: 10px 16px; }
-            .price-final { font-size: 24px; }
-            .flash-badge { font-size: 12px; padding: 6px 12px; }
+            .btn-top-nav { font-size: 12px; padding: 10px 16px; }
+            .price-final { font-size: 28px; }
+            .flash-badge { font-size: 11px; padding: 8px 14px; }
+            .button-group { width: 92%; bottom: 25px; }
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @media (max-height: 700px) {
+            .price-tag { top: 110px; }
+            .urgency-text { bottom: 160px; font-size: 13px; }
+            .button-group { bottom: 20px; }
         }
 
-        .reel-container.active .button-group {
-            animation: slideUp 0.5s ease-out;
+        /* ===== UTILIDADES ===== */
+        .hidden { display: none !important; }
+        .visually-hidden { 
+            position: absolute; 
+            width: 1px; 
+            height: 1px; 
+            padding: 0; 
+            margin: -1px; 
+            overflow: hidden; 
+            clip: rect(0,0,0,0); 
+            border: 0; 
         }
-    </style>       
+
+        /* ===== TOAST NOTIFICATIONS ===== */
+        .toast {
+            position: fixed;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0,0,0,0.95);
+            color: white;
+            padding: 16px 28px;
+            border-radius: 35px;
+            font-weight: 700;
+            z-index: 10000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid var(--hk-primary);
+            backdrop-filter: blur(10px);
+            font-family: 'Poppins', sans-serif;
+            box-shadow: var(--hk-shadow-lg);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ===== LOADING SKELETON ===== */
+        .skeleton {
+            background: linear-gradient(90deg, #1a1a2e 25%, #2a2a4e 50%, #1a1a2e 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
 </head>
 <body>
-
     <div class="progress-bar" id="progressBar"></div>
-
-    <div class="scroll-container" id="scrollContainer">
-        
-        <!-- 🆕 NUEVO: FÍSICO 0: Samsung Galaxy Watch Ultra (2025) - PRIMERO -->
-        <div class="reel-container" data-product="galaxy-watch-ultra">
-            <div class="flash-badge">⌚ NUEVO 2025</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto" poster="https://res.cloudinary.com/dgdw8fbku/image/upload/v1/Samsung_Galaxy_Watch_Ultra_rbrkd0.jpg">
+    
+    <div class="scroll-container" id="scrollContainer">        <!-- PRODUCTO 1: Galaxy Watch Ultra -->
+        <div class="reel-container" data-product="galaxy-watch-ultra" data-category="fisico">
+            <div class="flash-badge">⌚ Nuevo 2025</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata" 
+                   poster="https://res.cloudinary.com/dgdw8fbku/image/upload/v1/Samsung_Galaxy_Watch_Ultra_rbrkd0.jpg">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Samsung_Galaxy_Watch_Ultra_rbrkd0.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding" style="background: linear-gradient(90deg, #f5f5f5, #d4af37); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 26px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(212,175,55,0.3));">Galaxy Watch Ultra ⌚</div>
-            
+            <div class="branding" style="background: linear-gradient(90deg, #f5f5f5, #d4af37); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(212,175,55,0.3));">
+                Galaxy Watch Ultra ⌚
+            </div>
             <div class="price-tag">
                 <div class="price-original">$12,999 MXN</div>
                 <div class="price-final">$8,999 MXN</div>
                 <span class="discount-badge">⬇️ 31% OFF</span>
             </div>
-
             <div class="urgency-text">🏃‍♂️ Deportes extremos + GPS avanzado + Resistencia militar</div>
-            
             <div class="views-counter">18.5k viendo</div>
             <button class="share-btn" onclick="shareProduct('Galaxy Watch Ultra', '8999')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/1gMTZhz" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   onclick="trackClick('galaxy-watch-ultra')"
-                   style="background: linear-gradient(135deg, #d4af37 0%, #f5f5f5 50%, #1a1a1a 100%); color: #000; font-size: 18px; padding: 20px; border: 3px solid #d4af37; animation: glow-gold 2s ease-in-out infinite alternate;">
-                   ⌚ COMPRAR WATCH ULTRA $8,999 ⌚
+                <a href="https://meli.la/1gMTZhz" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
+                   onclick="trackClick('galaxy-watch-ultra')" 
+                   style="background: linear-gradient(135deg, #d4af37 0%, #f5f5f5 50%, #1a1a1a 100%); color: #000; border-color: #d4af37; animation: glow-gold 2s ease-in-out infinite alternate;">
+                   ⌚ Comprar Watch Ultra $8,999 ⌚
                 </a>
             </div>
-        </div>      
-        
-        <!-- 🆕 NUEVO: Nautica Voyage - PRIMERO -->
-        <div class="reel-container" data-product="nautica-voyage">
-            <div class="flash-badge">🌊 PERFUME TOP</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
+        </div>
+
+        <!-- PRODUCTO 2: Nautica Voyage -->
+        <div class="reel-container" data-product="nautica-voyage" data-category="fisico">
+            <div class="flash-badge">🌊 Perfume Top</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Nautica_voyage_eau_de_toilette_trending_unboxing_bestmensfragrance_parfumrecommended_fragrance_rALDtQpyUXU_l1zz6m.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding" style="background: linear-gradient(90deg, #4fc3f7, #0288d1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 28px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(79,195,247,0.3));">Nautica Voyage 🌊</div>
-            
+            <div class="branding" style="background: linear-gradient(90deg, #4fc3f7, #0288d1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(79,195,247,0.3));">
+                Nautica Voyage 🌊
+            </div>
             <div class="price-tag">
                 <div class="price-original">$599 MXN</div>
                 <div class="price-final">$299 MXN</div>
                 <span class="discount-badge">⬇️ 50% OFF</span>
             </div>
-
             <div class="urgency-text">🌊 Fragancia fresca marina + Envío GRATIS + Original</div>
-            
             <div class="views-counter">22.3k viendo</div>
             <button class="share-btn" onclick="shareProduct('Nautica Voyage', '299')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/2wumBgh" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
+                <a href="https://meli.la/2wumBgh" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
                    onclick="trackClick('nautica')"
-                   style="background: linear-gradient(135deg, #4fc3f7 0%, #0288d1 50%, #01579b 100%); color: #fff; font-size: 18px; padding: 20px; border: 3px solid #4fc3f7;">
-                   🌊 COMPRAR PERFUME $299 🌊
+                   style="background: linear-gradient(135deg, #4fc3f7 0%, #0288d1 50%, #01579b 100%); color: #fff; border-color: #4fc3f7;">
+                   🌊 Comprar Perfume $299 🌊
                 </a>
             </div>
         </div>
 
-        <!-- FÍSICO 1: Samsung S25 FE -->
-        <div class="reel-container" data-product="samsung-s25">
-            <div class="flash-badge">🔥 OFERTA FLASH</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto" poster="https://res.cloudinary.com/dgdw8fbku/image/upload/v1/Samsung_Galaxy_S25_FE_ggualp.jpg">
+        <!-- PRODUCTO 3: Samsung S25 FE -->
+        <div class="reel-container" data-product="samsung-s25" data-category="fisico">
+            <div class="flash-badge">🔥 Oferta Flash</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata" 
+                   poster="https://res.cloudinary.com/dgdw8fbku/image/upload/v1/Samsung_Galaxy_S25_FE_ggualp.jpg">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Samsung_Galaxy_S25_FE_ggualp.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
             <div class="branding">Samsung S25 FE 📱</div>
-            
             <div class="price-tag">
                 <div class="price-original">$13,999 MXN</div>
                 <div class="price-final">$8,999 MXN</div>
                 <span class="discount-badge">⬇️ 36% OFF</span>
             </div>
-
             <div class="urgency-text">⚡ Solo quedan 3 unidades - Envío GRATIS ⚡</div>
-            
             <div class="views-counter">12.4k viendo</div>
             <button class="share-btn" onclick="shareProduct('Samsung S25 FE', '8999')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/2mA4qCh" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
+                <a href="https://meli.la/2mA4qCh" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
                    onclick="trackClick('samsung')">
-                   COMPRAR AHORA - 36% OFF
+                   📱 Comprar Ahora - 36% OFF
                 </a>
             </div>
         </div>
 
-        <!-- FÍSICO 2: Moto Premium -->
-        <div class="reel-container" data-product="motorola-premium">
-            <div class="flash-badge">💎 PREMIUM</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
+        <!-- PRODUCTO 4: Moto Edge 50 Pro -->
+        <div class="reel-container" data-product="motorola-premium" data-category="fisico">
+            <div class="flash-badge">💎 Premium</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Motorola_Edici%C3%B3n_Premium_nouj95.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
             <div class="branding">Moto Edge 50 Pro 💎</div>
-            
             <div class="price-tag">
                 <div class="price-original">$12,999 MXN</div>
                 <div class="price-final">$7,999 MXN</div>
                 <span class="discount-badge">⬇️ 38% OFF</span>
             </div>
-
             <div class="urgency-text">🎁 Incluye funda + mica GRATIS</div>
-            
             <div class="views-counter">8.7k viendo</div>
             <button class="share-btn" onclick="shareProduct('Moto Edge 50 Pro', '7999')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/23KvNjV" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
+                <a href="https://meli.la/23KvNjV" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
                    onclick="trackClick('motorola')">
-                   COMPRAR CON 38% DESCUENTO
+                   💎 Comprar con 38% Descuento
                 </a>
             </div>
-        </div>       
-        
-        <!-- 🆕 NUEVO: Pistola de Masaje Xiaomi -->
-        <div class="reel-container" data-product="pistola-masaje">
-            <div class="flash-badge">💆 #1 MÁS VENDIDO</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
+        </div>
+
+        <!-- PRODUCTO 5: Pistola Masaje Xiaomi -->
+        <div class="reel-container" data-product="pistola-masaje" data-category="fisico">
+            <div class="flash-badge">💆 #1 Más Vendido</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Pistola_masaje_Xiaomi_me_encanta_%EF%B8%8F_Ij6vVKFiEKY_oz5c9x.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding" style="background: linear-gradient(90deg, #ff6b6b, #ee5a5a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 28px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(255,107,107,0.3));">Pistola Masaje Xiaomi 💆</div>
-            
+            <div class="branding" style="background: linear-gradient(90deg, #ff6b6b, #ee5a5a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(255,107,107,0.3));">
+                Pistola Masaje Xiaomi 💆
+            </div>
             <div class="price-tag">
                 <div class="price-original">$899 MXN</div>
                 <div class="price-final">$299 MXN</div>
                 <span class="discount-badge">⬇️ 67% OFF</span>
             </div>
-
             <div class="urgency-text">🔥 6 modos + 50mil vendidos + Envío GRATIS</div>
-            
             <div class="views-counter">35.6k viendo</div>
             <button class="share-btn" onclick="shareProduct('Pistola Masaje Xiaomi', '299')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/1FfMYZi" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
+                <a href="https://meli.la/1FfMYZi" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
                    onclick="trackClick('pistola-masaje')"
-                   style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 50%, #c0392b 100%); color: #fff; font-size: 18px; padding: 20px; border: 3px solid #ff6b6b;">
-                   💆 COMPRAR PISTOLA $299 - 67% OFF 💆
+                   style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 50%, #c0392b 100%); color: #fff; border-color: #ff6b6b;">
+                   💆 Comprar Pistola $299 - 67% OFF 💆
                 </a>
             </div>
         </div>
 
-        <!-- FÍSICO 3: Curren Reloj -->
-        <div class="reel-container" data-product="curren-reloj">
-            <div class="flash-badge">⌚ LUJO</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
+        <!-- PRODUCTO 6: Curren Reloj -->
+        <div class="reel-container" data-product="curren-reloj" data-category="fisico">
+            <div class="flash-badge">⌚ Lujo</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/reloj_curren_8402_tzmw3l.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
             <div class="branding">Curren 8402 Luxury ⌚</div>
-            
             <div class="price-tag">
                 <div class="price-original">$1,299 MXN</div>
                 <div class="price-final">$599 MXN</div>
                 <span class="discount-badge">⬇️ 54% OFF</span>
             </div>
-
             <div class="urgency-text">🚚 Envío GRATIS + Estuche de regalo</div>
-            
             <div class="views-counter">24.1k viendo</div>
             <button class="share-btn" onclick="shareProduct('Curren 8402', '599')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/1wiPMys" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
+                <a href="https://meli.la/1wiPMys" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
                    onclick="trackClick('curren')">
-                   LLEVÁR POR $599 - 54% OFF
+                   ⌚ Llevar por $599 - 54% OFF
                 </a>
             </div>
         </div>
 
-        <!-- FÍSICO 4: Espejo LED -->
-        <div class="reel-container" data-product="espejo">
-            <div class="flash-badge">✨ ESPEJO LED</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
+        <!-- PRODUCTO 7: Espejo LED -->
+        <div class="reel-container" data-product="espejo" data-category="fisico">
+            <div class="flash-badge">✨ Espejo LED</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/espejo2_nwhn93.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding" style="background: linear-gradient(90deg, #f5f5f5, #ffffff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 30px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));">Espejo LED Táctil ✨</div>
-            
+            <div class="branding" style="background: linear-gradient(90deg, #f5f5f5, #ffffff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));">
+                Espejo LED Táctil ✨
+            </div>
             <div class="price-tag">
                 <div class="price-original">$899 MXN</div>
                 <div class="price-final">$550 MXN</div>
                 <span class="discount-badge">⬇️ 39% OFF</span>
             </div>
-
-            <div class="urgency-text">💡 Iluminación LED + Táctil + Envío GRATIS a todo México</div>
-            
+            <div class="urgency-text">💡 Iluminación LED + Táctil + Envío GRATIS</div>
             <div class="views-counter">4.7k viendo</div>
             <button class="share-btn" onclick="shareProduct('Espejo LED Táctil', '550')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/1kYoTt1" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
+                <a href="https://meli.la/1kYoTt1" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
                    onclick="trackClick('espejo')"
-                   style="background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 50%, #c0c0c0 100%); color: #333; font-size: 18px; padding: 20px; border: 3px solid #fff; animation: glow-silver 2s ease-in-out infinite alternate;">
-                   ✨ COMPRAR ESPEJO LED $550 ✨
+                   style="background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 50%, #c0c0c0 100%); color: #333; border-color: #fff; animation: glow-silver 2s ease-in-out infinite alternate;">
+                   ✨ Comprar Espejo LED $550 ✨
                 </a>
             </div>
         </div>
 
-        <!-- FÍSICO 5: Cámara de Seguridad -->
-        <div class="reel-container" data-product="camara-seguridad">
-            <div class="flash-badge">🏠 SEGURIDAD</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
+        <!-- PRODUCTO 8: Cámara Seguridad -->
+        <div class="reel-container" data-product="camara-seguridad" data-category="fisico">
+            <div class="flash-badge">🏠 Seguridad</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/camara_de_seguridad_2_uk1o5b.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
             <div class="branding">Cámara WiFi 360° 🎥</div>
-            
             <div class="price-tag">
                 <div class="price-original">$1,599 MXN</div>
                 <div class="price-final">$899 MXN</div>
                 <span class="discount-badge">⬇️ 44% OFF</span>
             </div>
-
             <div class="urgency-text">📱 Visión nocturna + App móvil incluida</div>
-            
             <div class="views-counter">6.3k viendo</div>
             <button class="share-btn" onclick="shareProduct('Cámara WiFi 360', '899')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/29JngVu" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
+                <a href="https://meli.la/29JngVu" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
                    onclick="trackClick('camara')">
-                   COMPRAR CON 44% OFF
+                   🎥 Comprar con 44% OFF
                 </a>
             </div>
-        </div>            
-        
-        <!-- FÍSICO 6: Taladro Miwod 21V -->
-        <div class="reel-container" data-product="taladro-miwod">
-            <div class="flash-badge">🔧 BEST SELLER</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
+        </div>
+
+        <!-- PRODUCTO 9: Taladro Miwod -->
+        <div class="reel-container" data-product="taladro-miwod" data-category="fisico">
+            <div class="flash-badge">🔧 Best Seller</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/taladro1_yyp5nz.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding" style="background: linear-gradient(90deg, #f6d365, #fda085); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 32px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(246,211,101,0.3));">Taladro Miwod 21V ⚡</div>
-            
+            <div class="branding" style="background: linear-gradient(90deg, #f6d365, #fda085); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(246,211,101,0.3));">
+                Taladro Miwod 21V ⚡
+            </div>
             <div class="price-tag">
                 <div class="price-original">$1,299 MXN</div>
                 <div class="price-final">$599 MXN</div>
                 <span class="discount-badge">⬇️ 54% OFF</span>
             </div>
-
             <div class="urgency-text">🔋 2 Baterías + Kit completo de brocas</div>
-            
             <div class="views-counter">31.8k viendo</div>
             <button class="share-btn" onclick="shareProduct('Taladro Miwod 21V', '599')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/1XwiFN1" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
+                <a href="https://meli.la/1XwiFN1" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
                    onclick="trackClick('taladro')"
-                   style="font-size: 18px; padding: 20px;">
-                   🔥 COMPRAR KIT COMPLETO $599 🔥
+                   style="font-size: 17px;">
+                   ⚡ Comprar Kit Completo $599 ⚡
                 </a>
             </div>
         </div>
 
-        <!-- FÍSICO 7: Carpa Styrka 3x3 -->
-        <div class="reel-container" data-product="carpa-styrka">
-            <div class="flash-badge">⛺ OUTDOOR</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
+        <!-- PRODUCTO 10: Carpa Styrka -->
+        <div class="reel-container" data-product="carpa-styrka" data-category="fisico">
+            <div class="flash-badge">⛺ Outdoor</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Toldo_Plegable_3x3_Aleman_-_Vanlig_-_Exterior_IQZVxYT0IBg_1_hldbyk.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding" style="background: linear-gradient(90deg, #84fab0, #8fd3f4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 30px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(132,250,176,0.3));">Carpa Styrka 3x3 ⛺</div>
-            
+            <div class="branding" style="background: linear-gradient(90deg, #84fab0, #8fd3f4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(132,250,176,0.3));">
+                Carpa Styrka 3x3 ⛺
+            </div>
             <div class="price-tag">
                 <div class="price-original">$1,950 MXN</div>
                 <div class="price-final">$799 MXN</div>
                 <span class="discount-badge">⬇️ 59% OFF</span>
             </div>
-
             <div class="urgency-text">🌧️ Impermeable + UV Protection + Bolsa incluida</div>
-            
             <div class="views-counter">15.2k viendo</div>
             <button class="share-btn" onclick="shareProduct('Carpa Styrka 3x3', '799')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/31DDvzp" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
+                <a href="https://meli.la/31DDvzp" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
                    onclick="trackClick('carpa')"
-                   style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; font-size: 18px; padding: 20px;">
-                   🏕️ COMPRAR CARPA $799 - 59% OFF 🏕️
+                   style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff;">
+                   ⛺ Comprar Carpa $799 - 59% OFF ⛺
                 </a>
             </div>
-        </div>       
-        
-        <!-- FÍSICO 8: Producto Naranja -->
-        <div class="reel-container" data-product="naranja">
-            <div class="flash-badge">🍊 NUEVO</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
+        </div>
+
+        <!-- PRODUCTO 11: Producto Naranja -->
+        <div class="reel-container" data-product="naranja" data-category="fisico">
+            <div class="flash-badge">🍊 Nuevo</div>
+            <a href="dashboard.html" class="btn-top-nav">📚 Biblioteca</a>
+            <video class="video-reel" loop playsinline muted preload="metadata">
                 <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/3_naranja_ddfajm.mp4" type="video/mp4">
             </video>
             <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding" style="background: linear-gradient(90deg, #ff9a56, #ff6b35); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 30px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(255,107,53,0.3));">Producto Naranja 🍊</div>
-            
+            <div class="branding" style="background: linear-gradient(90deg, #ff9a56, #ff6b35); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(255,107,53,0.3));">
+                Producto Naranja 🍊
+            </div>
             <div class="price-tag">
                 <div class="price-original">$2,999 MXN</div>
                 <div class="price-final">$2,036 MXN</div>
                 <span class="discount-badge">⬇️ 32% OFF</span>
             </div>
-
             <div class="urgency-text">🚚 Envío GRATIS - Entrega en 24hrs</div>
-            
             <div class="views-counter">5.8k viendo</div>
             <button class="share-btn" onclick="shareProduct('Producto Naranja', '2036')">📤 Compartir</button>
-            
             <div class="button-group">
-                <a href="https://meli.la/1eMktrC" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
+                <a href="https://meli.la/1eMktrC" class="btn-main btn-fisico" target="_blank" rel="noopener noreferrer" 
                    onclick="trackClick('naranja')"
-                   style="background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 100%); color: #fff; font-size: 18px; padding: 20px; border: 3px solid #fff;">
-                   🍊 COMPRAR AHORA $2,036 🍊
+                   style="background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 100%); color: #fff;">
+                   🍊 Comprar Ahora $2,036 🍊
                 </a>
             </div>
-        </div>
-
-        <!-- FÍSICO 9: Roku Streaming Stick 4K -->
-        <div class="reel-container" data-product="roku-4k">
-            <div class="flash-badge">📺 SMART TV</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/Convierte_tu_tv_en_inteligente_con_el_ROKU_STREAMING_STICK_4K_shorts_youtubeshorts_roku_5vvOkB7QUzw_abtgrz.mp4#t=7" type="video/mp4">
-            </video>
-            <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding" style="background: linear-gradient(90deg, #a18cd1, #fbc2eb); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 30px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(161,140,209,0.3));">Roku Stick 4K 📺</div>
-            
-            <div class="price-tag">
-                <div class="price-original">$1,499 MXN</div>
-                <div class="price-final">$500 MXN</div>
-                <span class="discount-badge">⬇️ 67% OFF</span>
-            </div>
-
-            <div class="urgency-text">🎬 Netflix, Disney+, Prime Video ready</div>
-            
-            <div class="views-counter">9.1k viendo</div>
-            <button class="share-btn" onclick="shareProduct('Roku Stick 4K', '500')">📤 Compartir</button>
-            
-            <div class="button-group">
-                <a href="https://meli.la/13WbuSL" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   onclick="trackClick('roku')"
-                   style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff;">
-                   📺 CONVERTIR TV EN SMART $500 📺
-                </a>
-            </div>
-        </div>        
-        
-        <!-- DIGITAL 1: El León -->
-        <div class="reel-container" data-product="cuento-leon">
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/v1/Cuento_1_El_Leon_Happy_jujtwm.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding">El León Valiente 🦁</div>
-            
-            <div class="price-tag" style="border-color: #667eea;">
-                <div class="price-final" style="color: #fff; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">📚 CUENTO DIGITAL GRATIS</div>
-                <span class="discount-badge" style="background: linear-gradient(135deg, #667eea, #764ba2);">100% OFF</span>
-            </div>
-
-            <div class="views-counter">45.2k descargas</div>
-            <button class="share-btn" onclick="shareProduct('Cuento El León', '0')">📤 Compartir</button>
-            
-            <div class="button-group">
-                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/file/d/1HrFakhKIwAXAYs7zNZMFpDrx7h2YSCqT/view', 'leon')">
-    DESCARGAR GRATIS AHORA
-                </button>
-            </div>
-        </div>
-
-        <!-- DIGITAL 2: Animalitos -->
-        <div class="reel-container" data-product="cuento-animalitos">
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/animalitos_dwothk.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding">Animalitos Divertidos 🐾</div>
-            
-            <div class="price-tag" style="border-color: #667eea;">
-                <div class="price-final" style="color: #fff; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">📚 CUENTO DIGITAL GRATIS</div>
-                <span class="discount-badge" style="background: linear-gradient(135deg, #667eea, #764ba2);">100% OFF</span>
-            </div>
-
-            <div class="views-counter">38.7k descargas</div>
-            <button class="share-btn" onclick="shareProduct('Cuento Animalitos', '0')">📤 Compartir</button>
-            
-            <div class="button-group">
-               <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/file/d/1qCV6KI6eU3E3zD_sH_dXNPkQV3EzIo6f/view', 'animalitos')">
-    DESCARGAR GRATIS AHORA
-               </button> 
-            </div>
-        </div>
-
-        <!-- DIGITAL 3: Emociones -->
-        <div class="reel-container" data-product="cuento-emociones">
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/emociones_rwg9cf.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding">Mis Emociones 😊</div>
-            
-            <div class="price-tag" style="border-color: #667eea;">
-                <div class="price-final" style="color: #fff; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">📚 CUENTO DIGITAL GRATIS</div>
-                <span class="discount-badge" style="background: linear-gradient(135deg, #667eea, #764ba2);">100% OFF</span>
-            </div>
-
-            <div class="views-counter">52.1k descargas</div>
-            <button class="share-btn" onclick="shareProduct('Cuento Emociones', '0')">📤 Compartir</button>
-            
-            <div class="button-group">
-                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/file/d/1RNbc5sOcslreFlxeWgBABLdQ4fxoK_7F/view', 'emociones')">
-    DESCARGAR GRATIS AHORA
-                </button>
-            </div>
-        </div>
-
-        <!-- DIGITAL 4: Familia -->
-        <div class="reel-container" data-product="cuento-familia">
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            <video class="video-reel" loop playsinline muted preload="auto">
-                <source src="https://res.cloudinary.com/dgdw8fbku/video/upload/q_auto,f_mp4/familia_ed04bv.mp4" type="video/mp4">
-            </video>
-            <div class="audio-hint">🔊 Toca para sonido</div>
-            <div class="branding">Mi Familia 🏠</div>
-            
-            <div class="price-tag" style="border-color: #667eea;">
-                <div class="price-final" style="color: #fff; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">📚 CUENTO DIGITAL GRATIS</div>
-                <span class="discount-badge" style="background: linear-gradient(135deg, #667eea, #764ba2);">100% OFF</span>
-            </div>
-
-            <div class="views-counter">41.3k descargas</div>
-            <button class="share-btn" onclick="shareProduct('Cuento Familia', '0')">📤 Compartir</button>
-            
-            <div class="button-group">
-                <button class="btn-main btn-digital" onclick="downloadPDF('https://drive.google.com/file/d/1CNieuZWxl8sHcVuk6TiGd2rH0pkf5GeC/view', 'familia')">
-    DESCARGAR GRATIS AHORA
-                </button>
-            </div>
-        </div>
-
-        <!-- 🆕 NUEVO: Cargador GaN 20W 1HORA - Carrusel de Fotos -->
-        <div class="reel-container" data-product="cargador-gan-20w">
-            <div class="flash-badge">⚡ #1 MÁS VENDIDO</div>
-            <a href="Colorear.html" class="btn-top-draw">🎨 Colorear</a>
-            
-            <!-- Carrusel de Imágenes -->
-            <div class="carousel-container" id="carousel-cargador">
-                <div class="carousel-slide active">
-                    <img src="https://http2.mlstatic.com/D_Q_NP_880828-MLA100062693161_122025-O.webp" alt="Cargador GaN 20W 1HORA">
                 </div>
-                <div class="carousel-slide">
-                    <img src="https://http2.mlstatic.com/D_Q_NP_919962-MLA83906488340_042025-O.webp" alt="Cargador GaN Especificaciones">
-                </div>
-                <div class="carousel-slide">
-                    <img src="https://1hora.com/cdn/shop/files/1_3d43742e-e404-440b-a373-ece7e07222a0.jpg?v=1701056227&width=800" alt="Cargador 1HORA Detalle">
-                </div>
-                
-                <!-- Indicadores del carrusel -->
-                <div class="carousel-dots">
-                    <span class="dot active" onclick="currentSlide(1, 'carousel-cargador')"></span>
-                    <span class="dot" onclick="currentSlide(2, 'carousel-cargador')"></span>
-                    <span class="dot" onclick="currentSlide(3, 'carousel-cargador')"></span>
-                </div>
-                
-                <!-- Flechas de navegación -->
-                <button class="carousel-prev" onclick="changeSlide(-1, 'carousel-cargador')">❮</button>
-                <button class="carousel-next" onclick="changeSlide(1, 'carousel-cargador')">❯</button>
-            </div>
-            
-            <div class="branding" style="background: linear-gradient(90deg, #00d4ff, #0099cc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 26px; text-shadow: none; filter: drop-shadow(0 0 10px rgba(0,212,255,0.3));">Cargador GaN 20W ⚡</div>
-            
-            <div class="price-tag">
-                <div class="price-original">$98 MXN</div>
-                <div class="price-final">$69 MXN</div>
-                <span class="discount-badge">⬇️ 29% OFF</span>
-            </div>
-
-            <div class="urgency-text">🔋 Carga 0-50% en 30 min + Compatible iPhone/Samsung/Xiaomi + 100mil vendidos</div>
-            
-            <div class="views-counter">45.2k viendo</div>
-            <button class="share-btn" onclick="shareProduct('Cargador GaN 20W', '69')">📤 Compartir</button>
-            
-            <div class="button-group">
-                <a href="https://meli.la/1WTtdAw" 
-                   class="btn-main btn-fisico" 
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   onclick="trackClick('cargador-gan-20w')"
-                   style="background: linear-gradient(135deg, #00d4ff 0%, #0099cc 50%, #0077aa 100%); color: #fff; font-size: 18px; padding: 20px; border: 3px solid #00d4ff; animation: glow-blue 2s ease-in-out infinite alternate;">
-                   ⚡ COMPRAR CARGADOR $69 - 29% OFF ⚡
-                </a>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        const videos = document.querySelectorAll('.video-reel');
-        const containers = document.querySelectorAll('.reel-container');
-        let audioActivado = false;
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const video = entry.target;
-                const container = video.closest('.reel-container');
-                
-                if (entry.isIntersecting) {
-                    video.play();
-                    if (audioActivado) video.muted = false;
-                    container.classList.add('active');
-                    updateProgress(Array.from(containers).indexOf(container));
-                } else {
-                    video.pause();
-                    video.muted = true;
-                    container.classList.remove('active');
-                }
-            });
-        }, { threshold: 0.6 });
-
-        videos.forEach(v => observer.observe(v));
-
-        videos.forEach(v => {
-            v.addEventListener('click', function() {
-                audioActivado = true;
-                document.querySelectorAll('.audio-hint').forEach(h => h.style.display = 'none');
-                this.muted = !this.muted;
-                createHeartEffect(this);
-            });
-        });
-
-        function createHeartEffect(element) {
-            const heart = document.createElement('div');
-            heart.innerHTML = '❤️';
-            heart.style.cssText = 'position:absolute;font-size:50px;animation:float-up 1s ease-out;pointer-events:none;z-index:1000;left:50%;top:50%;transform:translate(-50%,-50%);';
-            element.parentElement.appendChild(heart);
-            setTimeout(() => heart.remove(), 1000);
-        }
-
-        function updateProgress(index) {
-            const bar = document.getElementById('progressBar');
-            bar.style.width = (((index + 1) / containers.length) * 100) + '%';
-        }
-
-        function shareProduct(name, price) {
-            const text = price === '0' 
-                ? `📚 Descarga GRATIS "${name}" en Happy Kids! 🎨\n\nPerfecto para los peques 👶\n`
-                : `🔥 OFERTA IMPERDIBLE 🔥\n\n${name} a solo $${price} MXN\n⬇️ Descuento exclusivo\n\n¡Apúrate antes de que se acabe! ⚡`;
-            
-            if (navigator.share) {
-                navigator.share({ title: 'Happy Kids - Ofertas', text: text, url: window.location.href })
-                    .then(() => showNotification('¡Gracias por compartir! 🎉'))
-                    .catch(() => copyToClipboard(text));
-            } else {
-                copyToClipboard(text);
-            }
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text + '\n' + window.location.href)
-                .then(() => showNotification('¡Link copiado! Pega en WhatsApp 📱'));
-        }
-
-        function showNotification(message) {
-            const toast = document.createElement('div');
-            toast.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.9);color:white;padding:16px 24px;border-radius:30px;font-weight:bold;z-index:10000;animation:slide-up 0.3s ease-out;border:2px solid #667eea;';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
-
-        function downloadPDF(url, filename) {
-            window.open(url, '_blank');
-            showNotification('📚 Abriendo cuento digital...');
-        }
-
-        function trackClick(product) {
-            console.log('Click en producto:', product);
-        }
-
-        // ===== FUNCIONES DEL CARRUSEL =====
-        let slideIntervals = {};
-        
-        function showSlide(n, carouselId) {
-            let carousel = document.getElementById(carouselId);
-            if (!carousel) return;
-            let slides = carousel.getElementsByClassName('carousel-slide');
-            let dots = carousel.getElementsByClassName('dot');
-            
-            if (n > slides.length) n = 1;
-            if (n < 1) n = slides.length;
-            
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].classList.remove('active');
-            }
-            
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.remove('active');
-            }
-            
-            slides[n-1].classList.add('active');
-            dots[n-1].classList.add('active');
-            
-            carousel.dataset.currentSlide = n;
-        }
-        
-        function changeSlide(n, carouselId) {
-            let carousel = document.getElementById(carouselId);
-            if (!carousel) return;
-            let current = parseInt(carousel.dataset.currentSlide || 1);
-            showSlide(current + n, carouselId);
-            resetInterval(carouselId);
-        }
-        
-        function currentSlide(n, carouselId) {
-            showSlide(n, carouselId);
-            resetInterval(carouselId);
-        }
-        
-        function resetInterval(carouselId) {
-            if (slideIntervals[carouselId]) {
-                clearInterval(slideIntervals[carouselId]);
-            }
-            startCarousel(carouselId);
-        }
-        
-        function startCarousel(carouselId) {
-            slideIntervals[carouselId] = setInterval(() => {
-                let carousel = document.getElementById(carouselId);
-                if (carousel) {
-                    let current = parseInt(carousel.dataset.currentSlide || 1);
-                    let slides = carousel.getElementsByClassName('carousel-slide');
-                    showSlide(current + 1 > slides.length ? 1 : current + 1, carouselId);
-                }
-            }, 4000);
-        }
-        
-        // Observador para iniciar/detener carrusel según visibilidad
-        const carouselObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    startCarousel(entry.target.id);
-                } else {
-                    if (slideIntervals[entry.target.id]) {
-                        clearInterval(slideIntervals[entry.target.id]);
-                    }
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const carousel = document.getElementById('carousel-cargador');
-            if (carousel) carouselObserver.observe(carousel);
-        });
-
-        document.addEventListener('keydown', (e) => {
-            const container = document.querySelector('.scroll-container');
-            const itemHeight = window.innerHeight;
-            
-            if (e.key === 'ArrowDown') {
-                container.scrollBy({ top: itemHeight, behavior: 'smooth' });
-            } else if (e.key === 'ArrowUp') {
-                container.scrollBy({ top: -itemHeight, behavior: 'smooth' });
-            }
-        });
-    </script>
-
-</body>
-                    </html>
