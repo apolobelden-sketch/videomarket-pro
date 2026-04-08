@@ -143,15 +143,30 @@ const container=document.getElementById('reelsContainer');
 
 if(container.children.length>0)return;
 
-for(let i=0;i<5;i++){
-const reel=document.createElement('div');
-reel.className='reel-card';
+products.forEach((p) => {
 
-reel.innerHTML=`
-<video class="reel-video" muted loop>
-<source src="https://www.w3schools.com/html/mov_bbb.mp4">
-</video>
-`;
+    const reel = document.createElement('div');
+    reel.className = 'reel-card';
+
+    reel.innerHTML = `
+    
+    <video class="reel-video" loop playsinline muted>
+        <source src="${getVideoUrl(p.video)}" type="video/mp4">
+    </video>
+
+    <div class="reel-content">
+        <h2>${p.name}</h2>
+        <p>$${p.final} MXN</p>
+
+        <a href="${p.url}" target="_blank" class="btn-reel btn-reel-primary">
+            🛒 Comprar
+        </a>
+    </div>
+
+    `;
+
+    container.appendChild(reel);
+});
 
 container.appendChild(reel);
 }
