@@ -1,603 +1,150 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Happy Kids Math - Juegos matemáticos interactivos para niños">
-    <meta name="theme-color" content="#FF6B6B">
-    <title>🧮 Happy Kids - Matemática Mágica</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --math-primary: #FF6B6B;
-            --math-secondary: #4ECDC4;
-            --math-accent: #FFE66D;
-            --math-success: #95E1D3;
-            --math-dark: #2C3E50;
-            --math-light: #F7F9FC;
-            --math-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --math-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            --math-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        // ===== MATH MODULE =====
+        let mathScore = 0;
+        let mathStreak = 0;
+        let currentFraction = {};
+        let currentQuickMath = {};
+
+        function initMath() {
+            newFraction();
+            newQuickMath();
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            font-family: 'Nunito', sans-serif;
-            background: var(--math-gradient);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            color: var(--math-dark);
-        }
-
-        .app-container {
-            background: var(--math-light);
-            border-radius: 30px;
-            box-shadow: var(--math-shadow);
-            max-width: 500px;
-            width: 100%;
-            min-height: 600px;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.6s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .navbar {
-            background: linear-gradient(135deg, var(--math-primary) 0%, #FF8E53 100%);
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-brand {
-            font-family: 'Fredoka One', cursive;
-            color: white;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links { display: flex; gap: 8px; }
-
-        .nav-btn {
-            padding: 8px 14px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 700;
-            color: white;
-            background: rgba(255,255,255,0.2);
-            transition: var(--math-transition);
-        }
-
-        .nav-btn:hover { background: rgba(255,255,255,0.3); }
-
-        .screen {
-            display: none;
-            padding: 25px;
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        .screen.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .score-board {
-            background: white;
-            border-radius: 20px;
-            padding: 15px 25px;
-            margin: 0 auto 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            font-size: 18px;
-            font-weight: 800;
-            border: 3px solid var(--math-accent);
-        }
-
-        .score-board span { color: var(--math-primary); font-size: 24px; }
-
-        .games-grid { display: grid; gap: 15px; margin: 20px 0; }
-
-        .game-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            cursor: pointer;
-            transition: var(--math-transition);
-            border: 3px solid transparent;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .game-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 5px;
-            height: 100%;
-            transition: var(--math-transition);
-        }
-
-        .game-card:hover { transform: translateY(-3px); box-shadow: var(--math-shadow); }
-
-        .game-card.suma::before { background: #FF6B6B; }
-        .game-card.suma { border-color: #FF6B6B; }
-        .game-card.resta::before { background: #4ECDC4; }
-        .game-card.resta { border-color: #4ECDC4; }
-        .game-card.conteo::before { background: #95E1D3; }
-        .game-card.conteo { border-color: #95E1D3; }
-        .game-card.fraccion::before { background: #F7DC6F; }
-        .game-card.fraccion { border-color: #F7DC6F; }
-
-        .game-icon {
-            font-size: 35px;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--math-light);
-            border-radius: 15px;
-            transition: var(--math-transition);
-        }
-
-        .game-card:hover .game-icon { transform: scale(1.1) rotate(5deg); }
-
-        .game-info h3 { font-size: 18px; margin-bottom: 5px; }
-        .game-info p { font-size: 13px; color: #7f8c8d; }
-
-        .game-area { text-align: center; }
-
-        .game-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 22px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .visual-container {
-            background: white;
-            border-radius: 25px;
-            padding: 30px 20px;
-            margin: 20px 0;
-            min-height: 150px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            border: 4px dashed var(--math-accent);
-            position: relative;
-        }
-
-        .visual-container::after {
-            content: '✨';
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            font-size: 30px;
-            animation: spin 3s linear infinite;
-        }
-
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        .emoji-item {
-            font-size: 40px;
-            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
-            transition: transform 0.2s;
-        }
-
-        .emoji-item:hover { transform: scale(1.2) rotate(10deg); }
-
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0) rotate(-180deg); }
-            to { opacity: 1; transform: scale(1) rotate(0deg); }
-        }
-
-        .operator {
-            font-size: 35px;
-            margin: 0 15px;
-            color: var(--math-primary);
-            font-weight: bold;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-
-        .input-section { margin: 25px 0; }
-
-        .number-input {
-            width: 120px;
-            height: 80px;
-            font-size: 36px;
-            text-align: center;
-            border: 4px solid var(--math-secondary);
-            border-radius: 20px;
-            outline: none;
-            font-weight: 800;
-            color: var(--math-dark);
-            transition: var(--math-transition);
-        }
-
-        .number-input:focus {
-            border-color: var(--math-primary);
-            box-shadow: 0 0 20px rgba(255,107,107,0.3);
-            transform: scale(1.05);
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: var(--math-transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 6px 0 rgba(0,0,0,0.2);
-        }
-
-        .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
-
-        .btn-check {
-            background: linear-gradient(135deg, var(--math-primary) 0%, #FF8E53 100%);
-            color: white;
-            font-size: 20px;
-            padding: 18px 40px;
-        }
-
-        .btn-back {
-            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
-            color: white;
-            margin-top: 20px;
-            font-size: 16px;
-        }
-
-        .feedback {
-            font-size: 22px;
-            font-weight: 800;
-            margin: 20px 0;
-            min-height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            border-radius: 15px;
-            padding: 15px;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .feedback.success { background: var(--math-success); color: #2c5f2d; }
-        .feedback.error { background: #fadbd8; color: #c0392b; }
-
-        .confetti {
-            position: fixed;
-            width: 12px;
-            height: 12px;
-            top: -10px;
-            animation: confetti-fall 3s linear forwards;
-            z-index: 1000;
-        }
-
-        @keyframes confetti-fall {
-            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-        }
-
-        .streak {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 14px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            display: none;
-        }
-
-        .streak.active { display: flex; align-items: center; gap: 5px; animation: pulse 0.5s; }
-
-        .nav-footer {
-            margin-top: 30px;
-            padding-top: 25px;
-            border-top: 3px dashed #bdc3c7;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .nav-footer-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 14px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 16px;
-            transition: var(--math-transition);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            color: white;
-        }
-
-        .nav-footer-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-
-        .btn-colorear { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .btn-home { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-
-        @media (max-width: 480px) {
-            .app-container { border-radius: 0; min-height: 100vh; }
-            body { padding: 0; }
-            .game-title { font-size: 20px; }
-            .emoji-item { font-size: 35px; }
-        }
-    </style>
-</head>
-<body>
-    <div class="app-container">
-        <div class="streak" id="streak">🔥 <span id="streak-count">0</span></div>
-
-        <nav class="navbar">
-            <div class="nav-brand">🎓 Happy Math</div>
-            <div class="nav-links">
-                <a href="index.html" class="nav-btn">🔥 Ofertas</a>
-                <a href="dashboard.html" class="nav-btn">📚 Libros</a>
-            </div>
-        </nav>
-
-        <div id="menu" class="screen active">
-            <div style="text-align: center;">
-                <div class="score-board">⭐ Puntos: <span id="score">0</span></div>
-            </div>
-
-            <div class="games-grid">
-                <div class="game-card suma" onclick="openGame('suma')">
-                    <div class="game-icon">🍎</div>
-                    <div class="game-info">
-                        <h3>Suma de Frutas</h3>
-                        <p>Sumas hasta 10</p>
-                    </div>
-                </div>
-                <div class="game-card resta" onclick="openGame('resta')">
-                    <div class="game-icon">🚀</div>
-                    <div class="game-info">
-                        <h3>Resta Espacial</h3>
-                        <p>Restas divertidas</p>
-                    </div>
-                </div>
-                <div class="game-card conteo" onclick="openGame('conteo')">
-                    <div class="game-icon">🦖</div>
-                    <div class="game-info">
-                        <h3>Cuenta Dinos</h3>
-                        <p>Conteo 1-10</p>
-                    </div>
-                </div>
-                <div class="game-card fraccion" onclick="openGame('fraccion')">
-                    <div class="game-icon">🍕</div>
-                    <div class="game-info">
-                        <h3>Rebanadas de Pizza</h3>
-                        <p>Primeras fracciones</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-footer">
-                <a href="colorear.html" class="nav-footer-btn btn-colorear">🎨 Ir a Colorear</a>
-                <a href="index.html" class="nav-footer-btn btn-home">🏠 Volver a Ofertas</a>
-            </div>
-        </div>
-
-        <div id="game" class="screen">
-            <div class="game-area">
-                <h2 class="game-title" id="titulo"></h2>
-                <div class="visual-container" id="contenedor-visual"></div>
-                <div class="input-section">
-                    <input type="number" id="respuesta" class="number-input" placeholder="?" min="0" max="20" inputmode="numeric">
-                </div>
-                <button class="btn btn-check" onclick="verificar()">✅ Revisar</button>
-                <div class="feedback" id="feedback"></div>
-                <button class="btn btn-back" onclick="volver()">⬅ Volver al Menú</button>
-            </div>
-        </div>
-    </div>
-
-    <script>        const state = {
-            juego: '',
-            score: parseInt(localStorage.getItem('hk_math_score')) || 0,
-            correcta: 0,
-            racha: parseInt(localStorage.getItem('hk_math_streak')) || 0
-        };
-
-        const juegos = {
-            suma: { titulo: '🍎 Suma las Manzanas', emoji: '🍎', min: 1, max: 5 },
-            resta: { titulo: '🚀 Resta Cohetes', emoji: '🚀', min: 1, max: 4 },
-            conteo: { titulo: '🦖 Cuenta los Dinos', emoji: '🦖', min: 1, max: 9 },
-            fraccion: { titulo: '🍕 Rebanadas de Pizza', emoji: '🍕', min: 1, max: 6 }
-        };
-
-        document.addEventListener('DOMContentLoaded', () => {
-            actualizarScore();
-            document.getElementById('respuesta').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') verificar();
-            });
-        });
-
-        function openGame(tipo) {
-            state.juego = tipo;
-            const config = juegos[tipo];
-            document.getElementById('menu').classList.remove('active');
-            setTimeout(() => {
-                document.getElementById('game').classList.add('active');
-                document.getElementById('titulo').innerHTML = config.titulo;
-                generar();
-            }, 100);
-        }
-
-        function volver() {
-            document.getElementById('game').classList.remove('active');
-            setTimeout(() => document.getElementById('menu').classList.add('active'), 100);
-        }
-
-        function generar() {
-            const contenedor = document.getElementById('contenedor-visual');
-            const input = document.getElementById('respuesta');
-            const feedback = document.getElementById('feedback');
-            const config = juegos[state.juego];
+        // ===== FRACTIONS GAME =====
+        function newFraction() {
+            // Generar fracciones aleatorias con denominadores comunes (2, 3, 4, 5, 6, 8, 10)
+            const dens = [2, 3, 4, 5, 6, 8, 10];
+            const den1 = dens[Math.floor(Math.random() * dens.length)];
+            const den2 = dens[Math.floor(Math.random() * dens.length)];
             
-            contenedor.innerHTML = '';
-            input.value = '';
-            feedback.innerHTML = '';
-            feedback.className = 'feedback';
-            input.focus();
-
-            let n1, n2;
-
-            switch(state.juego) {
-                case 'suma':
-                    n1 = random(config.min, config.max);
-                    n2 = random(1, 4);
-                    state.correcta = n1 + n2;
-                    dibujarEmojis(n1, config.emoji, contenedor);
-                    contenedor.innerHTML += '<span class="operator">+</span>';
-                    dibujarEmojis(n2, config.emoji, contenedor);
-                    break;
-                case 'resta':
-                    n1 = random(3, 8);
-                    n2 = random(1, Math.min(n1 - 1, 4));
-                    state.correcta = n1 - n2;
-                    dibujarEmojis(n1, config.emoji, contenedor);
-                    contenedor.innerHTML += '<span class="operator">-</span>';
-                    break;
-                case 'conteo':
-                case 'fraccion':
-                    n1 = random(config.min, config.max);
-                    state.correcta = n1;
-                    dibujarEmojis(n1, config.emoji, contenedor);
-                    break;
-            }
+            // Numeradores menores que denominadores
+            const num1 = Math.floor(Math.random() * (den1 - 1)) + 1;
+            const num2 = Math.floor(Math.random() * (den2 - 1)) + 1;
+            
+            currentFraction = { num1, den1, num2, den2 };
+            
+            // Mostrar
+            document.getElementById('fracNum1').textContent = num1;
+            document.getElementById('fracDen1').textContent = den1;
+            document.getElementById('fracNum2').textContent = num2;
+            document.getElementById('fracDen2').textContent = den2;
+            
+            // Limpiar inputs
+            document.getElementById('mathAnswerNum').value = '';
+            document.getElementById('mathAnswerDen').value = '';
         }
 
-        function random(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        function dibujarEmojis(cantidad, emoji, elemento) {
-            const container = document.createElement('div');
-            container.style.cssText = 'display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%;';
-            for (let i = 0; i < cantidad; i++) {
-                const span = document.createElement('span');
-                span.className = 'emoji-item';
-                span.textContent = emoji;
-                span.style.animationDelay = `${i * 0.1}s`;
-                container.appendChild(span);
-            }
-            elemento.appendChild(container);
-        }
-
-        function verificar() {
-            const input = document.getElementById('respuesta');
-            const feedback = document.getElementById('feedback');
-            const user = parseInt(input.value);
-
-            if (isNaN(user)) {
-                mostrarFeedback('❌ Escribe un número', 'error');
-                input.focus();
+        function checkFraction() {
+            const num = parseInt(document.getElementById('mathAnswerNum').value);
+            const den = parseInt(document.getElementById('mathAnswerDen').value);
+            
+            if (!num || !den || den === 0) {
+                showToast('⚠️ Ingresa numerador y denominador');
                 return;
             }
-
-            if (user === state.correcta) {
-                state.score += 10 + (state.racha * 2);
-                state.racha++;
-                localStorage.setItem('hk_math_score', state.score);
-                localStorage.setItem('hk_math_streak', state.racha);
-                actualizarScore();
-                mostrarRacha();
-                mostrarFeedback('🎉 ¡Excelente! ✨', 'success');
-                crearConfeti();
-                setTimeout(generar, 1800);
+            
+            // Calcular resultado correcto: a/b + c/d = (ad + bc) / bd
+            const correctNum = (currentFraction.num1 * currentFraction.den2) + (currentFraction.num2 * currentFraction.den1);
+            const correctDen = currentFraction.den1 * currentFraction.den2;
+            
+            // Simplificar ambos para comparar
+            const userSimplified = simplifyFraction(num, den);
+            const correctSimplified = simplifyFraction(correctNum, correctDen);
+            
+            if (userSimplified.num === correctSimplified.num && userSimplified.den === correctSimplified.den) {
+                mathScore += 10;
+                mathStreak++;
+                document.getElementById('mathScore').textContent = mathScore;
+                document.getElementById('mathStreak').textContent = mathStreak;
+                showToast('✅ ¡Correcto! +10 puntos');
+                
+                if (mathStreak % 5 === 0) {
+                    showToast('🔥 ¡Racha de ' + mathStreak + '! ¡Sigue así!');
+                }
+                
+                setTimeout(newFraction, 1500);
             } else {
-                state.racha = 0;
-                localStorage.setItem('hk_math_streak', 0);
-                ocultarRacha();
-                mostrarFeedback('❌ ¡Casi! Intenta de nuevo', 'error');
-                input.value = '';
-                input.focus();
+                mathStreak = 0;
+                document.getElementById('mathStreak').textContent = mathStreak;
+                showToast(`❌ Era ${correctSimplified.num}/${correctSimplified.den}`);
             }
         }
 
-        function mostrarFeedback(texto, tipo) {
-            const feedback = document.getElementById('feedback');
-            feedback.innerHTML = texto;
-            feedback.className = `feedback ${tipo}`;
+        function simplifyFraction(num, den) {
+            const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+            const divisor = gcd(Math.abs(num), Math.abs(den));
+            return { num: num / divisor, den: den / divisor };
         }
 
-        function mostrarRacha() {
-            if (state.racha > 1) {
-                document.getElementById('streak').classList.add('active');
-                document.getElementById('streak-count').textContent = state.racha;
+        // ===== QUICK MATH GAME =====
+        function newQuickMath() {
+            const operations = ['+', '-', '×'];
+            const op = operations[Math.floor(Math.random() * operations.length)];
+            let num1, num2, answer;
+            
+            switch(op) {
+                case '+':
+                    num1 = Math.floor(Math.random() * 20) + 1;
+                    num2 = Math.floor(Math.random() * 20) + 1;
+                    answer = num1 + num2;
+                    break;
+                case '-':
+                    num1 = Math.floor(Math.random() * 20) + 10;
+                    num2 = Math.floor(Math.random() * num1);
+                    answer = num1 - num2;
+                    break;
+                case '×':
+                    num1 = Math.floor(Math.random() * 10) + 1;
+                    num2 = Math.floor(Math.random() * 10) + 1;
+                    answer = num1 * num2;
+                    break;
+            }
+            
+            currentQuickMath = { num1, num2, op, answer };
+            document.getElementById('quickProblem').textContent = `${num1} ${op} ${num2} = ?`;
+            
+            // Generar opciones
+            const options = [answer];
+            while (options.length < 4) {
+                const fake = answer + Math.floor(Math.random() * 20) - 10;
+                if (fake !== answer && fake >= 0 && !options.includes(fake)) {
+                    options.push(fake);
+                }
+            }
+            
+            // Mezclar opciones
+            options.sort(() => Math.random() - 0.5);
+            
+            // Renderizar botones
+            const container = document.getElementById('quickOptions');
+            container.innerHTML = options.map(opt => `
+                <button class="btn-math" onclick="checkQuickMath(${opt})" style="font-size: 20px; padding: 12px;">
+                    ${opt}
+                </button>
+            `).join('');
+        }
+
+        function checkQuickMath(selected) {
+            if (selected === currentQuickMath.answer) {
+                mathScore += 5;
+                mathStreak++;
+                document.getElementById('mathScore').textContent = mathScore;
+                document.getElementById('mathStreak').textContent = mathStreak;
+                showToast('✅ ¡Rápido! +5 puntos');
+                setTimeout(newQuickMath, 1000);
+            } else {
+                mathStreak = 0;
+                document.getElementById('mathStreak').textContent = mathStreak;
+                showToast('❌ ¡Inténtalo de nuevo!');
             }
         }
 
-        function ocultarRacha() {
-            document.getElementById('streak').classList.remove('active');
+        // ===== MATH UTILITIES =====
+        function resetMath() {
+            mathScore = 0;
+            mathStreak = 0;
+            document.getElementById('mathScore').textContent = '0';
+            document.getElementById('mathStreak').textContent = '0';
+            newFraction();
+            newQuickMath();
+            showToast('🔄 Juego reiniciado');
         }
-
-        function actualizarScore() {
-            document.getElementById('score').textContent = state.score;
-        }
-
-        function crearConfeti() {
-            const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#f093fb'];
-            for (let i = 0; i < 30; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 3000);
-            }
-        }
-
-        window.addEventListener('error', (e) => {
-            console.error('[Happy Kids Math Error]', e.error);
-        });
-    </script>
-</body>
-</html>
