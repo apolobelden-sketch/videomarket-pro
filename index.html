@@ -855,7 +855,115 @@
         // ===== INITIAL LOAD =====
         window.addEventListener('DOMContentLoaded', () => {
             loadReels();
-        });
+        });        
+        
+        // ===== MATH MODULE =====
+        let mathScore = 0;
+        let mathStreak = 0;
+        let currentFraction = {};
+        let currentQuickMath = {};
+
+        function initMath() {
+            if(mathScore === 0 && document.getElementById('mathScore').textContent === '0') {
+                newFraction();
+                newQuickMath();
+            }
+        }
+
+        function newFraction() {
+            const dens = [2, 3, 4, 5, 6, 8, 10];
+            const den1 = dens[Math.floor(Math.random() * dens.length)];
+            const den2 = dens[Math.floor(Math.random() * dens.length)];
+            const num1 = Math.floor(Math.random() * (den1 - 1)) + 1;
+            const num2 = Math.floor(Math.random() * (den2 - 1)) + 1;
+            
+            currentFraction = { num1, den1, num2, den2 };
+            
+            document.getElementById('fracNum1').textContent = num1;
+            document.getElementById('fracDen1').textContent = den1;
+            document.getElementById('fracNum2').textContent = num2;
+            document.getElementById('fracDen2').textContent = den2;
+            document.getElementById('mathAnswerNum').value = '';
+            document.getElementById('mathAnswerDen').value = '';
+        }
+
+        function checkFraction() {
+            const num = parseInt(document.getElementById('mathAnswerNum').value);
+            const den = parseInt(document.getElementById('mathAnswerDen').value);
+            
+            if (!num || !den || den === 0) {
+                showToast('⚠️ Ingresa numerador y denominador');
+                return;
+            }
+            
+            const correctNum = (currentFraction.num1 * currentFraction.den2) + (currentFraction.num2 * currentFraction.den1);
+            const correctDen = currentFraction.den1 * currentFraction.den2;
+            const simplified = simplifyFraction(correctNum, correctDen);
+            
+            if (num === simplified.num && den === simplified.den) {
+                mathScore += 10;
+                mathStreak++;
+                updateMathScore();
+                showToast('✅ ¡Correcto! +10 puntos');
+                if (mathStreak % 5 === 0) showToast('🔥 ¡Racha de ' + mathStreak + '!');
+                setTimeout(newFraction, 1500);
+            } else {
+                mathStreak = 0;
+                updateMathScore();
+                showToast(`❌ Era ${simplified.num}/${simplified.den}`);
+            }
+        }
+
+        function simplifyFraction(n, d) {
+            const gcd = (a, b) => b ? gcd(b, a % b) : a;
+            const g = gcd(Math.abs(n), Math.abs(d));
+            return { num: n/g, den: d/g };
+        }
+
+        function updateMathScore() {
+            document.getElementById('mathScore').textContent = mathScore;
+            document.getElementById('mathStreak').textContent = mathStreak;
+        }
+
+        function newQuickMath() {
+            const ops = ['+', '-', '×'];
+            const op = ops[Math.floor(Math.random() * ops.length)];
+            let n1, n2, ans;
+            
+            switch(op) {
+                case '+': n1 = Math.floor(Math.random()*20)+1; n2 = Math.floor(Math.random()*20)+1; ans = n1+n2; break;
+                case '-': n1 = Math.floor(Math.random()*20)+10; n2 = Math.floor(Math.random()*n1); ans = n1-n2; break;
+                case '×': n1 = Math.floor(Math.random()*10)+1; n2 = Math.floor(Math.random()*10)+1; ans = n1*n2; break;
+            }
+            
+            currentQuickMath = { ans };
+            document.getElementById('quickProblem').textContent = `${n1} ${op} ${n2} = ?`;
+            
+            const opts = [ans];
+            while(opts.length < 4) {
+                const fake = ans + Math.floor(Math.random()*20) - 10;
+                if(fake >= 0 && !opts.includes(fake)) opts.push(fake);
+            }
+            opts.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('quickOptions').innerHTML = opts.map(o => 
+                `<button class="btn-math" onclick="checkQuickMath(${o})" style="font-size:20px;padding:12px">${o}</button>`
+            ).join('');
+        }
+
+        function checkQuickMath(sel) {
+            if(sel === currentQuickMath.ans) {
+                mathScore += 5;
+                mathStreak++;
+                updateMathScore();
+                showToast('✅ +5 puntos');
+                setTimeout(newQuickMath, 1000);
+            } else {
+                mathStreak = 0;
+                updateMathScore();
+                showToast('❌ Incorrecto');
+            }
+        }
             </script>
 </body>
 </html>
