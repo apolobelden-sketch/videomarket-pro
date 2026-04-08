@@ -963,7 +963,99 @@
                 updateMathScore();
                 showToast('❌ Incorrecto');
             }
+        }        // ===== AUDIO CONTROL GLOBAL =====
+        let audioEnabled = false;
+        let currentPlayingVideo = null;
+
+        function setupVideoObserver() {
+            const videos = document.querySelectorAll('.reel-video');
+            
+            reelsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+                    if(entry.isIntersecting && entry.intersectionRatio > 0.6) {
+                        // Pausar video anterior si existe
+                        if(currentPlayingVideo && currentPlayingVideo !== video) {
+                            currentPlayingVideo.pause();
+                            currentPlayingVideo.currentTime = 0;
+                        }
+                        
+                        currentPlayingVideo = video;
+                        video.play().catch(e => console.log('Autoplay prevented'));
+                        
+                        // Si el audio está activado, activar sonido en este video
+                        if(audioEnabled) {
+                            video.muted = false;
+                        }
+                        
+                        currentReel = parseInt(video.closest('.reel-card').dataset.index);
+                    } else {
+                        video.pause();
+                        video.currentTime = 0;
+                        video.muted = true; // Resetear muted cuando sale
+                    }
+                });
+            }, { threshold: [0.6] });
+            
+            videos.forEach(v => reelsObserver.observe(v));
         }
+
+        // Toggle global de audio
+        function toggleGlobalAudio() {
+            audioEnabled = !audioEnabled;
+            
+            const allVideos = document.querySelectorAll('.reel-video');
+            allVideos.forEach(video => {
+                video.muted = !audioEnabled;
+            });
+            
+            // Mostrar indicador visual
+            const indicator = document.getElementById('audioIndicator');
+            if(indicator) {
+                indicator.textContent = audioEnabled ? '🔊' : '🔇';
+                indicator.style.opacity = '1';
+                setTimeout(() => indicator.style.opacity = '0.5', 1000);
+            }
+            
+            showToast(audioEnabled ? '🔊 Audio activado' : '🔇 Audio desactivado');
+        }
+
+        // Agregar indicador de audio flotante
+        function addAudioIndicator() {
+            if(document.getElementById('audioIndicator')) return;
+            
+            const indicator = document.createElement('div');
+            indicator.id = 'audioIndicator';
+            indicator.innerHTML = '🔇';
+            indicator.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: rgba(0,0,0,0.7);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                z-index: 10000;
+                cursor: pointer;
+                backdrop-filter: blur(10px);
+                border: 2px solid rgba(255,255,255,0.3);
+                transition: all 0.3s ease;
+                opacity: 0.5;
+            `;
+            indicator.onclick = toggleGlobalAudio;
+            document.body.appendChild(indicator);
+        }
+
+        // Inicializar indicador al cargar
+        window.addEventListener('DOMContentLoaded', () => {
+            loadReels();
+            setTimeout(addAudioIndicator, 1000); // Agregar después de cargar reels
+        });
             </script>
 </body>
 </html>
