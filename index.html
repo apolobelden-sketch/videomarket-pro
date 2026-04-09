@@ -227,7 +227,7 @@
             {id:'animalitos',name:'Animalitos Divertidos',cat:'digital',badge:'📚 FREE',video:'animalitos_dwothk',pdf:pdfLinks.animalitos,views:'38.7k',desc:'Conoce animales divertidos.'},
             {id:'emociones',name:'Mis Emociones',cat:'digital',badge:'📚 FREE',video:'emociones_rwg9cf',pdf:pdfLinks.emociones,views:'52.1k',desc:'Ayuda a manejar emociones.'},
             {id:'familia',name:'Mi Familia',cat:'digital',badge:'📚 FREE',video:'familia_ed04bv',pdf:pdfLinks.familia,views:'41.3k',desc:'Celebra el amor familiar.'}
-        ];        function renderProducts(){
+        ];                function renderProducts(){
             const container=document.getElementById('products-container');
             const physical=products.filter(p=>p.cat==='fisico');
             physical.forEach((product,index)=>{
@@ -237,7 +237,7 @@
                 const videoUrl=getVideoUrl(product.video);
                 const hasVideo=!product.img;
                 const discount=Math.round(((product.orig-product.final)/product.orig)*100);
-                const videoId=`video-${product.id}`;
+                const videoId=`video-prod-${product.id}`;
                 
                 card.innerHTML=`
                     <span class="product-badge">${product.badge}</span>
@@ -266,7 +266,7 @@
                 card.className='book-card';
                 card.style.animationDelay=`${index*0.1}s`;
                 const videoUrl=getVideoUrl(book.video);
-                const videoId=`video-${book.id}`;
+                const videoId=`video-book-${book.id}`;
                 
                 card.innerHTML=`
                     <span class="free-badge">100% FREE</span>
@@ -281,9 +281,9 @@
                         <h3 class="book-title">${book.name}</h3>
                         <p class="book-desc">${book.desc}</p>
                         <div class="download-count"><span>📚</span> PDF listo para imprimir</div>
-                        <button class="download-btn" onclick="downloadPDF('${book.pdf}','${book.name}',this)">
+                        <a href="${book.pdf}" target="_blank" rel="noopener noreferrer" class="download-btn" onclick="return handleDownload(this)">
                             <span>⬇️</span> Descargar Ahora
-                        </button>
+                        </a>
                     </div>`;
                 container.appendChild(card);
             });
@@ -292,9 +292,13 @@
         function toggleAudio(videoId){
             const video=document.getElementById(videoId);
             const indicator=document.getElementById(`indicator-${videoId}`);
-            if(!video)return;
+            if(!video){
+                console.error('Video no encontrado:',videoId);
+                return;
+            }
             if(video.muted){
                 video.muted=false;
+                video.volume=1;
                 indicator.textContent='🔊';
                 indicator.style.color='#00ff88';
             }else{
@@ -304,21 +308,25 @@
             }
         }
         
-        function downloadPDF(url,bookName,btn){
-            btn.classList.add('processing');
+        function handleDownload(btn){
+            const originalHTML=btn.innerHTML;
             btn.innerHTML='<span>⏳</span> Preparando...';
+            btn.style.opacity='0.7';
+            btn.style.pointerEvents='none';
             
             setTimeout(()=>{
-                btn.classList.remove('processing');
-                btn.classList.add('success');
                 btn.innerHTML='<span>✅</span> ¡Descargando!';
-                window.open(url,'_blank');
+                btn.style.background='linear-gradient(135deg,#00ff88,#00cc6a)';
+                btn.style.opacity='1';
                 
                 setTimeout(()=>{
-                    btn.classList.remove('success');
-                    btn.innerHTML='<span>⬇️</span> Descargar Ahora';
+                    btn.innerHTML=originalHTML;
+                    btn.style.background='';
+                    btn.style.pointerEvents='auto';
                 },2000);
-            },800);
+            },500);
+            
+            return true;
         }
         
         document.addEventListener('DOMContentLoaded',()=>{
