@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relojes de Lujo</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Colecciones</a></li>
+                <li><a href="#">Servicio al Cliente</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Relojes de Lujo</h1>
+            <p>Descubre nuestros relojes de lujo, diseñados con precisión y elegancia</p>
+            <button>Explorar</button>
+        </section>
+        <section class="colecciones">
+            <h2>Colecciones</h2>
+            <div class="grid">
+                <div class="reloj">
+                    <img src="reloj1.jpg" alt="Reloj 1">
+                    <h3>Reloj 1</h3>
+                    <p>Precio: $1000</p>
+                </div>
+                <div class="reloj">
+                    <img src="reloj2.jpg" alt="Reloj 2">
+                    <h3>Reloj 2</h3>
+                    <p>Precio: $2000</p>
+                </div>
+                <div class="reloj">
+                    <img src="reloj3.jpg" alt="Reloj 3">
+                    <h3>Reloj 3</h3>
+                    <p>Precio: $3000</p>
+                </div>
+            </div>
+        </section>
+        <section class="testimonios">
+            <h2>Testimonios</h2>
+            <div class="grid">
+                <div class="testimonial">
+                    <img src="testimonial1.jpg" alt="Testimonial 1">
+                    <p>Me encanta mi reloj de lujo, es preciso y elegante</p>
+                    <h3>Cliente 1</h3>
+                </div>
+                <div class="testimonial">
+                    <img src="testimonial2.jpg" alt="Testimonial 2">
+                    <p>El servicio al cliente es excelente, siempre están dispuestos a ayudar</p>
+                    <h3>Cliente 2</h3>
+                </div>
+                <div class="testimonial">
+                    <img src="testimonial3.jpg" alt="Testimonial 3">
+                    <p>Me siento como un millonario con mi reloj de lujo</p>
+                    <h3>Cliente 3</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Relojes de Lujo</p>
+    </footer>
+</body>
+</html>
+
+/* estilos.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.hero {
+    background-image: url('hero.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 48px;
+}
+
+.hero p {
+    font-size: 18px;
+}
+
+.hero button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.colecciones {
+    padding: 2em;
+}
+
+.colecciones h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.reloj {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+
+.reloj img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.reloj h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.testimonios {
+    padding: 2em;
+}
+
+.testimonios h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.testimonial {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+
+.testimonial img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.testimonial p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    clear: both;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    .hero {
+        height: 50vh;
+    }
+}
