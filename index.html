@@ -1,233 +1,278 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Kids</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Nunito&display=swap" rel="stylesheet">
-
-<style>
-
-:root {
-    --hk-primary:#FF6B6B;
-    --hk-math:#6C5CE7;
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-    font-family:'Nunito';
-    background:#111;
-    color:#fff;
-    overflow:hidden;
-}
-
-/* NAV */
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    width:100%;
-    display:flex;
-    background:#000;
-}
-
-.nav-item{
-    flex:1;
-    text-align:center;
-    padding:10px;
-    cursor:pointer;
-}
-
-/* SECTIONS */
-.section{display:none;height:100vh}
-.section.active{display:block}
-
-/* REELS */
-.reels-container{
-    height:100vh;
-    overflow-y:scroll;
-    scroll-snap-type:y mandatory;
-}
-
-.reel-card{
-    height:100vh;
-    scroll-snap-align:start;
-    position:relative;
-}
-
-.reel-video{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-/* CATALOGO */
-.catalog-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    padding:10px;
-}
-
-/* MATH */
-.fraction-display{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    font-size:40px;
-}
-
-/* CARRUSEL (AGREGADO) */
-.carousel-container{position:relative}
-.carousel-slide{display:none}
-.carousel-slide.active{display:block}
-.carousel-container img{width:100%}
-
-</style>
-</head><body>
-
-<div class="app-container">
-
-<main id="mainContent">
-
-<section id="section-inicio" class="section active">
-<div id="reelsContainer" class="reels-container"></div>
-</section>
-
-<section id="section-colorear" class="section">
-<div class="catalog-grid" id="catalogGrid"></div>
-</section>
-
-<section id="section-mate" class="section">
-
-<div class="fraction-display">
-<input id="mathAnswerNum">
-<input id="mathAnswerDen">
-</div>
-
-<button onclick="checkFraction()">Verificar</button>
-
-<div id="quickProblem"></div>
-<div id="quickOptions"></div>
-
-</section>
-
-</main>
-
-<nav class="bottom-nav">
-<div class="nav-item" onclick="goTo('inicio')">🏠</div>
-<div class="nav-item" onclick="goTo('colorear')">🛍️</div>
-<div class="nav-item" onclick="goTo('mate')">🔢</div>
-</nav>
-
-</div><script>
-
-let reelsObserver=null;
-let audioEnabled=false;
-
-/* NAV */
-function goTo(section){
-document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-document.getElementById('section-'+section).classList.add('active');
-
-if(section==='inicio') loadReels();
-if(section==='colorear') loadCatalog();
-}
-
-/* REELS */
-function loadReels(){
-
-const container=document.getElementById('reelsContainer');
-
-if(container.children.length>0)return;
-
-products.forEach((p) => {
-
-    const reel = document.createElement('div');
-    reel.className = 'reel-card';
-
-    reel.innerHTML = `
-    
-    <video class="reel-video" loop playsinline muted>
-        <source src="${getVideoUrl(p.video)}" type="video/mp4">
-    </video>
-
-    <div class="reel-content">
-        <h2>${p.name}</h2>
-        <p>$${p.final} MXN</p>
-
-        <a href="${p.url}" target="_blank" class="btn-reel btn-reel-primary">
-            🛒 Comprar
-        </a>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 OFERTAS EXCLUSIVAS | Productos Premium & Libros GRATIS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg-primary:#050505;--bg-secondary:#0a0a0a;--bg-card:#111;--bg-elevated:#1a1a1a;--accent-primary:#ff3366;--accent-secondary:#ff6b6b;--accent-cyan:#00d4ff;--accent-gold:#ffd700;--accent-purple:#8b5cf6;--text-primary:#fff;--text-secondary:#a0a0a0;--text-muted:#666;--border:#222;--success:#00ff88;--gradient-hero:linear-gradient(135deg,#ff3366 0%,#ff6b6b 50%,#ffd700 100%)}
+        *::selection{background:var(--accent-primary);color:#fff}
+        body{font-family:'Inter',sans-serif;background:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;line-height:1.6}
+        @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(2deg)}}
+        @keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(255,51,102,.4),0 0 40px rgba(255,51,102,.2)}50%{box-shadow:0 0 30px rgba(255,51,102,.6),0 0 60px rgba(255,51,102,.3)}}
+        @keyframes gradient-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        @keyframes slide-up{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes scale-in{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+        .header{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg-primary)}
+        .header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(255,51,102,.15) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(139,92,246,.1) 0%,transparent 50%),radial-gradient(circle at 50% 50%,rgba(0,212,255,.05) 0%,transparent 50%);animation:gradient-shift 15s ease infinite}
+        .grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:50px 50px;mask:radial-gradient(circle at 50% 50%,#000 0%,transparent 70%)}
+        .floating-elements{position:absolute;inset:0;pointer-events:none}
+        .float-item{position:absolute;font-size:2rem;opacity:.1;animation:float 6s ease-in-out infinite}
+        .float-item:nth-child(1){top:10%;left:10%;animation-delay:0s}
+        .float-item:nth-child(2){top:20%;right:15%;animation-delay:1s}
+        .float-item:nth-child(3){bottom:30%;left:20%;animation-delay:2s}
+        .float-item:nth-child(4){bottom:20%;right:10%;animation-delay:3s}
+        .hero-content{position:relative;z-index:10;text-align:center;max-width:1000px;padding:2rem;animation:slide-up 1s ease-out}
+        .urgency-bar{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,51,102,.1);border:1px solid rgba(255,51,102,.3);padding:.75rem 1.5rem;border-radius:50px;margin-bottom:2rem;font-size:.9rem;font-weight:600;color:var(--accent-primary);animation:pulse-glow 2s infinite}
+        .urgency-bar::before{content:'';width:8px;height:8px;background:var(--accent-primary);border-radius:50%;animation:pulse 1s infinite}
+        .hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,8vw,6rem);font-weight:700;line-height:1.1;margin-bottom:1.5rem;background:linear-gradient(135deg,#fff 0%,#ff3366 50%,#ffd700 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 200%;animation:gradient-shift 5s ease infinite}
+        .hero-subtitle{font-size:1.4rem;color:var(--text-secondary);max-width:700px;margin:0 auto 3rem;line-height:1.7}
+        .highlight{color:var(--accent-primary);font-weight:700}
+        .cta-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+        .btn{padding:1.2rem 3rem;border-radius:16px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:all .3s cubic-bezier(.4,0,.2,1);display:inline-flex;align-items:center;gap:.75rem;cursor:pointer;border:none;position:relative;overflow:hidden;text-transform:uppercase;letter-spacing:1px}
+        .btn-primary{background:var(--gradient-hero);background-size:200% 200%;color:#fff;box-shadow:0 10px 40px rgba(255,51,102,.4);animation:gradient-shift 3s ease infinite}
+        .btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 60px rgba(255,51,102,.5)}
+        .btn-secondary{background:transparent;color:var(--text-primary);border:2px solid var(--border);backdrop-filter:blur(10px)}
+        .btn-secondary:hover{border-color:var(--accent-primary);background:rgba(255,51,102,.1);transform:translateY(-3px)}
+        .trust-indicators{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;opacity:.8}
+        .trust-item{display:flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--text-secondary)}
+        .stats-bar{position:relative;z-index:100;background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:2rem 3rem;margin:-4rem auto 0;max-width:900px;display:flex;justify-content:space-around;gap:2rem;flex-wrap:wrap;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:slide-up .8s ease-out .3s both}
+        .stat-item{text-align:center}
+        .stat-number{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block}
+        .stat-label{color:var(--text-muted);font-size:.85rem;text-transform:uppercase;letter-spacing:1px;margin-top:.25rem}
+        .section{padding:8rem 2rem;max-width:1400px;margin:0 auto;position:relative}
+        .section-header{text-align:center;margin-bottom:5rem;animation:slide-up .8s ease-out}
+        .section-tag{display:inline-block;background:rgba(255,51,102,.1);border:1px solid rgba(255,51,102,.3);color:var(--accent-primary);padding:.6rem 1.5rem;border-radius:50px;font-size:.85rem;font-weight:700;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:2px}
+        .section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;margin-bottom:1rem;line-height:1.2}
+        .section-subtitle{font-size:1.2rem;color:var(--text-secondary);max-width:600px;margin:0 auto}
+        .products-showcase{display:grid;grid-template-columns:repeat(12,1fr);gap:2rem;margin-bottom:4rem}
+        .product-card{background:var(--bg-card);border:1px solid var(--border);border-radius:24px;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;animation:scale-in .6s ease-out}
+        .product-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,51,102,.15) 0%,transparent 70%);opacity:0;transition:opacity .4s;pointer-events:none}
+        .product-card:hover::before{opacity:1}
+        .product-card:hover{transform:translateY(-10px);border-color:rgba(255,51,102,.3);box-shadow:0 30px 60px rgba(0,0,0,.4)}
+        .product-card.featured{grid-column:span 6}
+        .product-card.regular{grid-column:span 3}
+        @media(max-width:1024px){.product-card.featured{grid-column:span 12}.product-card.regular{grid-column:span 6}}
+        @media(max-width:640px){.product-card.regular{grid-column:span 12}}
+        .product-badge{position:absolute;top:1rem;left:1rem;background:var(--gradient-hero);color:#fff;padding:.5rem 1rem;border-radius:50px;font-size:.75rem;font-weight:700;z-index:10;text-transform:uppercase;letter-spacing:1px;box-shadow:0 4px 15px rgba(255,51,102,.4)}
+        .product-media{position:relative;aspect-ratio:9/16;background:#000;overflow:hidden}
+        .product-video{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+        .product-card:hover .product-video{transform:scale(1.05)}
+        .video-overlay{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(transparent,rgba(0,0,0,.9));display:flex;justify-content:space-between;align-items:center}
+        .views-counter{display:flex;align-items:center;gap:.5rem;color:#fff;font-size:.9rem;font-weight:600}
+        .play-icon{width:50px;height:50px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s}
+        .play-icon:hover{background:var(--accent-primary);transform:scale(1.1)}
+        .play-icon::after{content:'';width:0;height:0;border-left:15px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:3px}
+        .product-info{padding:1.5rem}
+        .product-name{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
+        .product-meta{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+        .meta-tag{background:rgba(0,212,255,.1);color:var(--accent-cyan);padding:.3rem .8rem;border-radius:50px;font-size:.75rem;font-weight:600;text-transform:uppercase}
+        .price-display{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.5rem}
+        .original-price{font-size:1rem;color:var(--text-muted);text-decoration:line-through}
+        .final-price{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--accent-primary)}
+        .discount-badge{background:var(--success);color:var(--bg-primary);padding:.3rem .8rem;border-radius:50px;font-size:.8rem;font-weight:700}
+        .buy-button{width:100%;background:#FFE600;color:#2D3277;border:none;padding:1.2rem;border-radius:12px;font-weight:800;font-size:1rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem;text-transform:uppercase;letter-spacing:1px;box-shadow:0 4px 20px rgba(255,230,0,.3);text-decoration:none}
+        .buy-button:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,230,0,.4)}
+        .books-section{background:linear-gradient(180deg,var(--bg-primary) 0%,#0a0a1a 100%);position:relative;overflow:hidden}
+        .books-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-cyan),transparent)}
+        .books-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+        .book-card{background:var(--bg-card);border:1px solid var(--border);border-radius:24px;overflow:hidden;transition:all .4s;position:relative}
+        .book-card::after{content:'';position:absolute;inset:0;border-radius:24px;padding:2px;background:linear-gradient(135deg,var(--accent-cyan),transparent,var(--accent-purple));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s}
+        .book-card:hover::after{opacity:1}
+        .book-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,212,255,.1)}
+        .free-badge{position:absolute;top:1rem;right:1rem;background:var(--accent-cyan);color:var(--bg-primary);padding:.5rem 1rem;border-radius:50px;font-size:.8rem;font-weight:800;z-index:10;text-transform:uppercase;box-shadow:0 4px 15px rgba(0,212,255,.4)}
+        .book-media{aspect-ratio:9/16;background:linear-gradient(135deg,#1a1a2e,#16213e);position:relative;overflow:hidden}
+        .book-video{width:100%;height:100%;object-fit:cover}
+        .book-info{padding:1.5rem}
+        .book-title{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.5rem}
+        .book-desc{color:var(--text-secondary);font-size:.95rem;margin-bottom:1rem}
+        .download-count{display:flex;align-items:center;gap:.5rem;color:var(--accent-cyan);font-size:.9rem;font-weight:600;margin-bottom:1rem}
+        .download-btn{width:100%;background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));color:#fff;border:none;padding:1rem;border-radius:12px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none}
+        .download-btn:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(0,212,255,.3)}
+        .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:4rem}
+        .feature-box{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:2.5rem;text-align:center;transition:all .4s}
+        .feature-box:hover{border-color:rgba(255,51,102,.3);transform:translateY(-5px)}
+        .feature-icon{font-size:3.5rem;margin-bottom:1.5rem;display:inline-block;animation:float 3s ease-in-out infinite}
+        .feature-title{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.75rem}
+        .feature-text{color:var(--text-secondary);font-size:1rem;line-height:1.6}
+        .footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding:4rem 2rem 2rem;text-align:center}
+        .footer-logo{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;margin-bottom:1rem;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .footer-text{color:var(--text-muted);max-width:500px;margin:0 auto 2rem;line-height:1.6}
+        .social-links{display:flex;gap:1rem;justify-content:center;margin-bottom:3rem}
+        .social-link{width:50px;height:50px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);text-decoration:none;font-size:1.3rem;transition:all .3s}
+        .social-link:hover{background:var(--accent-primary);border-color:var(--accent-primary);color:#fff;transform:translateY(-3px)}
+        .footer-bottom{border-top:1px solid var(--border);padding-top:2rem;color:var(--text-muted);font-size:.9rem}
+        ::-webkit-scrollbar{width:10px}
+        ::-webkit-scrollbar-track{background:var(--bg-primary)}
+        ::-webkit-scrollbar-thumb{background:var(--accent-primary);border-radius:5px}
+        ::-webkit-scrollbar-thumb:hover{background:var(--accent-secondary)}
+        @media(max-width:768px){.stats-bar{margin:-2rem 1rem 0;padding:1.5rem;gap:1.5rem}.stat-number{font-size:1.8rem}.section{padding:4rem 1rem}.cta-group{flex-direction:column;width:100%}.btn{width:100%;justify-content:center}}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="grid-overlay"></div>
+        <div class="floating-elements">
+            <div class="float-item">🔥</div>
+            <div class="float-item">💎</div>
+            <div class="float-item">⚡</div>
+            <div class="float-item">🚀</div>
+        </div>
+        <div class="hero-content">
+            <div class="urgency-bar">🔥 Ofertas por tiempo limitado</div>
+            <h1 class="hero-title">Productos Premium<br>& Libros GRATIS</h1>
+            <p class="hero-subtitle">Descubre <span class="highlight">productos de alta demanda</span> con precios imbatibles en Mercado Libre, más <span class="highlight">libros educativos 100% gratuitos</span>.</p>
+            <div class="cta-group">
+                <a href="#productos" class="btn btn-primary">🛒 Ver Productos</a>
+                <a href="#libros" class="btn btn-secondary">📚 Libros Free</a>
+            </div>
+            <div class="trust-indicators">
+                <div class="trust-item"><span>✓</span> Envío Gratis</div>
+                <div class="trust-item"><span>✓</span> Garantía ML</div>
+                <div class="trust-item"><span>✓</span> 24-48h</div>
+                <div class="trust-item"><span>✓</span> 50k+ Clientes</div>
+            </div>
+        </div>
+    </header>
+    <div class="stats-bar">
+        <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">Productos</span></div>
+        <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Libros Free</span></div>
+        <div class="stat-item"><span class="stat-number">50k+</span><span class="stat-label">Descargas</span></div>
+        <div class="stat-item"><span class="stat-number">24h</span><span class="stat-label">Envío</span></div>
     </div>
-
-    `;
-
-    container.appendChild(reel);
-});
-
-container.appendChild(reel);
-}
-
-setupVideoObserver();
-}
-
-/* OBSERVER (FIX) */
-function setupVideoObserver(){
-
-if(reelsObserver) reelsObserver.disconnect();
-
-const videos=document.querySelectorAll('.reel-video');
-
-reelsObserver=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-const v=e.target;
-
-if(e.isIntersecting){
-v.play();
-v.muted=!audioEnabled;
-}else{
-v.pause();
-v.currentTime=0;
-}
-});
-},{threshold:0.6});
-
-videos.forEach(v=>reelsObserver.observe(v));
-}
-
-/* AUDIO */
-function toggleAudio(){
-audioEnabled=!audioEnabled;
-document.querySelectorAll('video').forEach(v=>v.muted=!audioEnabled);
-}
-
-/* CATALOGO */
-function loadCatalog(){
-const grid=document.getElementById('catalogGrid');
-
-if(grid.children.length>0)return;
-
-for(let i=0;i<6;i++){
-const div=document.createElement('div');
-div.innerHTML="Producto "+i;
-grid.appendChild(div);
-}
-}
-
-/* MATH */
-function checkFraction(){
-alert("Funciona");
-}
-
-/* INIT (SOLO UNA VEZ) */
-window.addEventListener('DOMContentLoaded',()=>{
-loadReels();
-});
-
-</script>
-
+    <section class="section" id="productos">
+        <div class="section-header">
+            <span class="section-tag">🔥 Más Vendidos</span>
+            <h2 class="section-title">Productos en Oferta</h2>
+            <p class="section-subtitle">Artículos seleccionados con los mejores precios del mercado.</p>
+        </div>
+        <div class="products-showcase" id="products-container"></div>
+    </section>    <section class="section books-section" id="libros">
+        <div class="section-header">
+            <span class="section-tag" style="background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.3);color:var(--accent-cyan)">📚 Educación</span>
+            <h2 class="section-title" style="background:linear-gradient(135deg,#fff 0%,#00d4ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Libros 100% GRATIS</h2>
+            <p class="section-subtitle">Descarga libros educativos para niños completamente gratis.</p>
+        </div>
+        <div class="books-grid" id="books-container"></div>
+        <div class="features-grid">
+            <div class="feature-box">
+                <div class="feature-icon">📖</div>
+                <h3 class="feature-title">Alta Calidad</h3>
+                <p class="feature-text">Libros profesionalmente ilustrados.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">Diseño Atractivo</h3>
+                <p class="feature-text">Colores vibrantes y personajes entrañables.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">💡</div>
+                <h3 class="feature-title">Aprendizaje</h3>
+                <p class="feature-text">Moralejas sobre valores y emociones.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">Formato Digital</h3>
+                <p class="feature-text">PDF listo para leer o imprimir.</p>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-logo">⚡ TIENDA PREMIUM</div>
+        <p class="footer-text">Tu destino de confianza para productos de calidad.</p>
+        <div class="social-links">
+            <a href="#" class="social-link">📘</a>
+            <a href="#" class="social-link">📸</a>
+            <a href="#" class="social-link">🐦</a>
+            <a href="#" class="social-link">📧</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Tienda Premium. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script>
+        const CLOUD_NAME='dgdw8fbku';
+        function getVideoUrl(id){return`https://res.cloudinary.com/${CLOUD_NAME}/video/upload/q_auto,f_mp4/${id}`}
+        function getImageUrl(id){return`https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto/${id}`}
+        const products=[
+            {id:'galaxy-watch',name:'Galaxy Watch Ultra',cat:'fisico',badge:'🔥 NUEVO',orig:12999,final:8999,video:'Samsung_Galaxy_Watch_Ultra_rbrkd0',url:'https://meli.la/1gMTZhz',views:'18.5k',featured:true},
+            {id:'nautica',name:'Nautica Voyage',cat:'fisico',badge:'🌊 TOP',orig:599,final:299,video:'Nautica_voyage_eau_de_toilette_trending_unboxing_bestmensfragrance_parfumrecommended_fragrance_rALDtQpyUXU_l1zz6m',url:'https://meli.la/2wumBgh',views:'22.3k',featured:true},
+            {id:'s25',name:'Samsung S25 FE',cat:'fisico',badge:'⚡ FLASH',orig:13999,final:8999,video:'Samsung_Galaxy_S25_FE_ggualp',url:'https://meli.la/2mA4qCh',views:'12.4k',featured:false},
+            {id:'moto',name:'Moto Edge 50 Pro',cat:'fisico',badge:'💎 PREMIUM',orig:12999,final:7999,video:'Motorola_Edición_Premium_nouj95',url:'https://meli.la/23KvNjV',views:'8.7k',featured:false},
+            {id:'pistola',name:'Pistola Masaje Xiaomi',cat:'fisico',badge:'💆 #1',orig:899,final:299,video:'Pistola_masaje_Xiaomi_me_encanta_️_Ij6vVKFiEKY_oz5c9x',url:'https://meli.la/1FfMYZi',views:'35.6k',featured:false},
+            {id:'curren',name:'Curren 8402',cat:'fisico',badge:'⌚ LUJO',orig:1299,final:599,video:'reloj_curren_8402_tzmw3l',url:'https://meli.la/1wiPMys',views:'24.1k',featured:false},
+            {id:'espejo',name:'Espejo LED',cat:'fisico',badge:'✨ LED',orig:899,final:550,video:'espejo2_nwhn93',url:'https://meli.la/1kYoTt1',views:'4.7k',featured:false},
+            {id:'camara',name:'Cámara WiFi 360°',cat:'fisico',badge:'🏠 SEGURIDAD',orig:1599,final:899,video:'camara_de_seguridad_2_uk1o5b',url:'https://meli.la/29JngVu',views:'6.3k',featured:false},
+            {id:'taladro',name:'Taladro Miwod 21V',cat:'fisico',badge:'🔧 BEST',orig:1299,final:599,video:'taladro1_yyp5nz',url:'https://meli.la/1XwiFN1',views:'31.8k',featured:false},
+            {id:'carpa',name:'Carpa Styrka 3x3',cat:'fisico',badge:'⛺ OUTDOOR',orig:1950,final:799,video:'Toldo_Plegable_3x3_Aleman_-_Vanlig_-_Exterior_IQZVxYT0IBg_1_hldbyk',url:'https://meli.la/31DDvzp',views:'15.2k',featured:false},
+            {id:'naranja',name:'Producto Naranja',cat:'fisico',badge:'🍊 OFERTA',orig:2999,final:2036,video:'3_naranja_ddfajm',url:'https://meli.la/1eMktrC',views:'5.8k',featured:false},
+            {id:'cargador',name:'Cargador GaN 20W',cat:'fisico',badge:'⚡ CARGA',orig:98,final:69,img:true,images:['D_Q_NP_880828-MLA100062693161_122025-O.webp'],url:'https://meli.la/1WTtdAw',views:'45.2k',featured:false},
+            {id:'leon',name:'El León Valiente',cat:'digital',badge:'📚 FREE',orig:0,final:0,video:'Cuento_1_El_Leon_Happy_jujtwm',pdf:'https://drive.google.com/file/d/1HrFakhKIwAXAYs7zNZMFpDrx7h2YSCqT/view',views:'45.2k',desc:'Un cuento sobre coraje y amistad.'},
+            {id:'animalitos',name:'Animalitos Divertidos',cat:'digital',badge:'📚 FREE',orig:0,final:0,video:'animalitos_dwothk',pdf:'https://drive.google.com/file/d/1qCV6KI6eU3E3zD_sH_dXNPkQV3EzIo6f/view',views:'38.7k',desc:'Conoce animales divertidos.'},
+            {id:'emociones',name:'Mis Emociones',cat:'digital',badge:'📚 FREE',orig:0,final:0,video:'emociones_rwg9cf',pdf:'https://drive.google.com/file/d/1RNbc5sOcslreFlxeWgBABLdQ4fxoK_7F/view',views:'52.1k',desc:'Ayuda a manejar emociones.'},
+            {id:'familia',name:'Mi Familia',cat:'digital',badge:'📚 FREE',orig:0,final:0,video:'familia_ed04bv',pdf:'https://drive.google.com/file/d/1CNieuZWxl8sHcVuk6TiGd2rH0pkf5GeC/view',views:'41.3k',desc:'Celebra el amor familiar.'}
+        ];        function renderProducts(){
+            const container=document.getElementById('products-container');
+            const physical=products.filter(p=>p.cat==='fisico');
+            physical.forEach((product,index)=>{
+                const card=document.createElement('div');
+                card.className=`product-card ${product.featured?'featured':'regular'}`;
+                card.style.animationDelay=`${index*0.1}s`;
+                const videoUrl=getVideoUrl(product.video);
+                const hasVideo=!product.img;
+                const discount=Math.round(((product.orig-product.final)/product.orig)*100);
+                card.innerHTML=`
+                    <span class="product-badge">${product.badge}</span>
+                    <div class="product-media">
+                        ${hasVideo?`<video class="product-video" autoplay muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>`:`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e)"><img src="${getImageUrl(product.images[0])}" style="max-width:80%;max-height:80%;object-fit:contain" alt="${product.name}"></div>`}
+                        <div class="video-overlay"><div class="views-counter"><span>▶</span> ${product.views} views</div><div class="play-icon"></div></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-meta"><span class="meta-tag">Envío Gratis</span><span class="meta-tag">Stock Limitado</span></div>
+                        <div class="price-display"><span class="original-price">$${product.orig.toLocaleString()} MXN</span><span class="final-price">$${product.final.toLocaleString()} MXN</span><span class="discount-badge">-${discount}%</span></div>
+                        <a href="${product.url}" target="_blank" class="buy-button"><span>🛒</span> Comprar en Mercado Libre</a>
+                    </div>`;
+                container.appendChild(card);
+            });
+        }
+        function renderBooks(){
+            const container=document.getElementById('books-container');
+            const digital=products.filter(p=>p.cat==='digital');
+            digital.forEach((book,index)=>{
+                const card=document.createElement('div');
+                card.className='book-card';
+                card.style.animationDelay=`${index*0.1}s`;
+                const videoUrl=getVideoUrl(book.video);
+                card.innerHTML=`
+                    <span class="free-badge">100% FREE</span>
+                    <div class="book-media">
+                        <video class="book-video" autoplay muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>
+                        <div class="video-overlay"><div class="views-counter"><span>📥</span> ${book.views} descargas</div></div>
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">${book.name}</h3>
+                        <p class="book-desc">${book.desc}</p>
+                        <div class="download-count"><span>📚</span> PDF listo para imprimir</div>
+                        <a href="${book.pdf}" target="_blank" class="download-btn"><span>⬇️</span> Descargar Ahora</a>
+                    </div>`;
+                container.appendChild(card);
+            });
+        }
+        document.addEventListener('DOMContentLoaded',()=>{
+            renderProducts();
+            renderBooks();
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+            anchor.addEventListener('click',function(e){
+                e.preventDefault();
+                const target=document.querySelector(this.getAttribute('href'));
+                if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+            });
+        });
+    </script>
 </body>
 </html>
