@@ -214,7 +214,7 @@
             {id:'animalitos',name:'Animalitos Divertidos',cat:'digital',badge:'📚 FREE',orig:0,final:0,video:'animalitos_dwothk',pdf:'https://drive.google.com/file/d/1qCV6KI6eU3E3zD_sH_dXNPkQV3EzIo6f/view',views:'38.7k',desc:'Conoce animales divertidos.'},
             {id:'emociones',name:'Mis Emociones',cat:'digital',badge:'📚 FREE',orig:0,final:0,video:'emociones_rwg9cf',pdf:'https://drive.google.com/file/d/1RNbc5sOcslreFlxeWgBABLdQ4fxoK_7F/view',views:'52.1k',desc:'Ayuda a manejar emociones.'},
             {id:'familia',name:'Mi Familia',cat:'digital',badge:'📚 FREE',orig:0,final:0,video:'familia_ed04bv',pdf:'https://drive.google.com/file/d/1CNieuZWxl8sHcVuk6TiGd2rH0pkf5GeC/view',views:'41.3k',desc:'Celebra el amor familiar.'}
-        ];        function renderProducts(){
+        ];                function renderProducts(){
             const container=document.getElementById('products-container');
             const physical=products.filter(p=>p.cat==='fisico');
             physical.forEach((product,index)=>{
@@ -224,11 +224,17 @@
                 const videoUrl=getVideoUrl(product.video);
                 const hasVideo=!product.img;
                 const discount=Math.round(((product.orig-product.final)/product.orig)*100);
+                
+                const videoId=`video-${product.id}`;
+                
                 card.innerHTML=`
                     <span class="product-badge">${product.badge}</span>
-                    <div class="product-media">
-                        ${hasVideo?`<video class="product-video" autoplay muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>`:`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e)"><img src="${getImageUrl(product.images[0])}" style="max-width:80%;max-height:80%;object-fit:contain" alt="${product.name}"></div>`}
-                        <div class="video-overlay"><div class="views-counter"><span>▶</span> ${product.views} views</div><div class="play-icon"></div></div>
+                    <div class="product-media" onclick="toggleAudio('${videoId}',this)">
+                        ${hasVideo?`<video id="${videoId}" class="product-video" autoplay muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>`:`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e)"><img src="${getImageUrl(product.images[0])}" style="max-width:80%;max-height:80%;object-fit:contain" alt="${product.name}"></div>`}
+                        <div class="video-overlay">
+                            <div class="views-counter"><span>▶</span> ${product.views} views</div>
+                            <div class="audio-indicator" id="indicator-${videoId}">🔇</div>
+                        </div>
                     </div>
                     <div class="product-info">
                         <h3 class="product-name">${product.name}</h3>
@@ -239,6 +245,7 @@
                 container.appendChild(card);
             });
         }
+        
         function renderBooks(){
             const container=document.getElementById('books-container');
             const digital=products.filter(p=>p.cat==='digital');
@@ -247,11 +254,16 @@
                 card.className='book-card';
                 card.style.animationDelay=`${index*0.1}s`;
                 const videoUrl=getVideoUrl(book.video);
+                const videoId=`video-${book.id}`;
+                
                 card.innerHTML=`
                     <span class="free-badge">100% FREE</span>
-                    <div class="book-media">
-                        <video class="book-video" autoplay muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>
-                        <div class="video-overlay"><div class="views-counter"><span>📥</span> ${book.views} descargas</div></div>
+                    <div class="book-media" onclick="toggleAudio('${videoId}',this)">
+                        <video id="${videoId}" class="book-video" autoplay muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>
+                        <div class="video-overlay">
+                            <div class="views-counter"><span>📥</span> ${book.views} descargas</div>
+                            <div class="audio-indicator" id="indicator-${videoId}">🔇</div>
+                        </div>
                     </div>
                     <div class="book-info">
                         <h3 class="book-title">${book.name}</h3>
@@ -262,10 +274,26 @@
                 container.appendChild(card);
             });
         }
+        
+        function toggleAudio(videoId,container){
+            const video=document.getElementById(videoId);
+            const indicator=document.getElementById(`indicator-${videoId}`);
+            if(video.muted){
+                video.muted=false;
+                indicator.textContent='🔊';
+                indicator.style.color='#00ff88';
+            }else{
+                video.muted=true;
+                indicator.textContent='🔇';
+                indicator.style.color='#fff';
+            }
+        }
+        
         document.addEventListener('DOMContentLoaded',()=>{
             renderProducts();
             renderBooks();
         });
+        
         document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
             anchor.addEventListener('click',function(e){
                 e.preventDefault();
