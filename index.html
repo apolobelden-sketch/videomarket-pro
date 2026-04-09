@@ -3,360 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 OFERTAS EXCLUSIVAS | Productos Premium & Libros GRATIS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <title>🔥 Productos Premium & Libros GRATIS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--bg-primary:#050505;--bg-secondary:#0a0a0a;--bg-card:#111;--bg-elevated:#1a1a1a;--accent-primary:#ff3366;--accent-secondary:#ff6b6b;--accent-cyan:#00d4ff;--accent-gold:#ffd700;--accent-purple:#8b5cf6;--text-primary:#fff;--text-secondary:#a0a0a0;--text-muted:#666;--border:#222;--success:#00ff88;--gradient-hero:linear-gradient(135deg,#ff3366 0%,#ff6b6b 50%,#ffd700 100%)}
-        *::selection{background:var(--accent-primary);color:#fff}
-        body{font-family:'Inter',sans-serif;background:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;line-height:1.6}
-        @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(2deg)}}
-        @keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(255,51,102,.4),0 0 40px rgba(255,51,102,.2)}50%{box-shadow:0 0 30px rgba(255,51,102,.6),0 0 60px rgba(255,51,102,.3)}}
-        @keyframes gradient-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-        @keyframes slide-up{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes scale-in{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
-        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-        .header{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg-primary)}
-        .header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(255,51,102,.15) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(139,92,246,.1) 0%,transparent 50%),radial-gradient(circle at 50% 50%,rgba(0,212,255,.05) 0%,transparent 50%);animation:gradient-shift 15s ease infinite}
-        .grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:50px 50px;mask:radial-gradient(circle at 50% 50%,#000 0%,transparent 70%)}
-        .floating-elements{position:absolute;inset:0;pointer-events:none}
-        .float-item{position:absolute;font-size:2rem;opacity:.1;animation:float 6s ease-in-out infinite}
-        .float-item:nth-child(1){top:10%;left:10%;animation-delay:0s}
-        .float-item:nth-child(2){top:20%;right:15%;animation-delay:1s}
-        .float-item:nth-child(3){bottom:30%;left:20%;animation-delay:2s}
-        .float-item:nth-child(4){bottom:20%;right:10%;animation-delay:3s}
-        .hero-content{position:relative;z-index:10;text-align:center;max-width:1000px;padding:2rem;animation:slide-up 1s ease-out}
-        .urgency-bar{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,51,102,.1);border:1px solid rgba(255,51,102,.3);padding:.75rem 1.5rem;border-radius:50px;margin-bottom:2rem;font-size:.9rem;font-weight:600;color:var(--accent-primary);animation:pulse-glow 2s infinite}
-        .urgency-bar::before{content:'';width:8px;height:8px;background:var(--accent-primary);border-radius:50%;animation:pulse 1s infinite}
-        .hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,8vw,6rem);font-weight:700;line-height:1.1;margin-bottom:1.5rem;background:linear-gradient(135deg,#fff 0%,#ff3366 50%,#ffd700 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 200%;animation:gradient-shift 5s ease infinite}
-        .hero-subtitle{font-size:1.4rem;color:var(--text-secondary);max-width:700px;margin:0 auto 3rem;line-height:1.7}
-        .highlight{color:var(--accent-primary);font-weight:700}
-        .cta-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
-        .btn{padding:1.2rem 3rem;border-radius:16px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:all .3s cubic-bezier(.4,0,.2,1);display:inline-flex;align-items:center;gap:.75rem;cursor:pointer;border:none;position:relative;overflow:hidden;text-transform:uppercase;letter-spacing:1px}
-        .btn-primary{background:var(--gradient-hero);background-size:200% 200%;color:#fff;box-shadow:0 10px 40px rgba(255,51,102,.4);animation:gradient-shift 3s ease infinite}
-        .btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 60px rgba(255,51,102,.5)}
-        .btn-secondary{background:transparent;color:var(--text-primary);border:2px solid var(--border);backdrop-filter:blur(10px)}
-        .btn-secondary:hover{border-color:var(--accent-primary);background:rgba(255,51,102,.1);transform:translateY(-3px)}
-        .trust-indicators{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;opacity:.8}
-        .trust-item{display:flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--text-secondary)}
-        .stats-bar{position:relative;z-index:100;background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:2rem 3rem;margin:-4rem auto 0;max-width:900px;display:flex;justify-content:space-around;gap:2rem;flex-wrap:wrap;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:slide-up .8s ease-out .3s both}
-        .stat-item{text-align:center}
-        .stat-number{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block}
-        .stat-label{color:var(--text-muted);font-size:.85rem;text-transform:uppercase;letter-spacing:1px;margin-top:.25rem}
-        .section{padding:8rem 2rem;max-width:1400px;margin:0 auto;position:relative}
-        .section-header{text-align:center;margin-bottom:5rem;animation:slide-up .8s ease-out}
-        .section-tag{display:inline-block;background:rgba(255,51,102,.1);border:1px solid rgba(255,51,102,.3);color:var(--accent-primary);padding:.6rem 1.5rem;border-radius:50px;font-size:.85rem;font-weight:700;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:2px}
-        .section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;margin-bottom:1rem;line-height:1.2}
-        .section-subtitle{font-size:1.2rem;color:var(--text-secondary);max-width:600px;margin:0 auto}
-        .products-showcase{display:grid;grid-template-columns:repeat(12,1fr);gap:2rem;margin-bottom:4rem}
-        .product-card{background:var(--bg-card);border:1px solid var(--border);border-radius:24px;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;animation:scale-in .6s ease-out}
-        .product-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,51,102,.15) 0%,transparent 70%);opacity:0;transition:opacity .4s;pointer-events:none}
-        .product-card:hover::before{opacity:1}
-        .product-card:hover{transform:translateY(-10px);border-color:rgba(255,51,102,.3);box-shadow:0 30px 60px rgba(0,0,0,.4)}
-        .product-card.featured{grid-column:span 6}
-        .product-card.regular{grid-column:span 3}
-        @media(max-width:1024px){.product-card.featured{grid-column:span 12}.product-card.regular{grid-column:span 6}}
-        @media(max-width:640px){.product-card.regular{grid-column:span 12}}
-        .product-badge{position:absolute;top:1rem;left:1rem;background:var(--gradient-hero);color:#fff;padding:.5rem 1rem;border-radius:50px;font-size:.75rem;font-weight:700;z-index:10;text-transform:uppercase;letter-spacing:1px;box-shadow:0 4px 15px rgba(255,51,102,.4)}
-        .product-media{position:relative;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer}
-        .product-video{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-        .product-card:hover .product-video{transform:scale(1.05)}
-        .video-overlay{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(transparent,rgba(0,0,0,.9));display:flex;justify-content:space-between;align-items:center}
-        .views-counter{display:flex;align-items:center;gap:.5rem;color:#fff;font-size:.9rem;font-weight:600}
-        .audio-indicator{width:40px;height:40px;background:rgba(0,0,0,.5);backdrop-filter:blur(10px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all .3s;cursor:pointer;pointer-events:none}
-        .product-info{padding:1.5rem}
-        .product-name{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
-        .product-meta{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
-        .meta-tag{background:rgba(0,212,255,.1);color:var(--accent-cyan);padding:.3rem .8rem;border-radius:50px;font-size:.75rem;font-weight:600;text-transform:uppercase}
-        .price-display{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.5rem}
-        .original-price{font-size:1rem;color:var(--text-muted);text-decoration:line-through}
-        .final-price{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--accent-primary)}
-        .discount-badge{background:var(--success);color:var(--bg-primary);padding:.3rem .8rem;border-radius:50px;font-size:.8rem;font-weight:700}
-        .buy-button{width:100%;background:#FFE600;color:#2D3277;border:none;padding:1.2rem;border-radius:12px;font-weight:800;font-size:1rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem;text-transform:uppercase;letter-spacing:1px;box-shadow:0 4px 20px rgba(255,230,0,.3);text-decoration:none}
-        .buy-button:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,230,0,.4)}
-        .books-section{background:linear-gradient(180deg,var(--bg-primary) 0%,#0a0a1a 100%);position:relative;overflow:hidden}
-        .books-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-cyan),transparent)}
-        .books-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
-        .book-card{background:var(--bg-card);border:1px solid var(--border);border-radius:24px;overflow:hidden;transition:all .4s;position:relative}
-        .book-card::after{content:'';position:absolute;inset:0;border-radius:24px;padding:2px;background:linear-gradient(135deg,var(--accent-cyan),transparent,var(--accent-purple));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s}
-        .book-card:hover::after{opacity:1}
-        .book-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,212,255,.1)}
-        .free-badge{position:absolute;top:1rem;right:1rem;background:var(--accent-cyan);color:var(--bg-primary);padding:.5rem 1rem;border-radius:50px;font-size:.8rem;font-weight:800;z-index:10;text-transform:uppercase;box-shadow:0 4px 15px rgba(0,212,255,.4)}
-        .book-media{aspect-ratio:9/16;background:linear-gradient(135deg,#1a1a2e,#16213e);position:relative;overflow:hidden;cursor:pointer}
-        .book-video{width:100%;height:100%;object-fit:cover}
-        .book-info{padding:1.5rem}
-        .book-title{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.5rem}
-        .book-desc{color:var(--text-secondary);font-size:.95rem;margin-bottom:1rem}
-        .download-count{display:flex;align-items:center;gap:.5rem;color:var(--accent-cyan);font-size:.9rem;font-weight:600;margin-bottom:1rem}
-        .download-btn{width:100%;background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));color:#fff;border:none;padding:1rem;border-radius:12px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none}
-        .download-btn:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(0,212,255,.3)}
-        .download-btn.processing{background:#666}
-        .download-btn.success{background:linear-gradient(135deg,#00ff88,#00cc6a)}
-        .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:4rem}
-        .feature-box{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:2.5rem;text-align:center;transition:all .4s}
-        .feature-box:hover{border-color:rgba(255,51,102,.3);transform:translateY(-5px)}
-        .feature-icon{font-size:3.5rem;margin-bottom:1.5rem;display:inline-block;animation:float 3s ease-in-out infinite}
-        .feature-title{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.75rem}
-        .feature-text{color:var(--text-secondary);font-size:1rem;line-height:1.6}
-        .footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding:4rem 2rem 2rem;text-align:center}
-        .footer-logo{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;margin-bottom:1rem;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .footer-text{color:var(--text-muted);max-width:500px;margin:0 auto 2rem;line-height:1.6}
-        .social-links{display:flex;gap:1rem;justify-content:center;margin-bottom:3rem}
-        .social-link{width:50px;height:50px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);text-decoration:none;font-size:1.3rem;transition:all .3s}
-        .social-link:hover{background:var(--accent-primary);border-color:var(--accent-primary);color:#fff;transform:translateY(-3px)}
-        .footer-bottom{border-top:1px solid var(--border);padding-top:2rem;color:var(--text-muted);font-size:.9rem}
-        ::-webkit-scrollbar{width:10px}
-        ::-webkit-scrollbar-track{background:var(--bg-primary)}
-        ::-webkit-scrollbar-thumb{background:var(--accent-primary);border-radius:5px}
-        ::-webkit-scrollbar-thumb:hover{background:var(--accent-secondary)}
-        @media(max-width:768px){.stats-bar{margin:-2rem 1rem 0;padding:1.5rem;gap:1.5rem}.stat-number{font-size:1.8rem}.section{padding:4rem 1rem}.cta-group{flex-direction:column;width:100%}.btn{width:100%;justify-content:center}}
+        :root{--bg:#050505;--card:#111;--border:#222;--accent:#ff3366;--cyan:#00d4ff;--purple:#8b5cf6;--gold:#ffd700;--text:#fff;--muted:#888;--success:#00ff88}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+        .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at center,rgba(255,51,102,.15) 0%,transparent 70%);position:relative}
+        .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px;mask:radial-gradient(circle at center,black 30%,transparent 70%)}
+        .urgency{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,51,102,.15);border:1px solid rgba(255,51,102,.4);padding:.6rem 1.2rem;border-radius:50px;font-size:.85rem;font-weight:600;color:var(--accent);margin-bottom:1.5rem}
+        .urgency::before{content:'';width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 1.5s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+        h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .subtitle{font-size:1.2rem;color:var(--muted);max-width:600px;margin-bottom:2rem}
+        .highlight{color:var(--accent);font-weight:700}
+        .buttons{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
+        .btn{padding:1rem 2rem;border-radius:12px;font-weight:700;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem}
+        .btn-primary{background:linear-gradient(135deg,var(--accent),#ff6b6b);color:#fff;box-shadow:0 10px 30px rgba(255,51,102,.3)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(255,51,102,.4)}
+        .btn-secondary{background:transparent;border:2px solid var(--border);color:#fff}
+        .btn-secondary:hover{border-color:var(--accent)}
+        .trust{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;font-size:.9rem;color:var(--muted)}
+        .trust span{display:flex;align-items:center;gap:.3rem}
+        .stats{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;margin:-3rem auto 0;max-width:800px;display:flex;justify-content:space-around;flex-wrap:wrap;text-align:center;position:relative;z-index:10;width:90%}
+        .stat-number{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;color:var(--accent)}
+        .stat-label{font-size:.8rem;color:var(--muted);text-transform:uppercase}
+        section{padding:5rem 1rem;max-width:1400px;margin:0 auto}
+        .section-title{text-align:center;margin-bottom:3rem}
+        .section-title h2{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;margin-bottom:.5rem}
+        .section-title p{color:var(--muted)}
+        .tag{display:inline-block;background:rgba(255,51,102,.1);border:1px solid rgba(255,51,102,.3);color:var(--accent);padding:.4rem 1rem;border-radius:50px;font-size:.75rem;font-weight:700;text-transform:uppercase;margin-bottom:1rem}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+        .card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+        .card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.5)}
+        .card-badge{position:absolute;top:1rem;left:1rem;background:linear-gradient(135deg,var(--accent),#ff6b6b);color:#fff;padding:.4rem .8rem;border-radius:50px;font-size:.7rem;font-weight:700;z-index:5}
+        .media{position:relative;aspect-ratio:9/16;background:#000;cursor:pointer}
+        .media video{width:100%;height:100%;object-fit:cover}
+        .overlay{position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(transparent,rgba(0,0,0,.9));display:flex;justify-content:space-between;align-items:center}
+        .views{font-size:.85rem;font-weight:600}
+        .sound-icon{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
+        .info{padding:1.5rem}
+        .name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+        .meta{display:flex;gap:.5rem;margin-bottom:1rem}
+        .meta span{background:rgba(0,212,255,.1);color:var(--cyan);padding:.2rem .6rem;border-radius:50px;font-size:.7rem}
+        .price{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+        .old{text-decoration:line-through;color:var(--muted);font-size:.9rem}
+        .new{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:var(--accent)}
+        .save{background:var(--success);color:var(--bg);padding:.2rem .6rem;border-radius:50px;font-size:.75rem;font-weight:700}
+        .buy-btn{display:block;width:100%;background:#FFE600;color:#2D3277;text-align:center;padding:1rem;border-radius:10px;font-weight:800;text-decoration:none;transition:all .3s}
+        .buy-btn:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(255,230,0,.3)}
+        .books{background:linear-gradient(180deg,var(--bg) 0%,#0a0a1a 100%)}
+        .books .tag{background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.3);color:var(--cyan)}
+        .book-card::before{content:'';position:absolute;inset:0;border-radius:20px;padding:2px;background:linear-gradient(135deg,var(--cyan),transparent,var(--purple));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
+        .book-card:hover::before{opacity:1}
+        .book-card{position:relative}
+        .free{position:absolute;top:1rem;right:1rem;background:var(--cyan);color:var(--bg);padding:.4rem .8rem;border-radius:50px;font-size:.75rem;font-weight:800;z-index:5}
+        .desc{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
+        .download{display:block;width:100%;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;text-align:center;padding:1rem;border-radius:10px;font-weight:700;text-decoration:none;border:none;cursor:pointer}
+        .download:hover{opacity:.9}
+        .download.processing{opacity:.7}
+        .download.success{background:var(--success)}
+        .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:3rem}
+        .feature{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center}
+        .feature-icon{font-size:2.5rem;margin-bottom:1rem}
+        .feature h3{font-family:'Space Grotesk',sans-serif;margin-bottom:.5rem}
+        .feature p{color:var(--muted);font-size:.9rem}
+        footer{text-align:center;padding:3rem 1rem;border-top:1px solid var(--border)}
+        footer h2{font-family:'Space Grotesk',sans-serif;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+        @media(max-width:768px){.stats{margin:-2rem auto 0;padding:1.5rem}.stat-number{font-size:1.8rem}section{padding:3rem 1rem}}
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="grid-overlay"></div>
-        <div class="floating-elements">
-            <div class="float-item">🔥</div>
-            <div class="float-item">💎</div>
-            <div class="float-item">⚡</div>
-            <div class="float-item">🚀</div>
+    <div class="hero">
+        <div class="urgency">🔥 Ofertas por tiempo limitado</div>
+        <h1>Productos Premium<br>& Libros GRATIS</h1>
+        <p class="subtitle">Descubre <span class="highlight">productos de alta demanda</span> con precios imbatibles en Mercado Libre, más <span class="highlight">libros educativos digitales 100% gratuitos</span>.</p>
+        <div class="buttons">
+            <a href="#productos" class="btn btn-primary">🛒 Ver Productos</a>
+            <a href="#libros" class="btn btn-secondary">📚 Libros Free</a>
         </div>
-        <div class="hero-content">
-            <div class="urgency-bar">🔥 Ofertas por tiempo limitado</div>
-            <h1 class="hero-title">Productos Premium<br>& Libros GRATIS</h1>
-            <p class="hero-subtitle">Descubre <span class="highlight">productos de alta demanda</span> con precios imbatibles en Mercado Libre, más <span class="highlight">libros educativos 100% gratuitos</span>.</p>
-            <div class="cta-group">
-                <a href="#productos" class="btn btn-primary">🛒 Ver Productos</a>
-                <a href="#libros" class="btn btn-secondary">📚 Libros Free</a>
-            </div>
-            <div class="trust-indicators">
-                <div class="trust-item"><span>✓</span> Envío Gratis</div>
-                <div class="trust-item"><span>✓</span> Garantía ML</div>
-                <div class="trust-item"><span>✓</span> 24-48h</div>
-                <div class="trust-item"><span>✓</span> 50k+ Clientes</div>
-            </div>
+        <div class="trust">
+            <span>✓ Envío Gratis</span>
+            <span>✓ Garantía ML</span>
+            <span>✓ 24-48h</span>
+            <span>✓ 50k+ Clientes</span>
         </div>
-    </header>
-    <div class="stats-bar">
-        <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">Productos</span></div>
-        <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Libros Free</span></div>
-        <div class="stat-item"><span class="stat-number">50k+</span><span class="stat-label">Descargas</span></div>
-        <div class="stat-item"><span class="stat-number">24h</span><span class="stat-label">Envío</span></div>
     </div>
-    <section class="section" id="productos">
-        <div class="section-header">
-            <span class="section-tag">🔥 Más Vendidos</span>
-            <h2 class="section-title">Productos en Oferta</h2>
-            <p class="section-subtitle">Artículos seleccionados con los mejores precios del mercado.</p>
+    <div class="stats">
+        <div><div class="stat-number">12</div><div class="stat-label">Productos</div></div>
+        <div><div class="stat-number">4</div><div class="stat-label">Libros Free</div></div>
+        <div><div class="stat-number">50k+</div><div class="stat-label">Descargas</div></div>
+        <div><div class="stat-number">24h</div><div class="stat-label">Envío</div></div>
+    </div>
+    <section id="productos">
+        <div class="section-title">
+            <span class="tag">🔥 Más Vendidos</span>
+            <h2>Productos en Oferta</h2>
+            <p>Artículos seleccionados con los mejores precios del mercado</p>
         </div>
-        <div class="products-showcase" id="products-container"></div>
-    </section>    <section class="section books-section" id="libros">
-        <div class="section-header">
-            <span class="section-tag" style="background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.3);color:var(--accent-cyan)">📚 Educación</span>
-            <h2 class="section-title" style="background:linear-gradient(135deg,#fff 0%,#00d4ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Libros 100% GRATIS</h2>
-            <p class="section-subtitle">Descarga libros educativos para niños completamente gratis.</p>
+        <div class="grid" id="product-grid"></div>
+    </section>    <section id="libros" class="books">
+        <div class="section-title">
+            <span class="tag">📚 Educación Gratuita</span>
+            <h2 style="background:linear-gradient(135deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Libros 100% GRATIS</h2>
+            <p>Descarga libros educativos para niños completamente gratis</p>
         </div>
-        <div class="books-grid" id="books-container"></div>
-        <div class="features-grid">
-            <div class="feature-box">
+        <div class="grid" id="book-grid"></div>
+        <div class="features">
+            <div class="feature">
                 <div class="feature-icon">📖</div>
-                <h3 class="feature-title">Alta Calidad</h3>
-                <p class="feature-text">Libros profesionalmente ilustrados.</p>
+                <h3>Alta Calidad</h3>
+                <p>Libros profesionalmente ilustrados</p>
             </div>
-            <div class="feature-box">
+            <div class="feature">
                 <div class="feature-icon">🎨</div>
-                <h3 class="feature-title">Diseño Atractivo</h3>
-                <p class="feature-text">Colores vibrantes y personajes entrañables.</p>
+                <h3>Diseño Atractivo</h3>
+                <p>Colores vibrantes y personajes</p>
             </div>
-            <div class="feature-box">
+            <div class="feature">
                 <div class="feature-icon">💡</div>
-                <h3 class="feature-title">Aprendizaje</h3>
-                <p class="feature-text">Moralejas sobre valores y emociones.</p>
+                <h3>Aprendizaje</h3>
+                <p>Moralejas sobre valores</p>
             </div>
-            <div class="feature-box">
+            <div class="feature">
                 <div class="feature-icon">📱</div>
-                <h3 class="feature-title">Formato Digital</h3>
-                <p class="feature-text">PDF listo para leer o imprimir.</p>
+                <h3>Formato Digital</h3>
+                <p>PDF listo para imprimir</p>
             </div>
         </div>
     </section>
-    <footer class="footer">
-        <div class="footer-logo">⚡ TIENDA PREMIUM</div>
-        <p class="footer-text">Tu destino de confianza para productos de calidad.</p>
-        <div class="social-links">
-            <a href="#" class="social-link">📘</a>
-            <a href="#" class="social-link">📸</a>
-            <a href="#" class="social-link">🐦</a>
-            <a href="#" class="social-link">📧</a>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2024 Tienda Premium. Todos los derechos reservados.</p>
-        </div>
+    <footer>
+        <h2>⚡ TIENDA PREMIUM</h2>
+        <p style="color:var(--muted)">Tu destino de confianza para productos de calidad</p>
     </footer>
     <script>
         const CLOUD_NAME='dgdw8fbku';
-        function getVideoUrl(id){return`https://res.cloudinary.com/${CLOUD_NAME}/video/upload/q_auto,f_mp4/${id}`}
-        function getImageUrl(id){return`https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto/${id}`}
-        
-        // LINKS DIRECTOS DE DESCARGA GOOGLE DRIVE
-        const pdfLinks={
+        const getVideo=(id)=>`https://res.cloudinary.com/${CLOUD_NAME}/video/upload/q_auto,f_mp4/${id}`;
+        const getImg=(id)=>`https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto/${id}`;
+        const PDFS={
             leon:'https://drive.google.com/uc?export=download&id=1HrFakhKIwAXAYs7zNZMFpDrx7h2YSCqT',
             animalitos:'https://drive.google.com/uc?export=download&id=1RNbc5sOcslreFlxeWgBABLdQ4fxoK_7F',
             emociones:'https://drive.google.com/uc?export=download&id=1qCV6KI6eU3E3zD_sH_dXNPkQV3EzIo6f',
             familia:'https://drive.google.com/uc?export=download&id=1VB9QTiTt6ryejlSFLwEqWwollQGNgHkD'
         };
-        
-        const products=[
-            {id:'galaxy-watch',name:'Galaxy Watch Ultra',cat:'fisico',badge:'🔥 NUEVO',orig:12999,final:8999,video:'Samsung_Galaxy_Watch_Ultra_rbrkd0',url:'https://meli.la/1gMTZhz',views:'18.5k',featured:true},
-            {id:'nautica',name:'Nautica Voyage',cat:'fisico',badge:'🌊 TOP',orig:599,final:299,video:'Nautica_voyage_eau_de_toilette_trending_unboxing_bestmensfragrance_parfumrecommended_fragrance_rALDtQpyUXU_l1zz6m',url:'https://meli.la/2wumBgh',views:'22.3k',featured:true},
-            {id:'s25',name:'Samsung S25 FE',cat:'fisico',badge:'⚡ FLASH',orig:13999,final:8999,video:'Samsung_Galaxy_S25_FE_ggualp',url:'https://meli.la/2mA4qCh',views:'12.4k',featured:false},
-            {id:'moto',name:'Moto Edge 50 Pro',cat:'fisico',badge:'💎 PREMIUM',orig:12999,final:7999,video:'Motorola_Edición_Premium_nouj95',url:'https://meli.la/23KvNjV',views:'8.7k',featured:false},
-            {id:'pistola',name:'Pistola Masaje Xiaomi',cat:'fisico',badge:'💆 #1',orig:899,final:299,video:'Pistola_masaje_Xiaomi_me_encanta_️_Ij6vVKFiEKY_oz5c9x',url:'https://meli.la/1FfMYZi',views:'35.6k',featured:false},
-            {id:'curren',name:'Curren 8402',cat:'fisico',badge:'⌚ LUJO',orig:1299,final:599,video:'reloj_curren_8402_tzmw3l',url:'https://meli.la/1wiPMys',views:'24.1k',featured:false},
-            {id:'espejo',name:'Espejo LED',cat:'fisico',badge:'✨ LED',orig:899,final:550,video:'espejo2_nwhn93',url:'https://meli.la/1kYoTt1',views:'4.7k',featured:false},
-            {id:'camara',name:'Cámara WiFi 360°',cat:'fisico',badge:'🏠 SEGURIDAD',orig:1599,final:899,video:'camara_de_seguridad_2_uk1o5b',url:'https://meli.la/29JngVu',views:'6.3k',featured:false},
-            {id:'taladro',name:'Taladro Miwod 21V',cat:'fisico',badge:'🔧 BEST',orig:1299,final:599,video:'taladro1_yyp5nz',url:'https://meli.la/1XwiFN1',views:'31.8k',featured:false},
-            {id:'carpa',name:'Carpa Styrka 3x3',cat:'fisico',badge:'⛺ OUTDOOR',orig:1950,final:799,video:'Toldo_Plegable_3x3_Aleman_-_Vanlig_-_Exterior_IQZVxYT0IBg_1_hldbyk',url:'https://meli.la/31DDvzp',views:'15.2k',featured:false},
-            {id:'naranja',name:'Producto Naranja',cat:'fisico',badge:'🍊 OFERTA',orig:2999,final:2036,video:'3_naranja_ddfajm',url:'https://meli.la/1eMktrC',views:'5.8k',featured:false},
-            {id:'cargador',name:'Cargador GaN 20W',cat:'fisico',badge:'⚡ CARGA',orig:98,final:69,img:true,images:['D_Q_NP_880828-MLA100062693161_122025-O.webp'],url:'https://meli.la/1WTtdAw',views:'45.2k',featured:false},
-            {id:'leon',name:'El León Valiente',cat:'digital',badge:'📚 FREE',video:'Cuento_1_El_Leon_Happy_jujtwm',pdf:pdfLinks.leon,views:'45.2k',desc:'Un cuento sobre coraje y amistad.'},
-            {id:'animalitos',name:'Animalitos Divertidos',cat:'digital',badge:'📚 FREE',video:'animalitos_dwothk',pdf:pdfLinks.animalitos,views:'38.7k',desc:'Conoce animales divertidos.'},
-            {id:'emociones',name:'Mis Emociones',cat:'digital',badge:'📚 FREE',video:'emociones_rwg9cf',pdf:pdfLinks.emociones,views:'52.1k',desc:'Ayuda a manejar emociones.'},
-            {id:'familia',name:'Mi Familia',cat:'digital',badge:'📚 FREE',video:'familia_ed04bv',pdf:pdfLinks.familia,views:'41.3k',desc:'Celebra el amor familiar.'}
-        ];       function renderProductos() {
-            const grid = document.getElementById('product-grid');
-            productos.forEach((p, i) => {
-                const descuento = Math.round(((p.orig - p.final) / p.orig) * 100);
-                const videoUrl = getVideo(p.video);
-                
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.style.animationDelay = `${i * 0.1}s`;
-                
-                card.innerHTML = `
+        const productos=[
+            {id:'p1',nombre:'Galaxy Watch Ultra',badge:'🔥 NUEVO',orig:12999,final:8999,video:'Samsung_Galaxy_Watch_Ultra_rbrkd0',link:'https://meli.la/1gMTZhz',views:'18.5k'},
+            {id:'p2',nombre:'Nautica Voyage',badge:'🌊 TOP',orig:599,final:299,video:'Nautica_voyage_eau_de_toilette_trending_unboxing_bestmensfragrance_parfumrecommended_fragrance_rALDtQpyUXU_l1zz6m',link:'https://meli.la/2wumBgh',views:'22.3k'},
+            {id:'p3',nombre:'Samsung S25 FE',badge:'⚡ FLASH',orig:13999,final:8999,video:'Samsung_Galaxy_S25_FE_ggualp',link:'https://meli.la/2mA4qCh',views:'12.4k'},
+            {id:'p4',nombre:'Moto Edge 50 Pro',badge:'💎 PREMIUM',orig:12999,final:7999,video:'Motorola_Edición_Premium_nouj95',link:'https://meli.la/23KvNjV',views:'8.7k'},
+            {id:'p5',nombre:'Pistola Masaje Xiaomi',badge:'💆 #1',orig:899,final:299,video:'Pistola_masaje_Xiaomi_me_encanta_️_Ij6vVKFiEKY_oz5c9x',link:'https://meli.la/1FfMYZi',views:'35.6k'},
+            {id:'p6',nombre:'Curren 8402',badge:'⌚ LUJO',orig:1299,final:599,video:'reloj_curren_8402_tzmw3l',link:'https://meli.la/1wiPMys',views:'24.1k'},
+            {id:'p7',nombre:'Espejo LED',badge:'✨ LED',orig:899,final:550,video:'espejo2_nwhn93',link:'https://meli.la/1kYoTt1',views:'4.7k'},
+            {id:'p8',nombre:'Cámara WiFi 360°',badge:'🏠 SEGURIDAD',orig:1599,final:899,video:'camara_de_seguridad_2_uk1o5b',link:'https://meli.la/29JngVu',views:'6.3k'},
+            {id:'p9',nombre:'Taladro Miwod 21V',badge:'🔧 BEST',orig:1299,final:599,video:'taladro1_yyp5nz',link:'https://meli.la/1XwiFN1',views:'31.8k'},
+            {id:'p10',nombre:'Carpa Styrka 3x3',badge:'⛺ OUTDOOR',orig:1950,final:799,video:'Toldo_Plegable_3x3_Aleman_-_Vanlig_-_Exterior_IQZVxYT0IBg_1_hldbyk',link:'https://meli.la/31DDvzp',views:'15.2k'},
+            {id:'p11',nombre:'Producto Naranja',badge:'🍊 OFERTA',orig:2999,final:2036,video:'3_naranja_ddfajm',link:'https://meli.la/1eMktrC',views:'5.8k'},
+            {id:'p12',nombre:'Cargador GaN 20W',badge:'⚡ CARGA',orig:98,final:69,img:true,imagen:'D_Q_NP_880828-MLA100062693161_122025-O.webp',link:'https://meli.la/1WTtdAw',views:'45.2k'}
+        ];
+        const libros=[
+            {id:'l1',nombre:'El León Valiente',video:'Cuento_1_El_Leon_Happy_jujtwm',pdf:PDFS.leon,views:'45.2k',desc:'Un cuento sobre coraje y amistad.'},
+            {id:'l2',nombre:'Animalitos Divertidos',video:'animalitos_dwothk',pdf:PDFS.animalitos,views:'38.7k',desc:'Conoce animales divertidos.'},
+            {id:'l3',nombre:'Mis Emociones',video:'emociones_rwg9cf',pdf:PDFS.emociones,views:'52.1k',desc:'Ayuda a manejar emociones.'},
+            {id:'l4',nombre:'Mi Familia',video:'familia_ed04bv',pdf:PDFS.familia,views:'41.3k',desc:'Celebra el amor familiar.'}
+        ];        function renderProductos(){
+            const grid=document.getElementById('product-grid');
+            productos.forEach((p,i)=>{
+                const descuento=Math.round(((p.orig-p.final)/p.orig)*100);
+                const videoUrl=getVideo(p.video);
+                const card=document.createElement('div');
+                card.className='card';
+                card.innerHTML=`
                     <div style="position:relative">
                         <span class="card-badge">${p.badge}</span>
                         <div class="media" onclick="toggleSound('prod-${p.id}')">
-                            ${p.img ? 
-                                `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e)"><img src="${getImg(p.imagen)}" style="max-width:80%;max-height:80%"></div>` :
-                                `<video id="prod-${p.id}" muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>`
-                            }
-                            ${!p.img ? `
-                            <div class="overlay">
-                                <span class="views">▶ ${p.views}</span>
-                                <span class="sound-icon" id="icon-prod-${p.id}">🔇</span>
-                            </div>` : ''}
+                            ${p.img?`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e)"><img src="${getImg(p.imagen)}" style="max-width:80%;max-height:80%"></div>`:`<video id="prod-${p.id}" muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>`}
+                            ${!p.img?`<div class="overlay"><span class="views">▶ ${p.views}</span><span class="sound-icon" id="icon-prod-${p.id}">🔇</span></div>`:''}
                         </div>
                     </div>
                     <div class="info">
                         <div class="name">${p.nombre}</div>
                         <div class="meta"><span>Envío Gratis</span><span>Stock Limitado</span></div>
-                        <div class="price">
-                            <span class="old">$${p.orig.toLocaleString()}</span>
-                            <span class="new">$${p.final.toLocaleString()}</span>
-                            <span class="save">-${descuento}%</span>
-                        </div>
+                        <div class="price"><span class="old">$${p.orig.toLocaleString()}</span><span class="new">$${p.final.toLocaleString()}</span><span class="save">-${descuento}%</span></div>
                         <a href="${p.link}" target="_blank" class="buy-btn">🛒 Comprar en Mercado Libre</a>
-                    </div>
-                `;
+                    </div>`;
                 grid.appendChild(card);
-                
-                // Autoplay video
-                if(!p.img) {
-                    const vid = card.querySelector('video');
-                    vid.play().catch(()=>{});
-                }
+                if(!p.img){const vid=card.querySelector('video');vid.play().catch(()=>{});}
             });
         }
-
-        // RENDER LIBROS
-        function renderLibros() {
-            const grid = document.getElementById('book-grid');
-            libros.forEach((l, i) => {
-                const videoUrl = getVideo(l.video);
-                
-                const card = document.createElement('div');
-                card.className = 'card book-card';
-                card.style.animationDelay = `${i * 0.1}s`;
-                
-                card.innerHTML = `
+        function renderLibros(){
+            const grid=document.getElementById('book-grid');
+            libros.forEach((l,i)=>{
+                const videoUrl=getVideo(l.video);
+                const card=document.createElement('div');
+                card.className='card book-card';
+                card.innerHTML=`
                     <div style="position:relative">
                         <span class="free">100% FREE</span>
                         <div class="media" onclick="toggleSound('libro-${l.id}')">
                             <video id="libro-${l.id}" muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>
-                            <div class="overlay">
-                                <span class="views">📥 ${l.views}</span>
-                                <span class="sound-icon" id="icon-libro-${l.id}">🔇</span>
-                            </div>
+                            <div class="overlay"><span class="views">📥 ${l.views}</span><span class="sound-icon" id="icon-libro-${l.id}">🔇</span></div>
                         </div>
                     </div>
                     <div class="info">
                         <div class="name">${l.nombre}</div>
                         <p class="desc">${l.desc}</p>
-                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;color:var(--cyan);font-size:.9rem"><span>📚</span> PDF listo para imprimir</div>
+                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;color:var(--cyan);font-size:.9rem"><span>📚</span>PDF listo para imprimir</div>
                         <button class="download" onclick="descargar(this,'${l.pdf}')">⬇️ Descargar Ahora</button>
-                    </div>
-                `;
+                    </div>`;
                 grid.appendChild(card);
-                
-                // Autoplay
-                const vid = card.querySelector('video');
-                vid.play().catch(()=>{});
+                const vid=card.querySelector('video');vid.play().catch(()=>{});
             });
         }
-
-        // TOGGLE SONIDO - FUNCIONA PARA PRODUCTOS Y LIBROS
-        function toggleSound(id) {
-            const video = document.getElementById(id);
-            const icon = document.getElementById('icon-' + id);
-            if(!video || !icon) return;
-            
-            if(video.muted) {
-                video.muted = false;
-                video.volume = 1;
-                icon.textContent = '🔊';
-                icon.style.color = '#00ff88';
-            } else {
-                video.muted = true;
-                icon.textContent = '🔇';
-                icon.style.color = '#fff';
-            }
+        function toggleSound(id){
+            const video=document.getElementById(id);
+            const icon=document.getElementById('icon-'+id);
+            if(!video||!icon)return;
+            if(video.muted){video.muted=false;video.volume=1;icon.textContent='🔊';icon.style.color='#00ff88';}
+            else{video.muted=true;icon.textContent='🔇';icon.style.color='#fff';}
         }
-
-        // DESCARGAR PDF - ABRE EN NUEVA PESTAÑA
-        function descargar(btn, url) {
+        function descargar(btn,url){
             btn.classList.add('processing');
-            btn.innerHTML = '⏳ Preparando...';
-            
-            setTimeout(() => {
+            btn.innerHTML='⏳ Preparando...';
+            setTimeout(()=>{
                 btn.classList.remove('processing');
                 btn.classList.add('success');
-                btn.innerHTML = '✅ ¡Descargando!';
-                
-                // Abrir PDF en nueva pestaña
-                window.open(url, '_blank');
-                
-                setTimeout(() => {
-                    btn.classList.remove('success');
-                    btn.innerHTML = '⬇️ Descargar Ahora';
-                }, 2000);
-            }, 600);
+                btn.innerHTML='✅ ¡Descargando!';
+                window.open(url,'_blank');
+                setTimeout(()=>{btn.classList.remove('success');btn.innerHTML='⬇️ Descargar Ahora';},2000);
+            },600);
         }
-
-        // INICIAR
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded',()=>{
             renderProductos();
             renderLibros();
-            
-            // Smooth scroll
-            document.querySelectorAll('a[href^="#"]').forEach(a => {
-                a.addEventListener('click', e => {
+            document.querySelectorAll('a[href^="#"]').forEach(a=>{
+                a.addEventListener('click',e=>{
                     e.preventDefault();
-                    const destino = document.querySelector(a.getAttribute('href'));
-                    if(destino) destino.scrollIntoView({behavior: 'smooth'});
+                    const destino=document.querySelector(a.getAttribute('href'));
+                    if(destino)destino.scrollIntoView({behavior:'smooth'});
                 });
             });
         });
     </script>
 </body>
-</html> 
+</html>
