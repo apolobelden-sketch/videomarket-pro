@@ -223,8 +223,7 @@
             {id:'animalitos',name:'Animalitos Divertidos',cat:'digital',badge:'📚 FREE',video:'animalitos_dwothk',pdf:pdfLinks.animalitos,views:'38.7k',desc:'Conoce animales divertidos.'},
             {id:'emociones',name:'Mis Emociones',cat:'digital',badge:'📚 FREE',video:'emociones_rwg9cf',pdf:pdfLinks.emociones,views:'52.1k',desc:'Ayuda a manejar emociones.'},
             {id:'familia',name:'Mi Familia',cat:'digital',badge:'📚 FREE',video:'familia_ed04bv',pdf:pdfLinks.familia,views:'41.3k',desc:'Celebra el amor familiar.'}
-        ];               // RENDER PRODUCTOS
-        function renderProductos() {
+        ];       function renderProductos() {
             const grid = document.getElementById('product-grid');
             productos.forEach((p, i) => {
                 const descuento = Math.round(((p.orig - p.final) / p.orig) * 100);
