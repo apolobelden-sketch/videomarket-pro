@@ -63,8 +63,7 @@
         .product-card:hover .product-video{transform:scale(1.05)}
         .video-overlay{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(transparent,rgba(0,0,0,.9));display:flex;justify-content:space-between;align-items:center}
         .views-counter{display:flex;align-items:center;gap:.5rem;color:#fff;font-size:.9rem;font-weight:600}
-        .audio-indicator{width:40px;height:40px;background:rgba(0,0,0,.5);backdrop-filter:blur(10px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all .3s;cursor:pointer}
-        .audio-indicator:hover{transform:scale(1.1);background:rgba(255,255,255,.2)}
+        .audio-indicator{width:40px;height:40px;background:rgba(0,0,0,.5);backdrop-filter:blur(10px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all .3s;cursor:pointer;pointer-events:none}
         .product-info{padding:1.5rem}
         .product-name{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
         .product-meta{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
@@ -91,7 +90,7 @@
         .download-count{display:flex;align-items:center;gap:.5rem;color:var(--accent-cyan);font-size:.9rem;font-weight:600;margin-bottom:1rem}
         .download-btn{width:100%;background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));color:#fff;border:none;padding:1rem;border-radius:12px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none}
         .download-btn:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(0,212,255,.3)}
-        .download-btn.processing{opacity:.7;cursor:wait}
+        .download-btn.processing{background:#666}
         .download-btn.success{background:linear-gradient(135deg,#00ff88,#00cc6a)}
         .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:4rem}
         .feature-box{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:2.5rem;text-align:center;transition:all .4s}
@@ -199,8 +198,7 @@
         function getVideoUrl(id){return`https://res.cloudinary.com/${CLOUD_NAME}/video/upload/q_auto,f_mp4/${id}`}
         function getImageUrl(id){return`https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto/${id}`}
         
-        // LINKS DE DESCARGA DIRECTA DE GOOGLE DRIVE
-        // Formato: https://drive.google.com/uc?export=download&id=FILE_ID
+        // LINKS DIRECTOS DE DESCARGA GOOGLE DRIVE
         const pdfLinks={
             leon:'https://drive.google.com/uc?export=download&id=1HrFakhKIwAXAYs7zNZMFpDrx7h2YSCqT',
             animalitos:'https://drive.google.com/uc?export=download&id=1RNbc5sOcslreFlxeWgBABLdQ4fxoK_7F',
@@ -221,13 +219,11 @@
             {id:'carpa',name:'Carpa Styrka 3x3',cat:'fisico',badge:'⛺ OUTDOOR',orig:1950,final:799,video:'Toldo_Plegable_3x3_Aleman_-_Vanlig_-_Exterior_IQZVxYT0IBg_1_hldbyk',url:'https://meli.la/31DDvzp',views:'15.2k',featured:false},
             {id:'naranja',name:'Producto Naranja',cat:'fisico',badge:'🍊 OFERTA',orig:2999,final:2036,video:'3_naranja_ddfajm',url:'https://meli.la/1eMktrC',views:'5.8k',featured:false},
             {id:'cargador',name:'Cargador GaN 20W',cat:'fisico',badge:'⚡ CARGA',orig:98,final:69,img:true,images:['D_Q_NP_880828-MLA100062693161_122025-O.webp'],url:'https://meli.la/1WTtdAw',views:'45.2k',featured:false},
-            
-            // LIBROS CON LINKS CORREGIDOS
             {id:'leon',name:'El León Valiente',cat:'digital',badge:'📚 FREE',video:'Cuento_1_El_Leon_Happy_jujtwm',pdf:pdfLinks.leon,views:'45.2k',desc:'Un cuento sobre coraje y amistad.'},
             {id:'animalitos',name:'Animalitos Divertidos',cat:'digital',badge:'📚 FREE',video:'animalitos_dwothk',pdf:pdfLinks.animalitos,views:'38.7k',desc:'Conoce animales divertidos.'},
             {id:'emociones',name:'Mis Emociones',cat:'digital',badge:'📚 FREE',video:'emociones_rwg9cf',pdf:pdfLinks.emociones,views:'52.1k',desc:'Ayuda a manejar emociones.'},
             {id:'familia',name:'Mi Familia',cat:'digital',badge:'📚 FREE',video:'familia_ed04bv',pdf:pdfLinks.familia,views:'41.3k',desc:'Celebra el amor familiar.'}
-        ];                function renderProducts(){
+        ];        function renderProducts(){
             const container=document.getElementById('products-container');
             const physical=products.filter(p=>p.cat==='fisico');
             physical.forEach((product,index)=>{
@@ -237,7 +233,7 @@
                 const videoUrl=getVideoUrl(product.video);
                 const hasVideo=!product.img;
                 const discount=Math.round(((product.orig-product.final)/product.orig)*100);
-                const videoId=`video-prod-${product.id}`;
+                const videoId=`prod-${product.id}`;
                 
                 card.innerHTML=`
                     <span class="product-badge">${product.badge}</span>
@@ -245,7 +241,7 @@
                         ${hasVideo?`<video id="${videoId}" class="product-video" autoplay muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>`:`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e)"><img src="${getImageUrl(product.images[0])}" style="max-width:80%;max-height:80%;object-fit:contain" alt="${product.name}"></div>`}
                         <div class="video-overlay">
                             <div class="views-counter"><span>▶</span> ${product.views} views</div>
-                            <div class="audio-indicator" id="indicator-${videoId}">🔇</div>
+                            <div class="audio-indicator" id="ind-${videoId}">🔇</div>
                         </div>
                     </div>
                     <div class="product-info">
@@ -266,7 +262,7 @@
                 card.className='book-card';
                 card.style.animationDelay=`${index*0.1}s`;
                 const videoUrl=getVideoUrl(book.video);
-                const videoId=`video-book-${book.id}`;
+                const videoId=`book-${book.id}`;
                 
                 card.innerHTML=`
                     <span class="free-badge">100% FREE</span>
@@ -274,28 +270,51 @@
                         <video id="${videoId}" class="book-video" autoplay muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>
                         <div class="video-overlay">
                             <div class="views-counter"><span>📥</span> ${book.views} descargas</div>
-                            <div class="audio-indicator" id="indicator-${videoId}">🔇</div>
+                            <div class="audio-indicator" id="ind-${videoId}">🔇</div>
                         </div>
                     </div>
                     <div class="book-info">
                         <h3 class="book-title">${book.name}</h3>
                         <p class="book-desc">${book.desc}</p>
                         <div class="download-count"><span>📚</span> PDF listo para imprimir</div>
-                        <a href="${book.pdf}" target="_blank" rel="noopener noreferrer" class="download-btn" onclick="return handleDownload(this)">
+                        <a href="${book.pdf}" target="_blank" rel="noopener" class="download-btn" id="btn-${book.id}">
                             <span>⬇️</span> Descargar Ahora
                         </a>
                     </div>`;
                 container.appendChild(card);
+                
+                // Agregar event listener al botón de descarga
+                const btn=card.querySelector('.download-btn');
+                btn.addEventListener('click',function(e){
+                    e.preventDefault();
+                    const originalText=this.innerHTML;
+                    this.classList.add('processing');
+                    this.innerHTML='<span>⏳</span> Preparando...';
+                    
+                    setTimeout(()=>{
+                        this.classList.remove('processing');
+                        this.classList.add('success');
+                        this.innerHTML='<span>✅</span> ¡Descargando!';
+                        window.open(this.href,'_blank');
+                        
+                        setTimeout(()=>{
+                            this.classList.remove('success');
+                            this.innerHTML=originalText;
+                        },2000);
+                    },600);
+                });
             });
         }
         
         function toggleAudio(videoId){
             const video=document.getElementById(videoId);
-            const indicator=document.getElementById(`indicator-${videoId}`);
-            if(!video){
-                console.error('Video no encontrado:',videoId);
+            const indicator=document.getElementById(`ind-${videoId}`);
+            
+            if(!video||!indicator){
+                console.log('No encontrado:',videoId);
                 return;
             }
+            
             if(video.muted){
                 video.muted=false;
                 video.volume=1;
@@ -306,27 +325,6 @@
                 indicator.textContent='🔇';
                 indicator.style.color='#fff';
             }
-        }
-        
-        function handleDownload(btn){
-            const originalHTML=btn.innerHTML;
-            btn.innerHTML='<span>⏳</span> Preparando...';
-            btn.style.opacity='0.7';
-            btn.style.pointerEvents='none';
-            
-            setTimeout(()=>{
-                btn.innerHTML='<span>✅</span> ¡Descargando!';
-                btn.style.background='linear-gradient(135deg,#00ff88,#00cc6a)';
-                btn.style.opacity='1';
-                
-                setTimeout(()=>{
-                    btn.innerHTML=originalHTML;
-                    btn.style.background='';
-                    btn.style.pointerEvents='auto';
-                },2000);
-            },500);
-            
-            return true;
         }
         
         document.addEventListener('DOMContentLoaded',()=>{
