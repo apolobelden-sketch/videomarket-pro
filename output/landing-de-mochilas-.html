@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochilas Antirrobo</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="presentacion">
+            <h1>Mochilas Antirrobo</h1>
+            <p>Protege tus pertenencias con nuestras mochilas antirrobo</p>
+            <button>Ver Productos</button>
+        </section>
+        <section class="caracteristicas">
+            <h2>Características</h2>
+            <ul>
+                <li>Material resistente y duradero</li>
+                <li>Cierre seguro con cremallera y hebilla</li>
+                <li>Compartimentos internos para organizar tus pertenencias</li>
+                <li>Diseño elegante y moderno</li>
+            </ul>
+        </section>
+        <section class="productos">
+            <h2>Productos</h2>
+            <div class="tarjeta-producto">
+                <img src="mochila1.jpg" alt="Mochila 1">
+                <h3>Mochila 1</h3>
+                <p>Descripción de la mochila 1</p>
+                <button>Comprar</button>
+            </div>
+            <div class="tarjeta-producto">
+                <img src="mochila2.jpg" alt="Mochila 2">
+                <h3>Mochila 2</h3>
+                <p>Descripción de la mochila 2</p>
+                <button>Comprar</button>
+            </div>
+            <div class="tarjeta-producto">
+                <img src="mochila3.jpg" alt="Mochila 3">
+                <h3>Mochila 3</h3>
+                <p>Descripción de la mochila 3</p>
+                <button>Comprar</button>
+            </div>
+        </section>
+        <section class="testimonios">
+            <h2>Testimonios</h2>
+            <blockquote>
+                <p>Me encanta mi mochila antirrobo, es muy segura y práctica</p>
+                <cite>Cliente satisfecho</cite>
+            </blockquote>
+            <blockquote>
+                <p>La mochila antirrobo es perfecta para viajar, no tengo que preocuparme por la seguridad de mis pertenencias</p>
+                <cite>Otro cliente satisfecho</cite>
+            </blockquote>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Mochilas Antirrobo</p>
+    </footer>
+</body>
+</html>
+
+/* estilos.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+.presentacion {
+    background-image: linear-gradient(to bottom, #333, #555);
+    color: #fff;
+    padding: 2em;
+    text-align: center;
+}
+
+.presentacion h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.presentacion p {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+.presentacion button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 1em 2em;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.caracteristicas {
+    background-color: #f7f7f7;
+    padding: 2em;
+}
+
+.caracteristicas h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.caracteristicas ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.caracteristicas li {
+    margin-bottom: 0.5em;
+}
+
+.productos {
+    background-color: #fff;
+    padding: 2em;
+}
+
+.productos h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.tarjeta-producto {
+    background-color: #f7f7f7;
+    padding: 1em;
+    margin-bottom: 1em;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta-producto img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.tarjeta-producto h3 {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+.tarjeta-producto p {
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+.tarjeta-producto button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 1em 2em;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.testimonios {
+    background-color: #f7f7f7;
+    padding: 2em;
+}
+
+.testimonios h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.testimonios blockquote {
+    margin-bottom: 1em;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.testimonios cite {
+    font-size: 0.8em;
+    color: #666;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    clear: both;
+}
+
+/* Media queries */
+
+@media (max-width: 768px) {
+    main {
+        padding: 1em;
+    }
+    .presentacion {
+        padding: 1em;
+    }
+    .caracteristicas {
+        padding: 1em;
+    }
+    .productos {
+        padding: 1em;
+    }
+    .testimonios {
+        padding: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.5em;
+    }
+    main {
+        padding: 0.5em;
+    }
+    .presentacion {
+        padding: 0.5em;
+    }
+    .caracteristicas {
+        padding: 0.5em;
+    }
+    .productos {
+        padding: 0.5em;
+    }
+    .testimonios {
+        padding: 0.5em;
+    }
+}

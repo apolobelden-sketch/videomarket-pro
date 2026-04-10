@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soportes para Celular</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Soportes para Celular</h1>
+            <p>Protege y personaliza tu dispositivo móvil con nuestros soportes de alta calidad</p>
+            <button>Descubre más</button>
+        </section>
+        <section class="features">
+            <h2>Características</h2>
+            <ul>
+                <li>
+                    <i class="fas fa-check"></i>
+                    <p>Soportes de alta calidad y duraderos</p>
+                </li>
+                <li>
+                    <i class="fas fa-check"></i>
+                    <p>Diseños variados y personalizables</p>
+                </li>
+                <li>
+                    <i class="fas fa-check"></i>
+                    <p>Compatibilidad con la mayoría de los dispositivos móviles</p>
+                </li>
+            </ul>
+        </section>
+        <section class="products">
+            <h2>Productos</h2>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="product1.jpg" alt="Soporte para Celular 1">
+                    <h3>Soporte para Celular 1</h3>
+                    <p>$19.99</p>
+                </div>
+                <div class="product">
+                    <img src="product2.jpg" alt="Soporte para Celular 2">
+                    <h3>Soporte para Celular 2</h3>
+                    <p>$24.99</p>
+                </div>
+                <div class="product">
+                    <img src="product3.jpg" alt="Soporte para Celular 3">
+                    <h3>Soporte para Celular 3</h3>
+                    <p>$29.99</p>
+                </div>
+            </div>
+        </section>
+        <section class="testimonials">
+            <h2>Testimonios</h2>
+            <div class="testimonial">
+                <p>Me encanta mi soporte para celular, es muy resistente y fácil de usar.</p>
+                <p>- Juan P.</p>
+            </div>
+            <div class="testimonial">
+                <p>El soporte que compré es perfecto, se adapta a mi dispositivo móvil sin problemas.</p>
+                <p>- María G.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Soportes para Celular</p>
+    </footer>
+</body>
+</html>
+
+/* styles.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+.hero {
+    background-image: linear-gradient(to bottom, #333, #555);
+    background-size: 100% 300px;
+    background-position: 0% 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 48px;
+}
+
+.hero p {
+    font-size: 18px;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.features {
+    background-color: #f9f9f9;
+    padding: 2em;
+}
+
+.features h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.features ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.features li {
+    margin-bottom: 10px;
+}
+
+.features i {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.products {
+    background-color: #f9f9f9;
+    padding: 2em;
+}
+
+.products h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.product {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+
+.product img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.product p {
+    font-size: 16px;
+    color: #666;
+}
+
+.testimonials {
+    background-color: #f9f9f9;
+    padding: 2em;
+}
+
+.testimonials h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.testimonial {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.testimonial p {
+    font-size: 16px;
+    color: #666;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    clear: both;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

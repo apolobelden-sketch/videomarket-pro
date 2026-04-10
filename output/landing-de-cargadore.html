@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargadores Portátiles</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#principal">Inicio</a></li>
+                <li><a href="#caracteristicas">Características</a></li>
+                <li><a href="#precios">Precios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="principal">
+        <section class="presentacion">
+            <h1>Cargadores Portátiles</h1>
+            <p>Los mejores cargadores portátiles para tu dispositivo móvil</p>
+            <button>Conoce más</button>
+        </section>
+        <section id="caracteristicas" class="caracteristicas">
+            <h2>Características</h2>
+            <ul>
+                <li>Capacidad de carga de hasta 20.000mAh</li>
+                <li>Carga rápida de hasta 18W</li>
+                <li>Compatible con dispositivos Android e iOS</li>
+                <li>Diseño compacto y ligero</li>
+            </ul>
+        </section>
+        <section id="precios" class="precios">
+            <h2>Precios</h2>
+            <ul>
+                <li>Cargador portátil de 10.000mAh: $50</li>
+                <li>Cargador portátil de 15.000mAh: $70</li>
+                <li>Cargador portátil de 20.000mAh: $90</li>
+            </ul>
+        </section>
+        <section id="contacto" class="contacto">
+            <h2>Contacto</h2>
+            <p>Para más información, por favor contáctanos:</p>
+            <ul>
+                <li>Teléfono: 555-555-5555</li>
+                <li>Correo electrónico: <a href="mailto:info@cargadoresportatiles.com">info@cargadoresportatiles.com</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Cargadores Portátiles. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
+
+/* estilos.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+.presentacion {
+    background-image: linear-gradient(to bottom, #333, #555);
+    color: #fff;
+    padding: 2em;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.presentacion h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.presentacion p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.presentacion button {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.caracteristicas {
+    background-color: #f7f7f7;
+    padding: 2em;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.caracteristicas h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.caracteristicas ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.caracteristicas li {
+    margin-bottom: 10px;
+}
+
+.precios {
+    background-color: #f7f7f7;
+    padding: 2em;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.precios h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.precios ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.precios li {
+    margin-bottom: 10px;
+}
+
+.contacto {
+    background-color: #f7f7f7;
+    padding: 2em;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.contacto h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.contacto ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.contacto li {
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    clear: both;
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 768px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .presentacion {
+        margin-bottom: 20px;
+    }
+
+    .caracteristicas, .precios, .contacto {
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    header {
+        padding: 0.5em;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    main {
+        padding: 1em;
+    }
+
+    .presentacion {
+        padding: 1em;
+    }
+
+    .caracteristicas, .precios, .contacto {
+        padding: 1em;
+    }
+}

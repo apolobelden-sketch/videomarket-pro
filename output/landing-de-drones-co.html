@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drones con Cámara</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Drones</a></li>
+                <li><a href="#">Cámaras</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Drones con Cámara</h1>
+            <p>Explora nuevos horizontes con nuestros drones equipados con cámaras de alta calidad</p>
+            <button>Ver Más</button>
+        </section>
+        <section class="features">
+            <h2>Características</h2>
+            <ul>
+                <li>
+                    <i class="fas fa-camera"></i>
+                    <h3>Cámaras de alta calidad</h3>
+                    <p>Resolución 4K, estabilización de imagen y zoom óptico</p>
+                </li>
+                <li>
+                    <i class="fas fa-battery-full"></i>
+                    <h3>Batería larga duración</h3>
+                    <p>Hasta 30 minutos de vuelo continuo</p>
+                </li>
+                <li>
+                    <i class="fas fa-wifi"></i>
+                    <h3>Conexión Wi-Fi</h3>
+                    <p>Transmisión en vivo de video y control remoto</p>
+                </li>
+            </ul>
+        </section>
+        <section class="products">
+            <h2>Nuestros Drones</h2>
+            <ul>
+                <li>
+                    <img src="drone1.jpg" alt="Drone 1">
+                    <h3>Drone 1</h3>
+                    <p>Precio: $999</p>
+                </li>
+                <li>
+                    <img src="drone2.jpg" alt="Drone 2">
+                    <h3>Drone 2</h3>
+                    <p>Precio: $1,499</p>
+                </li>
+                <li>
+                    <img src="drone3.jpg" alt="Drone 3">
+                    <h3>Drone 3</h3>
+                    <p>Precio: $2,999</p>
+                </li>
+            </ul>
+        </section>
+        <section class="testimonios">
+            <h2>Lo que nuestros clientes dicen</h2>
+            <ul>
+                <li>
+                    <p>Me encanta mi drone, la cámara es increíble!</p>
+                    <p>- Juan</p>
+                </li>
+                <li>
+                    <p>El servicio al cliente es excelente, siempre están dispuestos a ayudar</p>
+                    <p>- María</p>
+                </li>
+                <li>
+                    <p>He comprado varios drones, pero este es el mejor que he tenido</p>
+                    <p>- Carlos</p>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Drones con Cámara</p>
+        <ul>
+            <li><a href="#">Términos y Condiciones</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+
+/* estilos.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+.hero {
+    background-image: linear-gradient(to bottom, #333, #555);
+    color: #fff;
+    padding: 2em;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.hero button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.features {
+    background-color: #f9f9f9;
+    padding: 2em;
+}
+
+.features h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.features ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.features li {
+    margin-bottom: 20px;
+}
+
+.features i {
+    font-size: 2em;
+    margin-right: 10px;
+}
+
+.features h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.products {
+    background-color: #f9f9f9;
+    padding: 2em;
+}
+
+.products h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.products ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.products li {
+    margin: 20px;
+    width: calc(33.33% - 20px);
+}
+
+.products img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.products h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.testimonios {
+    background-color: #f9f9f9;
+    padding: 2em;
+}
+
+.testimonios h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.testimonios ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.testimonios li {
+    margin-bottom: 20px;
+}
+
+.testimonios p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer li {
+    margin-right: 20px;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
+    .products ul {
+        flex-direction: column;
+    }
+    .products li {
+        width: 100%;
+        margin: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2em;
+    }
+    .features h2 {
+        font-size: 1.5em;
+    }
+    .products h2 {
+        font-size: 1.5em;
+    }
+    .testimonios h2 {
+        font-size: 1.5em;
+    }
+}
+
+// script.js
+
+// Agregar evento de clic al botón de la sección hero
+document.querySelector('.hero button').addEventListener('click', () => {
+    // Scroll hacia la sección de productos
+    document.querySelector('.products').scrollIntoView({ behavior: 'smooth' });
+});

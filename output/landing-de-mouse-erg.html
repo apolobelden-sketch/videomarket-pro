@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Ergonómicos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#caracteristicas">Características</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#comprar">Comprar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="inicio">
+            <h1>Mouse Ergonómicos</h1>
+            <p>Descubre la comodidad y el bienestar en tu trabajo o juego con nuestros mouse ergonómicos.</p>
+            <button>Ver más</button>
+        </section>
+        <section id="caracteristicas">
+            <h2>Características</h2>
+            <ul>
+                <li>Diseño ergonómico para reducir la fatiga y el estrés en la mano y el brazo.</li>
+                <li>Resolución óptica de 1000 DPI para una precisión máxima.</li>
+                <li>Conectividad inalámbrica para mayor libertad de movimiento.</li>
+                <li>Batería recargable para un uso prolongado.</li>
+            </ul>
+        </section>
+        <section id="beneficios">
+            <h2>Beneficios</h2>
+            <ul>
+                <li>Reduce la fatiga y el dolor en la mano y el brazo.</li>
+                <li>Mejora la productividad y la eficiencia en el trabajo o juego.</li>
+                <li>Ofrece una mayor comodidad y bienestar durante el uso prolongado.</li>
+                <li>Es ideal para personas que pasan mucho tiempo frente a la computadora.</li>
+            </ul>
+        </section>
+        <section id="comprar">
+            <h2>Comprar</h2>
+            <button>Comprar ahora</button>
+            <p>Precio: $50.00</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Mouse Ergonómicos. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
+
+/* styles.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+section {
+    background-color: #fff;
+    padding: 2em;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    clear: both;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+    section {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header nav ul {
+        flex-direction: column;
+    }
+    header nav ul li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}

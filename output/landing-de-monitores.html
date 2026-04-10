@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitores 4K</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#caracteristicas">Características</a></li>
+                <li><a href="#precios">Precios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="inicio">
+            <h1>Monitores 4K de alta calidad</h1>
+            <p>Disfruta de imágenes nítidas y detalladas con nuestros monitores 4K</p>
+            <button>Ver más</button>
+        </section>
+        <section id="caracteristicas">
+            <h2>Características</h2>
+            <ul>
+                <li>Resolución 4K (3840 x 2160 píxeles)</li>
+                <li>Paneles IPS para una mejor calidad de imagen</li>
+                <li>Conectividad HDMI, DisplayPort y USB</li>
+                <li>Diseño elegante y minimalista</li>
+            </ul>
+        </section>
+        <section id="precios">
+            <h2>Precios</h2>
+            <table>
+                <tr>
+                    <th>Modelo</th>
+                    <th>Precio</th>
+                </tr>
+                <tr>
+                    <td>Monitor 4K 24"</td>
+                    <td>$300</td>
+                </tr>
+                <tr>
+                    <td>Monitor 4K 27"</td>
+                    <td>$450</td>
+                </tr>
+                <tr>
+                    <td>Monitor 4K 32"</td>
+                    <td>$600</td>
+                </tr>
+            </table>
+        </section>
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <p>¿Tienes alguna pregunta o deseas realizar un pedido? ¡Contáctanos!</p>
+            <form>
+                <input type="text" placeholder="Nombre">
+                <input type="email" placeholder="Correo electrónico">
+                <textarea placeholder="Mensaje"></textarea>
+                <button>Enviar</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Monitores 4K</p>
+    </footer>
+</body>
+</html>
+
+/* estilos.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+section {
+    background-color: #fff;
+    padding: 2em;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    clear: both;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+    section {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header nav ul {
+        flex-direction: column;
+    }
+    header nav ul li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
