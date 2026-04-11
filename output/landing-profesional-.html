@@ -1162,4 +1162,189 @@
             const prompts = {
                 tiktok: "Generando ideas virales para TikTok...",
                 description: "Creando descripciones persuasivas...",
-                script: "Escribiendo script
+                script: "Escribiendo script                script: "Escribiendo script profesional...",
+                improve: "Analizando tu tienda..."
+            };
+            
+            chat.innerHTML += `
+                <div class="ai-message user" style="display: flex; gap: 12px; margin-bottom: 16px; animation: fadeInUp 0.3s ease; flex-direction: row-reverse;">
+                    <div class="ai-message-avatar" style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="ai-message-content" style="background: var(--primary); padding: 12px 16px; border-radius: var(--radius-md); max-width: 80%; font-size: 14px; line-height: 1.6;">
+                        ${prompts[type]}
+                    </div>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                const responses = {
+                    tiktok: generateTikTokIdeas(),
+                    description: generateProductDescription(),
+                    script: generateVideoScript(),
+                    improve: analyzeStore()
+                };
+                
+                chat.innerHTML += `
+                    <div class="ai-message" style="display: flex; gap: 12px; margin-bottom: 16px; animation: fadeInUp 0.3s ease;">
+                        <div class="ai-message-avatar" style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="ai-message-content" style="background: var(--bg-elevated); padding: 12px 16px; border-radius: var(--radius-md); max-width: 80%; font-size: 14px; line-height: 1.6;">
+                            ${responses[type]}
+                        </div>
+                    </div>
+                `;
+                chat.scrollTop = chat.scrollHeight;
+            }, 1500);
+        }
+
+        function generateForProduct(productName, type) {
+            toggleAIPanel();
+            const chat = document.getElementById('aiChat');
+            
+            chat.innerHTML += `
+                <div class="ai-message user" style="display: flex; gap: 12px; margin-bottom: 16px; animation: fadeInUp 0.3s ease; flex-direction: row-reverse;">
+                    <div class="ai-message-avatar" style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="ai-message-content" style="background: var(--primary); padding: 12px 16px; border-radius: var(--radius-md); max-width: 80%; font-size: 14px; line-height: 1.6;">
+                        Generar ${type} para: ${productName}
+                    </div>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                let response = '';
+                if (type === 'tiktok') {
+                    response = `🎵 <b>Ideas para TikTok - ${productName}:</b><br><br>1. "POV: Finalmente encontré ${productName} después de buscar 3 meses"<br>2. Unboxing con ASMR + review rápida<br>3. "3 razones por las que necesitas esto YA"`;
+                } else if (type === 'desc') {
+                    response = `✨ <b>Descripción optimizada:</b><br><br>Transforma tu día a día con ${productName}. Diseñado para quienes buscan calidad sin compromisos. 🔥 Envío gratis | Garantía 30 días | Stock limitado`;
+                } else if (type === 'script') {
+                    response = `🎬 <b>Script de 30 seg:</b><br><br>[0-5s] Hook: "Esto cambió mi rutina completamente"<br>[5-15s] Problema + Solución con ${productName}<br>[15-25s] Beneficios clave con texto en pantalla<br>[25-30s] CTA: "Link en bio - Solo 50 unidades"`;
+                }
+                
+                chat.innerHTML += `
+                    <div class="ai-message" style="display: flex; gap: 12px; margin-bottom: 16px; animation: fadeInUp 0.3s ease;">
+                        <div class="ai-message-avatar" style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="ai-message-content" style="background: var(--bg-elevated); padding: 12px 16px; border-radius: var(--radius-md); max-width: 80%; font-size: 14px; line-height: 1.6;">
+                            ${response}
+                        </div>
+                    </div>
+                `;
+                chat.scrollTop = chat.scrollHeight;
+            }, 1000);
+        }
+
+        function generateTikTokIdeas() {
+            return `🎯 <b>5 Ideas Virales para tu nicho:</b><br><br>1. "Day in my life" mostrando tu producto en uso real<br>2. Trend de transición + before/after con tu producto<br>3. "Storytime" de cómo encontraste este producto<br>4. Duet con reseñas de clientes<br>5. "Get ready with me" integrando tu producto`;
+        }
+
+        function generateProductDescription() {
+            return `📝 <b>Fórmula de descripción de alto impacto:</b><br><br>✅ Hook emocional (dolor/deseo)<br>✅ Beneficios, no características<br>✅ Prueba social ("Más de 1000 vendidos")<br>✅ Urgencia escasa ("Últimas unidades")<br>✅ Garantía que elimine objeciones`;
+        }
+
+        function generateVideoScript() {
+            return `🎥 <b>Estructura de video que convierte:</b><br><br><b>Seg 0-3:</b> Hook visual + texto impactante<br><b>Seg 3-10:</b> Identificar el problema/patrón<br><b>Seg 10-20:</b> Presentar solución con demo<br><b>Seg 20-25:</b> Testimonio/prueba social<br><b>Seg 25-30:</b> Oferta irresistible + CTA urgente`;
+        }
+
+        function analyzeStore() {
+            const suggestions = [];
+            if (state.products.length < 5) suggestions.push("Agrega más productos (mínimo recomendado: 8-12)");
+            if (!state.cart.length) suggestions.push("Los visitantes no están comprando - considera ofertas de lanzamiento");
+            
+            return `🔍 <b>Análisis de tu tienda:</b><br><br>${suggestions.length ? suggestions.map(s => `• ${s}`).join('<br>') : '¡Tu tienda está optimizada! 🎉'}<br><br>💡 <b>Recomendación:</b> Activa el Modo Automático para sugerencias en tiempo real.`;
+        }
+
+        function handleAIInput(e) {
+            if (e.key === 'Enter') sendAIMessage();
+        }
+
+        function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            const chat = document.getElementById('aiChat');
+            chat.innerHTML += `
+                <div class="ai-message user" style="display: flex; gap: 12px; margin-bottom: 16px; animation: fadeInUp 0.3s ease; flex-direction: row-reverse;">
+                    <div class="ai-message-avatar" style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="ai-message-content" style="background: var(--primary); padding: 12px 16px; border-radius: var(--radius-md); max-width: 80%; font-size: 14px; line-height: 1.6;">
+                        ${message}
+                    </div>
+                </div>
+            `;
+            
+            input.value = '';
+            
+            setTimeout(() => {
+                const responses = [
+                    "Entiendo. Te sugiero enfocarte en beneficios emocionales para aumentar conversiones.",
+                    "Perfecto. Puedo ayudarte a crear contenido que destaque las ventajas únicas de tus productos.",
+                    "Interesante. Te recomiendo usar prueba social y urgencia en tus descripciones.",
+                    "Excelente idea. ¿Quieres que genere un script de video completo para este producto?"
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                chat.innerHTML += `
+                    <div class="ai-message" style="display: flex; gap: 12px; margin-bottom: 16px; animation: fadeInUp 0.3s ease;">
+                        <div class="ai-message-avatar" style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="ai-message-content" style="background: var(--bg-elevated); padding: 12px 16px; border-radius: var(--radius-md); max-width: 80%; font-size: 14px; line-height: 1.6;">
+                            ${randomResponse}
+                        </div>
+                    </div>
+                `;
+                chat.scrollTop = chat.scrollHeight;
+            }, 1000);
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.className = `toast show ${type}`;
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function toggleWishlist(id) {
+            showToast('Agregado a favoritos', 'success');
+        }
+
+        function quickView(id) {
+            openProductModal(id);
+        }
+
+        function showSection(section) {
+            showToast('Sección: ' + section, 'success');
+        }
+
+        function initAutoMode() {
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    const indicator = document.getElementById('autoModeIndicator');
+                    if (indicator) {
+                        indicator.classList.add('active');
+                        setTimeout(() => {
+                            indicator.classList.remove('active');
+                        }, 5000);
+                    }
+                }
+            }, 30000);
+        }
+
+        function toggleView(view) {
+            showToast('Vista cambiada a: ' + view, 'success');
+        }
+    </script>
+</body>
+</html>
