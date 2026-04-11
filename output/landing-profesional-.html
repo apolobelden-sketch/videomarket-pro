@@ -2,238 +2,1164 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samsung Galaxy S23</title>
-    <link rel="stylesheet" href="estilos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>SmartStore AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #0ea5e9;
+            --accent: #22c55e;
+            --accent-dark: #16a34a;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-elevated: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--bg-elevated);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        .loader-text {
+            margin-top: 16px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .app {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            background: var(--bg-dark);
+        }
+        @media (min-width: 768px) {
+            .app {
+                max-width: 1200px;
+            }
+        }
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logo i {
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: none;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        .icon-btn:hover {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            transform: scale(1.05);
+        }
+        .icon-btn .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 18px;
+            height: 18px;
+            background: var(--accent);
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            animation: bounce 0.3s;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        .hero {
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease;
+        }
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            max-width: 400px;
+            margin: 0 auto 24px;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+        .ai-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: var(--shadow-glow);
+            transition: var(--transition);
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+        .ai-trigger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+        .ai-trigger i {
+            animation: sparkle 2s infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(10deg); }
+        }
+        .search-section {
+            padding: 0 20px 20px;
+        }
+        .search-bar {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        .search-bar input {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 14px 16px 14px 44px;
+            color: var(--text-primary);
+            font-size: 15px;
+            transition: var(--transition);
+        }
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--bg-elevated);
+        }
+        .search-bar i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+        .filters {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        .filters::-webkit-scrollbar {
+            display: none;
+        }
+        .filter-chip {
+            flex-shrink: 0;
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .filter-chip:hover:not(.active) {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+        .products-section {
+            padding: 0 20px 100px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (min-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        .product-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            animation: fadeInUp 0.5s ease both;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .product-image {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: var(--bg-elevated);
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        .product-wishlist {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            background: rgba(15, 23, 42, 0.8);
+            border: none;
+            border-radius: 50%;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        .product-wishlist:hover {
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+        }
+        .product-wishlist.active {
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+        }
+        .product-info {
+            padding: 16px;
+        }
+        .product-category {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .product-name {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .product-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .product-original {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+            margin-left: 6px;
+        }
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--warning);
+        }
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            padding: 0 16px 16px;
+        }
+        .btn-quick {
+            flex: 1;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+        }
+        .btn-secondary {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Características</a></li>
-                <li><a href="#">Especificaciones</a></li>
-                <li><a href="#">Comprar</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Cargando...</div>
+    </div>
+    
+    <div class="app">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                SmartStore
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="toggleAIPanel()">
+                    <i class="fas fa-sparkles"></i>
+                </button>
+                <button class="icon-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="badge" id="cartBadge" style="display: none;">0</span>
+                </button>
+            </div>
+        </header>
+
         <section class="hero">
-            <h1>Samsung Galaxy S23</h1>
-            <p>El smartphone más avanzado del mercado</p>
-            <button class="btn-comprar">Comprar ahora en Mercado Libre</button>
-            <img src="s23.jpg" alt="Samsung Galaxy S23">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-robot"></i>
+                    Powered by AI
+                </div>
+                <h1>Tu Tienda Inteligente</h1>
+                <p>Descubre productos seleccionados por IA</p>
+                <button class="ai-trigger" onclick="toggleAIPanel()">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    Generar con IA
+                </button>
+            </div>
         </section>
-        <section class="caracteristicas">
-            <h2>Características</h2>
-            <ul>
-                <li>Pantalla Dynamic AMOLED de 6,2 pulgadas</li>
-                <li>Procesador Qualcomm Snapdragon 8 Gen 2</li>
-                <li>12 GB de RAM y 128 GB de almacenamiento interno</li>
-                <li>Cámara principal de 50 MP y cámara frontal de 12 MP</li>
-                <li>Batería de 4500 mAh con carga rápida</li>
-            </ul>
+
+        <section class="search-section">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Buscar productos..." oninput="filterProducts()">
+            </div>
+            <div class="filters" id="categoryFilters">
+                <button class="filter-chip active" onclick="filterByCategory('all')">Todos</button>
+                <button class="filter-chip" onclick="filterByCategory('tech')">Tecnología</button>
+                <button class="filter-chip" onclick="filterByCategory('home')">Hogar</button>
+                <button class="filter-chip" onclick="filterByCategory('fashion')">Moda</button>
+            </div>
         </section>
-        <section class="especificaciones">
-            <h2>Especificaciones</h2>
-            <table>
-                <tr>
-                    <th>Característica</th>
-                    <th>Valor</th>
-                </tr>
-                <tr>
-                    <td>Pantalla</td>
-                    <td>6,2 pulgadas, Dynamic AMOLED</td>
-                </tr>
-                <tr>
-                    <td>Procesador</td>
-                    <td>Qualcomm Snapdragon 8 Gen 2</td>
-                </tr>
-                <tr>
-                    <td>RAM</td>
-                    <td>12 GB</td>
-                </tr>
-                <tr>
-                    <td>Almacenamiento interno</td>
-                    <td>128 GB</td>
-                </tr>
-                <tr>
-                    <td>Cámara principal</td>
-                    <td>50 MP</td>
-                </tr>
-                <tr>
-                    <td>Cámara frontal</td>
-                    <td>12 MP</td>
-                </tr>
-                <tr>
-                    <td>Batería</td>
-                    <td>4500 mAh</td>
-                </tr>
-            </table>
+
+        <section class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">Productos</h2>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+            <div class="empty-state" id="emptyState" style="display: none; text-align: center; padding: 40px; color: var(--text-secondary);">
+                <i class="fas fa-box-open" style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
+                <h3>No hay productos</h3>
+            </div>
         </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 Samsung</p>
-    </footer>
-</body>
-</html>
+    </div>
 
-/* estilos.css */
+    <nav class="bottom-nav" style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; justify-content: space-around; padding: 12px 0 24px; z-index: 100;">
+        <a href="#" class="nav-item active" style="display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--primary); text-decoration: none; font-size: 11px; padding: 4px 16px; border-radius: 12px;">
+            <i class="fas fa-home" style="font-size: 20px;"></i>
+            Inicio
+        </a>
+        <a href="#" class="nav-item" onclick="toggleAIPanel()" style="display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-secondary); text-decoration: none; font-size: 11px; padding: 4px 16px; border-radius: 12px;">
+            <i class="fas fa-sparkles" style="font-size: 20px;"></i>
+            IA
+        </a>
+        <a href="#" class="nav-item" onclick="toggleCart()" style="display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-secondary); text-decoration: none; font-size: 11px; padding: 4px 16px; border-radius: 12px;">
+            <i class="fas fa-shopping-bag" style="font-size: 20px;"></i>
+            Carrito
+        </a>
+    </nav>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <!-- PARTE 2: MODALES Y PANELES - Continúa en siguiente mensaje -->    <!-- Product Modal -->
+    <div class="modal" id="productModal" onclick="closeModal(event)" style="position: fixed; inset: 0; z-index: 200; display: none; align-items: flex-end; justify-content: center; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.3s;">
+        <div class="modal-content" onclick="event.stopPropagation()" style="background: var(--bg-card); width: 100%; max-width: 480px; max-height: 90vh; border-radius: var(--radius-lg) var(--radius-lg) 0 0; overflow: hidden; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+            <div class="modal-header" style="display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                <h3 class="modal-title" style="font-size: 18px; font-weight: 700;">Detalles del Producto</h3>
+                <button class="modal-close" onclick="closeProductModal()" style="width: 36px; height: 36px; border-radius: 50%; background: var(--bg-elevated); border: none; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody" style="padding: 20px; overflow-y: auto; max-height: calc(90vh - 80px);"></div>
+        </div>
+    </div>
 
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
-}
+    <!-- AI Panel -->
+    <div class="ai-panel" id="aiPanel" style="position: fixed; inset: 0; z-index: 300; display: none; flex-direction: column; background: var(--bg-dark); opacity: 0; transition: opacity 0.3s;">
+        <div class="ai-header" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 20px; display: flex; align-items: center; justify-content: space-between;">
+            <div class="ai-title" style="display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px;">
+                <div class="ai-avatar" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; animation: pulse 2s infinite;">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div>
+                    <div>Asistente IA</div>
+                    <div style="font-size: 12px; opacity: 0.8;">Siempre listo para ayudar</div>
+                </div>
+            </div>
+            <button class="ai-close" onclick="toggleAIPanel()" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.2); border: none; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ai-body" style="flex: 1; overflow-y: auto; padding: 20px;">
+            <div class="ai-tools" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px;">
+                <div class="ai-tool" onclick="generateContent('tiktok')" style="background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: var(--radius-md); padding: 20px; text-align: center; cursor: pointer; transition: var(--transition);">
+                    <i class="fab fa-tiktok" style="font-size: 28px; margin-bottom: 12px; display: block; color: var(--primary);"></i>
+                    <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">TikTok Viral</h3>
+                    <p style="font-size: 12px; color: var(--text-secondary);">Ideas de contenido</p>
+                </div>
+                <div class="ai-tool" onclick="generateContent('description')" style="background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: var(--radius-md); padding: 20px; text-align: center; cursor: pointer; transition: var(--transition);">
+                    <i class="fas fa-pen-fancy" style="font-size: 28px; margin-bottom: 12px; display: block; color: var(--primary);"></i>
+                    <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Descripciones</h3>
+                    <p style="font-size: 12px; color: var(--text-secondary);">Textos persuasivos</p>
+                </div>
+                <div class="ai-tool" onclick="generateContent('script')" style="background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: var(--radius-md); padding: 20px; text-align: center; cursor: pointer; transition: var(--transition);">
+                    <i class="fas fa-video" style="font-size: 28px; margin-bottom: 12px; display: block; color: var(--primary);"></i>
+                    <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Scripts Video</h3>
+                    <p style="font-size: 12px; color: var(--text-secondary);">Guiones profesionales</p>
+                </div>
+                <div class="ai-tool" onclick="generateContent('improve')" style="background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: var(--radius-md); padding: 20px; text-align: center; cursor: pointer; transition: var(--transition);">
+                    <i class="fas fa-wand-magic" style="font-size: 28px; margin-bottom: 12px; display: block; color: var(--primary);"></i>
+                    <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Mejorar</h3>
+                    <p style="font-size: 12px; color: var(--text-secondary);">Optimizar tienda</p>
+                </div>
+            </div>
+            <div class="ai-chat" id="aiChat" style="background: var(--bg-card); border-radius: var(--radius-md); padding: 16px; min-height: 200px;">
+                <div class="ai-message" style="display: flex; gap: 12px; margin-bottom: 16px; animation: fadeInUp 0.3s ease;">
+                    <div class="ai-message-avatar" style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="ai-message-content" style="background: var(--bg-elevated); padding: 12px 16px; border-radius: var(--radius-md); max-width: 80%; font-size: 14px; line-height: 1.6;">
+                        ¡Hola! Soy tu asistente de ventas. ¿Qué necesitas crear hoy? Puedo generar descripciones de productos, scripts para videos o ideas para TikTok.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ai-input-area" style="padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05);">
+            <div class="ai-input-wrapper" style="display: flex; gap: 12px; background: var(--bg-card); padding: 4px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <input type="text" class="ai-input" id="aiInput" placeholder="Escribe tu solicitud..." onkeypress="handleAIInput(event)" style="flex: 1; background: transparent; border: none; padding: 12px 16px; color: var(--text-primary); font-size: 14px;">
+                <button class="ai-send" onclick="sendAIMessage()" style="width: 40px; height: 40px; background: var(--primary); border: none; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 1em;
-    text-align: center;
-}
+    <!-- Cart Panel -->
+    <div class="cart-panel" id="cartPanel" onclick="toggleCart()" style="position: fixed; inset: 0; z-index: 250; display: none; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px);">
+        <div class="cart-content" onclick="event.stopPropagation()" style="position: absolute; right: 0; top: 0; bottom: 0; width: 100%; max-width: 400px; background: var(--bg-card); transform: translateX(100%); transition: transform 0.3s ease; display: flex; flex-direction: column;">
+            <div class="cart-header" style="padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: space-between;">
+                <h3>Tu Carrito</h3>
+                <button class="modal-close" onclick="toggleCart()" style="width: 36px; height: 36px; border-radius: 50%; background: var(--bg-elevated); border: none; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cartItems" style="flex: 1; overflow-y: auto; padding: 20px;">
+                <div class="empty-state" style="text-align: center; padding: 60px 20px; color: var(--text-secondary);">
+                    <i class="fas fa-shopping-bag" style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
+                    <h3>Carrito vacío</h3>
+                    <p>Agrega productos para comenzar</p>
+                </div>
+            </div>
+            <div class="cart-footer" id="cartFooter" style="display: none; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); background: var(--bg-dark);">
+                <div class="cart-total" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 18px;">
+                    <span>Total</span>
+                    <span class="cart-total-value" id="cartTotal" style="font-weight: 800; color: var(--accent); font-size: 24px;">$0.00</span>
+                </div>
+                <button class="btn-large btn-whatsapp" onclick="checkoutWhatsApp()" style="width: 100%; padding: 16px; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #25d366, #128c7e); color: white;">
+                    <i class="fab fa-whatsapp"></i>
+                    Comprar por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
 
-header nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-}
+    <!-- Toast -->
+    <div class="toast" id="toast" style="position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--bg-card); color: var(--text-primary); padding: 16px 24px; border-radius: var(--radius-md); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); display: flex; align-items: center; gap: 12px; z-index: 400; opacity: 0; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.1);">
+        <i class="fas fa-check-circle" style="color: var(--accent);"></i>
+        <span id="toastMessage">Operación exitosa</span>
+    </div>
 
-header nav ul li {
-    margin-right: 20px;
-}
+    <!-- Desktop Sidebar (visible only on desktop) -->
+    <style>
+        @media (min-width: 768px) {
+            .app {
+                display: grid;
+                grid-template-columns: 280px 1fr;
+            }
+            .sidebar {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                background: var(--bg-card);
+                border-right: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 24px;
+                display: flex;
+                flex-direction: column;
+            }
+            .sidebar-logo {
+                font-size: 24px;
+                font-weight: 800;
+                margin-bottom: 32px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .sidebar-nav {
+                flex: 1;
+            }
+            .sidebar-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 16px;
+                border-radius: var(--radius-md);
+                color: var(--text-secondary);
+                text-decoration: none;
+                margin-bottom: 8px;
+                transition: var(--transition);
+            }
+            .sidebar-item:hover,
+            .sidebar-item.active {
+                background: rgba(99, 102, 241, 0.1);
+                color: var(--primary);
+            }
+            .sidebar-footer {
+                padding-top: 24px;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .main-content {
+                overflow-y: auto;
+                height: 100vh;
+            }
+            .header {
+                position: sticky;
+                top: 0;
+            }
+            .bottom-nav {
+                display: none;
+            }
+        }
+        @media (max-width: 767px) {
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
 
-header nav a {
-    color: #fff;
-    text-decoration: none;
-}
+    <!-- PARTE 3: JAVASCRIPT - Continúa en siguiente mensaje -->    <script>
+        // Data & State
+        const state = {
+            products: [],
+            cart: JSON.parse(localStorage.getItem('cart')) || [],
+            currentCategory: 'all',
+            searchQuery: '',
+            autoMode: false,
+            aiHistory: JSON.parse(localStorage.getItem('aiHistory')) || []
+        };
 
-.hero {
-    background-image: linear-gradient(to bottom, #333, #555);
-    background-size: 100% 300px;
-    background-position: 0% 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-}
+        // Sample Products Data
+        const productsData = [
+            {
+                id: 1,
+                name: "Auriculares Pro Wireless",
+                category: "tech",
+                price: 89.99,
+                originalPrice: 129.99,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
+                rating: 4.8,
+                reviews: 124,
+                description: "Auriculares premium con cancelación de ruido activa, 30h de batería y sonido Hi-Res.",
+                specs: { "Batería": "30 horas", "Conexión": "Bluetooth 5.2", "Peso": "250g" },
+                badge: "-30%"
+            },
+            {
+                id: 2,
+                name: "Smart Watch Ultra",
+                category: "tech",
+                price: 199.99,
+                originalPrice: 299.99,
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400",
+                rating: 4.9,
+                reviews: 89,
+                description: "Reloj inteligente con monitor de salud avanzado, GPS y resistencia al agua 50m.",
+                specs: { "Pantalla": "1.9 OLED", "Batería": "7 días", "Resistencia": "5ATM" },
+                badge: "Nuevo"
+            },
+            {
+                id: 3,
+                name: "Lámpara Minimalista LED",
+                category: "home",
+                price: 45.99,
+                originalPrice: 69.99,
+                image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400",
+                rating: 4.6,
+                reviews: 56,
+                description: "Lámpara de diseño escandinavo con luz ajustable y control táctil.",
+                specs: { "Potencia": "12W", "Temperatura": "2700K-6500K", "Material": "Madera/Metal" },
+                badge: null
+            },
+            {
+                id: 4,
+                name: "Sneakers Urban Edition",
+                category: "fashion",
+                price: 79.99,
+                originalPrice: 109.99,
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
+                rating: 4.7,
+                reviews: 203,
+                description: "Zapatillas urbanas con tecnología de amortiguación y diseño transpirable.",
+                specs: { "Material": "Malla/Sintético", "Suela": "Goma EVA", "Peso": "280g" },
+                badge: "Popular"
+            },
+            {
+                id: 5,
+                name: "Botella Térmica Inteligente",
+                category: "sports",
+                price: 34.99,
+                originalPrice: 49.99,
+                image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400",
+                rating: 4.5,
+                reviews: 78,
+                description: "Mantiene tu bebida fría 24h o caliente 12h. Pantalla LED con temperatura.",
+                specs: { "Capacidad": "500ml", "Material": "Acero 316", "Display": "LED" },
+                badge: null
+            },
+            {
+                id: 6,
+                name: "Cámara de Seguridad 360°",
+                category: "tech",
+                price: 59.99,
+                originalPrice: 89.99,
+                image: "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=400",
+                rating: 4.4,
+                reviews: 45,
+                description: "Vigilancia inteligente con visión nocturna, detección de movimiento y app móvil.",
+                specs: { "Resolución": "2K", "Ángulo": "360°", "Almacenamiento": "Cloud/SD" },
+                badge: "-33%"
+            }
+        ];
 
-.hero h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
-}
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            updateCartUI();
+            initAutoMode();
+            
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
 
-.hero p {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
+        function loadProducts() {
+            state.products = productsData;
+            renderProducts();
+        }
 
-.btn-comprar {
-    background-color: #03A9F4;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const empty = document.getElementById('emptyState');
+            
+            let filtered = state.products;
+            
+            if (state.currentCategory !== 'all') {
+                filtered = filtered.filter(p => p.category === state.currentCategory);
+            }
+            
+            if (state.searchQuery) {
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                    p.description.toLowerCase().includes(state.searchQuery.toLowerCase())
+                );
+            }
 
-.btn-comprar:hover {
-    background-color: #00698f;
-}
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                empty.style.display = 'block';
+                return;
+            }
+            
+            empty.style.display = 'none';
+            
+            grid.innerHTML = filtered.map((product, index) => `
+                <article class="product-card" style="animation-delay: ${index * 0.1}s" onclick="openProductModal(${product.id})">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                        <button class="product-wishlist" onclick="event.stopPropagation(); toggleWishlist(${product.id})">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-meta">
+                            <div>
+                                <span class="product-price">$${product.price}</span>
+                                ${product.originalPrice ? `<span class="product-original">$${product.originalPrice}</span>` : ''}
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <span>${product.rating}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-actions">
+                        <button class="btn-quick btn-secondary" onclick="event.stopPropagation(); quickView(${product.id})">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn-quick btn-primary" onclick="event.stopPropagation(); addToCart(${product.id})">
+                            <i class="fas fa-plus"></i>
+                            Agregar
+                        </button>
+                    </div>
+                </article>
+            `).join('');
+        }
 
-.caracteristicas {
-    padding: 2em;
-}
+        function filterByCategory(category) {
+            state.currentCategory = category;
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+                if (chip.textContent.toLowerCase().includes(category) || 
+                    (category === 'all' && chip.textContent === 'Todos')) {
+                    chip.classList.add('active');
+                }
+            });
+            renderProducts();
+        }
 
-.caracteristicas h2 {
-    margin-top: 0;
-}
+        function filterProducts() {
+            state.searchQuery = document.getElementById('searchInput').value;
+            renderProducts();
+        }
 
-.caracteristicas ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+        function openProductModal(id) {
+            const product = state.products.find(p => p.id === id);
+            if (!product) return;
 
-.caracteristicas li {
-    margin-bottom: 10px;
-}
+            const modal = document.getElementById('productModal');
+            const body = document.getElementById('modalBody');
+            
+            const discount = product.originalPrice ? 
+                Math.round((1 - product.price/product.originalPrice) * 100) : 0;
 
-.especificaciones {
-    padding: 2em;
-}
+            body.innerHTML = `
+                <div class="product-detail-image">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="product-detail-info">
+                    <span class="product-category">${product.category}</span>
+                    <h2>${product.name}</h2>
+                    <div class="product-detail-price">
+                        <span class="current-price">$${product.price}</span>
+                        ${product.originalPrice ? `
+                            <span class="original-price">$${product.originalPrice}</span>
+                            <span class="discount-badge">-${discount}%</span>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="ai-suggestions">
+                        <h4><i class="fas fa-sparkles"></i> Sugerencias IA</h4>
+                        <div class="suggestion-chips">
+                            <span class="suggestion-chip" onclick="generateForProduct('${product.name}', 'tiktok')">🎵 TikTok</span>
+                            <span class="suggestion-chip" onclick="generateForProduct('${product.name}', 'desc')">📝 Descripción</span>
+                            <span class="suggestion-chip" onclick="generateForProduct('${product.name}', 'script')">🎬 Script</span>
+                        </div>
+                    </div>
 
-.especificaciones h2 {
-    margin-top: 0;
-}
+                    <p class="product-description">${product.description}</p>
+                    
+                    <div class="specs-grid">
+                        ${Object.entries(product.specs).map(([key, val]) => `
+                            <div class="spec-item">
+                                <div class="spec-label">${key}</div>
+                                <div class="spec-value">${val}</div>
+                            </div>
+                        `).join('')}
+                    </div>
 
-.especificaciones table {
-    border-collapse: collapse;
-    width: 100%;
-}
+                    <div class="action-buttons">
+                        <button class="btn-large btn-secondary" onclick="addToCart(${product.id}); closeProductModal()" style="flex: 1; padding: 16px; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--bg-elevated); color: var(--text-primary);">
+                            <i class="fas fa-shopping-bag"></i>
+                            Agregar
+                        </button>
+                        <button class="btn-large btn-whatsapp" onclick="buyNowWhatsApp(${product.id})" style="flex: 1; padding: 16px; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #25d366, #128c7e); color: white;">
+                            <i class="fab fa-whatsapp"></i>
+                            Comprar Ahora
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+            modal.style.opacity = '1';
+            modal.querySelector('.modal-content').style.transform = 'translateY(0)';
+            document.body.style.overflow = 'hidden';
+        }
 
-.especificaciones th, .especificaciones td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('active');
+            modal.style.opacity = '0';
+            modal.querySelector('.modal-content').style.transform = 'translateY(100%)';
+            document.body.style.overflow = '';
+        }
 
-.especificaciones th {
-    background-color: #f0f0f0;
-}
+        function closeModal(e) {
+            if (e.target === e.currentTarget) {
+                closeProductModal();
+            }
+        }
 
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 1em;
-    text-align: center;
-    clear: both;
-}
+        function addToCart(productId) {
+            const product = state.products.find(p => p.id === productId);
+            const existing = state.cart.find(item => item.id === productId);
+            
+            if (existing) {
+                existing.quantity++;
+            } else {
+                state.cart.push({ ...product, quantity: 1 });
+            }
+            
+            saveCart();
+            updateCartUI();
+            showToast('Producto agregado al carrito', 'success');
+        }
 
-/* Responsive design */
+        function removeFromCart(productId) {
+            state.cart = state.cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartUI();
+        }
 
-@media only screen and (max-width: 768px) {
-    .hero {
-        height: 100vh;
-        background-size: 100% 200px;
-        background-position: 0% 100%;
-    }
-    .hero h1 {
-        font-size: 36px;
-    }
-    .hero p {
-        font-size: 14px;
-    }
-    .btn-comprar {
-        padding: 5px 10px;
-        font-size: 14px;
-    }
-}
+        function updateQuantity(productId, delta) {
+            const item = state.cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    saveCart();
+                    updateCartUI();
+                }
+            }
+        }
 
-@media only screen and (max-width: 480px) {
-    .hero {
-        height: 100vh;
-        background-size: 100% 150px;
-        background-position: 0% 100%;
-    }
-    .hero h1 {
-        font-size: 24px;
-    }
-    .hero p {
-        font-size: 12px;
-    }
-    .btn-comprar {
-        padding: 5px 5px;
-        font-size: 12px;
-    }
-}
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(state.cart));
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const items = document.getElementById('cartItems');
+            const footer = document.getElementById('cartFooter');
+            const total = document.getElementById('cartTotal');
+            
+            const count = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (count > 0) {
+                badge.textContent = count;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+            
+            if (state.cart.length === 0) {
+                items.innerHTML = `
+                    <div class="empty-state" style="text-align: center; padding: 60px 20px; color: var(--text-secondary);">
+                        <i class="fas fa-shopping-bag" style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
+                        <h3>Carrito vacío</h3>
+                        <p>Agrega productos para comenzar</p>
+                    </div>
+                `;
+                footer.style.display = 'none';
+            } else {
+                items.innerHTML = state.cart.map(item => `
+                    <div class="cart-item" style="display: flex; gap: 16px; padding: 16px; background: var(--bg-dark); border-radius: var(--radius-md); margin-bottom: 12px; animation: slideIn 0.3s ease;">
+                        <div class="cart-item-image" style="width: 80px; height: 80px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0;">
+                            <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="cart-item-info" style="flex: 1;">
+                            <div class="cart-item-name" style="font-weight: 600; margin-bottom: 4px; font-size: 14px;">${item.name}</div>
+                            <div class="cart-item-price" style="color: var(--accent); font-weight: 700; margin-bottom: 8px;">$${(item.price * item.quantity).toFixed(2)}</div>
+                            <div class="cart-item-actions" style="display: flex; align-items: center; gap: 12px;">
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)" style="width: 28px; height: 28px; border-radius: 50%; background: var(--bg-elevated); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)" style="width: 28px; height: 28px; border-radius: 50%; background: var(--bg-elevated); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">+</button>
+                                <button class="cart-item-remove" onclick="removeFromCart(${item.id})" style="margin-left: auto; color: var(--error); background: none; border: none; cursor: pointer; font-size: 14px;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                const totalValue = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                total.textContent = '$' + totalValue.toFixed(2);
+                footer.style.display = 'block';
+            }
+        }
+
+        function toggleCart() {
+            const panel = document.getElementById('cartPanel');
+            const content = panel.querySelector('.cart-content');
+            
+            if (panel.classList.contains('active')) {
+                panel.classList.remove('active');
+                content.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    panel.style.display = 'none';
+                }, 300);
+                document.body.style.overflow = '';
+            } else {
+                panel.style.display = 'block';
+                setTimeout(() => {
+                    panel.classList.add('active');
+                    content.style.transform = 'translateX(0)';
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function buyNowWhatsApp(productId) {
+            const product = state.products.find(p => p.id === productId);
+            const message = `¡Hola! Me interesa comprar:\n\n*${product.name}*\nCantidad: 1\nPrecio: $${product.price.toFixed(2)}\n\n¿Está disponible?`;
+            openWhatsApp(message);
+        }
+
+        function checkoutWhatsApp() {
+            let message = `¡Hola! Quiero realizar este pedido:\n\n`;
+            let total = 0;
+            
+            state.cart.forEach(item => {
+                message += `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
+                total += item.price * item.quantity;
+            });
+            
+            message += `\n*Total: $${total.toFixed(2)}*\n\n¿Podemos coordinar la entrega?`;
+            openWhatsApp(message);
+        }
+
+        function openWhatsApp(message) {
+            const phone = '1234567890';
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function toggleAIPanel() {
+            const panel = document.getElementById('aiPanel');
+            if (panel.classList.contains('active')) {
+                panel.classList.remove('active');
+                panel.style.opacity = '0';
+                setTimeout(() => {
+                    panel.style.display = 'none';
+                }, 300);
+            } else {
+                panel.style.display = 'flex';
+                setTimeout(() => {
+                    panel.classList.add('active');
+                    panel.style.opacity = '1';
+                }, 10);
+            }
+        }
+
+        function generateContent(type) {
+            const chat = document.getElementById('aiChat');
+            const prompts = {
+                tiktok: "Generando ideas virales para TikTok...",
+                description: "Creando descripciones persuasivas...",
+                script: "Escribiendo script
