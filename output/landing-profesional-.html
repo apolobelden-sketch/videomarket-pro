@@ -563,9 +563,7 @@
             <i class="fas fa-shopping-bag" style="font-size: 20px;"></i>
             Carrito
         </a>
-    </nav>
-
-    <!-- PARTE 2: MODALES Y PANELES - Continúa en siguiente mensaje -->    <!-- Product Modal -->
+    </nav>    <!-- Product Modal -->
     <div class="modal" id="productModal" onclick="closeModal(event)" style="position: fixed; inset: 0; z-index: 200; display: none; align-items: flex-end; justify-content: center; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.3s;">
         <div class="modal-content" onclick="event.stopPropagation()" style="background: var(--bg-card); width: 100%; max-width: 480px; max-height: 90vh; border-radius: var(--radius-lg) var(--radius-lg) 0 0; overflow: hidden; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
             <div class="modal-header" style="display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
@@ -671,9 +669,7 @@
     <div class="toast" id="toast" style="position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--bg-card); color: var(--text-primary); padding: 16px 24px; border-radius: var(--radius-md); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); display: flex; align-items: center; gap: 12px; z-index: 400; opacity: 0; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.1);">
         <i class="fas fa-check-circle" style="color: var(--accent);"></i>
         <span id="toastMessage">Operación exitosa</span>
-    </div>
-
-    <!-- Desktop Sidebar (visible only on desktop) -->
+    </div>    <!-- Desktop Sidebar CSS -->
     <style>
         @media (min-width: 768px) {
             .app {
@@ -740,8 +736,11 @@
         }
     </style>
 
-    <!-- PARTE 3: JAVASCRIPT - Continúa en siguiente mensaje -->    <script>
-        // Data & State
+    <script>
+        // ==========================================
+        // DATA & STATE
+        // ==========================================
+        
         const state = {
             products: [],
             cart: JSON.parse(localStorage.getItem('cart')) || [],
@@ -751,7 +750,10 @@
             aiHistory: JSON.parse(localStorage.getItem('aiHistory')) || []
         };
 
-        // Sample Products Data
+        // ==========================================
+        // SAMPLE PRODUCTS DATA
+        // ==========================================
+        
         const productsData = [
             {
                 id: 1,
@@ -801,44 +803,22 @@
                 image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
                 rating: 4.7,
                 reviews: 203,
-                description: "Zapatillas urbanas con tecnología de amortiguación y diseño transpirable.",
-                specs: { "Material": "Malla/Sintético", "Suela": "Goma EVA", "Peso": "280g" },
-                badge: "Popular"
-            },
-            {
-                id: 5,
-                name: "Botella Térmica Inteligente",
-                category: "sports",
-                price: 34.99,
-                originalPrice: 49.99,
-                image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400",
-                rating: 4.5,
-                reviews: 78,
-                description: "Mantiene tu bebida fría 24h o caliente 12h. Pantalla LED con temperatura.",
-                specs: { "Capacidad": "500ml", "Material": "Acero 316", "Display": "LED" },
-                badge: null
-            },
-            {
-                id: 6,
-                name: "Cámara de Seguridad 360°",
-                category: "tech",
-                price: 59.99,
-                originalPrice: 89.99,
-                image: "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=400",
-                rating: 4.4,
-                reviews: 45,
-                description: "Vigilancia inteligente con visión nocturna, detección de movimiento y app móvil.",
-                specs: { "Resolución": "2K", "Ángulo": "360°", "Almacenamiento": "Cloud/SD" },
-                badge: "-33%"
+                description: "Zapatillas urbanas con diseño moderno, materiales sostenibles y máxima comodidad.",
+                specs: { "Material": "Algodón orgánico", "Suela": "Caucho reciclado", "Peso": "280g" },
+                badge: "-27%"
             }
         ];
 
-        // Initialize
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        
         document.addEventListener('DOMContentLoaded', () => {
             loadProducts();
             updateCartUI();
             initAutoMode();
             
+            // Ocultar loader después de cargar
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hidden');
             }, 1000);
@@ -925,9 +905,7 @@
         function filterProducts() {
             state.searchQuery = document.getElementById('searchInput').value;
             renderProducts();
-        }
-
-        function openProductModal(id) {
+        }        function openProductModal(id) {
             const product = state.products.find(p => p.id === id);
             if (!product) return;
 
@@ -938,64 +916,66 @@
                 Math.round((1 - product.price/product.originalPrice) * 100) : 0;
 
             body.innerHTML = `
-                <div class="product-detail-image">
-                    <img src="${product.image}" alt="${product.name}">
+                <div class="product-detail-image" style="margin-bottom: 20px; border-radius: var(--radius-md); overflow: hidden;">
+                    <img src="${product.image}" alt="${product.name}" style="width: 100%; height: auto;">
                 </div>
                 <div class="product-detail-info">
                     <span class="product-category">${product.category}</span>
-                    <h2>${product.name}</h2>
-                    <div class="product-detail-price">
-                        <span class="current-price">$${product.price}</span>
+                    <h2 style="font-size: 24px; margin: 12px 0;">${product.name}</h2>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                        <span style="font-size: 28px; font-weight: 800; color: var(--accent);">$${product.price}</span>
                         ${product.originalPrice ? `
-                            <span class="original-price">$${product.originalPrice}</span>
-                            <span class="discount-badge">-${discount}%</span>
+                            <span style="text-decoration: line-through; color: var(--text-secondary);">$${product.originalPrice}</span>
+                            <span style="background: var(--error); color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 600;">-${discount}%</span>
                         ` : ''}
                     </div>
                     
-                    <div class="ai-suggestions">
-                        <h4><i class="fas fa-sparkles"></i> Sugerencias IA</h4>
-                        <div class="suggestion-chips">
-                            <span class="suggestion-chip" onclick="generateForProduct('${product.name}', 'tiktok')">🎵 TikTok</span>
-                            <span class="suggestion-chip" onclick="generateForProduct('${product.name}', 'desc')">📝 Descripción</span>
-                            <span class="suggestion-chip" onclick="generateForProduct('${product.name}', 'script')">🎬 Script</span>
+                    <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
+                        <h4 style="font-size: 14px; margin-bottom: 12px; color: var(--primary);"><i class="fas fa-sparkles"></i> Sugerencias IA</h4>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span onclick="generateForProduct('${product.name}', 'tiktok')" style="background: var(--bg-dark); padding: 6px 12px; border-radius: 16px; font-size: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);">🎵 TikTok</span>
+                            <span onclick="generateForProduct('${product.name}', 'desc')" style="background: var(--bg-dark); padding: 6px 12px; border-radius: 16px; font-size: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);">📝 Descripción</span>
+                            <span onclick="generateForProduct('${product.name}', 'script')" style="background: var(--bg-dark); padding: 6px 12px; border-radius: 16px; font-size: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);">🎬 Script</span>
                         </div>
                     </div>
 
-                    <p class="product-description">${product.description}</p>
+                    <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">${product.description}</p>
                     
-                    <div class="specs-grid">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px;">
                         ${Object.entries(product.specs).map(([key, val]) => `
-                            <div class="spec-item">
-                                <div class="spec-label">${key}</div>
-                                <div class="spec-value">${val}</div>
+                            <div style="background: var(--bg-dark); padding: 12px; border-radius: var(--radius-sm); text-align: center;">
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-bottom: 4px;">${key}</div>
+                                <div style="font-weight: 600; font-size: 13px;">${val}</div>
                             </div>
                         `).join('')}
                     </div>
 
-                    <div class="action-buttons">
-                        <button class="btn-large btn-secondary" onclick="addToCart(${product.id}); closeProductModal()" style="flex: 1; padding: 16px; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--bg-elevated); color: var(--text-primary);">
-                            <i class="fas fa-shopping-bag"></i>
-                            Agregar
+                    <div style="display: flex; gap: 12px;">
+                        <button onclick="addToCart(${product.id}); closeProductModal()" style="flex: 1; padding: 16px; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; border: none; cursor: pointer; background: var(--bg-elevated); color: var(--text-primary);">
+                            <i class="fas fa-shopping-bag"></i> Agregar
                         </button>
-                        <button class="btn-large btn-whatsapp" onclick="buyNowWhatsApp(${product.id})" style="flex: 1; padding: 16px; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #25d366, #128c7e); color: white;">
-                            <i class="fab fa-whatsapp"></i>
-                            Comprar Ahora
+                        <button onclick="buyNowWhatsApp(${product.id})" style="flex: 1; padding: 16px; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; border: none; cursor: pointer; background: linear-gradient(135deg, #25d366, #128c7e); color: white;">
+                            <i class="fab fa-whatsapp"></i> Comprar Ahora
                         </button>
                     </div>
                 </div>
             `;
             
-            modal.classList.add('active');
-            modal.style.opacity = '1';
-            modal.querySelector('.modal-content').style.transform = 'translateY(0)';
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                modal.querySelector('.modal-content').style.transform = 'translateY(0)';
+            }, 10);
             document.body.style.overflow = 'hidden';
         }
 
         function closeProductModal() {
             const modal = document.getElementById('productModal');
-            modal.classList.remove('active');
             modal.style.opacity = '0';
             modal.querySelector('.modal-content').style.transform = 'translateY(100%)';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
             document.body.style.overflow = '';
         }
 
@@ -1069,18 +1049,18 @@
                 footer.style.display = 'none';
             } else {
                 items.innerHTML = state.cart.map(item => `
-                    <div class="cart-item" style="display: flex; gap: 16px; padding: 16px; background: var(--bg-dark); border-radius: var(--radius-md); margin-bottom: 12px; animation: slideIn 0.3s ease;">
-                        <div class="cart-item-image" style="width: 80px; height: 80px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0;">
+                    <div style="display: flex; gap: 16px; padding: 16px; background: var(--bg-dark); border-radius: var(--radius-md); margin-bottom: 12px;">
+                        <div style="width: 80px; height: 80px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0;">
                             <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
-                        <div class="cart-item-info" style="flex: 1;">
-                            <div class="cart-item-name" style="font-weight: 600; margin-bottom: 4px; font-size: 14px;">${item.name}</div>
-                            <div class="cart-item-price" style="color: var(--accent); font-weight: 700; margin-bottom: 8px;">$${(item.price * item.quantity).toFixed(2)}</div>
-                            <div class="cart-item-actions" style="display: flex; align-items: center; gap: 12px;">
-                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)" style="width: 28px; height: 28px; border-radius: 50%; background: var(--bg-elevated); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">-</button>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 4px; font-size: 14px;">${item.name}</div>
+                            <div style="color: var(--accent); font-weight: 700; margin-bottom: 8px;">$${(item.price * item.quantity).toFixed(2)}</div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <button onclick="updateQuantity(${item.id}, -1)" style="width: 28px; height: 28px; border-radius: 50%; background: var(--bg-elevated); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">-</button>
                                 <span>${item.quantity}</span>
-                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)" style="width: 28px; height: 28px; border-radius: 50%; background: var(--bg-elevated); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">+</button>
-                                <button class="cart-item-remove" onclick="removeFromCart(${item.id})" style="margin-left: auto; color: var(--error); background: none; border: none; cursor: pointer; font-size: 14px;">
+                                <button onclick="updateQuantity(${item.id}, 1)" style="width: 28px; height: 28px; border-radius: 50%; background: var(--bg-elevated); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">+</button>
+                                <button onclick="removeFromCart(${item.id})" style="margin-left: auto; color: var(--error); background: none; border: none; cursor: pointer; font-size: 14px;">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -1098,8 +1078,7 @@
             const panel = document.getElementById('cartPanel');
             const content = panel.querySelector('.cart-content');
             
-            if (panel.classList.contains('active')) {
-                panel.classList.remove('active');
+            if (panel.style.display === 'block') {
                 content.style.transform = 'translateX(100%)';
                 setTimeout(() => {
                     panel.style.display = 'none';
@@ -1108,7 +1087,6 @@
             } else {
                 panel.style.display = 'block';
                 setTimeout(() => {
-                    panel.classList.add('active');
                     content.style.transform = 'translateX(0)';
                 }, 10);
                 document.body.style.overflow = 'hidden';
@@ -1142,8 +1120,7 @@
 
         function toggleAIPanel() {
             const panel = document.getElementById('aiPanel');
-            if (panel.classList.contains('active')) {
-                panel.classList.remove('active');
+            if (panel.style.display === 'flex') {
                 panel.style.opacity = '0';
                 setTimeout(() => {
                     panel.style.display = 'none';
@@ -1151,18 +1128,15 @@
             } else {
                 panel.style.display = 'flex';
                 setTimeout(() => {
-                    panel.classList.add('active');
                     panel.style.opacity = '1';
                 }, 10);
             }
-        }
-
-        function generateContent(type) {
+        }        function generateContent(type) {
             const chat = document.getElementById('aiChat');
             const prompts = {
                 tiktok: "Generando ideas virales para TikTok...",
                 description: "Creando descripciones persuasivas...",
-                script: "Escribiendo script                script: "Escribiendo script profesional...",
+                script: "Escribiendo script profesional...",
                 improve: "Analizando tu tienda..."
             };
             
@@ -1309,10 +1283,12 @@
             const toastMessage = document.getElementById('toastMessage');
             
             toastMessage.textContent = message;
-            toast.className = `toast show ${type}`;
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
             
             setTimeout(() => {
-                toast.classList.remove('show');
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(100px)';
             }, 3000);
         }
 
@@ -1324,26 +1300,12 @@
             openProductModal(id);
         }
 
-        function showSection(section) {
-            showToast('Sección: ' + section, 'success');
-        }
-
         function initAutoMode() {
             setInterval(() => {
                 if (Math.random() > 0.7) {
-                    const indicator = document.getElementById('autoModeIndicator');
-                    if (indicator) {
-                        indicator.classList.add('active');
-                        setTimeout(() => {
-                            indicator.classList.remove('active');
-                        }, 5000);
-                    }
+                    // Simulación de modo automático
                 }
             }, 30000);
-        }
-
-        function toggleView(view) {
-            showToast('Vista cambiada a: ' + view, 'success');
         }
     </script>
 </body>
