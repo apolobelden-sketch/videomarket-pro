@@ -3,78 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Productos Premium con los mejores precios en Mercado Libre y Libros Educativos 100% GRATIS para niños.">
+    <meta name="keywords" content="productos premium, libros gratis, mercado libre, ofertas, descuentos, educación infantil">
+    <meta property="og:title" content="🔥 Productos Premium & Libros GRATIS">
+    <meta property="og:description" content="Descubre productos de alta demanda con precios imbatibles + libros educativos digitales gratuitos.">
+    <meta property="og:type" content="website">
     <title>🔥 Productos Premium & Libros GRATIS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--bg:#050505;--card:#111;--border:#222;--accent:#ff3366;--cyan:#00d4ff;--purple:#8b5cf6;--gold:#ffd700;--text:#fff;--muted:#888;--success:#00ff88}
-        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-        .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at center,rgba(255,51,102,.15) 0%,transparent 70%);position:relative}
+        :root{--bg:#050505;--card:#111;--border:#222;--accent:#ff3366;--cyan:#00d4ff;--purple:#8b5cf6;--gold:#ffd700;--text:#fff;--muted:#888;--success:#00ff88;--glass:rgba(255,255,255,.05)}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+        ::-webkit-scrollbar{width:8px}
+        ::-webkit-scrollbar-track{background:var(--bg)}
+        ::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+        ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+        .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at center,rgba(255,51,102,.15) 0%,transparent 70%),radial-gradient(ellipse at top right,rgba(0,212,255,.08) 0%,transparent 50%);position:relative;overflow:hidden}
         .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px;mask:radial-gradient(circle at center,black 30%,transparent 70%)}
-        .urgency{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,51,102,.15);border:1px solid rgba(255,51,102,.4);padding:.6rem 1.2rem;border-radius:50px;font-size:.85rem;font-weight:600;color:var(--accent);margin-bottom:1.5rem}
+        .hero::after{content:'';position:absolute;bottom:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,51,102,.03) 0%,transparent 50%);animation:float 20s infinite ease-in-out}
+        @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,-30px)}}
+        .urgency{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,51,102,.15);border:1px solid rgba(255,51,102,.4);padding:.6rem 1.2rem;border-radius:50px;font-size:.85rem;font-weight:600;color:var(--accent);margin-bottom:1.5rem;backdrop-filter:blur(10px);animation:slideDown .8s ease-out}
         .urgency::before{content:'';width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 1.5s infinite}
-        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-        h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .subtitle{font-size:1.2rem;color:var(--muted);max-width:600px;margin-bottom:2rem}
-        .highlight{color:var(--accent);font-weight:700}
-        .buttons{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
-        .btn{padding:1rem 2rem;border-radius:12px;font-weight:700;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.8)}}
+        @keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeInUp .8s ease-out .2s both}
+        .subtitle{font-size:1.2rem;color:var(--muted);max-width:600px;margin-bottom:2rem;animation:fadeInUp .8s ease-out .4s both}
+        .highlight{color:var(--accent);font-weight:700;position:relative}
+        .highlight::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--accent),transparent);transform:scaleX(0);transform-origin:left;animation:underline 1s ease-out .8s forwards}
+        @keyframes underline{to{transform:scaleX(1)}}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .buttons{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;animation:fadeInUp .8s ease-out .6s both}
+        .btn{padding:1rem 2rem;border-radius:12px;font-weight:700;text-decoration:none;transition:all .3s cubic-bezier(.4,0,.2,1);display:inline-flex;align-items:center;gap:.5rem;position:relative;overflow:hidden}
+        .btn::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,.2);border-radius:50%;transform:translate(-50%,-50%);transition:width .6s,height .6s}
+        .btn:active::before{width:300px;height:300px}
         .btn-primary{background:linear-gradient(135deg,var(--accent),#ff6b6b);color:#fff;box-shadow:0 10px 30px rgba(255,51,102,.3)}
-        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(255,51,102,.4)}
-        .btn-secondary{background:transparent;border:2px solid var(--border);color:#fff}
-        .btn-secondary:hover{border-color:var(--accent)}
-        .trust{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;font-size:.9rem;color:var(--muted)}
-        .trust span{display:flex;align-items:center;gap:.3rem}
-        .stats{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;margin:-3rem auto 0;max-width:800px;display:flex;justify-content:space-around;flex-wrap:wrap;text-align:center;position:relative;z-index:10;width:90%}
-        .stat-number{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;color:var(--accent)}
-        .stat-label{font-size:.8rem;color:var(--muted);text-transform:uppercase}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(255,51,102,.4)}
+        .btn-secondary{background:var(--glass);border:2px solid var(--border);color:#fff;backdrop-filter:blur(10px)}
+        .btn-secondary:hover{border-color:var(--accent);background:rgba(255,51,102,.1)}
+        .trust{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;font-size:.9rem;color:var(--muted);animation:fadeInUp .8s ease-out .8s both}
+        .trust span{display:flex;align-items:center;gap:.3rem;transition:color .3s}
+        .trust span:hover{color:var(--text)}
+        .stats{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2.5rem;margin:-3rem auto 0;max-width:900px;display:flex;justify-content:space-around;flex-wrap:wrap;text-align:center;position:relative;z-index:10;width:90%;backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,.5);animation:fadeInUp .8s ease-out 1s both}
+        .stat-item{position:relative;padding:0 1rem}
+        .stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:40px;background:var(--border)}
+        .stat-number{font-family:'Space Grotesk',sans-serif;font-size:2.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+        .stat-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:.5rem}
         section{padding:5rem 1rem;max-width:1400px;margin:0 auto}
         .section-title{text-align:center;margin-bottom:3rem}
-        .section-title h2{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;margin-bottom:.5rem}
-        .section-title p{color:var(--muted)}
-        .tag{display:inline-block;background:rgba(255,51,102,.1);border:1px solid rgba(255,51,102,.3);color:var(--accent);padding:.4rem 1rem;border-radius:50px;font-size:.75rem;font-weight:700;text-transform:uppercase;margin-bottom:1rem}
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
-        .card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform .3s,box-shadow .3s}
-        .card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.5)}
-        .card-badge{position:absolute;top:1rem;left:1rem;background:linear-gradient(135deg,var(--accent),#ff6b6b);color:#fff;padding:.4rem .8rem;border-radius:50px;font-size:.7rem;font-weight:700;z-index:5}
-        .media{position:relative;aspect-ratio:9/16;background:#000;cursor:pointer}
-        .media video{width:100%;height:100%;object-fit:cover}
-        .overlay{position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(transparent,rgba(0,0,0,.9));display:flex;justify-content:space-between;align-items:center}
-        .views{font-size:.85rem;font-weight:600}
-        .sound-icon{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
-        .info{padding:1.5rem}
-        .name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
-        .meta{display:flex;gap:.5rem;margin-bottom:1rem}
-        .meta span{background:rgba(0,212,255,.1);color:var(--cyan);padding:.2rem .6rem;border-radius:50px;font-size:.7rem}
-        .price{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+        .section-title h2{font-family:'Space Grotesk',sans-serif;font-size:2.8rem;margin-bottom:.5rem}
+        .section-title p{color:var(--muted);font-size:1.1rem}
+        .tag{display:inline-block;background:rgba(255,51,102,.1);border:1px solid rgba(255,51,102,.3);color:var(--accent);padding:.5rem 1.2rem;border-radius:50px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem}
+        .card{background:var(--card);border:1px solid var(--border);border-radius:24px;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative}
+        .card:hover{transform:translateY(-10px);box-shadow:0 25px 50px rgba(0,0,0,.6),0 0 30px rgba(255,51,102,.1);border-color:rgba(255,51,102,.3)}
+        .card-badge{position:absolute;top:1rem;left:1rem;background:linear-gradient(135deg,var(--accent),#ff6b6b);color:#fff;padding:.5rem 1rem;border-radius:50px;font-size:.7rem;font-weight:800;z-index:5;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 4px 15px rgba(255,51,102,.3)}
+        .media{position:relative;aspect-ratio:9/16;background:#000;cursor:pointer;overflow:hidden}
+        .media video{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+        .card:hover .media video{transform:scale(1.05)}
+        .overlay{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(transparent 0%,rgba(0,0,0,.95) 100%);display:flex;justify-content:space-between;align-items:flex-end;opacity:0;transition:opacity .3s}
+        .card:hover .overlay{opacity:1}
+        .views{font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:.3rem}
+        .sound-icon{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;backdrop-filter:blur(10px);transition:all .3s;border:1px solid rgba(255,255,255,.1)}
+        .sound-icon:hover{background:rgba(255,255,255,.25);transform:scale(1.1)}
+        .info{padding:1.8rem}
+        .name{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
+        .meta{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+        .meta span{background:rgba(0,212,255,.1);color:var(--cyan);padding:.3rem .8rem;border-radius:50px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+        .price{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap}
         .old{text-decoration:line-through;color:var(--muted);font-size:.9rem}
-        .new{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:var(--accent)}
-        .save{background:var(--success);color:var(--bg);padding:.2rem .6rem;border-radius:50px;font-size:.75rem;font-weight:700}
-        .buy-btn{display:block;width:100%;background:#FFE600;color:#2D3277;text-align:center;padding:1rem;border-radius:10px;font-weight:800;text-decoration:none;transition:all .3s}
-        .buy-btn:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(255,230,0,.3)}
-        .books{background:linear-gradient(180deg,var(--bg) 0%,#0a0a1a 100%)}
+        .new{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:800;color:var(--accent)}
+        .save{background:var(--success);color:var(--bg);padding:.3rem .8rem;border-radius:50px;font-size:.75rem;font-weight:800}
+        .buy-btn{display:block;width:100%;background:linear-gradient(135deg,#FFE600,#FFD700);color:#2D3277;text-align:center;padding:1rem;border-radius:14px;font-weight:800;text-decoration:none;transition:all .3s;position:relative;overflow:hidden;border:none;cursor:pointer;font-size:1rem}
+        .buy-btn:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(255,230,0,.3)}
+        .buy-btn::after{content:'→';margin-left:.5rem;transition:transform .3s;display:inline-block}
+        .buy-btn:hover::after{transform:translateX(4px)}
+        .books{background:linear-gradient(180deg,var(--bg) 0%,#0a0a1a 100%);position:relative}
+        .books::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
         .books .tag{background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.3);color:var(--cyan)}
-        .book-card::before{content:'';position:absolute;inset:0;border-radius:20px;padding:2px;background:linear-gradient(135deg,var(--cyan),transparent,var(--purple));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
+        .book-card::before{content:'';position:absolute;inset:0;border-radius:24px;padding:2px;background:linear-gradient(135deg,var(--cyan),transparent,var(--purple));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
         .book-card:hover::before{opacity:1}
         .book-card{position:relative}
-        .free{position:absolute;top:1rem;right:1rem;background:var(--cyan);color:var(--bg);padding:.4rem .8rem;border-radius:50px;font-size:.75rem;font-weight:800;z-index:5}
-        .desc{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
-        .download{display:block;width:100%;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;text-align:center;padding:1rem;border-radius:10px;font-weight:700;text-decoration:none;border:none;cursor:pointer}
-        .download:hover{opacity:.9}
-        .download.processing{opacity:.7}
-        .download.success{background:var(--success)}
-        .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:3rem}
-        .feature{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center}
-        .feature-icon{font-size:2.5rem;margin-bottom:1rem}
-        .feature h3{font-family:'Space Grotesk',sans-serif;margin-bottom:.5rem}
+        .free{position:absolute;top:1rem;right:1rem;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;padding:.5rem 1rem;border-radius:50px;font-size:.75rem;font-weight:800;z-index:5;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 4px 15px rgba(0,212,255,.3)}
+        .desc{color:var(--muted);font-size:.9rem;margin-bottom:1.2rem;line-height:1.5}
+        .download{display:block;width:100%;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;text-align:center;padding:1rem;border-radius:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:all .3s;font-size:1rem;position:relative;overflow:hidden}
+        .download:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(0,212,255,.3)}
+        .download.processing{opacity:.7;pointer-events:none}
+        .download.success{background:var(--success);color:var(--bg)}
+        .download::after{content:'↓';margin-left:.5rem;transition:transform .3s;display:inline-block}
+        .download:hover::after{transform:translateY(2px)}
+        .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:4rem}
+        .feature{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.5rem 2rem;text-align:center;transition:all .3s;position:relative;overflow:hidden}
+        .feature::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple));transform:scaleX(0);transition:transform .3s;transform-origin:left}
+        .feature:hover{transform:translateY(-5px);border-color:rgba(0,212,255,.3)}
+        .feature:hover::before{transform:scaleX(1)}
+        .feature-icon{font-size:3rem;margin-bottom:1.2rem;display:block;transition:transform .3s}
+        .feature:hover .feature-icon{transform:scale(1.1)}
+        .feature h3{font-family:'Space Grotesk',sans-serif;margin-bottom:.5rem;font-size:1.2rem}
         .feature p{color:var(--muted);font-size:.9rem}
-        footer{text-align:center;padding:3rem 1rem;border-top:1px solid var(--border)}
-        footer h2{font-family:'Space Grotesk',sans-serif;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
-        @media(max-width:768px){.stats{margin:-2rem auto 0;padding:1.5rem}.stat-number{font-size:1.8rem}section{padding:3rem 1rem}}
+        footer{text-align:center;padding:4rem 1rem;border-top:1px solid var(--border);background:radial-gradient(ellipse at center,rgba(255,51,102,.05) 0%,transparent 70%)}
+        footer h2{font-family:'Space Grotesk',sans-serif;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;font-size:2rem}
+        .footer-links{display:flex;gap:2rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap}
+        .footer-links a{color:var(--muted);text-decoration:none;transition:color .3s;font-size:.9rem}
+        .footer-links a:hover{color:var(--accent)}
+        .social-links{display:flex;gap:1rem;justify-content:center;margin-bottom:2rem}
+        .social-links a{width:45px;height:45px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .3s;font-size:1.2rem}
+        .social-links a:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 5px 15px rgba(255,51,102,.2)}
+        .copyright{color:var(--muted);font-size:.85rem}
+        .scroll-top{position:fixed;bottom:2rem;right:2rem;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#ff6b6b);border:none;color:#fff;font-size:1.5rem;cursor:pointer;opacity:0;transform:translateY(20px);transition:all .3s;z-index:100;box-shadow:0 5px 20px rgba(255,51,102,.3);display:flex;align-items:center;justify-content:center}
+        .scroll-top.visible{opacity:1;transform:translateY(0)}
+        .scroll-top:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(255,51,102,.4)}
+        .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--border);padding:1rem 2rem;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.5);z-index:1000;transition:all .3s;opacity:0;display:flex;align-items:center;gap:.8rem;font-weight:600}
+        .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+        .toast-icon{font-size:1.2rem}
+        @media(max-width:768px){
+            .stats{margin:-2rem auto 0;padding:1.5rem}
+            .stat-number{font-size:2rem}
+            .stat-item:not(:last-child)::after{display:none}
+            .stat-item{width:50%;padding:.5rem}
+            section{padding:3rem 1rem}
+            .grid{grid-template-columns:1fr}
+            .overlay{opacity:1}
+        }
+        @media(max-width:480px){
+            h1{font-size:2rem}
+            .subtitle{font-size:1rem}
+            .buttons{flex-direction:column;width:100%;padding:0 1rem}
+            .btn{width:100%;justify-content:center}
+        }
+        .lazy-load{opacity:0;transform:translateY(20px);transition:all .6s ease-out}
+        .lazy-load.loaded{opacity:1;transform:translateY(0)}
     </style>
 </head>
-<body>
-    <div class="hero">
+<body>    <div class="hero">
         <div class="urgency">🔥 Ofertas por tiempo limitado</div>
         <h1>Productos Premium<br>& Libros GRATIS</h1>
         <p class="subtitle">Descubre <span class="highlight">productos de alta demanda</span> con precios imbatibles en Mercado Libre, más <span class="highlight">libros educativos digitales 100% gratuitos</span>.</p>
@@ -89,12 +150,14 @@
             <span>✓ 50k+ Clientes</span>
         </div>
     </div>
+    
     <div class="stats">
-        <div><div class="stat-number">12</div><div class="stat-label">Productos</div></div>
-        <div><div class="stat-number">4</div><div class="stat-label">Libros Free</div></div>
-        <div><div class="stat-number">50k+</div><div class="stat-label">Descargas</div></div>
-        <div><div class="stat-number">24h</div><div class="stat-label">Envío</div></div>
+        <div class="stat-item"><div class="stat-number" data-target="12">0</div><div class="stat-label">Productos</div></div>
+        <div class="stat-item"><div class="stat-number" data-target="4">0</div><div class="stat-label">Libros Free</div></div>
+        <div class="stat-item"><div class="stat-number" data-target="50000">0</div><div class="stat-label">Descargas</div></div>
+        <div class="stat-item"><div class="stat-number" data-target="24">0</div><div class="stat-label">Horas Envío</div></div>
     </div>
+
     <section id="productos">
         <div class="section-title">
             <span class="tag">🔥 Más Vendidos</span>
@@ -102,7 +165,9 @@
             <p>Artículos seleccionados con los mejores precios del mercado</p>
         </div>
         <div class="grid" id="product-grid"></div>
-    </section>    <section id="libros" class="books">
+    </section>
+
+    <section id="libros" class="books">
         <div class="section-title">
             <span class="tag">📚 Educación Gratuita</span>
             <h2 style="background:linear-gradient(135deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Libros 100% GRATIS</h2>
@@ -113,30 +178,46 @@
             <div class="feature">
                 <div class="feature-icon">📖</div>
                 <h3>Alta Calidad</h3>
-                <p>Libros profesionalmente ilustrados</p>
+                <p>Libros profesionalmente ilustrados con contenido educativo verificado</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">🎨</div>
                 <h3>Diseño Atractivo</h3>
-                <p>Colores vibrantes y personajes</p>
+                <p>Colores vibrantes y personajes encantadores que capturan la atención</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">💡</div>
                 <h3>Aprendizaje</h3>
-                <p>Moralejas sobre valores</p>
+                <p>Moralejas sobre valores, emociones y habilidades sociales</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">📱</div>
                 <h3>Formato Digital</h3>
-                <p>PDF listo para imprimir</p>
+                <p>PDF listo para imprimir o leer en cualquier dispositivo</p>
             </div>
         </div>
     </section>
+
     <footer>
         <h2>⚡ TIENDA PREMIUM</h2>
-        <p style="color:var(--muted)">Tu destino de confianza para productos de calidad</p>
+        <p style="color:var(--muted);max-width:500px;margin:0 auto 2rem">Tu destino de confianza para productos de calidad y recursos educativos gratuitos</p>
+        <div class="footer-links">
+            <a href="#productos">Productos</a>
+            <a href="#libros">Libros Gratis</a>
+            <a href="#" onclick="showToast('Próximamente','ℹ️')">Contacto</a>
+            <a href="#" onclick="showToast('Próximamente','ℹ️')">Términos</a>
+        </div>
+        <div class="social-links">
+            <a href="#" onclick="showToast('Próximamente','📱')" title="WhatsApp">💬</a>
+            <a href="#" onclick="showToast('Próximamente','📱')" title="Instagram">📷</a>
+            <a href="#" onclick="showToast('Próximamente','📱')" title="Facebook">👍</a>
+            <a href="#" onclick="showToast('Próximamente','📱')" title="TikTok">🎵</a>
+        </div>
+        <p class="copyright">© 2026 Tienda Premium. Todos los derechos reservados.</p>
     </footer>
-    <script>
+
+    <button class="scroll-top" onclick="scrollToTop()" title="Volver arriba">↑</button>
+    <div class="toast" id="toast"><span class="toast-icon" id="toast-icon"></span><span id="toast-message"></span></div>    <script>
         const CLOUD_NAME='dgdw8fbku';
         const getVideo=(id)=>`https://res.cloudinary.com/${CLOUD_NAME}/video/upload/q_auto,f_mp4/${id}`;
         const getImg=(id)=>`https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto/${id}`;
@@ -146,6 +227,7 @@
             emociones:'https://drive.google.com/uc?export=download&id=1qCV6KI6eU3E3zD_sH_dXNPkQV3EzIo6f',
             familia:'https://drive.google.com/uc?export=download&id=1VB9QTiTt6ryejlSFLwEqWwollQGNgHkD'
         };
+        
         const productos=[
             {id:'p1',nombre:'Galaxy Watch Ultra',badge:'🔥 NUEVO',orig:12999,final:8999,video:'Samsung_Galaxy_Watch_Ultra_rbrkd0',link:'https://meli.la/1gMTZhz',views:'18.5k'},
             {id:'p2',nombre:'Nautica Voyage',badge:'🌊 TOP',orig:599,final:299,video:'Nautica_voyage_eau_de_toilette_trending_unboxing_bestmensfragrance_parfumrecommended_fragrance_rALDtQpyUXU_l1zz6m',link:'https://meli.la/2wumBgh',views:'22.3k'},
@@ -160,23 +242,27 @@
             {id:'p11',nombre:'Producto Naranja',badge:'🍊 OFERTA',orig:2999,final:2036,video:'3_naranja_ddfajm',link:'https://meli.la/1eMktrC',views:'5.8k'},
             {id:'p12',nombre:'Cargador GaN 20W',badge:'⚡ CARGA',orig:98,final:69,img:true,imagen:'D_Q_NP_880828-MLA100062693161_122025-O.webp',link:'https://meli.la/1WTtdAw',views:'45.2k'}
         ];
+        
         const libros=[
-            {id:'l1',nombre:'El León Valiente',video:'Cuento_1_El_Leon_Happy_jujtwm',pdf:PDFS.leon,views:'45.2k',desc:'Un cuento sobre coraje y amistad.'},
-            {id:'l2',nombre:'Animalitos Divertidos',video:'animalitos_dwothk',pdf:PDFS.animalitos,views:'38.7k',desc:'Conoce animales divertidos.'},
-            {id:'l3',nombre:'Mis Emociones',video:'emociones_rwg9cf',pdf:PDFS.emociones,views:'52.1k',desc:'Ayuda a manejar emociones.'},
-            {id:'l4',nombre:'Mi Familia',video:'familia_ed04bv',pdf:PDFS.familia,views:'41.3k',desc:'Celebra el amor familiar.'}
-        ];        function renderProductos(){
+            {id:'l1',nombre:'El León Valiente',video:'Cuento_1_El_Leon_Happy_jujtwm',pdf:PDFS.leon,views:'45.2k',desc:'Un cuento sobre coraje y amistad que enseña a los niños a enfrentar sus miedos.'},
+            {id:'l2',nombre:'Animalitos Divertidos',video:'animalitos_dwothk',pdf:PDFS.animalitos,views:'38.7k',desc:'Conoce animales divertidos y aprende sobre la diversidad del reino animal.'},
+            {id:'l3',nombre:'Mis Emociones',video:'emociones_rwg9cf',pdf:PDFS.emociones,views:'52.1k',desc:'Ayuda a los niños a identificar y manejar sus emociones de forma saludable.'},
+            {id:'l4',nombre:'Mi Familia',video:'familia_ed04bv',pdf:PDFS.familia,views:'41.3k',desc:'Celebra el amor familiar y los lazos que nos unen a nuestros seres queridos.'}
+        ];
+
+        function renderProductos(){
             const grid=document.getElementById('product-grid');
             productos.forEach((p,i)=>{
                 const descuento=Math.round(((p.orig-p.final)/p.orig)*100);
                 const videoUrl=getVideo(p.video);
                 const card=document.createElement('div');
-                card.className='card';
+                card.className='card lazy-load';
+                card.style.transitionDelay=`${i * 0.05}s`;
                 card.innerHTML=`
                     <div style="position:relative">
                         <span class="card-badge">${p.badge}</span>
                         <div class="media" onclick="toggleSound('prod-${p.id}')">
-                            ${p.img?`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e)"><img src="${getImg(p.imagen)}" style="max-width:80%;max-height:80%"></div>`:`<video id="prod-${p.id}" muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>`}
+                            ${p.img?`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e)"><img src="${getImg(p.imagen)}" style="max-width:80%;max-height:80%;transition:transform .3s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="${p.nombre}"></div>`:`<video id="prod-${p.id}" muted loop playsinline poster="${videoUrl}.jpg" preload="metadata"><source src="${videoUrl}" type="video/mp4"></video>`}
                             ${!p.img?`<div class="overlay"><span class="views">▶ ${p.views}</span><span class="sound-icon" id="icon-prod-${p.id}">🔇</span></div>`:''}
                         </div>
                     </div>
@@ -184,23 +270,29 @@
                         <div class="name">${p.nombre}</div>
                         <div class="meta"><span>Envío Gratis</span><span>Stock Limitado</span></div>
                         <div class="price"><span class="old">$${p.orig.toLocaleString()}</span><span class="new">$${p.final.toLocaleString()}</span><span class="save">-${descuento}%</span></div>
-                        <a href="${p.link}" target="_blank" class="buy-btn">🛒 Comprar en Mercado Libre</a>
+                        <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="buy-btn" onclick="trackClick('${p.nombre}')">🛒 Comprar en Mercado Libre</a>
                     </div>`;
                 grid.appendChild(card);
-                if(!p.img){const vid=card.querySelector('video');vid.play().catch(()=>{});}
+                if(!p.img){
+                    const vid=card.querySelector('video');
+                    vid.play().catch(()=>{});
+                    vid.addEventListener('loadeddata',()=>{vid.classList.add('loaded');});
+                }
             });
         }
+
         function renderLibros(){
             const grid=document.getElementById('book-grid');
             libros.forEach((l,i)=>{
                 const videoUrl=getVideo(l.video);
                 const card=document.createElement('div');
-                card.className='card book-card';
+                card.className='card book-card lazy-load';
+                card.style.transitionDelay=`${i * 0.05}s`;
                 card.innerHTML=`
                     <div style="position:relative">
                         <span class="free">100% FREE</span>
                         <div class="media" onclick="toggleSound('libro-${l.id}')">
-                            <video id="libro-${l.id}" muted loop playsinline poster="${videoUrl}.jpg"><source src="${videoUrl}" type="video/mp4"></video>
+                            <video id="libro-${l.id}" muted loop playsinline poster="${videoUrl}.jpg" preload="metadata"><source src="${videoUrl}" type="video/mp4"></video>
                             <div class="overlay"><span class="views">📥 ${l.views}</span><span class="sound-icon" id="icon-libro-${l.id}">🔇</span></div>
                         </div>
                     </div>
@@ -208,39 +300,146 @@
                         <div class="name">${l.nombre}</div>
                         <p class="desc">${l.desc}</p>
                         <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;color:var(--cyan);font-size:.9rem"><span>📚</span>PDF listo para imprimir</div>
-                        <button class="download" onclick="descargar(this,'${l.pdf}')">⬇️ Descargar Ahora</button>
+                        <button class="download" onclick="descargar(this,'${l.pdf}','${l.nombre}')">⬇️ Descargar Ahora</button>
                     </div>`;
                 grid.appendChild(card);
-                const vid=card.querySelector('video');vid.play().catch(()=>{});
+                const vid=card.querySelector('video');
+                vid.play().catch(()=>{});
             });
         }
+
         function toggleSound(id){
             const video=document.getElementById(id);
             const icon=document.getElementById('icon-'+id);
             if(!video||!icon)return;
-            if(video.muted){video.muted=false;video.volume=1;icon.textContent='🔊';icon.style.color='#00ff88';}
-            else{video.muted=true;icon.textContent='🔇';icon.style.color='#fff';}
+            if(video.muted){
+                video.muted=false;
+                video.volume=0.8;
+                icon.textContent='🔊';
+                icon.style.background='rgba(0,255,136,.2)';
+                icon.style.color='#00ff88';
+                icon.style.borderColor='rgba(0,255,136,.3)';
+            }else{
+                video.muted=true;
+                icon.textContent='🔇';
+                icon.style.background='rgba(255,255,255,.15)';
+                icon.style.color='#fff';
+                icon.style.borderColor='rgba(255,255,255,.1)';
+            }
         }
-        function descargar(btn,url){
+
+        function descargar(btn,url,nombre){
             btn.classList.add('processing');
-            btn.innerHTML='⏳ Preparando...';
+            btn.innerHTML='⏳ Preparando descarga...';
             setTimeout(()=>{
                 btn.classList.remove('processing');
                 btn.classList.add('success');
                 btn.innerHTML='✅ ¡Descargando!';
                 window.open(url,'_blank');
-                setTimeout(()=>{btn.classList.remove('success');btn.innerHTML='⬇️ Descargar Ahora';},2000);
-            },600);
+                showToast(`Descargando: ${nombre}`,'📥');
+                setTimeout(()=>{btn.classList.remove('success');btn.innerHTML='⬇️ Descargar Ahora';},3000);
+            },800);
         }
+
+        function showToast(message,icon='✅'){
+            const toast=document.getElementById('toast');
+            const toastIcon=document.getElementById('toast-icon');
+            const toastMessage=document.getElementById('toast-message');
+            toastIcon.textContent=icon;
+            toastMessage.textContent=message;
+            toast.classList.add('show');
+            setTimeout(()=>{toast.classList.remove('show');},3000);
+        }
+
+        function trackClick(producto){
+            console.log('Click en producto:',producto);
+        }
+
+        function scrollToTop(){
+            window.scrollTo({top:0,behavior:'smooth'});
+        }
+
+        function animateStats(){
+            const stats=document.querySelectorAll('.stat-number');
+            const observer=new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{
+                    if(entry.isIntersecting){
+                        const el=entry.target;
+                        const target=parseInt(el.getAttribute('data-target'));
+                        const duration=2000;
+                        const start=performance.now();
+                        const animate=(now)=>{
+                            const progress=Math.min((now-start)/duration,1);
+                            const easeOut=1-Math.pow(1-progress,3);
+                            const current=Math.round(easeOut*target);
+                            el.textContent=current>=1000?(current/1000).toFixed(current>=10000?0:1)+'k':current;
+                            if(progress<1)requestAnimationFrame(animate);
+                        };
+                        requestAnimationFrame(animate);
+                        observer.unobserve(el);
+                    }
+                });
+            },{threshold:.5});
+            stats.forEach(stat=>observer.observe(stat));
+        }
+
+        function lazyLoadCards(){
+            const cards=document.querySelectorAll('.lazy-load');
+            const observer=new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('loaded');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },{threshold:.1});
+            cards.forEach(card=>observer.observe(card));
+        }
+
+        function handleScrollTop(){
+            const btn=document.querySelector('.scroll-top');
+            window.addEventListener('scroll',()=>{
+                if(window.scrollY>500){btn.classList.add('visible');}
+                else{btn.classList.remove('visible');}
+            });
+        }
+
+        function pauseOffscreenVideos(){
+            const videos=document.querySelectorAll('video');
+            const observer=new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{
+                    const video=entry.target;
+                    if(entry.isIntersecting && !video.paused){video.play().catch(()=>{});}
+                    else if(!entry.isIntersecting && !video.paused){video.pause();}
+                });
+            },{threshold:.1});
+            videos.forEach(v=>observer.observe(v));
+        }
+
         document.addEventListener('DOMContentLoaded',()=>{
             renderProductos();
             renderLibros();
+            animateStats();
+            lazyLoadCards();
+            handleScrollTop();
+            pauseOffscreenVideos();
+            
             document.querySelectorAll('a[href^="#"]').forEach(a=>{
                 a.addEventListener('click',e=>{
                     e.preventDefault();
                     const destino=document.querySelector(a.getAttribute('href'));
-                    if(destino)destino.scrollIntoView({behavior:'smooth'});
+                    if(destino){
+                        const offset=destino.offsetTop-80;
+                        window.scrollTo({top:offset,behavior:'smooth'});
+                    }
                 });
+            });
+
+            document.addEventListener('keydown',(e)=>{
+                if(e.key==='Escape'){
+                    document.querySelectorAll('video').forEach(v=>{v.muted=true;});
+                    document.querySelectorAll('.sound-icon').forEach(i=>{i.textContent='🔇';i.style.background='rgba(255,255,255,.15)';i.style.color='#fff';});
+                }
             });
         });
     </script>
