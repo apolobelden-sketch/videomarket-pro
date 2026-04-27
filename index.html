@@ -215,4 +215,295 @@
             <a href="#" onclick="showToast('Próximamente','ℹ️')">Términos</a>
         </div>
         <div class="social-links">
-            <a href="#" onclick="showToast('Próximamente','📱')" title=
+            <a href="#" onclick="showToast('Próximamente','📱')" title="WhatsApp">💬</a>
+            <a href="#" onclick="showToast('Próximamente','📱')" title="Instagram">📷</a>
+            <a href="#" onclick="showToast('Próximamente','📱')" title="Facebook">👍</a>
+            <a href="#" onclick="showToast('Próximamente','📱')" title="TikTok">🎵</a>
+        </div>
+        <p class="copyright">© 2026 Tienda Premium. Todos los derechos reservados.</p>
+    </footer>
+
+    <button class="scroll-top" onclick="scrollToTop()" title="Volver arriba">↑</button>
+    <div class="toast" id="toast"><span class="toast-icon" id="toast-icon"></span><span id="toast-message"></span></div>
+
+    <script>
+        const CLOUD_NAME='dgdw8fbku';
+        const getVideo=(id)=>`https://res.cloudinary.com/${CLOUD_NAME}/video/upload/q_auto,f_mp4/${id}`;
+        const getImg=(id)=>`https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto/${id}`;
+        const getPoster=(id)=>`https://res.cloudinary.com/${CLOUD_NAME}/video/upload/so_1,w_480,h_854,c_fill,q_auto/${id}.jpg`;
+        
+        const PDFS={
+            leon:'https://drive.google.com/uc?export=download&id=1HrFakhKIwAXAYs7zNZMFpDrx7h2YSCqT',
+            animalitos:'https://drive.google.com/uc?export=download&id=1RNbc5sOcslreFlxeWgBABLdQ4fxoK_7F',
+            emociones:'https://drive.google.com/uc?export=download&id=1qCV6KI6eU3E3zD_sH_dXNPkQV3EzIo6f',
+            familia:'https://drive.google.com/uc?export=download&id=1VB9QTiTt6ryejlSFLwEqWwollQGNgHkD'
+        };
+        
+        const productos=[
+            {id:'p1',nombre:'Galaxy Watch Ultra',badge:'🔥 NUEVO',orig:12999,final:8999,video:'Samsung_Galaxy_Watch_Ultra_rbrkd0',link:'https://meli.la/1gMTZhz',views:'18.5k'},
+            {id:'p2',nombre:'Nautica Voyage',badge:'🌊 TOP',orig:599,final:299,video:'Nautica_voyage_eau_de_toilette_trending_unboxing_bestmensfragrance_parfumrecommended_fragrance_rALDtQpyUXU_l1zz6m',link:'https://meli.la/2wumBgh',views:'22.3k'},
+            {id:'p3',nombre:'Samsung S25 FE',badge:'⚡ FLASH',orig:13999,final:8999,video:'Samsung_Galaxy_S25_FE_ggualp',link:'https://meli.la/2mA4qCh',views:'12.4k'},
+            {id:'p4',nombre:'Moto Edge 50 Pro',badge:'💎 PREMIUM',orig:12999,final:7999,video:'Motorola_Edición_Premium_nouj95',link:'https://meli.la/23KvNjV',views:'8.7k'},
+            {id:'p5',nombre:'Pistola Masaje Xiaomi',badge:'💆 #1',orig:899,final:299,video:'Pistola_masaje_Xiaomi_me_encanta_️_Ij6vVKFiEKY_oz5c9x',link:'https://meli.la/1FfMYZi',views:'35.6k'},
+            {id:'p6',nombre:'Curren 8402',badge:'⌚ LUJO',orig:1299,final:599,video:'reloj_curren_8402_tzmw3l',link:'https://meli.la/1wiPMys',views:'24.1k'},
+            {id:'p7',nombre:'Espejo LED',badge:'✨ LED',orig:899,final:550,video:'espejo2_nwhn93',link:'https://meli.la/1kYoTt1',views:'4.7k'},
+            {id:'p8',nombre:'Cámara WiFi 360°',badge:'🏠 SEGURIDAD',orig:1599,final:899,video:'camara_de_seguridad_2_uk1o5b',link:'https://meli.la/29JngVu',views:'6.3k'},
+            {id:'p9',nombre:'Taladro Miwod 21V',badge:'🔧 BEST',orig:1299,final:599,video:'taladro1_yyp5nz',link:'https://meli.la/1XwiFN1',views:'31.8k'},
+            {id:'p10',nombre:'Carpa Styrka 3x3',badge:'⛺ OUTDOOR',orig:1950,final:799,video:'Toldo_Plegable_3x3_Aleman_-_Vanlig_-_Exterior_IQZVxYT0IBg_1_hldbyk',link:'https://meli.la/31DDvzp',views:'15.2k'},
+            {id:'p11',nombre:'Producto Naranja',badge:'🍊 OFERTA',orig:2999,final:2036,video:'3_naranja_ddfajm',link:'https://meli.la/1eMktrC',views:'5.8k'},
+            {id:'p12',nombre:'Cargador GaN 20W',badge:'⚡ CARGA',orig:98,final:69,img:true,imagen:'D_Q_NP_880828-MLA100062693161_122025-O.webp',link:'https://meli.la/1WTtdAw',views:'45.2k'}
+        ];
+        
+        const libros=[
+            {id:'l1',nombre:'El León Valiente',video:'Cuento_1_El_Leon_Happy_jujtwm',pdf:PDFS.leon,views:'45.2k',desc:'Un cuento sobre coraje y amistad que enseña a los niños a enfrentar sus miedos.'},
+            {id:'l2',nombre:'Animalitos Divertidos',video:'animalitos_dwothk',pdf:PDFS.animalitos,views:'38.7k',desc:'Conoce animales divertidos y aprende sobre la diversidad del reino animal.'},
+            {id:'l3',nombre:'Mis Emociones',video:'emociones_rwg9cf',pdf:PDFS.emociones,views:'52.1k',desc:'Ayuda a los niños a identificar y manejar sus emociones de forma saludable.'},
+            {id:'l4',nombre:'Mi Familia',video:'familia_ed04bv',pdf:PDFS.familia,views:'41.3k',desc:'Celebra el amor familiar y los lazos que nos unen a nuestros seres queridos.'}
+        ];
+
+        function crearVideoHTML(id, videoId, esLibro){
+            const videoUrl = getVideo(videoId);
+            const posterUrl = getPoster(videoId);
+            return `
+                <div style="position:relative;width:100%;height:100%;" class="video-container" data-video-id="${id}">
+                    <div class="video-loading"></div>
+                    <video id="${id}" muted loop playsinline preload="metadata" poster="${posterUrl}" style="position:absolute;inset:0;z-index:2;">
+                        <source src="${videoUrl}" type="video/mp4">
+                        Tu navegador no soporta videos HTML5.
+                    </video>
+                    <div class="overlay" style="z-index:3;">
+                        <span class="views">${esLibro ? '📥' : '▶'} ${esLibro ? 'Descargas' : 'Vistas'}</span>
+                        <span class="sound-icon" id="icon-${id}">🔇</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderProductos(){
+            const grid=document.getElementById('product-grid');
+            productos.forEach((p,i)=>{
+                const descuento=Math.round(((p.orig-p.final)/p.orig)*100);
+                const card=document.createElement('div');
+                card.className='card lazy-load';
+                card.style.transitionDelay=`${i * 0.05}s`;
+                
+                let mediaContent;
+                if(p.img){
+                    mediaContent = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e)"><img src="${getImg(p.imagen)}" style="max-width:80%;max-height:80%;transition:transform .3s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="${p.nombre}" loading="lazy"></div>`;
+                } else {
+                    mediaContent = crearVideoHTML('prod-'+p.id, p.video, false);
+                }
+                
+                card.innerHTML=`
+                    <div style="position:relative">
+                        <span class="card-badge">${p.badge}</span>
+                        <div class="media" onclick="toggleSound('prod-${p.id}')">
+                            ${mediaContent}
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div class="name">${p.nombre}</div>
+                        <div class="meta"><span>Envío Gratis</span><span>Stock Limitado</span></div>
+                        <div class="price"><span class="old">$${p.orig.toLocaleString()}</span><span class="new">$${p.final.toLocaleString()}</span><span class="save">-${descuento}%</span></div>
+                        <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="buy-btn" onclick="trackClick('${p.nombre}')">🛒 Comprar en Mercado Libre</a>
+                    </div>`;
+                grid.appendChild(card);
+                
+                if(!p.img){
+                    inicializarVideo('prod-'+p.id);
+                }
+            });
+        }
+
+        function renderLibros(){
+            const grid=document.getElementById('book-grid');
+            libros.forEach((l,i)=>{
+                const card=document.createElement('div');
+                card.className='card book-card lazy-load';
+                card.style.transitionDelay=`${i * 0.05}s`;
+                card.innerHTML=`
+                    <div style="position:relative">
+                        <span class="free">100% FREE</span>
+                        <div class="media" onclick="toggleSound('libro-${l.id}')">
+                            ${crearVideoHTML('libro-'+l.id, l.video, true)}
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div class="name">${l.nombre}</div>
+                        <p class="desc">${l.desc}</p>
+                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;color:var(--cyan);font-size:.9rem"><span>📚</span>PDF listo para imprimir</div>
+                        <button class="download" onclick="descargar(this,'${l.pdf}','${l.nombre}')">⬇️ Descargar Ahora</button>
+                    </div>`;
+                grid.appendChild(card);
+                inicializarVideo('libro-'+l.id);
+            });
+        }
+
+        function inicializarVideo(id){
+            const video = document.getElementById(id);
+            const container = video ? video.closest('.video-container') : null;
+            if(!video) return;
+            
+            const playVideo = () => {
+                video.play().then(() => {
+                    if(container) container.classList.add('video-loaded');
+                }).catch(err => {
+                    console.log('Autoplay bloqueado:', err);
+                    if(container) container.classList.add('video-loaded');
+                });
+            };
+            
+            if(video.readyState >= 2){
+                playVideo();
+            } else {
+                video.addEventListener('loadeddata', playVideo, {once:true});
+                video.addEventListener('canplay', playVideo, {once:true});
+            }
+            
+            video.addEventListener('error', (e) => {
+                console.error('Error cargando video:', e);
+                if(container) container.innerHTML = '<div class="video-fallback">Video no disponible</div>';
+            });
+        }
+
+        function toggleSound(id){
+            const video=document.getElementById(id);
+            const icon=document.getElementById('icon-'+id);
+            if(!video||!icon)return;
+            
+            if(video.muted){
+                video.muted=false;
+                video.volume=0.8;
+                icon.textContent='🔊';
+                icon.style.background='rgba(0,255,136,.2)';
+                icon.style.color='#00ff88';
+                icon.style.borderColor='rgba(0,255,136,.3)';
+            }else{
+                video.muted=true;
+                icon.textContent='🔇';
+                icon.style.background='rgba(255,255,255,.15)';
+                icon.style.color='#fff';
+                icon.style.borderColor='rgba(255,255,255,.1)';
+            }
+        }
+
+        function descargar(btn,url,nombre){
+            btn.classList.add('processing');
+            btn.innerHTML='⏳ Preparando descarga...';
+            setTimeout(()=>{
+                btn.classList.remove('processing');
+                btn.classList.add('success');
+                btn.innerHTML='✅ ¡Descargando!';
+                window.open(url,'_blank');
+                showToast(`Descargando: ${nombre}`,'📥');
+                setTimeout(()=>{btn.classList.remove('success');btn.innerHTML='⬇️ Descargar Ahora';},3000);
+            },800);
+        }
+
+        function showToast(message,icon='✅'){
+            const toast=document.getElementById('toast');
+            const toastIcon=document.getElementById('toast-icon');
+            const toastMessage=document.getElementById('toast-message');
+            toastIcon.textContent=icon;
+            toastMessage.textContent=message;
+            toast.classList.add('show');
+            setTimeout(()=>{toast.classList.remove('show');},3000);
+        }
+
+        function trackClick(producto){
+            console.log('Click en producto:',producto);
+        }
+
+        function scrollToTop(){
+            window.scrollTo({top:0,behavior:'smooth'});
+        }
+
+        function animateStats(){
+            const stats=document.querySelectorAll('.stat-number');
+            const observer=new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{
+                    if(entry.isIntersecting){
+                        const el=entry.target;
+                        const target=parseInt(el.getAttribute('data-target'));
+                        const duration=2000;
+                        const start=performance.now();
+                        const animate=(now)=>{
+                            const progress=Math.min((now-start)/duration,1);
+                            const easeOut=1-Math.pow(1-progress,3);
+                            const current=Math.round(easeOut*target);
+                            el.textContent=current>=1000?(current/1000).toFixed(current>=10000?0:1)+'k':current;
+                            if(progress<1)requestAnimationFrame(animate);
+                        };
+                        requestAnimationFrame(animate);
+                        observer.unobserve(el);
+                    }
+                });
+            },{threshold:.5});
+            stats.forEach(stat=>observer.observe(stat));
+        }
+
+        function lazyLoadCards(){
+            const cards=document.querySelectorAll('.lazy-load');
+            const observer=new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('loaded');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },{threshold:.1});
+            cards.forEach(card=>observer.observe(card));
+        }
+
+        function handleScrollTop(){
+            const btn=document.querySelector('.scroll-top');
+            window.addEventListener('scroll',()=>{
+                if(window.scrollY>500){btn.classList.add('visible');}
+                else{btn.classList.remove('visible');}
+            });
+        }
+
+        function pauseOffscreenVideos(){
+            const videos=document.querySelectorAll('video');
+            const observer=new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{
+                    const video=entry.target;
+                    if(entry.isIntersecting && video.paused){
+                        video.play().catch(()=>{});
+                    }else if(!entry.isIntersecting && !video.paused){
+                        video.pause();
+                    }
+                });
+            },{threshold:.1});
+            videos.forEach(v=>observer.observe(v));
+        }
+
+        document.addEventListener('DOMContentLoaded',()=>{
+            renderProductos();
+            renderLibros();
+            animateStats();
+            lazyLoadCards();
+            handleScrollTop();
+            setTimeout(pauseOffscreenVideos, 1000);
+            
+            document.querySelectorAll('a[href^="#"]').forEach(a=>{
+                a.addEventListener('click',e=>{
+                    e.preventDefault();
+                    const destino=document.querySelector(a.getAttribute('href'));
+                    if(destino){
+                        const offset=destino.offsetTop-80;
+                        window.scrollTo({top:offset,behavior:'smooth'});
+                    }
+                });
+            });
+
+            document.addEventListener('keydown',(e)=>{
+                if(e.key==='Escape'){
+                    document.querySelectorAll('video').forEach(v=>{v.muted=true;});
+                    document.querySelectorAll('.sound-icon').forEach(i=>{i.textContent='🔇';i.style.background='rgba(255,255,255,.15)';i.style.color='#fff';});
+                }
+            });
+        });
+    </script>
+</body>
+</html>
