@@ -411,8 +411,7 @@
             toast.classList.add('show');
             setTimeout(()=>{toast.classList.remove('show');},3000);
         }
-
-        function trackClick(producto){
+function trackClick(producto){
             console.log('Click en producto:',producto);
         }
 
@@ -473,7 +472,8 @@
             handleScrollTop();
             observarVideos();
             
-            document.querySelectorAll('a[href^="#"]').forEacha.addEventListener('click',e=>{
+            document.querySelectorAll('a[href^="#"]').forEach(a=>{
+                a.addEventListener('click',e=>{
                     e.preventDefault();
                     const destino=document.querySelector(a.getAttribute('href'));
                     if(destino){
