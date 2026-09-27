@@ -61,6 +61,10 @@ section{max-width:1200px;margin:0 auto;padding:3rem 1.2rem}
 .price em{font-style:normal;background:rgba(25,211,138,.15);color:var(--ok);font-size:.75rem;font-weight:700;padding:.2rem .55rem;border-radius:999px}
 .body .btn{margin-top:auto}
 small.n{color:var(--mu);font-size:.72rem;text-align:center}
+.cover-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem;gap:.6rem;background:linear-gradient(150deg,#232f3e,#0d1420)}
+.cover-fallback span{font-size:2.4rem}
+.cover-fallback b{color:#fff;font-size:1rem;font-weight:700;line-height:1.3}
+.cover-fallback small{color:#9aa3b0;font-size:.72rem}
 footer{border-top:1px solid var(--bd);text-align:center;padding:3rem 1.2rem calc(3rem + env(safe-area-inset-bottom));color:var(--mu);font-size:.85rem}
 footer p{max-width:620px;margin:.8rem auto}
 footer .row a{padding:.5rem 1rem;border:1px solid var(--bd);border-radius:999px;color:var(--tx)}
@@ -101,22 +105,25 @@ const $=s=>document.querySelector(s);
 const C='dgdw8fbku';
 const vid=id=>`https://res.cloudinary.com/${C}/video/upload/q_auto,f_mp4/${id}`;
 const pos=id=>`https://res.cloudinary.com/${C}/video/upload/so_1,w_480,h_600,c_fill,q_auto/${id}.jpg`;
-const img=id=>`https://res.cloudinary.com/${C}/image/upload/q_auto/${id}`;
+const imgc=id=>`https://res.cloudinary.com/${C}/image/upload/q_auto/${id}`;
 
-const productos=[
-  {nombre:'Galaxy Watch Ultra',etiqueta:'🔥 Nuevo',antes:12999,ahora:8999,video:'Samsung_Galaxy_Watch_Ultra_rbrkd0',enlace:'https://meli.la/1gMTZhz'},
-  {nombre:'Nautica Voyage',etiqueta:'🌊 Top',antes:599,ahora:299,video:'Nautica_voyage_eau_de_toilette_trending_unboxing_bestmensfragrance_parfumrecommended_fragrance_rALDtQpyUXU_l1zz6m',enlace:'https://meli.la/2wumBgh'},
-  {nombre:'Samsung S25 FE',etiqueta:'⚡ Flash',antes:13999,ahora:8999,video:'Samsung_Galaxy_S25_FE_ggualp',enlace:'https://meli.la/2mA4qCh'},
-  {nombre:'Moto Edge 50 Pro',etiqueta:'💎 Premium',antes:12999,ahora:7999,video:'Motorola_Edición_Premium_nouj95',enlace:'https://meli.la/23KvNjV'},
-  {nombre:'Pistola Masaje Xiaomi',etiqueta:'💆 Destacado',antes:899,ahora:299,video:'Pistola_masaje_Xiaomi_me_encanta_️_Ij6vVKFiEKY_oz5c9x',enlace:'https://meli.la/1FfMYZi'},
-  {nombre:'Reloj Curren 8402',etiqueta:'⌚ Lujo',antes:1299,ahora:599,video:'reloj_curren_8402_tzmw3l',enlace:'https://meli.la/1wiPMys'},
-  {nombre:'Espejo LED',etiqueta:'✨ LED',antes:899,ahora:550,video:'espejo2_nwhn93',enlace:'https://meli.la/1kYoTt1'},
-  {nombre:'Cámara WiFi 360°',etiqueta:'🏠 Seguridad',antes:1599,ahora:899,video:'camara_de_seguridad_2_uk1o5b',enlace:'https://meli.la/29JngVu'},
-  {nombre:'Taladro Miwod 21V',etiqueta:'🔧 Herramientas',antes:1299,ahora:599,video:'taladro1_yyp5nz',enlace:'https://meli.la/1XwiFN1'},
-  {nombre:'Carpa Styrka 3x3',etiqueta:'⛺ Outdoor',antes:1950,ahora:799,video:'Toldo_Plegable_3x3_Aleman_-_Vanlig_-_Exterior_IQZVxYT0IBg_1_hldbyk',enlace:'https://meli.la/31DDvzp'},
-  {nombre:'Producto Naranja',etiqueta:'🍊 Oferta',antes:2999,ahora:2036,video:'3_naranja_ddfajm',enlace:'https://meli.la/1eMktrC'},
-  {nombre:'Cargador GaN 20W',etiqueta:'⚡ Carga',antes:98,ahora:69,imagen:'D_Q_NP_880828-MLA100062693161_122025-O.webp',enlace:'https://meli.la/1WTtdAw'}
-];
+const SUPABASE_URL='https://pnjglzuxsyahxcbgjwvq.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuamdsenV4c3lhaHhjYmdqd3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1NjI0ODcsImV4cCI6MjA5NzEzODQ4N30.iD-yLgcC5GiGWQseAykLnONTCr1qA7kXSWgqVQ3-gfM';
+
+async function cargarProductos(){
+  try{
+    const r=await fetch(`${SUPABASE_URL}/rest/v1/tienda_productos?select=*&activo=eq.true&order=orden.asc`,{
+      headers:{apikey:SUPABASE_KEY, Authorization:`Bearer ${SUPABASE_KEY}`}
+    });
+    const filas=await r.json();
+    return filas.map(p=>({
+      nombre:p.nombre, etiqueta:p.etiqueta, antes:Number(p.precio_antes)||0, ahora:Number(p.precio_ahora),
+      enlace:p.enlace, video:p.video_cloudinary,
+      imagenBase64:p.imagen_tipo==='base64'?p.imagen:null,
+      imagenUrl:(p.imagen_tipo==='url')?p.imagen:null
+    }));
+  }catch(e){return []}
+}
 
 const libros=[
   {nombre:'El León Valiente',video:'Cuento_1_El_Leon_Happy_jujtwm',pdf:'https://drive.google.com/uc?export=download&id=1HrFakhKIwAXAYs7zNZMFpDrx7h2YSCqT',desc:'Un cuento sobre coraje y amistad para enfrentar los miedos.'},
@@ -126,32 +133,39 @@ const libros=[
 ];
 
 const misLibros=[
-  {grupo:'ninos',nombre:'Little Artists: Safari of Colors',desc:'Libro de colorear con ilustraciones grandes de animales, para niños de 3 a 5 años.',formatos:[{tipo:'Pasta blanda',precio:6.50,asin:'B0GJ54G774'}],img:'IMG_LITTLE_ARTISTS'},
-  {grupo:'ninos',nombre:'Mi libro de colorear: preescolar',desc:'Dibujos grandes y sencillos para desarrollar la creatividad y motricidad fina, 3 a 5 años.',formatos:[{tipo:'Pasta blanda',precio:8.50,asin:'B0GFGWVHPW'}],img:'IMG_MI_LIBRO_COLOREAR'},
+  {grupo:'ninos',nombre:'Little Artists: Safari of Colors',desc:'Libro de colorear con ilustraciones grandes de animales, para niños de 3 a 5 años.',formatos:[{tipo:'Pasta blanda',precio:6.50,asin:'B0GJ54G774'}],img:''},
+  {grupo:'ninos',nombre:'Mi libro de colorear: preescolar',desc:'Dibujos grandes y sencillos para desarrollar la creatividad y motricidad fina, 3 a 5 años.',formatos:[{tipo:'Pasta blanda',precio:8.50,asin:'B0GFGWVHPW'}],img:''},
   {grupo:'adultos',nombre:'The Echo of Your Voice',desc:'La verdad escondida en las cartas.',formatos:[{tipo:'Kindle eBook',precio:0.99,asin:'B0GHZVH4R8'}]},
   {grupo:'adultos',nombre:'Bonds of Gold and Blood',desc:'El precio del legado.',formatos:[{tipo:'Kindle eBook',precio:3.99,asin:'B0GHSLSSCF'},{tipo:'Pasta blanda',precio:10.00,asin:'B0GHVNL4YQ'}]}
 ];
 
-const media=(m,id)=>m.imagen
-  ?`<img class="pr" src="${img(m.imagen)}" alt="${m.nombre}" loading="lazy">`
-  :`<video id="${id}" muted loop playsinline preload="none" poster="${pos(m.video)}" data-src="${vid(m.video)}"></video><button class="snd" data-v="${id}" aria-label="Activar sonido">🔇</button>`;
+function mediaProducto(p,id){
+  if(p.imagenBase64) return `<img class="pr" src="${p.imagenBase64}" alt="${p.nombre}" loading="lazy">`;
+  if(p.imagenUrl) return `<img class="pr" src="${p.imagenUrl}" alt="${p.nombre}" loading="lazy">`;
+  if(p.video) return `<video id="${id}" muted loop playsinline preload="none" poster="${pos(p.video)}" data-src="${vid(p.video)}"></video><button class="snd" data-v="${id}" aria-label="Activar sonido">🔇</button>`;
+  return `<div class="cover-fallback"><span>🛒</span><b>${p.nombre}</b><small>Mercado Libre</small></div>`;
+}
+
+const mediaLibro=(m,id)=>`<video id="${id}" muted loop playsinline preload="none" poster="${pos(m.video)}" data-src="${vid(m.video)}"></video><button class="snd" data-v="${id}" aria-label="Activar sonido">🔇</button>`;
 
 function renderLibroAutor(l){
   const botones=l.formatos.map(f=>`<a class="btn az" href="https://www.amazon.com/dp/${f.asin}" target="_blank" rel="noopener noreferrer">${f.tipo} · $${f.precio.toFixed(2)}</a>`).join('');
-  const portada=l.img?`<img src="${l.img}" alt="${l.nombre}" style="width:100%;height:100%;object-fit:cover">`:'📘';
+  const portada=l.img?`<img src="${l.img}" alt="${l.nombre}" style="width:100%;height:100%;object-fit:cover">`:`<div class="cover-fallback"><span>📘</span><b>${l.nombre}</b><small>Amazon</small></div>`;
   return `<article class="card in"><div class="media ph">${portada}</div><div class="body"><h3>${l.nombre}</h3><p>${l.desc}</p>${botones}</div></article>`;
 }
 
-function render(){
+async function render(){
+  const productos=await cargarProductos();
+
   $('#g-prod').innerHTML=productos.map((p,i)=>{
     const pct=p.antes>p.ahora?Math.round((1-p.ahora/p.antes)*100):0;
-    return `<article class="card"><div class="media"><span class="chip">${p.etiqueta||''}</span>${media(p,'v'+i)}</div>
+    return `<article class="card"><div class="media"><span class="chip">${p.etiqueta||''}</span>${mediaProducto(p,'v'+i)}</div>
     <div class="body"><h3>${p.nombre}</h3>
     <div class="price">${pct?`<s>$${p.antes.toLocaleString('es-MX')}</s>`:''}<strong>$${p.ahora.toLocaleString('es-MX')}</strong>${pct?`<em>-${pct}%</em>`:''}</div>
     <a class="btn ml" href="${p.enlace}" target="_blank" rel="sponsored noopener noreferrer">Ver en Mercado Libre →</a>
     <small class="n">Precio de referencia; puede cambiar.</small></div></article>`}).join('');
 
-  $('#g-lib').innerHTML=libros.map((l,i)=>`<article class="card"><div class="media"><span class="chip g">GRATIS</span>${media(l,'b'+i)}</div>
+  $('#g-lib').innerHTML=libros.map((l,i)=>`<article class="card"><div class="media"><span class="chip g">GRATIS</span>${mediaLibro(l,'b'+i)}</div>
     <div class="body"><h3>${l.nombre}</h3><p>${l.desc}</p>
     <a class="btn p w" href="${l.pdf}" target="_blank" rel="noopener noreferrer">⬇️ Descargar PDF</a></div></article>`).join('');
 
