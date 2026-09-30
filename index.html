@@ -132,12 +132,23 @@ const libros=[
   {nombre:'Mi Familia',video:'familia_ed04bv',pdf:'https://drive.google.com/uc?export=download&id=1VB9QTiTt6ryejlSFLwEqWwollQGNgHkD',desc:'Celebra el amor familiar y los lazos que nos unen.'}
 ];
 
-const misLibros=[
+const misLibrosRespaldo=[
   {grupo:'ninos',nombre:'Little Artists: Safari of Colors',desc:'Libro de colorear con ilustraciones grandes de animales, para niños de 3 a 5 años.',formatos:[{tipo:'Pasta blanda',precio:6.50,asin:'B0GJ54G774'}],img:''},
   {grupo:'ninos',nombre:'Mi libro de colorear: preescolar',desc:'Dibujos grandes y sencillos para desarrollar la creatividad y motricidad fina, 3 a 5 años.',formatos:[{tipo:'Pasta blanda',precio:8.50,asin:'B0GFGWVHPW'}],img:''},
   {grupo:'adultos',nombre:'The Echo of Your Voice',desc:'La verdad escondida en las cartas.',formatos:[{tipo:'Kindle eBook',precio:0.99,asin:'B0GHZVH4R8'}]},
   {grupo:'adultos',nombre:'Bonds of Gold and Blood',desc:'El precio del legado.',formatos:[{tipo:'Kindle eBook',precio:3.99,asin:'B0GHSLSSCF'},{tipo:'Pasta blanda',precio:10.00,asin:'B0GHVNL4YQ'}]}
 ];
+
+async function cargarLibrosAutor(){
+  try{
+    const r=await fetch(`${SUPABASE_URL}/rest/v1/tienda_libros_autor?select=*&activo=eq.true&order=orden.asc`,{
+      headers:{apikey:SUPABASE_KEY, Authorization:`Bearer ${SUPABASE_KEY}`}
+    });
+    const f=await r.json();
+    if(!Array.isArray(f)||!f.length) return misLibrosRespaldo;
+    return f.map(l=>({grupo:l.grupo,nombre:l.nombre,desc:l.descripcion,formatos:l.formatos,img:l.imagen||''}));
+  }catch(e){return misLibrosRespaldo}
+}
 
 function mediaProducto(p,id){
   if(p.imagenBase64) return `<img class="pr" src="${p.imagenBase64}" alt="${p.nombre}" loading="lazy">`;
@@ -149,13 +160,13 @@ function mediaProducto(p,id){
 const mediaLibro=(m,id)=>`<video id="${id}" muted loop playsinline preload="none" poster="${pos(m.video)}" data-src="${vid(m.video)}"></video><button class="snd" data-v="${id}" aria-label="Activar sonido">🔇</button>`;
 
 function renderLibroAutor(l){
-  const botones=l.formatos.map(f=>`<a class="btn az" href="https://www.amazon.com/dp/${f.asin}" target="_blank" rel="noopener noreferrer">${f.tipo} · $${f.precio.toFixed(2)}</a>`).join('');
+  const botones=l.formatos.map(f=>`<a class="btn az" href="https://www.amazon.com/dp/${f.asin}" target="_blank" rel="noopener noreferrer">${f.tipo} · $${Number(f.precio).toFixed(2)}</a>`).join('');
   const portada=l.img?`<img src="${l.img}" alt="${l.nombre}" style="width:100%;height:100%;object-fit:cover">`:`<div class="cover-fallback"><span>📘</span><b>${l.nombre}</b><small>Amazon</small></div>`;
   return `<article class="card in"><div class="media ph">${portada}</div><div class="body"><h3>${l.nombre}</h3><p>${l.desc}</p>${botones}</div></article>`;
 }
 
 async function render(){
-  const productos=await cargarProductos();
+  const [productos,misLibros]=await Promise.all([cargarProductos(),cargarLibrosAutor()]);
 
   $('#g-prod').innerHTML=productos.map((p,i)=>{
     const pct=p.antes>p.ahora?Math.round((1-p.ahora/p.antes)*100):0;
