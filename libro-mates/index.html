@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mi cuaderno de matemáticas · 1.º de primaria</title>
+<meta name="description" content="Cuaderno de matemáticas para primer grado de primaria: hojas para contar, sumar, restar y practicar, listas para imprimir.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--tx:#1f2430;--mu:#5b6275;--c1:#ff7a59;--c2:#3b82f6;--c3:#22b573;--c4:#ffc83d;--bg:#fff6e8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Baloo 2",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--tx);line-height:1.4}
+.barra{position:sticky;top:0;z-index:10;display:flex;gap:.8rem;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:.7rem 1rem;background:#fff;border-bottom:3px solid var(--c4)}
+.barra b{font-size:1.1rem}
+.barra span{color:var(--mu);font-size:.9rem}
+.barra button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.55rem 1.1rem;background:var(--c2);color:#fff;cursor:pointer}
+main{padding:1rem .6rem 3rem}
+.hoja{max-width:8.5in;margin:1rem auto;background:#fff;border:3px solid var(--tx);border-radius:18px;padding:1.2rem 1.3rem 1.4rem}
+.cab{display:flex;align-items:center;gap:.8rem;border-bottom:3px dashed var(--c1);padding-bottom:.6rem;margin-bottom:.7rem}
+.num{background:var(--c1);color:#fff;font-weight:800;border-radius:999px;padding:.15rem .8rem;white-space:nowrap}
+.cab h2{font-size:clamp(1.3rem,4.4vw,1.8rem);line-height:1.15}
+.datos{display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:.8rem;font-weight:700}
+.datos span{flex:1;min-width:140px;border-bottom:2px solid var(--tx);padding-bottom:.1rem}
+.sec{margin-bottom:1rem}
+.sec h3{font-size:1.1rem;margin-bottom:.5rem;display:flex;gap:.5rem;align-items:flex-start}
+.sec h3 i{font-style:normal;background:var(--c3);color:#fff;border-radius:50%;width:1.7rem;height:1.7rem;flex:none;display:grid;place-items:center;font-size:.95rem}
+.ejs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.7rem}
+.ej{border:2.5px solid var(--tx);border-radius:14px;padding:.6rem .7rem;display:flex;flex-direction:column;gap:.45rem;break-inside:avoid}
+.ej p{font-size:.98rem}
+.fila{display:flex;flex-wrap:wrap;gap:.1rem .15rem;align-items:center;font-size:1.55rem;line-height:1.15}
+.it{display:inline-block;position:relative}
+.quitar{opacity:.4}
+.quitar::after{content:"✖";position:absolute;inset:0;display:grid;place-items:center;color:#d6001c;font-size:1.1em;opacity:1}
+.op{font-weight:800;font-size:1.7rem;margin:0 .35rem}
+.sep{display:inline-block;width:1rem}
+.moneda{display:inline-grid;place-items:center;width:2.1rem;height:2.1rem;border-radius:50%;border:2.5px solid #8a6a00;background:#ffd95e;font-weight:800;font-size:1rem}
+.resp{margin-top:auto;display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem}
+.caja{display:inline-block;width:3.2rem;height:2.4rem;border:2.5px solid var(--tx);border-radius:10px}
+.linea{display:inline-block;flex:1;min-width:4rem;border-bottom:2.5px solid var(--tx);height:1.5rem}
+.cierre{margin-top:.6rem;text-align:center;font-weight:800;font-size:1.15rem;color:var(--c3)}
+.portada{text-align:center;padding:2.2rem 1.2rem;border-color:var(--c2)}
+.portada .gran{font-size:4.2rem;line-height:1.1}
+.portada h1{font-size:clamp(2rem,8vw,3rem);line-height:1.05;margin:.6rem 0;color:var(--c1)}
+.portada p{font-size:1.2rem;color:var(--mu);margin-bottom:1.6rem}
+.clave h2{margin-bottom:.4rem}
+.clave p{margin:.25rem 0;font-size:.95rem}
+.aviso{max-width:8.5in;margin:2rem auto;text-align:center;color:var(--mu)}
+@page{size:letter;margin:10mm}
+@media print{
+  body{background:#fff}
+  .barra{display:none}
+  main{padding:0}
+  .hoja{margin:0;max-width:none;border:2.5px solid var(--tx);border-radius:14px;break-after:page;page-break-after:always;min-height:240mm}
+  .clave{break-after:auto}
+  .ej{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="barra"><b>📘 Mi cuaderno de matemáticas</b><span id="estado">Cargando…</span><button type="button" onclick="window.print()">🖨️ Imprimir o guardar PDF</button></div>
+<main id="libro"></main>
+<script>
+const URL_SB='https://pnjglzuxsyahxcbgjwvq.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuamdsenV4c3lhaHhjYmdqd3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1NjI0ODcsImV4cCI6MjA5NzEzODQ4N30.iD-yLgcC5GiGWQseAykLnONTCr1qA7kXSWgqVQ3-gfM';
+const LIBRO='matematicas-1o';
+
+const quitar=s=>String(s==null?'':s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const EMOJI=[
+['manzana','🍎'],['estrella','⭐'],['galleta','🍪'],['patito','🐥'],['pollito','🐥'],['pollo','🐥'],['pato','🦆'],['cerdito','🐷'],['cerdo','🐷'],['vaquita','🐮'],['vaca','🐮'],
+['lapiz','✏️'],['lapice','✏️'],['flor','🌸'],['pelota','⚽'],['balon','⚽'],['globo','🎈'],['mariposa','🦋'],['pez','🐟'],['peces','🐟'],['pescado','🐟'],
+['gato','🐱'],['gatito','🐱'],['perro','🐶'],['perrito','🐶'],['carro','🚗'],['coche','🚗'],['auto','🚗'],['huevo','🥚'],['naranja','🍊'],['platano','🍌'],['banana','🍌'],
+['corazon','❤️'],['circulo','🔴'],['cuadrado','🟦'],['triangulo','🔺'],['rectangulo','🟩'],['dulce','🍬'],['caramelo','🍬'],['paleta','🍭'],['libro','📘'],['cuaderno','📒'],
+['conejo','🐰'],['abeja','🐝'],['arbol','🌳'],['sol','☀️'],['luna','🌙'],['casa','🏠'],['pastel','🍰'],['helado','🍦'],['uva','🍇'],['fresa','🍓'],['pera','🍐'],['limon','🍋'],
+['tortuga','🐢'],['rana','🐸'],['raton','🐭'],['caballo','🐴'],['oveja','🐑'],['gallina','🐔'],['pajaro','🐦'],['pajarito','🐦'],['hoja','🍃'],['nube','☁️'],['gota','💧'],
+['bicicleta','🚲'],['juguete','🧸'],['osito','🧸'],['oso','🐻'],['taco','🌮'],['pan','🍞'],['tortilla','🫓'],['mango','🥭'],['sandia','🍉'],['aguacate','🥑'],['zanahoria','🥕'],
+['caracol','🐌'],['cangrejo','🦀'],['elefante','🐘'],['leon','🦁'],['mono','🐵'],['jirafa','🦒'],['crayola','🖍️'],['color','🖍️'],['regalo','🎁'],['vaso','🥛'],['manzanas','🍎']
+];
+const STOP=new Set(['a','de','del','en','y','o','mas','menos','por','con','la','las','el','los','un','una','que','al','se','pesos','peso','veces','cada','hay','son']);
+
+function emojiDe(palabra){
+  const p=quitar(palabra);
+  if(!p||STOP.has(p)) return null;
+  for(const [k,e] of EMOJI){ if(p===k||p.startsWith(k)&&p.length<=k.length+3) return e; }
+  return null;
+}
+const NUMEROS={un:1,una:1,uno:1,dos:2,tres:3,cuatro:4,cinco:5,seis:6,siete:7,ocho:8,nueve:9,diez:10};
+function grupos(texto){
+  const out=[];
+  const re=/(\d+|\bun\b|\buna\b|\buno\b|\bdos\b|\btres\b|\bcuatro\b|\bcinco\b|\bseis\b|\bsiete\b|\bocho\b|\bnueve\b|\bdiez\b)\s+(?:de\s+)?([a-záéíóúñü]+)(?:\s+([a-záéíóúñü]+))?/gi;
+  let m;
+  while((m=re.exec(texto||''))){
+    let e=emojiDe(m[2]);
+    if(!e&&m[3]) e=emojiDe(m[3]);
+    const n=/^\d+$/.test(m[1])?Number(m[1]):NUMEROS[quitar(m[1])];
+    if(e&&n) out.push({n:Math.min(n,30),e});
+  }
+  return out;
+}
+function rep(em,n,cls){
+  n=Math.max(0,Math.min(Number(n)||0,30));
+  let s='';
+  for(let i=0;i<n;i++) s+=`<span class="it${cls?' '+cls:''}">${em}</span>`;
+  return s;
+}
+function monedas(texto){
+  const re=/(\d+)\s+monedas?\s+de\s+\$?\s*(\d+)/gi;
+  let m,html='',hay=false;
+  while((m=re.exec(texto||''))){
+    hay=true;
+    const n=Math.min(Number(m[1]),20);
+    for(let i=0;i<n;i++) html+=`<span class="moneda">${esc(m[2])}</span>`;
+    html+='<span class="sep"></span>';
+  }
+  return hay?`<div class="fila">${html}</div>`:'';
+}
+function reloj(h){
+  h=((Number(h)%12)||12);
+  const ang=(h%12)*30;
+  const marcas=Array.from({length:12},(_,i)=>{
+    const a=i*30*Math.PI/180;
+    return `<line x1="${50+38*Math.sin(a)}" y1="${50-38*Math.cos(a)}" x2="${50+44*Math.sin(a)}" y2="${50-44*Math.cos(a)}" stroke="#1f2430" stroke-width="2.5"/>`;
+  }).join('');
+  const nums=[12,3,6,9].map((n,i)=>{
+    const a=i*90*Math.PI/180;
+    return `<text x="${50+30*Math.sin(a)}" y="${50-30*Math.cos(a)+4}" text-anchor="middle" font-size="11" font-weight="800" fill="#1f2430">${n}</text>`;
+  }).join('');
+  const hr=ang*Math.PI/180;
+  return `<svg viewBox="0 0 100 100" width="110" height="110" role="img" aria-label="Reloj marcando las ${h} en punto"><circle cx="50" cy="50" r="46" fill="#fff" stroke="#1f2430" stroke-width="4"/>${marcas}${nums}<line x1="50" y1="50" x2="${50+22*Math.sin(hr)}" y2="${50-22*Math.cos(hr)}" stroke="#ff7a59" stroke-width="5" stroke-linecap="round"/><line x1="50" y1="50" x2="50" y2="14" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="50" r="3.5" fill="#1f2430"/></svg>`;
+}
+function dibujoHTML(e){
+  const dib=e.dibujo||'';
+  const txt=dib+' '+(e.enunciado||'');
+  if(/reloj|en punto/i.test(txt)){
+    const m=txt.match(/(\d{1,2})\s*(?:en punto|:00)/i)||txt.match(/las\s+(\d{1,2})/i);
+    if(m) return reloj(m[1]);
+  }
+  const mon=monedas(dib);
+  if(mon) return mon;
+  const a=Number(e.a),b=Number(e.b);
+  const aritm=e.a!==null&&e.a!==undefined&&e.b!==null&&e.b!==undefined&&Number.isFinite(a)&&Number.isFinite(b)&&(e.op==='+'||e.op==='-');
+  const gs=grupos(dib);
+  if(aritm){
+    const em=(gs[0]&&gs[0].e)||'⭐';
+    if(e.op==='+') return `<div class="fila">${rep(em,a)}<span class="op">+</span>${rep(em,b)}</div>`;
+    return `<div class="fila">${rep(em,a-b)}${rep(em,b,'quitar')}</div>`;
+  }
+  if(gs.length) return `<div class="fila">${gs.map(g=>rep(g.e,g.n)).join('<span class="sep"></span>')}</div>`;
+  return '';
+}
+function ejercicioHTML(e){
+  const a=Number(e.a),b=Number(e.b);
+  const aritm=e.a!==null&&e.a!==undefined&&e.b!==null&&e.b!==undefined&&Number.isFinite(a)&&Number.isFinite(b)&&(e.op==='+'||e.op==='-');
+  const resp=aritm
+    ? `<div class="resp">${a} ${e.op==='-'?'−':'+'} ${b} = <span class="caja"></span></div>`
+    : `<div class="resp">Respuesta: <span class="linea"></span></div>`;
+  return `<div class="ej"><p>${esc(e.enunciado)}</p>${dibujoHTML(e)}${resp}</div>`;
+}
+function hojaHTML(p){
+  const c=p.contenido||{};
+  const secs=(c.secciones||[]).map((s,i)=>`<section class="sec"><h3><i>${i+1}</i><span>${esc(s.consigna)}</span></h3><div class="ejs">${(s.ejercicios||[]).map(ejercicioHTML).join('')}</div></section>`).join('');
+  return `<article class="hoja"><header class="cab"><span class="num">Hoja ${p.numero}</span><h2>${esc(c.titulo||p.titulo||'')}</h2></header><div class="datos"><span>Nombre:</span><span>Fecha:</span></div>${secs}<div class="cierre">😊 ${esc(c.cierre||'¡Muy bien!')}</div></article>`;
+}
+function portadaHTML(){
+  return `<article class="hoja portada"><div class="gran">🔢 ➕ ➖ ⭐</div><h1>Mi cuaderno de matemáticas</h1><p>Primer grado de primaria</p><div class="datos"><span>Nombre:</span><span>Grupo:</span></div></article>`;
+}
+function claveHTML(paginas){
+  const filas=paginas.map(p=>{
+    const r=p.respuestas||[];
+    const t=r.map((s,i)=>`Sección ${i+1}: ${esc((s||[]).join(', '))}`).join(' · ');
+    return `<p><b>Hoja ${p.numero}.</b> ${t}</p>`;
+  }).join('');
+  return `<article class="hoja clave"><header class="cab"><span class="num">Adulto</span><h2>Clave de respuestas</h2></header>${filas}</article>`;
+}
+async function cargar(){
+  const est=document.getElementById('estado'),cont=document.getElementById('libro');
+  try{
+    const url=`${URL_SB}/rest/v1/libro_paginas?select=numero,titulo,contenido,respuestas&libro=eq.${LIBRO}&order=numero.asc`;
+    const r=await fetch(url,{headers:{apikey:KEY,Authorization:'Bearer '+KEY}});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const filas=(await r.json()).filter(p=>p&&p.contenido);
+    if(!filas.length){est.textContent='Todavía no hay hojas listas';cont.innerHTML='<p class="aviso">Las hojas se están preparando. Vuelve en unos minutos.</p>';return}
+    cont.innerHTML=portadaHTML()+filas.map(hojaHTML).join('')+claveHTML(filas);
+    est.textContent=filas.length+' hojas listas';
+  }catch(e){
+    est.textContent='No se pudo cargar';
+    cont.innerHTML='<p class="aviso">No se pudo cargar el cuaderno. Revisa tu conexión e inténtalo de nuevo.</p>';
+  }
+}
+cargar();
+</script>
+</body>
+</html>
