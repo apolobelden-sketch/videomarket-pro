@@ -15,6 +15,7 @@ body{font-family:"Baloo 2",system-ui,-apple-system,"Segoe UI",sans-serif;backgro
 .barra{position:sticky;top:0;z-index:10;display:flex;gap:.8rem;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:.7rem 1rem;background:#fff;border-bottom:3px solid var(--c4)}
 .barra b{font-size:1.1rem}
 .barra span{color:var(--mu);font-size:.9rem}
+.enlaces{display:flex;gap:.6rem}.enlaces a{color:var(--c2);font-weight:700;text-decoration:none;font-size:.9rem}
 .barra button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.55rem 1.1rem;background:var(--c2);color:#fff;cursor:pointer}
 main{padding:1rem .6rem 3rem}
 .hoja{max-width:8.5in;margin:1rem auto;background:#fff;border:3px solid var(--tx);border-radius:18px;padding:1.2rem 1.3rem 1.4rem}
@@ -59,12 +60,12 @@ main{padding:1rem .6rem 3rem}
 </style>
 </head>
 <body>
-<div class="barra"><b>📘 Mi cuaderno de matemáticas</b><span id="estado">Cargando…</span><button type="button" onclick="window.print()">🖨️ Imprimir o guardar PDF</button></div>
+<div class="barra"><b id="tituloBarra">📘 Mi cuaderno</b><span id="estado">Cargando…</span><span class="enlaces"><a href="?libro=matematicas-1o">🔢 Matemáticas</a><a href="?libro=lectura-1o">📖 Lectura</a></span><button type="button" onclick="window.print()">🖨️ Imprimir o guardar PDF</button></div>
 <main id="libro"></main>
 <script>
 const URL_SB='https://pnjglzuxsyahxcbgjwvq.supabase.co';
 const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuamdsenV4c3lhaHhjYmdqd3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1NjI0ODcsImV4cCI6MjA5NzEzODQ4N30.iD-yLgcC5GiGWQseAykLnONTCr1qA7kXSWgqVQ3-gfM';
-const LIBRO='matematicas-1o';
+const LIBRO=(()=>{const l=new URLSearchParams(location.search).get('libro')||'matematicas-1o';return /^[a-z0-9-]{3,40}$/.test(l)?l:'matematicas-1o'})();
 
 const quitar=s=>String(s==null?'':s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -77,8 +78,15 @@ const EMOJI=[
 ['conejo','🐰'],['abeja','🐝'],['arbol','🌳'],['sol','☀️'],['luna','🌙'],['casa','🏠'],['pastel','🍰'],['helado','🍦'],['uva','🍇'],['fresa','🍓'],['pera','🍐'],['limon','🍋'],
 ['tortuga','🐢'],['rana','🐸'],['raton','🐭'],['caballo','🐴'],['oveja','🐑'],['gallina','🐔'],['pajaro','🐦'],['pajarito','🐦'],['hoja','🍃'],['nube','☁️'],['gota','💧'],
 ['bicicleta','🚲'],['juguete','🧸'],['osito','🧸'],['oso','🐻'],['taco','🌮'],['pan','🍞'],['tortilla','🫓'],['mango','🥭'],['sandia','🍉'],['aguacate','🥑'],['zanahoria','🥕'],
-['caracol','🐌'],['cangrejo','🦀'],['elefante','🐘'],['leon','🦁'],['mono','🐵'],['jirafa','🦒'],['crayola','🖍️'],['color','🖍️'],['regalo','🎁'],['vaso','🥛'],['manzanas','🍎']
-];
+['caracol','🐌'],['cangrejo','🦀'],['elefante','🐘'],['leon','🦁'],['mono','🐵'],['jirafa','🦒'],['crayola','🖍️'],['color','🖍️'],['regalo','🎁'],['vaso','🥛'],
+['arana','🕷️'],['cebra','🦓'],['tigre','🐯'],['zorro','🦊'],['lobo','🐺'],['ballena','🐳'],['serpiente','🐍'],['paloma','🕊️'],['pinguino','🐧'],['pulpo','🐙'],['cocodrilo','🐊'],
+['koala','🐨'],['panda','🐼'],['tiburon','🦈'],['delfin','🐬'],['pavo','🦃'],['hormiga','🐜'],['buho','🦉'],['pina','🍍'],['cereza','🍒'],['durazno','🍑'],['tomate','🍅'],['maiz','🌽'],
+['queso','🧀'],['sopa','🍲'],['pizza','🍕'],['hamburguesa','🍔'],['papa','🥔'],['cebolla','🧅'],['cama','🛏️'],['puerta','🚪'],['tijeras','✂️'],['llave','🔑'],['reloj','⏰'],['foco','💡'],
+['tren','🚂'],['avion','✈️'],['barco','⛵'],['camion','🚚'],['autobus','🚌'],['moto','🏍️'],['zapato','👟'],['gorra','🧢'],['sombrero','👒'],['camisa','👕'],['calcetin','🧦'],['mochila','🎒'],
+['paraguas','☂️'],['telefono','📞'],['tambor','🥁'],['guitarra','🎸'],['corona','👑'],['anillo','💍'],['vela','🕯️'],['jabon','🧼'],['escoba','🧹'],['taza','☕'],['cuchara','🥄'],
+['iglesia','⛪'],['mano','✋'],['ojo','👁️'],['oreja','👂'],['nariz','👃'],['boca','👄'],['pie','🦶'],['diente','🦷'],['rosa','🌹'],['montana','⛰️'],['volcan','🌋'],['fuego','🔥'],
+['nieve','❄️'],['lluvia','🌧️'],['arcoiris','🌈'],['hongo','🍄'],['dado','🎲'],['silla','🪑']
+].sort((a,b)=>b[0].length-a[0].length);
 const STOP=new Set(['a','de','del','en','y','o','mas','menos','por','con','la','las','el','los','un','una','que','al','se','pesos','peso','veces','cada','hay','son']);
 
 function emojiDe(palabra){
@@ -164,8 +172,9 @@ function hojaHTML(p){
   const secs=(c.secciones||[]).map((s,i)=>`<section class="sec"><h3><i>${i+1}</i><span>${esc(s.consigna)}</span></h3><div class="ejs">${(s.ejercicios||[]).map(ejercicioHTML).join('')}</div></section>`).join('');
   return `<article class="hoja"><header class="cab"><span class="num">Hoja ${p.numero}</span><h2>${esc(c.titulo||p.titulo||'')}</h2></header><div class="datos"><span>Nombre:</span><span>Fecha:</span></div>${secs}<div class="cierre">😊 ${esc(c.cierre||'¡Muy bien!')}</div></article>`;
 }
-function portadaHTML(){
-  return `<article class="hoja portada"><div class="gran">🔢 ➕ ➖ ⭐</div><h1>Mi cuaderno de matemáticas</h1><p>Primer grado de primaria</p><div class="datos"><span>Nombre:</span><span>Grupo:</span></div></article>`;
+function portadaHTML(info){
+  const i=info||{};
+  return `<article class="hoja portada"><div class="gran">${esc(i.emoji_portada||'📘 ⭐')}</div><h1>${esc(i.titulo||'Mi cuaderno')}</h1><p>${esc(i.subtitulo||'Primer grado de primaria')}</p><div class="datos"><span>Nombre:</span><span>Grupo:</span></div></article>`;
 }
 function claveHTML(paginas){
   const filas=paginas.map(p=>{
@@ -177,13 +186,18 @@ function claveHTML(paginas){
 }
 async function cargar(){
   const est=document.getElementById('estado'),cont=document.getElementById('libro');
+  const cab={apikey:KEY,Authorization:'Bearer '+KEY};
   try{
-    const url=`${URL_SB}/rest/v1/libro_paginas?select=numero,titulo,contenido,respuestas&libro=eq.${LIBRO}&order=numero.asc`;
-    const r=await fetch(url,{headers:{apikey:KEY,Authorization:'Bearer '+KEY}});
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    const filas=(await r.json()).filter(p=>p&&p.contenido);
+    const urlP=`${URL_SB}/rest/v1/libro_paginas?select=numero,titulo,contenido,respuestas&libro=eq.${LIBRO}&order=numero.asc`;
+    const urlI=`${URL_SB}/rest/v1/libro_info?select=titulo,subtitulo,emoji_portada&libro=eq.${LIBRO}`;
+    const [rp,ri]=await Promise.all([fetch(urlP,{headers:cab}),fetch(urlI,{headers:cab}).catch(()=>null)]);
+    if(!rp.ok) throw new Error('HTTP '+rp.status);
+    let info=null;
+    try{ if(ri&&ri.ok){const a=await ri.json(); info=a&&a[0]||null} }catch(e){}
+    if(info&&info.titulo){document.title=info.titulo+' · 1.º de primaria';document.getElementById('tituloBarra').textContent=(info.emoji_portada?info.emoji_portada.split(' ')[0]+' ':'')+info.titulo}
+    const filas=(await rp.json()).filter(p=>p&&p.contenido);
     if(!filas.length){est.textContent='Todavía no hay hojas listas';cont.innerHTML='<p class="aviso">Las hojas se están preparando. Vuelve en unos minutos.</p>';return}
-    cont.innerHTML=portadaHTML()+filas.map(hojaHTML).join('')+claveHTML(filas);
+    cont.innerHTML=portadaHTML(info)+filas.map(hojaHTML).join('')+claveHTML(filas);
     est.textContent=filas.length+' hojas listas';
   }catch(e){
     est.textContent='No se pudo cargar';
