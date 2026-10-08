@@ -7,13 +7,18 @@
 <meta name="description" content="Libro de colorear de animales para niños, gratis, en PDF para ver o imprimir.">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#fff6e8;color:#1f2430;line-height:1.5;min-height:100vh;display:grid;place-items:center;padding:1rem}
-main{max-width:520px;background:#fff;border:3px solid #1f2430;border-radius:20px;padding:1.6rem;text-align:center}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#fff6e8;color:#1f2430;line-height:1.5;padding:1rem}
+main{max-width:640px;margin:0 auto;background:#fff;border:3px solid #1f2430;border-radius:20px;padding:1.6rem;text-align:center}
 .emo{font-size:3.4rem;line-height:1.1}
 h1{font-size:1.7rem;line-height:1.15;margin:.5rem 0;color:#ff7a59}
 p{color:#5b6275;margin:.5rem 0}
 .btn{display:block;margin:1rem 0 .4rem;padding:.9rem 1.2rem;border-radius:999px;background:#3b82f6;color:#fff;font-weight:700;text-decoration:none;font-size:1.05rem}
 .sec{background:#fff;color:#3b82f6;border:2.5px solid #3b82f6}
+h2{font-size:1.1rem;margin-top:1.4rem}
+#vista{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-top:.8rem}
+#vista figure{border:2.5px solid #1f2430;border-radius:12px;overflow:hidden;background:#fff}
+#vista canvas{display:block;width:100%;height:auto}
+#vistaEstado{font-size:.9rem;color:#5b6275}
 small{display:block;margin-top:1rem;color:#5b6275}
 </style>
 </head>
@@ -22,10 +27,40 @@ small{display:block;margin-top:1rem;color:#5b6275}
 <div class="emo">🦆 🐮 🐱 🐘</div>
 <h1>Libro de colorear: animales</h1>
 <p>28 dibujos de animales para colorear. Gratis, para ver en pantalla o imprimir.</p>
-<a class="btn" href="https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/colorear/libro-de-colorear-animales.pdf" target="_blank" rel="noopener">📄 Abrir el libro (PDF)</a>
+<h2>Mira cómo son los dibujos</h2>
+<p id="vistaEstado">Cargando las primeras 4 páginas…</p>
+<div id="vista"></div>
+<a class="btn" href="https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/colorear/libro-de-colorear-animales.pdf" target="_blank" rel="noopener">📄 Abrir el libro completo (PDF)</a>
 <a class="btn sec" href="../libro-mates/?libro=dibujo-1o">✏️ Cuaderno de dibujo y trazos</a>
-<p>Pesa unos 18 MB: si tienes datos móviles, mejor ábrelo con Wi-Fi.</p>
+<p>El libro completo pesa unos 18 MB: si tienes datos móviles, mejor ábrelo con Wi-Fi.</p>
 <small>© Jairo Guizar</small>
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+const URL_PDF='https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/colorear/libro-de-colorear-animales.pdf';
+async function vista(){
+  const cont=document.getElementById('vista'),est=document.getElementById('vistaEstado');
+  try{
+    if(!window.pdfjsLib) throw new Error('sin visor');
+    pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    const pdf=await pdfjsLib.getDocument({url:URL_PDF,disableAutoFetch:true,rangeChunkSize:131072}).promise;
+    const n=Math.min(4,pdf.numPages);
+    for(let i=1;i<=n;i++){
+      const pagina=await pdf.getPage(i);
+      const v0=pagina.getViewport({scale:1});
+      const v=pagina.getViewport({scale:300/v0.width});
+      const c=document.createElement('canvas');
+      c.width=Math.round(v.width);c.height=Math.round(v.height);
+      await pagina.render({canvasContext:c.getContext('2d'),viewport:v}).promise;
+      const fig=document.createElement('figure');
+      fig.appendChild(c);cont.appendChild(fig);
+    }
+    est.textContent='Estas son las primeras '+n+' páginas de '+pdf.numPages+'.';
+  }catch(e){
+    est.textContent='No se pudo cargar la vista previa. Puedes abrir el libro completo con el botón de abajo.';
+  }
+}
+window.addEventListener('load',vista);
+</script>
 </body>
 </html>
