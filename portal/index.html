@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mis apps · Jairo Guizar</title>
+<meta name="description" content="Todas mis apps, cuadernos y libros en un solo lugar.">
+<meta name="theme-color" content="#fff6e8">
+<style>
+:root{--tx:#1f2430;--mu:#5b6275;--c1:#ff7a59;--c2:#3b82f6;--c3:#22b573;--bg:#fff6e8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--tx);line-height:1.5}
+header{text-align:center;padding:2.4rem 1rem 1rem}
+header h1{font-size:clamp(2rem,8vw,3rem);line-height:1.05;color:var(--c1)}
+header p{color:var(--mu);margin-top:.5rem}
+main{max-width:980px;margin:0 auto;padding:1rem 1rem 3rem}
+h2{font-size:1.15rem;margin:1.6rem 0 .7rem;color:var(--c2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.9rem}
+.card{background:#fff;border:3px solid var(--tx);border-radius:18px;padding:1rem;display:flex;flex-direction:column;gap:.45rem}
+.emo{font-size:2.4rem;line-height:1}
+.card h3{font-size:1.05rem;line-height:1.25}
+.card p{color:var(--mu);font-size:.92rem;flex:1}
+.btn{display:block;text-align:center;padding:.65rem 1rem;border-radius:999px;background:var(--c2);color:#fff;font-weight:700;text-decoration:none}
+.btn:active{transform:scale(.98)}
+.nota{text-align:center;color:var(--mu);font-size:.85rem;margin-top:1.5rem}
+footer{text-align:center;color:var(--mu);font-size:.85rem;padding:1.5rem 1rem 2.5rem}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header><h1>Mis apps</h1><p>Cuadernos, libros y herramientas para aprender, en un solo lugar.</p></header>
+<main id="apps"><p class="nota">Cargando…</p></main>
+<footer>© Jairo Guizar</footer>
+<script>
+const URL_SB='https://pnjglzuxsyahxcbgjwvq.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuamdsenV4c3lhaHhjYmdqd3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1NjI0ODcsImV4cCI6MjA5NzEzODQ4N30.iD-yLgcC5GiGWQseAykLnONTCr1qA7kXSWgqVQ3-gfM';
+const BASE='https://apolobelden-sketch.github.io/';
+const RESPALDO=[
+{nombre:'Tienda Premium',descripcion:'Productos seleccionados de Mercado Libre y libros infantiles gratis.',url:BASE+'videomarket-pro/',emoji:'🛒',categoria:'Tienda'},
+{nombre:'Cuaderno de matemáticas',descripcion:'20 hojas de 1.º de primaria para contar, sumar y restar. Listo para imprimir.',url:BASE+'videomarket-pro/libro-mates/',emoji:'🔢',categoria:'Libros y cuadernos'},
+{nombre:'Cuaderno de lectura y escritura',descripcion:'20 hojas de 1.º de primaria con letras, sílabas, palabras y oraciones.',url:BASE+'videomarket-pro/libro-mates/?libro=lectura-1o',emoji:'📖',categoria:'Libros y cuadernos'},
+{nombre:'Cuaderno de dibujo y trazos',descripcion:'20 hojas para repasar trazos, unir puntos, copiar y dibujar.',url:BASE+'videomarket-pro/libro-mates/?libro=dibujo-1o',emoji:'✏️',categoria:'Libros y cuadernos'},
+{nombre:'Libro de colorear: animales',descripcion:'28 dibujos de animales para colorear, gratis y en PDF.',url:BASE+'videomarket-pro/libro-colorear/',emoji:'🦆',categoria:'Libros y cuadernos'},
+{nombre:'Aprende y colorea',descripcion:'Actividades educativas para aprender y colorear.',url:BASE+'Aprende-y-colorea-/',emoji:'🎨',categoria:'Aprender'},
+{nombre:'¿Cómo le hago?',descripcion:'Guías paso a paso para resolver cosas del día a día.',url:BASE+'C-mo-le-hago-/',emoji:'🧰',categoria:'Aprender'}
+];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function render(apps){
+  const grupos=new Map();
+  for(const a of apps){
+    if(!/^https:\/\//i.test(a.url||'')) continue;
+    const g=a.categoria||'General';
+    if(!grupos.has(g)) grupos.set(g,[]);
+    grupos.get(g).push(a);
+  }
+  let html='';
+  for(const [g,lista] of grupos){
+    html+=`<h2>${esc(g)}</h2><div class="grid">`+lista.map(a=>`<article class="card"><div class="emo">${esc(a.emoji||'📱')}</div><h3>${esc(a.nombre)}</h3><p>${esc(a.descripcion)}</p><a class="btn" href="${esc(a.url)}">Abrir →</a></article>`).join('')+'</div>';
+  }
+  document.getElementById('apps').innerHTML=html||'<p class="nota">Pronto habrá apps aquí.</p>';
+}
+async function cargar(){
+  let apps;
+  try{
+    const r=await fetch(`${URL_SB}/rest/v1/apps?select=nombre,descripcion,url,emoji,categoria,orden&order=orden.asc`,{headers:{apikey:KEY,Authorization:'Bearer '+KEY}});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    apps=await r.json();
+    if(!Array.isArray(apps)||!apps.length) throw new Error('vacío');
+  }catch(e){ apps=RESPALDO; }
+  render(apps);
+}
+cargar();
+</script>
+</body>
+</html>
