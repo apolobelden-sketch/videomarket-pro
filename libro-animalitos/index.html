@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animalitos Divertidos</title>
+<meta name="description" content="Libro para colorear gratis: 20 animalitos divertidos para imprimir. Por Jairo Guizar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff8ee;--ink:#2a2420;--muted:#776c62;--acc:#f26b3a;--acc2:#2e9c8a;--line:#efe2cf}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+.portada{text-align:center;padding:36px 16px 20px;max-width:760px;margin:auto}
+.portada h1{font:800 clamp(2.2rem,8vw,3.6rem)/1 "Baloo 2",system-ui;margin:0;color:var(--acc)}
+.portada p{margin:10px 0 0;color:var(--muted);font-size:1.05rem}
+.autor{font-weight:700;color:var(--acc2)}
+.acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0 6px}
+.acciones button,.acciones a{border:0;border-radius:999px;padding:12px 20px;font:700 1rem Nunito,system-ui;cursor:pointer;text-decoration:none}
+.imprimir{background:var(--acc);color:#fff}
+.tienda{background:#fff;color:var(--ink);border:2px solid var(--line)!important}
+.nota{font-size:.88rem;color:var(--muted);max-width:520px;margin:6px auto 0}
+.paginas{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;max-width:960px;margin:20px auto 50px;padding:0 16px}
+.pagina{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:zoom-in}
+.pagina img{width:100%;aspect-ratio:1;object-fit:contain;display:block;background:#fff}
+.pagina .pie{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;font-size:.85rem;border-top:1px solid var(--line)}
+.pagina .pie b{color:var(--acc2)}
+.pagina .pie button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font:700 .78rem Nunito;cursor:pointer}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px}
+#visor{position:fixed;inset:0;background:rgba(30,20,10,.88);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
+#visor img{max-width:100%;max-height:100%;background:#fff;border-radius:10px}
+.hoja{display:none}
+@media print{
+  @page{size:letter;margin:12mm}
+  body{background:#fff}
+  .portada,.paginas,footer,#visor{display:none!important}
+  .hoja{display:flex!important;flex-direction:column;align-items:center;justify-content:center;height:250mm;page-break-after:always;break-after:page}
+  .hoja img{max-width:100%;max-height:220mm}
+  .hoja .t{font:800 20pt "Baloo 2",sans-serif;margin-bottom:6mm}
+  .hoja .c{font:9pt Nunito,sans-serif;color:#666;margin-top:6mm}
+  body.una .hoja{display:none!important}
+  body.una .hoja.sel{display:flex!important}
+  .hoja.portadaimp .t{font-size:40pt;color:#f26b3a}
+}
+</style>
+</head>
+<body>
+<header class="portada">
+  <h1>Animalitos Divertidos</h1>
+  <p>Libro para colorear · 20 dibujos gratis para imprimir</p>
+  <p>por <span class="autor">Jairo Guizar</span></p>
+  <div class="acciones">
+    <button class="imprimir" id="todo">🖨️ Imprimir o guardar PDF</button>
+    <a class="tienda" href="../" id="tiendaLink">🛍️ Ver mi tienda</a>
+  </div>
+  <p class="nota">Toca un dibujo para verlo grande. En “Imprimir” elige <b>Guardar como PDF</b> si no tienes impresora.</p>
+</header>
+
+<main class="paginas" id="paginas"></main>
+<div id="hojas"></div>
+<footer>© 2026 Jairo Guizar · Uso personal y escolar gratuito</footer>
+<div id="visor"><img alt=""></div>
+
+<script>
+const BASE = "https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/imagenes/";
+const PAGINAS = [{"titulo": "El patito y sus botas", "ruta": "pruebas/1791747162812-colorear.jpg"}, {"titulo": "El perrito y su pelota", "ruta": "animalitos-divertidos/1791748118259-colorear.jpg"}, {"titulo": "El elefantito", "ruta": "animalitos-divertidos/1791748141954-colorear.jpg"}, {"titulo": "El gatito juguetón", "ruta": "animalitos-divertidos/1791748257659-colorear.jpg"}, {"titulo": "El conejito y su zanahoria", "ruta": "animalitos-divertidos/1791748307830-colorear.jpg"}, {"titulo": "El osito y la miel", "ruta": "animalitos-divertidos/1791748356411-colorear.jpg"}, {"titulo": "El pollito", "ruta": "animalitos-divertidos/1791748395822-colorear.jpg"}, {"titulo": "La tortuga con sombrero", "ruta": "animalitos-divertidos/1791748441047-colorear.jpg"}, {"titulo": "El leoncito rey", "ruta": "animalitos-divertidos/1791748489902-colorear.jpg"}, {"titulo": "El cerdito feliz", "ruta": "animalitos-divertidos/1791748533716-colorear.jpg"}, {"titulo": "La jirafa con bufanda", "ruta": "animalitos-divertidos/1791748578795-colorear.jpg"}, {"titulo": "El búho", "ruta": "animalitos-divertidos/1791748675832-colorear.jpg"}, {"titulo": "El pececito", "ruta": "animalitos-divertidos/1791748720371-colorear.jpg"}, {"titulo": "El monito y su plátano", "ruta": "animalitos-divertidos/1791748804611-colorear.jpg"}, {"titulo": "El pingüino patinador", "ruta": "animalitos-divertidos/1791749001540-colorear.jpg"}, {"titulo": "El ratoncito y la fresa", "ruta": "animalitos-divertidos/1791749157323-colorear.jpg"}, {"titulo": "La ranita", "ruta": "animalitos-divertidos/1791749170291-colorear.jpg"}, {"titulo": "La abejita", "ruta": "animalitos-divertidos/1791749295521-colorear.jpg"}, {"titulo": "El caracol y la flor", "ruta": "animalitos-divertidos/1791749303790-colorear.jpg"}, {"titulo": "El dinosaurio y su globo", "ruta": "animalitos-divertidos/1791749430604-colorear.jpg"}];
+const $ = (s) => document.querySelector(s);
+
+function hoja(p, i, extra) {
+  const h = document.createElement("section");
+  h.className = "hoja" + (extra ? " " + extra : "");
+  h.innerHTML = `<div class="t"></div><img alt=""><div class="c">Animalitos Divertidos · © Jairo Guizar</div>`;
+  h.querySelector(".t").textContent = p.titulo;
+  h.querySelector("img").src = BASE + p.ruta;
+  h.querySelector("img").alt = p.titulo;
+  h.dataset.i = i;
+  return h;
+}
+
+// Hoja de portada impresa
+const portadaImp = document.createElement("section");
+portadaImp.className = "hoja portadaimp";
+portadaImp.innerHTML = `<div class="t">Animalitos Divertidos</div><div class="c" style="font-size:14pt">Libro para colorear · por Jairo Guizar</div><div class="c" style="margin-top:20mm">Este libro pertenece a: ______________________</div>`;
+$("#hojas").appendChild(portadaImp);
+
+PAGINAS.forEach((p, i) => {
+  const el = document.createElement("article");
+  el.className = "pagina";
+  el.innerHTML = `<img loading="lazy" alt=""><div class="pie"><span><b>${i + 1}.</b> <span class="nom"></span></span><button>Imprimir</button></div>`;
+  el.querySelector("img").src = BASE + p.ruta;
+  el.querySelector("img").alt = p.titulo;
+  el.querySelector(".nom").textContent = p.titulo;
+  el.querySelector("img").onclick = () => { $("#visor img").src = BASE + p.ruta; $("#visor").style.display = "flex"; };
+  el.querySelector("button").onclick = () => {
+    document.querySelectorAll(".hoja").forEach((h) => h.classList.toggle("sel", h.dataset.i === String(i)));
+    document.body.classList.add("una"); print(); document.body.classList.remove("una");
+  };
+  $("#paginas").appendChild(el);
+  $("#hojas").appendChild(hoja(p, i));
+});
+
+$("#todo").onclick = () => { document.body.classList.remove("una"); print(); };
+$("#visor").onclick = () => ($("#visor").style.display = "none");
+</script>
+</body>
+</html>
