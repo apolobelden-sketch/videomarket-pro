@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit Ediciones Guizar</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff8ee;--card:#fff;--ink:#2a2420;--muted:#776c62;--acc:#f26b3a;--acc2:#2e9c8a;--line:#efe2cf}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Nunito,system-ui,sans-serif}
+header{text-align:center;padding:28px 16px 8px}
+h1{font:800 2.2rem/1 "Baloo 2",system-ui;margin:0;color:var(--acc)}
+header p{color:var(--muted);margin:6px 0 0}
+main{max-width:760px;margin:auto;padding:0 16px 40px}
+section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:16px}
+h2{font:800 1.3rem "Baloo 2",system-ui;margin:0 0 8px}
+.paso{display:inline-block;background:var(--acc2);color:#fff;border-radius:999px;padding:0 10px;font-size:.85rem;margin-right:6px}
+.copia{position:relative;background:#faf5ec;border:1px dashed var(--line);border-radius:12px;padding:12px 12px 40px;white-space:pre-wrap;margin:8px 0}
+.copia button{position:absolute;right:8px;bottom:8px;border:0;background:var(--acc);color:#fff;border-radius:999px;padding:6px 14px;font:700 .85rem Nunito;cursor:pointer}
+.etq{font-weight:700;font-size:.9rem;color:var(--muted);margin-top:10px}
+.imgs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.imgs figure{margin:0;text-align:center}
+.imgs img{width:100%;border-radius:12px;border:1px solid var(--line);background:#fff}
+.imgs a{font-weight:700;color:var(--acc2)}
+.posts{display:grid;gap:14px}
+.post{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:start}
+.post img{width:96px;height:96px;object-fit:contain;border:1px solid var(--line);border-radius:10px;background:#fff}
+.post .copia{margin:0}
+ul{padding-left:20px;margin:6px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>Ediciones Guizar</h1>
+  <p>Kit para abrir tus redes · toca “Copiar” y pega</p>
+</header>
+<main>
+
+<section>
+  <h2>🎨 Logo y portada</h2>
+  <div class="imgs">
+    <figure><img id="logo" alt="Logo"><figcaption><a id="logoA" target="_blank">Abrir logo</a> · foto de perfil</figcaption></figure>
+    <figure><img id="banner" alt="Portada"><figcaption><a id="bannerA" target="_blank">Abrir portada</a> · imagen de portada</figcaption></figure>
+  </div>
+  <p class="etq">Abre la imagen, mantén el dedo encima y elige “Descargar imagen” para subirla a cada red.</p>
+</section>
+
+<section>
+  <h2>🏷️ Datos de la marca</h2>
+  <p class="etq">Nombre</p>
+  <div class="copia">Ediciones Guizar<button>Copiar</button></div>
+  <p class="etq">Usuario (si no está libre, prueba “edicionesguizar.mx”)</p>
+  <div class="copia">edicionesguizar<button>Copiar</button></div>
+  <p class="etq">Enlace principal</p>
+  <div class="copia" id="enlace">https://apolobelden-sketch.github.io/videomarket-pro/portal/<button>Copiar</button></div>
+</section>
+
+<section>
+  <h2><span class="paso">1</span>Pinterest Business</h2>
+  <p class="etq">Descripción del perfil</p>
+  <div class="copia">Libros, cuadernos y dibujos para colorear para niños 📚🖍️ Páginas gratis para imprimir, cuadernos escolares de primaria y libros a la venta. Nuevos dibujos cada semana. Por Jairo Guizar.<button>Copiar</button></div>
+  <p class="etq">Tableros para crear</p>
+  <ul>
+    <li>Dibujos para colorear de animales</li>
+    <li>Dibujos para colorear gratis para imprimir</li>
+    <li>Cuadernos y actividades de primaria</li>
+    <li>Libros infantiles Ediciones Guizar</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="paso">2</span>Página de Facebook</h2>
+  <p class="etq">Categoría: Editorial (o “Libros y revistas”)</p>
+  <p class="etq">Descripción</p>
+  <div class="copia">📚 Ediciones Guizar: libros, cuadernos escolares y dibujos para colorear para niños.
+🖍️ Descarga gratis páginas para imprimir y colorear.
+✏️ Cuadernos de primaria listos para usar.
+🛍️ Libros y productos para la familia.
+👉 Todo en un solo lugar: el enlace de la página.<button>Copiar</button></div>
+</section>
+
+<section>
+  <h2><span class="paso">3</span>Instagram profesional</h2>
+  <p class="etq">Biografía (máx. 150 letras)</p>
+  <div class="copia">📚 Libros y cuadernos infantiles
+🖍️ Dibujos para colorear GRATIS
+✏️ Actividades de primaria
+👇 Descarga e imprime<button>Copiar</button></div>
+  <p class="etq">Categoría: Editorial</p>
+</section>
+
+<section>
+  <h2>🗓️ Primeras 9 publicaciones</h2>
+  <p class="etq">Usa la misma imagen y texto en las 3 redes. Al conectar Metricool, yo las programo.</p>
+  <div class="posts" id="posts"></div>
+</section>
+
+<section>
+  <h2><span class="paso">4</span>Al final</h2>
+  <ul>
+    <li>Conecta Metricool en la app de Claude y enlaza ahí Facebook, Instagram y Pinterest.</li>
+    <li>Avísame y programo las publicaciones.</li>
+  </ul>
+</section>
+
+</main>
+<script>
+const IMG = "https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/imagenes/";
+const LOGO = "ediciones-guizar/1791750835842-infantil.jpg";
+const BANNER = "ediciones-guizar/1791750834488-portada.jpg";
+const LIBRO = "https://apolobelden-sketch.github.io/videomarket-pro/libro-animalitos/";
+const TAGS = "#dibujosparacolorear #paracolorear #librosinfantiles #actividadesparaniños #imprimibles #coloringpages #EdicionesGuizar";
+const POSTS = [
+  ["pruebas/1791747162812-colorear.jpg", "🦆 ¡El patito ya sacó sus botas para la lluvia! ¿De qué color se las pintarías? 🌧️\nDescárgalo gratis junto con 19 animalitos más."],
+  ["animalitos-divertidos/1791748356411-colorear.jpg", "🐻 Un osito que ama la miel 🍯 Ideal para colorear en familia este fin de semana.\nLibro completo GRATIS para imprimir."],
+  ["animalitos-divertidos/1791748489902-colorear.jpg", "🦁 ¡El rey de la selva con su corona! 👑 Perfecto para los más pequeños: trazos grandes y fáciles de colorear."],
+  ["animalitos-divertidos/1791749430604-colorear.jpg", "🦕 Un dinosaurio bebé con su globo 🎈 ¿Quién en casa ama los dinos? Imprímelo gratis."],
+  ["animalitos-divertidos/1791748578795-colorear.jpg", "🦒 La jirafa con bufanda está lista para el frío 🧣 Elige los colores más divertidos."],
+  ["animalitos-divertidos/1791749001540-colorear.jpg", "🐧 ¡Pingüino patinador en acción! ⛸️ Actividad sin pantallas para niños de preescolar y primaria."],
+  ["animalitos-divertidos/1791748307830-colorear.jpg", "🐰 Al conejito le encantan las zanahorias 🥕 Descarga el libro completo “Animalitos Divertidos”, 20 páginas gratis."],
+  ["animalitos-divertidos/1791749295521-colorear.jpg", "🐝 Una abejita feliz volando entre flores 🌼 ¿Le pones rayas amarillas y negras o de colores?"],
+  ["animalitos-divertidos/1791748257659-colorear.jpg", "🐱 Gatito juguetón con su bola de estambre 🧶 Comparte con alguien que tenga peques en casa 💛"],
+];
+document.querySelectorAll(".copia").forEach(prep);
+function prep(el){
+  el.querySelector("button").onclick = async (e) => {
+    const b = e.currentTarget, t = el.firstChild.textContent;
+    try { await navigator.clipboard.writeText(t); b.textContent = "¡Copiado!"; }
+    catch { const r = document.createRange(); r.selectNodeContents(el.firstChild); getSelection().removeAllRanges(); getSelection().addRange(r); b.textContent = "Selecciona y copia"; }
+    setTimeout(() => (b.textContent = "Copiar"), 1500);
+  };
+}
+for (const [r, txt] of POSTS) {
+  const d = document.createElement("div"); d.className = "post";
+  const a = document.createElement("a"); a.href = IMG + r; a.target = "_blank";
+  const im = document.createElement("img"); im.src = IMG + r; im.alt = ""; a.appendChild(im);
+  const c = document.createElement("div"); c.className = "copia";
+  c.appendChild(document.createTextNode(`${txt}\n👉 ${LIBRO}\n\n${TAGS}`));
+  const b = document.createElement("button"); b.textContent = "Copiar"; c.appendChild(b);
+  d.append(a, c); document.getElementById("posts").appendChild(d); prep(c);
+}
+for (const [id, r] of [["logo", LOGO], ["banner", BANNER]]) {
+  document.getElementById(id).src = IMG + r;
+  document.getElementById(id + "A").href = IMG + r;
+}
+</script>
+</body>
+</html>
