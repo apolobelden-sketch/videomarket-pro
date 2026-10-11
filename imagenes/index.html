@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taller de Imágenes</title>
+<style>
+:root{--bg:#fbf8f3;--card:#fff;--ink:#22201c;--muted:#6f6a61;--line:#e6dfd3;--acc:#e0652b;--acc2:#2f7d6d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:20px 16px 8px;max-width:900px;margin:auto}
+h1{margin:0;font-size:1.6rem}
+header p{margin:4px 0 0;color:var(--muted)}
+main{max-width:900px;margin:auto;padding:8px 16px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}
+label{display:block;font-weight:600;margin:12px 0 6px}
+textarea,input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+textarea{min-height:90px;resize:vertical}
+.estilos{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.estilos button{padding:12px 8px;border:2px solid var(--line);background:#fff;border-radius:10px;font:inherit;cursor:pointer}
+.estilos button.on{border-color:var(--acc);background:#fff3ec;font-weight:700}
+.fila{display:flex;gap:10px}
+.fila>*{flex:1}
+.btn{display:block;width:100%;margin-top:16px;padding:14px;border:0;border-radius:12px;background:var(--acc);color:#fff;font:700 1.05rem system-ui;cursor:pointer}
+.btn:disabled{opacity:.6}
+#msg{margin-top:10px;color:var(--muted);min-height:1.4em}
+#msg.err{color:#b3261e}
+.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:12px}
+.item{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.item img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#eee;cursor:zoom-in}
+.item div{padding:8px;font-size:.82rem;color:var(--muted)}
+.item .acc{display:flex;gap:6px;padding:0 8px 8px}
+.item .acc a,.item .acc button{flex:1;text-align:center;font-size:.8rem;padding:6px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);text-decoration:none;cursor:pointer}
+.chip{display:inline-block;background:#eef6f4;color:var(--acc2);border-radius:20px;padding:2px 10px;font-size:.8rem;margin-top:6px}
+#visor{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:16px}
+#visor img{max-width:100%;max-height:100%;background:#fff;border-radius:8px}
+@media print{body *{visibility:hidden}#impr,#impr *{visibility:visible}#impr{position:fixed;inset:0;display:flex!important;align-items:center;justify-content:center}#impr img{max-width:100%;max-height:100%}}
+#impr{display:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎨 Taller de Imágenes</h1>
+  <p>Dibujos para tus libros: para colorear, ilustraciones y portadas. Gratis con Cloudflare.</p>
+</header>
+<main>
+  <div class="card" id="cajaClave">
+    <label for="clave">Clave del Cerebro</label>
+    <input id="clave" type="password" placeholder="Tu clave interna" autocomplete="current-password">
+    <button class="btn" id="entrar">Entrar</button>
+  </div>
+
+  <div id="app" hidden>
+    <div class="card">
+      <label for="desc">¿Qué dibujo quieres?</label>
+      <textarea id="desc" placeholder="Ej.: un pato con botas de lluvia saltando en un charco"></textarea>
+
+      <label>Estilo</label>
+      <div class="estilos" id="estilos">
+        <button data-e="colorear" class="on">✏️ Para colorear</button>
+        <button data-e="infantil">🌈 Ilustración a color</button>
+        <button data-e="portada">📘 Portada</button>
+        <button data-e="realista">📷 Detallado</button>
+      </div>
+
+      <div class="fila">
+        <div>
+          <label for="libro">Libro (opcional)</label>
+          <input id="libro" placeholder="Ej.: Animales de la granja">
+        </div>
+        <div>
+          <label for="cant">Cantidad</label>
+          <select id="cant"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+        </div>
+      </div>
+      <button class="btn" id="gen">Crear dibujo</button>
+      <div id="msg"></div>
+      <span class="chip" id="cuota"></span>
+    </div>
+
+    <div class="card">
+      <strong>Mis imágenes</strong>
+      <div class="galeria" id="gal"></div>
+    </div>
+  </div>
+</main>
+<div id="visor"><img alt=""></div>
+<div id="impr"><img alt=""></div>
+
+<script>
+const URL_FN = "https://pnjglzuxsyahxcbgjwvq.supabase.co/functions/v1/generar-imagen";
+const KEY = "sb_publishable_f3roew_gvKiClDkdKYieYg_d0_7fWUk";
+const LIMITE_DIA = 170;
+let estilo = "colorear";
+const $ = (id) => document.getElementById(id);
+const leer = (k) => { try { return localStorage.getItem(k) || ""; } catch { return ""; } };
+const guardar = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
+
+async function llamar(cuerpo) {
+  const r = await fetch(URL_FN, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apikey: KEY, Authorization: "Bearer " + KEY, "x-cerebro-clave": $("clave").value },
+    body: JSON.stringify(cuerpo),
+  });
+  const d = await r.json().catch(() => ({ error: "Respuesta inválida" }));
+  if (!r.ok) throw new Error(d.error || ("Error " + r.status));
+  return d;
+}
+function aviso(t, err) { $("msg").textContent = t; $("msg").className = err ? "err" : ""; }
+
+async function entrar() {
+  try {
+    const e = await llamar({ accion: "estado" });
+    guardar("cerebro_clave", $("clave").value);
+    $("cajaClave").hidden = true; $("app").hidden = false;
+    if (!e.cloudflare_configurado) aviso("Falta conectar Cloudflare (CLOUDFLARE_ACCOUNT_ID y CLOUDFLARE_API_TOKEN en Supabase).", true);
+    galeria();
+  } catch (err) { alert(err.message); }
+}
+
+async function galeria() {
+  const d = await llamar({ accion: "listar" });
+  $("cuota").textContent = `Hoy: ${d.hoy_cloudflare} de ~${LIMITE_DIA} gratis`;
+  $("gal").innerHTML = "";
+  for (const im of d.imagenes) {
+    const el = document.createElement("div");
+    el.className = "item";
+    el.innerHTML = `<img loading="lazy" alt=""><div></div><div class="acc"><a target="_blank" rel="noopener">Abrir</a><button data-p>Imprimir</button><button data-b>Borrar</button></div>`;
+    el.querySelector("img").src = im.url;
+    el.querySelector("img").onclick = () => { $("visor").querySelector("img").src = im.url; $("visor").style.display = "flex"; };
+    el.querySelector("div").textContent = (im.libro ? im.libro + " · " : "") + im.descripcion;
+    el.querySelector("a").href = im.url;
+    el.querySelector("[data-p]").onclick = () => { $("impr").querySelector("img").src = im.url; setTimeout(() => print(), 400); };
+    el.querySelector("[data-b]").onclick = async () => { if (confirm("¿Borrar esta imagen?")) { await llamar({ accion: "borrar", id: im.id }); galeria(); } };
+    $("gal").appendChild(el);
+  }
+}
+
+async function generar() {
+  const descripcion = $("desc").value.trim();
+  if (!descripcion) return aviso("Escribe qué dibujo quieres.", true);
+  const n = +$("cant").value;
+  $("gen").disabled = true;
+  try {
+    for (let i = 1; i <= n; i++) {
+      aviso(`Dibujando ${i} de ${n}… (unos 10 segundos)`);
+      await llamar({ descripcion, estilo, libro: $("libro").value });
+    }
+    aviso("¡Listo!"); guardar("libro", $("libro").value);
+    galeria();
+  } catch (err) { aviso(err.message, true); }
+  $("gen").disabled = false;
+}
+
+$("estilos").onclick = (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  estilo = b.dataset.e;
+  document.querySelectorAll("#estilos button").forEach((x) => x.classList.toggle("on", x === b));
+};
+$("entrar").onclick = entrar;
+$("gen").onclick = generar;
+$("visor").onclick = () => ($("visor").style.display = "none");
+$("clave").value = leer("cerebro_clave");
+$("libro").value = leer("libro");
+if ($("clave").value) entrar();
+</script>
+</body>
+</html>
