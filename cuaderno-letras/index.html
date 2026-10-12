@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mis primeras letras</title>
+<meta name="description" content="Cuaderno gratis de trazo de letras para preescolar y 1.º de primaria: vocales y consonantes para repasar e imprimir. Por Jairo Guizar, Ediciones Guizar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Baloo+2:wght@700;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f7ff;--ink:#1f2a37;--muted:#64748b;--acc:#2f6fdb;--acc2:#f26b3a;--line:#dbe4f3;--guia:#b9c7de;--gris:#c3c9d2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+.cab{text-align:center;padding:30px 16px 10px;max-width:760px;margin:auto}
+.cab h1{font:800 clamp(2.1rem,8vw,3.3rem)/1 "Baloo 2",system-ui;margin:0;color:var(--acc)}
+.cab p{margin:8px 0 0;color:var(--muted)}
+.cab .autor{color:var(--acc2);font-weight:700}
+.acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0 4px}
+.acciones button,.acciones a{border:0;border-radius:999px;padding:12px 20px;font:700 1rem Nunito,system-ui;cursor:pointer;text-decoration:none}
+.imprimir{background:var(--acc);color:#fff}
+.sec{background:#fff;color:var(--ink);border:2px solid var(--line)!important}
+.indice{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:760px;margin:14px auto 0;padding:0 16px}
+.indice a{min-width:38px;text-align:center;padding:6px 8px;border-radius:10px;background:#fff;border:1px solid var(--line);color:var(--ink);text-decoration:none;font:700 1rem Andika,sans-serif}
+main{max-width:820px;margin:18px auto 40px;padding:0 12px}
+.hoja{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px;margin:0 0 18px;box-shadow:0 2px 10px rgba(31,42,55,.05);position:relative}
+.hoja h2{font:800 1.5rem "Baloo 2",system-ui;margin:0;color:var(--acc)}
+.hoja .num{position:absolute;right:18px;top:16px;font:700 .85rem Nunito;color:var(--muted)}
+.cons{color:var(--muted);margin:2px 0 12px;font-weight:700}
+.top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.grande{width:min(300px,62vw);height:auto}
+.dibujo{text-align:center;flex:1;min-width:150px}
+.dibujo .emo{font-size:88px;line-height:1}
+.dibujo .pal{font:700 1.7rem Andika,sans-serif;margin-top:6px}
+.dibujo .pal b{color:var(--acc2)}
+.renglon{display:block;width:100%;height:auto;margin:6px 0}
+.etq{font:700 .9rem Nunito;color:var(--muted);margin-top:14px}
+.diploma{text-align:center;border:3px dashed var(--acc2);border-radius:16px;padding:18px;margin-top:16px}
+.diploma .t{font:800 1.8rem "Baloo 2",system-ui;color:var(--acc2)}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px}
+@media (max-width:560px){.dibujo .emo{font-size:70px}}
+@media print{
+  @page{size:letter;margin:10mm}
+  body{background:#fff}
+  .cab,.indice,footer{display:none!important}
+  main{margin:0;padding:0;max-width:none}
+  .hoja{border:0;box-shadow:none;border-radius:0;margin:0;padding:4mm 6mm;page-break-after:always;break-after:page;min-height:250mm}
+  body.una .hoja{display:none}
+  body.una .hoja.sel{display:block}
+  .acciones-hoja{display:none!important}
+}
+.acciones-hoja{position:absolute;right:16px;bottom:12px}
+.acciones-hoja button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font:700 .8rem Nunito;cursor:pointer}
+</style>
+</head>
+<body>
+<header class="cab">
+  <h1>Mis primeras letras</h1>
+  <p>Cuaderno de trazo · preescolar y 1.º de primaria · 20 hojas gratis</p>
+  <p>por <span class="autor">Jairo Guizar</span> · Ediciones Guizar</p>
+  <div class="acciones">
+    <button class="imprimir" id="todo">🖨️ Imprimir o guardar PDF</button>
+    <a class="sec" href="../portal/">📚 Más cuadernos</a>
+  </div>
+  <div class="indice" id="indice"></div>
+</header>
+<main id="hojas"></main>
+<footer>© 2026 Jairo Guizar · Ediciones Guizar · Uso personal y escolar gratuito</footer>
+
+<script>
+const LETRAS = [
+  ["A","a","🐝","abeja"],["E","e","🐘","elefante"],["I","i","🦎","iguana"],["O","o","🐻","oso"],["U","u","🍇","uvas"],
+  ["M","m","🦋","mariposa"],["P","p","🦆","pato"],["L","l","🌙","luna"],["S","s","☀️","sol"],["T","t","🐢","tortuga"],
+  ["N","n","☁️","nube"],["D","d","🎲","dado"],["R","r","🐭","ratón"],["C","c","🏠","casa"],["B","b","⛵","barco"],
+  ["F","f","🦭","foca"],["G","g","🐱","gato"],["V","v","🐄","vaca"]
+];
+const $ = (s) => document.querySelector(s);
+const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const RENGLON = (contenido) => `<svg class="renglon" viewBox="0 0 760 92" preserveAspectRatio="xMinYMid meet" role="img">
+  <line x1="0" y1="8" x2="760" y2="8" stroke="#b9c7de" stroke-width="1.5"/>
+  <line x1="0" y1="36" x2="760" y2="36" stroke="#b9c7de" stroke-width="1.2" stroke-dasharray="6 6"/>
+  <line x1="0" y1="66" x2="760" y2="66" stroke="#7f95bb" stroke-width="2"/>
+  <line x1="0" y1="86" x2="760" y2="86" stroke="#dbe4f3" stroke-width="1.2"/>${contenido}</svg>`;
+const T = (x, txt, gris) => `<text x="${x}" y="66" font-family="Andika, Nunito, sans-serif" font-size="66" fill="${gris ? "#c3c9d2" : "#1f2a37"}">${esc(txt)}</text>`;
+const fila = (modelo, repetir, n) => {
+  const paso = Math.floor(740 / (n + 1));
+  let c = T(14, modelo, false);
+  for (let k = 1; k <= n; k++) c += T(14 + paso * k, repetir, true);
+  return RENGLON(c);
+};
+const filaPalabra = (pal, n) => {
+  const paso = Math.floor(740 / (n + 1));
+  let c = T(14, pal, false);
+  for (let k = 1; k <= n; k++) c += T(14 + paso * k, pal, true);
+  return RENGLON(c);
+};
+const vacio = () => RENGLON("");
+
+function letraSVG(M, m) {
+  return `<svg class="grande" viewBox="0 0 300 170" role="img" aria-label="Letra ${M}${m} para repasar">
+    <text x="20" y="140" font-family="Andika" font-size="150" fill="none" stroke="#2f6fdb" stroke-width="3" stroke-dasharray="10 8" stroke-linecap="round">${M}</text>
+    <text x="165" y="140" font-family="Andika" font-size="150" fill="none" stroke="#f26b3a" stroke-width="3" stroke-dasharray="10 8" stroke-linecap="round">${m}</text>
+    <circle cx="30" cy="40" r="6" fill="#22c55e"/><circle cx="178" cy="78" r="6" fill="#22c55e"/>
+  </svg>`;
+}
+
+const hojas = [];
+hojas.push({ id: "nombre", nav: "✏️", html: `<h2>Este cuaderno es de…</h2><p class="cons">Escribe tu nombre en cada renglón. Pide ayuda si la necesitas.</p>
+  <div class="nombre">${vacio()}${vacio()}${vacio()}${vacio()}</div>
+  <p class="etq">Dibújate aquí 👇</p><div style="height:250px;border:2px dashed var(--line);border-radius:14px"></div>` });
+
+LETRAS.forEach(([M, m, emo, pal], i) => {
+  const palHTML = `<b>${esc(pal[0])}</b>${esc(pal.slice(1))}`;
+  hojas.push({ id: "l" + M, nav: M, html: `<h2>La letra ${M} ${m}</h2>
+    <p class="cons">${i < 5 ? "Vocal" : "Consonante"} · Repasa con tu dedo y luego con tu lápiz. Empieza en el punto verde.</p>
+    <div class="top">${letraSVG(M, m)}<div class="dibujo"><div class="emo">${emo}</div><div class="pal">${palHTML}</div></div></div>
+    <p class="etq">Repasa la letra gris y completa el renglón:</p>
+    ${fila(M, M, 6)}${fila(m, m, 7)}
+    <p class="etq">Repasa la palabra:</p>
+    ${filaPalabra(pal, pal.length > 5 ? 1 : 2)}
+    <p class="etq">Ahora escribe tú solo:</p>${vacio()}` });
+});
+
+hojas.push({ id: "final", nav: "⭐", html: `<h2>¡Ya sé mis letras!</h2><p class="cons">Repasa estas palabras con todo lo que aprendiste.</p>
+  ${filaPalabra("mamá", 2)}${filaPalabra("papá", 2)}${filaPalabra("sol", 3)}${filaPalabra("luna", 2)}${filaPalabra("casa", 2)}
+  <div class="diploma"><div class="t">⭐ ¡Felicidades! ⭐</div><p>Terminaste tu cuaderno <b>Mis primeras letras</b>.</p><p>Nombre: ______________________________</p></div>` });
+
+hojas.forEach((h, i) => {
+  const s = document.createElement("section");
+  s.className = "hoja"; s.id = h.id;
+  s.innerHTML = `<span class="num">Hoja ${i + 1} de ${hojas.length}</span>${h.html}<div class="acciones-hoja"><button>Imprimir esta hoja</button></div>`;
+  s.querySelector(".acciones-hoja button").onclick = () => {
+    document.querySelectorAll(".hoja").forEach((x) => x.classList.toggle("sel", x === s));
+    document.body.classList.add("una"); print(); document.body.classList.remove("una");
+  };
+  $("#hojas").appendChild(s);
+  const a = document.createElement("a"); a.href = "#" + h.id; a.textContent = h.nav; $("#indice").appendChild(a);
+});
+$("#todo").onclick = () => { document.body.classList.remove("una"); print(); };
+</script>
+</body>
+</html>
