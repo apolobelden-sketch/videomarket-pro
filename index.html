@@ -83,21 +83,35 @@ footer .row a{padding:.5rem 1rem;border:1px solid var(--bd);border-radius:999px;
 
 <section id="productos"><div class="head"><h2>Productos</h2><p>Toca el video para activar el sonido.</p></div><div class="grid" id="g-prod"></div></section>
 
-<section id="imprimir"><div class="head"><h2>Libros y cuadernos para imprimir</h2><p>Gratis · ábrelos, imprímelos o guárdalos en PDF.</p></div><div id="g-apps"><p class="subhead">Cargando…</p></div></section>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&display=swap" rel="stylesheet"><style>.pt{position:relative;aspect-ratio:3/4;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:7% 6% 6%;color:#fff;text-align:center;container-type:inline-size;box-shadow:inset 9px 0 0 rgba(0,0,0,.14)}.pt-marca{font:800 3.6cqw/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;opacity:.92}.pt-tit{font:800 11.5cqw/1 "Baloo 2",system-ui,sans-serif;margin-top:3cqw;text-shadow:0 .8cqw 0 rgba(0,0,0,.22);text-wrap:balance}.pt-arte{flex:1;position:relative;width:100%;margin:4cqw 0}.pt-i{position:absolute;background:#fff;border-radius:4cqw;padding:1.5cqw;box-shadow:0 2cqw 4cqw rgba(0,0,0,.28);object-fit:contain;aspect-ratio:1}.pt-i0{width:56%;left:22%;top:0;transform:rotate(-3deg);z-index:2}.pt-i1{width:40%;left:0;bottom:0;transform:rotate(-9deg);z-index:1}.pt-i2{width:40%;right:0;bottom:0;transform:rotate(8deg);z-index:1}.pt-txt{display:flex;flex-wrap:wrap;justify-content:center;align-content:center;height:100%;gap:2.5cqw}.pt-txt span{font:800 18cqw/1.15 "Baloo 2",system-ui,sans-serif;background:#fff;border-radius:4cqw;padding:0 3.5cqw;box-shadow:0 1.6cqw 0 rgba(0,0,0,.2)}.pt-badge{background:#ffe600;color:#1f2430;font:800 4.6cqw/1 system-ui,sans-serif;padding:2.4cqw 4.5cqw;border-radius:999px;box-shadow:0 1cqw 0 rgba(0,0,0,.2)}.gp .card .body{gap:.5rem}@media(max-width:600px){.grid.gp{grid-template-columns:1fr 1fr;gap:.8rem}.gp .body{padding:.7rem .7rem .9rem}.gp .body p{font-size:.8rem}.gp .btn{padding:.6rem .8rem;font-size:.85rem}}</style><section id="imprimir"><div class="head"><h2>Libros y cuadernos para imprimir</h2><p>Gratis · ábrelos, imprímelos o guárdalos en PDF.</p></div><div id="g-apps"><p class="subhead">Cargando…</p></div></section>
 <script>
+window.portadaHTML = (a, esc) => {
+  let p = null;
+  try { p = a.portada ? JSON.parse(a.portada) : null; } catch (e) {}
+  if (!p) return "";
+  const c = p.fondo || ["#ff9a3c", "#ff5e62"];
+  let arte = "";
+  if (p.imgs && p.imgs.length) {
+    arte = p.imgs.slice(0, 3).map((u, i) => `<img class="pt-i pt-i${i}" src="${esc(u)}" alt="" loading="lazy">`).join("");
+  } else if (p.texto) {
+    const col = ["#ff5e62", "#2f80ed", "#22b573", "#ff9f1c", "#9b51e0", "#e84393"];
+    arte = `<div class="pt-txt">` + p.texto.split(" ").map((t, i) => `<span style="color:${col[i % col.length]}">${esc(t)}</span>`).join("") + `</div>`;
+  }
+  return `<div class="pt" style="background:linear-gradient(160deg,${esc(c[0])},${esc(c[1])})"><div class="pt-marca">Ediciones Guizar</div><div class="pt-tit">${esc(a.nombre)}</div><div class="pt-arte">${arte}</div>${p.badge ? `<div class="pt-badge">${esc(p.badge)}</div>` : ""}</div>`;
+};
 (async () => {
   const box = document.getElementById("g-apps");
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   try {
     const K = "sb_publishable_f3roew_gvKiClDkdKYieYg_d0_7fWUk";
-    const r = await fetch("https://pnjglzuxsyahxcbgjwvq.supabase.co/rest/v1/apps?select=nombre,descripcion,url,emoji,categoria,orden&activo=eq.true&publica=eq.true&categoria=neq.Tienda&order=orden.asc", { headers: { apikey: K } });
+    const r = await fetch("https://pnjglzuxsyahxcbgjwvq.supabase.co/rest/v1/apps?select=nombre,descripcion,url,emoji,categoria,orden,portada&activo=eq.true&publica=eq.true&categoria=neq.Tienda&order=orden.asc", { headers: { apikey: K } });
     const f = await r.json();
     if (!Array.isArray(f) || !f.length) throw new Error("vacio");
     const grupos = new Map();
     for (const a of f) { if (!/^https:\/\//i.test(a.url || "")) continue; const g = a.categoria || "Más"; if (!grupos.has(g)) grupos.set(g, []); grupos.get(g).push(a); }
     let html = "";
     for (const [g, lista] of grupos) {
-      html += `<p class="subhead">${esc(g)}</p><div class="grid">` + lista.map((a) => `<article class="card in"><div class="body"><div style="font-size:2.6rem;line-height:1">${esc(a.emoji || "📘")}</div><h3>${esc(a.nombre)}</h3><p>${esc(a.descripcion)}</p><a class="btn p w" href="${esc(a.url)}">Abrir →</a></div></article>`).join("") + "</div>";
+      html += `<p class="subhead">${esc(g)}</p><div class="grid gp">` + lista.map((a) => { const pt = portadaHTML(a, esc); return `<article class="card in"><a href="${esc(a.url)}">${pt}</a><div class="body">${pt ? "" : `<div style="font-size:2.6rem;line-height:1">${esc(a.emoji || "📘")}</div><h3>${esc(a.nombre)}</h3>`}<p>${esc(a.descripcion)}</p><a class="btn p w" href="${esc(a.url)}">Abrir →</a></div></article>`; }).join("") + "</div>";
     }
     box.innerHTML = html;
   } catch (e) {
