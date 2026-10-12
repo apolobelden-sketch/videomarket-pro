@@ -64,6 +64,37 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px
   <div class="indice" id="indice"></div>
 </header>
 <main id="hojas"></main>
+<section id="reco" hidden style="max-width:960px;margin:0 auto 30px;padding:0 16px">
+<h2 style="font:800 1.4rem 'Baloo 2',system-ui;margin:0 0 4px">🛍️ Materiales recomendados</h2>
+<p style="margin:0 0 12px;color:#776c62;font-size:.92rem">Para colorear los dibujos y practicar las letras en casa.</p>
+<div id="recoLista" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px"></div>
+<p style="font-size:.78rem;color:#776c62;margin-top:10px">Enlaces de afiliado de Mercado Libre: si compras, Ediciones Guizar recibe una pequeña comisión sin costo extra para ti. Precios sujetos a cambio.</p>
+</section>
+<style>@media print{#reco{display:none!important}}.reco-it{background:#fff;border:1px solid #efe2cf;border-radius:14px;overflow:hidden;text-decoration:none;color:#2a2420;display:flex;flex-direction:column}.reco-it img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff}.reco-it .tx{padding:8px 10px;font-size:.85rem;flex:1}.reco-it b{display:block;color:#e2552a;font-size:1.15rem;margin-top:4px}.reco-it s{color:#999;font-size:.8rem;margin-left:4px}.reco-it .bt{display:block;margin:0 10px 10px;text-align:center;background:#ffe600;border-radius:999px;padding:8px;font-weight:700;font-size:.85rem}</style>
+<script>
+(async () => {
+  try {
+    const U = "https://pnjglzuxsyahxcbgjwvq.supabase.co/rest/v1/tienda_productos?select=nombre,precio_antes,precio_ahora,enlace,imagen&activo=eq.true&or=(etiqueta.ilike.*colorear*,etiqueta.ilike.*escolar*)&order=orden.desc";
+    const r = await fetch(U, { headers: { apikey: "sb_publishable_f3roew_gvKiClDkdKYieYg_d0_7fWUk" } });
+    const lista = r.ok ? await r.json() : [];
+    if (!lista.length) return;
+    const caja = document.getElementById("recoLista");
+    const peso = (n) => "$" + Number(n).toLocaleString("es-MX", { maximumFractionDigits: 0 });
+    for (const p of lista) {
+      const a = document.createElement("a");
+      a.className = "reco-it"; a.href = p.enlace; a.target = "_blank"; a.rel = "noopener sponsored";
+      const im = document.createElement("img"); im.src = p.imagen; im.alt = p.nombre; im.loading = "lazy";
+      const tx = document.createElement("div"); tx.className = "tx"; tx.textContent = p.nombre;
+      const b = document.createElement("b"); b.textContent = peso(p.precio_ahora);
+      if (p.precio_antes && Number(p.precio_antes) > Number(p.precio_ahora)) { const s = document.createElement("s"); s.textContent = peso(p.precio_antes); b.appendChild(s); }
+      tx.appendChild(b);
+      const bt = document.createElement("span"); bt.className = "bt"; bt.textContent = "Ver en Mercado Libre";
+      a.append(im, tx, bt); caja.appendChild(a);
+    }
+    document.getElementById("reco").hidden = false;
+  } catch (e) {}
+})();
+</script>
 <footer>© 2026 Jairo Guizar · Ediciones Guizar · Uso personal y escolar gratuito</footer>
 
 <script>
