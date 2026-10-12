@@ -73,16 +73,38 @@ footer .row a{padding:.5rem 1rem;border:1px solid var(--bd);border-radius:999px;
 </style>
 </head>
 <body>
-<header><b>⚡ Tienda Premium</b><nav><a href="#productos">Productos</a><a href="#mis-libros">Mis libros</a><a href="#libros">Libros gratis</a></nav></header>
+<header><b>⚡ Tienda Premium</b><nav><a href="#productos">Productos</a><a href="#mis-libros">Mis libros</a><a href="#imprimir">Para imprimir</a><a href="#libros">Cuentos gratis</a></nav></header>
 
 <div class="hero">
   <h1>Productos seleccionados<br>y <span class="grad">libros gratis</span></h1>
   <p>Una selección de productos en Mercado Libre, mis libros publicados en Amazon, y cuentos educativos en PDF para niños, sin costo.</p>
-  <div class="row"><a class="btn p" href="#productos">🛒 Ver productos</a><a class="btn" href="#libros">📚 Libros gratis</a></div>
+  <div class="row"><a class="btn p" href="#productos">🛒 Ver productos</a><a class="btn" href="#imprimir">📚 Libros y cuadernos</a></div>
 </div>
 
 <section id="productos"><div class="head"><h2>Productos</h2><p>Toca el video para activar el sonido.</p></div><div class="grid" id="g-prod"></div></section>
 
+<section id="imprimir"><div class="head"><h2>Libros y cuadernos para imprimir</h2><p>Gratis · ábrelos, imprímelos o guárdalos en PDF.</p></div><div id="g-apps"><p class="subhead">Cargando…</p></div></section>
+<script>
+(async () => {
+  const box = document.getElementById("g-apps");
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  try {
+    const K = "sb_publishable_f3roew_gvKiClDkdKYieYg_d0_7fWUk";
+    const r = await fetch("https://pnjglzuxsyahxcbgjwvq.supabase.co/rest/v1/apps?select=nombre,descripcion,url,emoji,categoria,orden&activo=eq.true&publica=eq.true&categoria=neq.Tienda&order=orden.asc", { headers: { apikey: K } });
+    const f = await r.json();
+    if (!Array.isArray(f) || !f.length) throw new Error("vacio");
+    const grupos = new Map();
+    for (const a of f) { if (!/^https:\/\//i.test(a.url || "")) continue; const g = a.categoria || "Más"; if (!grupos.has(g)) grupos.set(g, []); grupos.get(g).push(a); }
+    let html = "";
+    for (const [g, lista] of grupos) {
+      html += `<p class="subhead">${esc(g)}</p><div class="grid">` + lista.map((a) => `<article class="card in"><div class="body"><div style="font-size:2.6rem;line-height:1">${esc(a.emoji || "📘")}</div><h3>${esc(a.nombre)}</h3><p>${esc(a.descripcion)}</p><a class="btn p w" href="${esc(a.url)}">Abrir →</a></div></article>`).join("") + "</div>";
+    }
+    box.innerHTML = html;
+  } catch (e) {
+    box.innerHTML = '<p class="subhead"><a href="portal/">Ver todos los libros y cuadernos →</a></p>';
+  }
+})();
+</script>
 <section id="mis-libros">
   <div class="head"><h2>Mis libros</h2><p>Escritos por Jairo Guizar · disponibles en Amazon</p></div>
   <p class="subhead">📎 Para niños</p>
@@ -91,7 +113,7 @@ footer .row a{padding:.5rem 1rem;border:1px solid var(--bd);border-radius:999px;
   <div class="grid" id="g-libros-adultos"></div>
 </section>
 
-<section id="libros"><div class="head"><h2>Libros 100% gratis</h2><p>Cuentos para niños en PDF, listos para leer o imprimir.</p></div><div class="grid" id="g-lib"></div></section>
+<section id="libros"><div class="head"><h2>Cuentos 100% gratis</h2><p>Cuentos para niños en PDF, listos para leer o imprimir.</p></div><div class="grid" id="g-lib"></div></section>
 
 <footer>
   <b style="color:var(--tx)">⚡ Tienda Premium</b>
