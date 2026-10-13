@@ -50,7 +50,7 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px
   <p>Libro para colorear · 20 dibujos · PDF para imprimir en casa</p>
   <p>por <span class="autor">Jairo Guizar</span></p>
   <div class="acciones">
-    <a class="imprimir" href="https://mpago.la/2C4znZ7" target="_blank" rel="noopener">🛒 Comprar libro completo · $59</a>
+    <a class="imprimir" href="https://pnjglzuxsyahxcbgjwvq.supabase.co/functions/v1/mp-libro?accion=comprar&libro=dia-de-muertos" target="_blank" rel="noopener">🛒 Comprar libro completo · $59</a>
     <a class="tienda" href="../" id="tiendaLink">🛍️ Ver mi tienda</a>
   </div>
   <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;background:#fff;border:2px solid #e65100;border-radius:18px;padding:14px;margin:16px auto 6px;max-width:560px;text-align:left">
@@ -58,7 +58,7 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px
     <div style="flex:1;min-width:200px">
       <div style="font:800 1.15rem 'Baloo 2',system-ui;color:#4a148c">📘 Libro completo en PDF</div>
       <div style="font-size:.9rem;color:#5a5060;margin:4px 0 10px">46 páginas tamaño carta, dibujos en alta calidad, página "Este libro pertenece a" y diploma final. Imprímelo las veces que quieras.</div>
-      <a href="https://mpago.la/2C4znZ7" target="_blank" rel="noopener" style="display:block;text-align:center;background:#009ee3;color:#fff;font-weight:800;text-decoration:none;padding:12px;border-radius:999px">Comprar por $59 con Mercado Pago</a>
+      <a href="https://pnjglzuxsyahxcbgjwvq.supabase.co/functions/v1/mp-libro?accion=comprar&libro=dia-de-muertos" target="_blank" rel="noopener" style="display:block;text-align:center;background:#009ee3;color:#fff;font-weight:800;text-decoration:none;padding:12px;border-radius:999px">Comprar por $59 con Mercado Pago</a>
       <div style="font-size:.78rem;color:#776c62;margin-top:6px">Paga con tarjeta, OXXO o SPEI. Después de pagar, envía tu comprobante a <a href="mailto:jairoventas555@gmail.com?subject=Compra%20libro%20D%C3%ADa%20de%20Muertos" style="color:#4a148c">jairoventas555@gmail.com</a> y te mandamos tu PDF.</div>
     </div>
   </div>
@@ -123,7 +123,7 @@ portadaImp.className = "hoja portadaimp";
 portadaImp.innerHTML = `<div class="t">Día de Muertos y Halloween</div><div class="c" style="font-size:14pt">Libro para colorear · por Jairo Guizar</div><div class="c" style="margin-top:20mm">Este libro pertenece a: ______________________</div>`;
 $("#hojas").appendChild(portadaImp);
 
-const MP = "https://mpago.la/2C4znZ7";
+const MP = "https://pnjglzuxsyahxcbgjwvq.supabase.co/functions/v1/mp-libro?accion=comprar&libro=dia-de-muertos";
 const IDS = ["01-calaverita","02-cempasuchil","03-pan-de-muerto","04-xolo","05-alebrije","06-vela-flores","07-mariposa","08-catrinita","09-esqueletito","10-guitarra","11-calabaza","12-fantasmita","13-gatito-bruja","14-murcielaguito","15-buho-brujito","16-calabaza-dulces","17-aranita","18-caldero","19-monstruito","20-escoba"];
 const MUESTRA = (id) => `https://res.cloudinary.com/dgdw8fbku/image/upload/w_320,c_scale,e_blur:120,q_60/ediciones-guizar/dia-de-muertos/${id}.jpg`;
 PAGINAS.forEach((p, i) => {
