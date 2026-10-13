@@ -47,10 +47,10 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px
 <body>
 <header class="portada">
   <h1>Día de Muertos y Halloween</h1>
-  <p>Libro para colorear · 20 dibujos gratis para imprimir</p>
+  <p>Libro para colorear · 20 dibujos · PDF para imprimir en casa</p>
   <p>por <span class="autor">Jairo Guizar</span></p>
   <div class="acciones">
-    <button class="imprimir" id="todo">🖨️ Imprimir o guardar PDF</button>
+    <a class="imprimir" href="https://mpago.la/2C4znZ7" target="_blank" rel="noopener">🛒 Comprar libro completo · $59</a>
     <a class="tienda" href="../" id="tiendaLink">🛍️ Ver mi tienda</a>
   </div>
   <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;background:#fff;border:2px solid #e65100;border-radius:18px;padding:14px;margin:16px auto 6px;max-width:560px;text-align:left">
@@ -62,7 +62,7 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px
       <div style="font-size:.78rem;color:#776c62;margin-top:6px">Paga con tarjeta, OXXO o SPEI. Después de pagar, envía tu comprobante a <a href="mailto:jairoventas555@gmail.com?subject=Compra%20libro%20D%C3%ADa%20de%20Muertos" style="color:#4a148c">jairoventas555@gmail.com</a> y te mandamos tu PDF.</div>
     </div>
   </div>
-  <p class="nota">Toca un dibujo para verlo grande. En “Imprimir” elige <b>Guardar como PDF</b> si no tienes impresora.</p>
+  <p class="nota">Estos son los 20 dibujos que trae el libro. Cómpralo y recibe el PDF completo para imprimir las veces que quieras.</p>
 </header>
 
 <main class="paginas" id="paginas"></main>
@@ -123,23 +123,18 @@ portadaImp.className = "hoja portadaimp";
 portadaImp.innerHTML = `<div class="t">Día de Muertos y Halloween</div><div class="c" style="font-size:14pt">Libro para colorear · por Jairo Guizar</div><div class="c" style="margin-top:20mm">Este libro pertenece a: ______________________</div>`;
 $("#hojas").appendChild(portadaImp);
 
+const MP = "https://mpago.la/2C4znZ7";
+const IDS = ["01-calaverita","02-cempasuchil","03-pan-de-muerto","04-xolo","05-alebrije","06-vela-flores","07-mariposa","08-catrinita","09-esqueletito","10-guitarra","11-calabaza","12-fantasmita","13-gatito-bruja","14-murcielaguito","15-buho-brujito","16-calabaza-dulces","17-aranita","18-caldero","19-monstruito","20-escoba"];
+const MUESTRA = (id) => `https://res.cloudinary.com/dgdw8fbku/image/upload/w_320,c_scale,e_blur:120,q_60/ediciones-guizar/dia-de-muertos/${id}.jpg`;
 PAGINAS.forEach((p, i) => {
-  const el = document.createElement("article");
-  el.className = "pagina";
-  el.innerHTML = `<img loading="lazy" alt=""><div class="pie"><span><b>${i + 1}.</b> <span class="nom"></span></span><button>Imprimir</button></div>`;
-  el.querySelector("img").src = BASE + p.ruta;
-  el.querySelector("img").alt = p.titulo;
+  const el = document.createElement("a");
+  el.className = "pagina"; el.href = MP; el.target = "_blank"; el.rel = "noopener";
+  el.style.cssText = "position:relative;text-decoration:none;color:inherit;cursor:pointer";
+  el.innerHTML = `<img loading="lazy" alt=""><span style="position:absolute;top:8px;right:8px;background:rgba(74,20,140,.9);color:#fff;font:700 .72rem system-ui;padding:4px 8px;border-radius:999px">🔒 En el libro</span><div class="pie"><span><b>${i + 1}.</b> <span class="nom"></span></span></div>`;
+  el.querySelector("img").src = MUESTRA(IDS[i] || IDS[0]);
   el.querySelector(".nom").textContent = p.titulo;
-  el.querySelector("img").onclick = () => { $("#visor img").src = BASE + p.ruta; $("#visor").style.display = "flex"; };
-  el.querySelector("button").onclick = () => {
-    document.querySelectorAll(".hoja").forEach((h) => h.classList.toggle("sel", h.dataset.i === String(i)));
-    document.body.classList.add("una"); print(); document.body.classList.remove("una");
-  };
   $("#paginas").appendChild(el);
-  $("#hojas").appendChild(hoja(p, i));
 });
-
-$("#todo").onclick = () => { document.body.classList.remove("una"); print(); };
 $("#visor").onclick = () => ($("#visor").style.display = "none");
 </script>
 </body>
