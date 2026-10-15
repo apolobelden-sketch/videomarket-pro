@@ -33,7 +33,18 @@ const ayuda = `<small>¿Algún problema? Escríbenos a <a href="mailto:${correo}
 
 async function revisar(intento = 0) {
   if (!pid) {
-    pintar(`<div class="emo">🤔</div><h1>No encontramos tu pago</h1><p>Si ya pagaste, abre el enlace que te mandó Mercado Pago o escríbenos.</p>${ayuda}`);
+    pintar(`<div class="emo">🔎</div><h1>Recupera tu compra</h1>
+      <p>Escribe el <b>número de operación</b> que viene en el correo de Mercado Pago (también aparece en tu app de Mercado Pago, en el detalle del pago).</p>
+      <form id="f" style="margin-top:12px">
+        <input id="n" inputmode="numeric" placeholder="Ej. 123456789012" required
+          style="width:100%;padding:13px;border:2px solid #d8cfe0;border-radius:12px;font-size:1.05rem;text-align:center">
+        <button class="btn" style="width:100%;border:0;cursor:pointer">Buscar mi compra</button>
+      </form>${ayuda}`);
+    document.getElementById("f").onsubmit = (e) => {
+      e.preventDefault();
+      const n = document.getElementById("n").value.replace(/\D/g, "");
+      if (n) location.search = `?payment_id=${n}`;
+    };
     return;
   }
   try {
