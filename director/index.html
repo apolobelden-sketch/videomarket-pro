@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#c2410c">
+<title>Director · Ediciones Guizar</title>
+<style>
+:root{--bg:#fbf7f1;--card:#fff;--tx:#2a2420;--sub:#6f655d;--line:#ece3d8;--ac:#c2410c;--ac2:#fde7d9;--yo:#c2410c;--ok:#15803d;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root{--bg:#17130f;--card:#221c17;--tx:#f4ede6;--sub:#b7aca1;--line:#3a3129;--ac:#fb923c;--ac2:#3b2416;--yo:#9a3412;--ok:#4ade80;--bad:#f87171}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx);display:flex;flex-direction:column}
+header{padding:12px 16px;border-bottom:1px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:space-between;gap:8px}
+header h1{margin:0;font-size:1.1rem}
+header small{color:var(--sub);display:block;font-size:.8rem}
+header button{border:0;background:var(--ac2);color:var(--tx);border-radius:10px;padding:8px 12px;font:inherit;font-weight:600;cursor:pointer}
+#chat{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;max-width:760px;width:100%;margin:0 auto}
+.m{max-width:88%;padding:10px 13px;border-radius:14px;line-height:1.45;white-space:pre-wrap;word-break:break-word;font-size:.97rem}
+.yo{background:var(--yo);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.dir{background:var(--card);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:4px}
+.dir.err{color:var(--bad)}
+.dir table{border-collapse:collapse;font-size:.85rem;margin:6px 0;display:block;overflow-x:auto;white-space:nowrap}
+.dir td,.dir th{border:1px solid var(--line);padding:4px 6px;text-align:left}
+.dir a{color:var(--ac);word-break:break-all}
+.adj{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.adj a.btn,.conf button{display:block;text-align:center;text-decoration:none;font-weight:700;padding:11px;border-radius:10px;background:var(--ac2);color:var(--tx);border:0;font:inherit;cursor:pointer;white-space:normal}
+.adj img{width:100%;max-width:340px;border-radius:12px;border:1px solid var(--line);background:#fff}
+.conf{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.conf .det{font-size:.85rem;color:var(--sub);margin:4px 0 10px;white-space:pre-wrap}
+.conf .si{background:var(--ac);color:#fff}
+.conf .fila{display:flex;gap:8px}.conf .fila button{flex:1}
+.pensando{color:var(--sub);font-style:italic}
+.sugerencias{display:flex;gap:6px;overflow-x:auto;padding:8px 16px 0;max-width:760px;width:100%;margin:0 auto}
+.sugerencias button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:999px;padding:7px 12px;font:inherit;font-size:.85rem;cursor:pointer}
+form{display:flex;gap:8px;padding:10px 16px 14px;max-width:760px;width:100%;margin:0 auto}
+textarea{flex:1;resize:none;min-height:46px;max-height:140px;padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--tx);font:inherit}
+form button{border:0;border-radius:14px;background:var(--ac);color:#fff;font:inherit;font-weight:700;padding:0 18px;cursor:pointer;min-width:64px}
+form button:disabled{opacity:.5}
+#acceso{max-width:420px;margin:40px auto;padding:20px;background:var(--card);border:1px solid var(--line);border-radius:16px}
+#acceso input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;margin:10px 0;background:var(--bg);color:var(--tx)}
+#acceso button{width:100%;border:0;border-radius:10px;background:var(--ac);color:#fff;font:inherit;font-weight:700;padding:12px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>🧠 Director</h1><small>Tu entorno: apps, pedidos, libros, imágenes y QR</small></div>
+  <button id="limpiar" type="button" hidden>Nueva charla</button>
+</header>
+
+<div id="acceso" hidden>
+  <b>🔒 Código de acceso</b>
+  <p style="color:var(--sub);margin:6px 0 0">Es el mismo código de la Fábrica de Apps.</p>
+  <input id="claveIn" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="xxxx-xxxx-xxxx">
+  <button id="claveOk" type="button">Entrar</button>
+  <p id="claveError" style="color:var(--bad)" hidden></p>
+</div>
+
+<div id="app" hidden style="display:contents">
+  <div id="chat"></div>
+  <div class="sugerencias" id="sugerencias">
+    <button type="button">¿Qué sabes hacer?</button>
+    <button type="button">¿Cuánto vendieron mis apps esta semana?</button>
+    <button type="button">¿Qué libros tengo a la venta?</button>
+    <button type="button">Hazme un QR del catálogo de libros</button>
+    <button type="button">Crea un menú para una taquería</button>
+  </div>
+  <form id="form">
+    <textarea id="txt" rows="1" placeholder="Escribe un encargo…" enterkeyhint="send"></textarea>
+    <button id="enviar" type="submit">Enviar</button>
+  </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+const FN = "https://pnjglzuxsyahxcbgjwvq.supabase.co/functions/v1/director";
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }, del(k) { try { localStorage.removeItem(k); } catch (e) {} } };
+
+let clave = ls.get("director_clave") || "";
+let historial = [];
+try { historial = JSON.parse(ls.get("director_historial") || "[]"); } catch (e) { historial = []; }
+const guardarHist = () => ls.set("director_historial", JSON.stringify(historial.slice(-30)));
+
+// Texto con formato sencillo: **negritas**, enlaces y tablas tipo markdown
+function formato(t) {
+  let h = esc(t);
+  const lineas = h.split("\n"); const out = []; let tabla = [];
+  const cerrar = () => { if (tabla.length) { out.push("<table>" + tabla.map((f, i) => "<tr>" + f.map((c) => i === 0 ? `<th>${c}</th>` : `<td>${c}</td>`).join("") + "</tr>").join("") + "</table>"); tabla = []; } };
+  for (const l of lineas) {
+    if (/^\s*\|.*\|\s*$/.test(l)) { if (!/^\s*\|[\s:|-]+\|\s*$/.test(l)) tabla.push(l.trim().slice(1, -1).split("|").map((c) => c.trim())); continue; }
+    cerrar(); out.push(l);
+  }
+  cerrar();
+  h = out.join("\n").replace(/<\/table>\n/g, "</table>");
+  h = h.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/^#{1,4}\s*(.+)$/gm, "<b>$1</b>");
+  h = h.replace(/(https?:\/\/[^\s<)|]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+  return h;
+}
+
+function tarjetaQR(texto, titulo) {
+  if (typeof qrcode !== "function") return null;
+  const qr = qrcode(0, "M"); qr.addData(texto); qr.make();
+  const n = qr.getModuleCount(), W = 900, celda = Math.floor(640 / (n + 8)), lado = celda * (n + 8), H = 260 + lado + 120;
+  const c = document.createElement("canvas"); c.width = W; c.height = H; const x = c.getContext("2d");
+  x.fillStyle = "#fff"; x.fillRect(0, 0, W, H); x.fillStyle = "#c2410c"; x.fillRect(0, 0, W, 20);
+  x.textAlign = "center"; x.fillStyle = "#2a2420";
+  let tam = 60; const tit = (titulo || "Escanea el código").slice(0, 40);
+  x.font = `bold ${tam}px system-ui, sans-serif`;
+  while (x.measureText(tit).width > W - 80 && tam > 28) { tam -= 4; x.font = `bold ${tam}px system-ui, sans-serif`; }
+  x.fillText(tit, W / 2, 130);
+  x.font = "600 34px system-ui, sans-serif"; x.fillStyle = "#c2410c"; x.fillText("Escanea con la cámara de tu celular", W / 2, 195);
+  const ox = Math.round((W - lado) / 2), oy = 225; x.fillStyle = "#000";
+  for (let r = 0; r < n; r++) for (let k = 0; k < n; k++) if (qr.isDark(r, k)) x.fillRect(ox + (k + 4) * celda, oy + (r + 4) * celda, celda, celda);
+  x.fillStyle = "#6f655d"; x.font = "22px system-ui, sans-serif";
+  const corto = texto.replace(/^https?:\/\//, ""); x.fillText(corto.length > 70 ? corto.slice(0, 67) + "…" : corto, W / 2, oy + lado + 60);
+  return c.toDataURL("image/png");
+}
+
+function burbuja(rol, texto, extra) {
+  const d = document.createElement("div");
+  d.className = "m " + (rol === "yo" ? "yo" : "dir") + (extra?.error ? " err" : "");
+  if (rol === "yo") d.textContent = texto; else d.innerHTML = formato(texto);
+  const adj = extra?.adjuntos || [];
+  if (adj.length) {
+    const caja = document.createElement("div"); caja.className = "adj";
+    for (const a of adj) {
+      if (a.tipo === "enlace" && /^https:\/\//.test(a.url)) {
+        const e = document.createElement("a"); e.className = "btn"; e.href = a.url; e.target = "_blank"; e.rel = "noopener"; e.textContent = a.titulo || a.url; caja.append(e);
+      } else if (a.tipo === "imagen" && /^https:\/\//.test(a.url)) {
+        const im = document.createElement("img"); im.src = a.url; im.alt = a.titulo || "Imagen"; im.loading = "lazy";
+        const e = document.createElement("a"); e.href = a.url; e.target = "_blank"; e.rel = "noopener"; e.append(im); caja.append(e);
+      } else if (a.tipo === "qr" && a.texto) {
+        const src = tarjetaQR(a.texto, a.titulo);
+        if (src) { const im = document.createElement("img"); im.src = src; im.alt = "Código QR"; caja.append(im);
+          const nota = document.createElement("small"); nota.style.color = "var(--sub)"; nota.textContent = "Mantén presionada la imagen para guardarla o compartirla."; caja.append(nota); }
+      }
+    }
+    d.append(caja);
+  }
+  if (extra?.confirmar) {
+    const c = extra.confirmar, box = document.createElement("div"); box.className = "conf";
+    box.innerHTML = `<b>${esc(c.titulo)}</b><div class="det">${esc(String(c.detalle || "").slice(0, 600))}</div><div class="fila"><button class="si" type="button">✅ Sí, hazlo</button><button class="no" type="button">✕ No</button></div>`;
+    const resolver = async (si) => {
+      box.querySelectorAll("button").forEach((b) => b.disabled = true);
+      box.querySelector(".fila").innerHTML = `<span class="pensando">${si ? "Haciéndolo… (puede tardar hasta un minuto)" : "Cancelando…"}</span>`;
+      await mandar({ confirmar: { mision: c.mision, si } }, si ? "✅ Sí, hazlo" : "✕ No");
+      box.querySelector(".fila").innerHTML = "";
+    };
+    box.querySelector(".si").onclick = () => resolver(true);
+    box.querySelector(".no").onclick = () => resolver(false);
+    d.append(box);
+  }
+  $("chat").append(d);
+  $("chat").scrollTop = $("chat").scrollHeight;
+  return d;
+}
+
+async function mandar(cuerpo, textoYo) {
+  if (textoYo) { burbuja("yo", textoYo); }
+  const esp = burbuja("dir", "…"); esp.classList.add("pensando"); esp.textContent = "Pensando…";
+  $("enviar").disabled = true;
+  try {
+    const r = await fetch(FN, { method: "POST", headers: { "Content-Type": "application/json", "x-fabrica-clave": clave }, body: JSON.stringify(cuerpo) });
+    const d = await r.json().catch(() => ({}));
+    esp.remove();
+    if (r.status === 401 && d.candado) { clave = ""; ls.del("director_clave"); pedirClave("El código no es correcto."); return; }
+    if (!r.ok) { burbuja("dir", "⚠️ " + (d.error || "Error " + r.status), { error: true }); return; }
+    burbuja("dir", d.texto || "", d);
+    if (cuerpo.mensaje) historial.push({ rol: "yo", texto: cuerpo.mensaje });
+    if (d.texto) historial.push({ rol: "director", texto: d.texto });
+    guardarHist();
+  } catch (e) {
+    esp.remove(); burbuja("dir", "⚠️ No hay conexión. Revisa tu internet e intenta de nuevo.", { error: true });
+  } finally { $("enviar").disabled = false; }
+}
+
+$("form").onsubmit = (e) => {
+  e.preventDefault();
+  const t = $("txt").value.trim(); if (!t) return;
+  $("txt").value = ""; $("txt").style.height = "";
+  $("sugerencias").hidden = true;
+  mandar({ mensaje: t, historial: historial.slice(-10) }, t);
+};
+$("txt").addEventListener("input", () => { const t = $("txt"); t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight, 140) + "px"; });
+$("txt").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey && !/Android|iPhone/i.test(navigator.userAgent)) { e.preventDefault(); $("form").requestSubmit(); } });
+document.querySelectorAll("#sugerencias button").forEach((b) => b.onclick = () => { $("txt").value = b.textContent; $("txt").focus(); });
+$("limpiar").onclick = () => { historial = []; guardarHist(); $("chat").innerHTML = ""; $("sugerencias").hidden = false; saludo(); };
+
+function pedirClave(msg) {
+  $("app").hidden = true; $("acceso").hidden = false; $("limpiar").hidden = true;
+  $("claveError").hidden = !msg; $("claveError").textContent = msg || "";
+  $("claveIn").focus();
+}
+$("claveOk").onclick = () => {
+  const v = $("claveIn").value.trim().toLowerCase(); if (v.length < 6) return;
+  clave = v; ls.set("director_clave", v); $("claveIn").value = ""; iniciar();
+};
+$("claveIn").addEventListener("keydown", (e) => { if (e.key === "Enter") $("claveOk").click(); });
+
+function saludo() { burbuja("dir", "Hola, Jairo. Dime qué necesitas: crear una app para un negocio, ver pedidos y ventas, revisar tus libros, generar una imagen o hacer un QR."); }
+function iniciar() {
+  if (!clave) clave = ls.get("fabrica_clave") || "";
+  if (!clave) return pedirClave();
+  $("acceso").hidden = true; $("app").hidden = false; $("limpiar").hidden = false;
+  $("chat").innerHTML = "";
+  if (historial.length) { for (const h of historial.slice(-12)) burbuja(h.rol === "yo" ? "yo" : "dir", h.texto); $("sugerencias").hidden = true; }
+  else saludo();
+}
+iniciar();
+</script>
+</body>
+</html>
