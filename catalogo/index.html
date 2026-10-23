@@ -109,6 +109,15 @@ footer{text-align:center;color:var(--sub);font-size:.85rem;margin-top:42px}
           <span class="boton">Ver cuaderno</span>
         </div>
       </a>
+      <a class="libro" href="../libro-trazos/">
+        <div class="portada"><img loading="lazy" alt="Portada de Mis Primeros Trazos y Números" src="https://res.cloudinary.com/dgdw8fbku/image/upload/pg_1,dn_150/w_400,q_80/ediciones-guizar/trazos/muestra.jpg"></div>
+        <div class="cuerpo">
+          <p class="titulo">Mis Primeros Trazos y Números</p>
+          <p class="desc">30 páginas para 3 a 6 años: trazos, números del 1 al 10, vocales, contar y diploma.</p>
+          <div class="pie"><span class="precio">$59</span><span class="etq">PDF</span></div>
+          <span class="boton">Ver libro</span>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -170,7 +179,7 @@ footer{text-align:center;color:var(--sub);font-size:.85rem;margin-top:42px}
 <script>
 // Los libros de Amazon se leen de la misma lista que usa la tienda (se actualizan solos)
 const SUPABASE_URL = "https://pnjglzuxsyahxcbgjwvq.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuamdsenV4c3lhaHhjYmdqd3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1NjI0ODcsImV4cCI6MjA5NzEzODQ4N30.iD-yLgcC5GiGWQseAykLnONTCr1qA7kXSWgqVQ3-gfM";
+const SUPABASE_KEY = "sb_publishable_f3roew_gvKiClDkdKYieYg_d0_7fWUk";
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const EMOJI = { ninos: "🖍️", adultos: "📖" };
 
@@ -178,7 +187,7 @@ async function cargarAmazon() {
   const caja = document.getElementById("rejillaAmazon");
   try {
     const r = await fetch(`${SUPABASE_URL}/rest/v1/tienda_libros_autor?select=nombre,grupo,imagen,formatos,orden&activo=eq.true&order=grupo.desc,orden.asc`, {
-      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` },
+      headers: { apikey: SUPABASE_KEY },
     });
     if (!r.ok) throw new Error();
     const libros = await r.json();
