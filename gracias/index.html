@@ -51,8 +51,12 @@ async function revisar(intento = 0) {
     const r = await fetch(`${FN}?accion=descargar&payment_id=${encodeURIComponent(pid)}`);
     const d = await r.json();
     if (d.estado === "approved" && d.url) {
-      pintar(`<div class="emo">🎉</div><h1>¡Gracias por tu compra!</h1><p>Tu libro <b>${d.titulo}</b> está listo.</p>
-        <a class="btn" href="${d.url}">⬇️ Descargar mi libro (PDF)</a>
+      const varios = Array.isArray(d.archivos) && d.archivos.length > 1;
+      const botones = varios
+        ? d.archivos.map((a) => `<a class="btn" href="${a.url}" style="margin-bottom:10px">⬇️ ${a.titulo} (PDF)</a>`).join("")
+        : `<a class="btn" href="${d.url}">⬇️ Descargar mi libro (PDF)</a>`;
+      pintar(`<div class="emo">🎉</div><h1>¡Gracias por tu compra!</h1><p>${varios ? "Tu paquete" : "Tu libro"} <b>${d.titulo}</b> está listo.${varios ? " Descarga cada PDF con su botón:" : ""}</p>
+        ${botones}
         <p style="font-size:.9rem">Guarda esta página: puedes volver a abrirla para descargarlo otra vez.</p>${ayuda}`);
     } else if (d.estado === "pending" || d.estado === "in_process") {
       pintar(`<div class="emo">⏳</div><h1>Tu pago está en proceso</h1><p>Si pagaste en OXXO o por transferencia, Mercado Pago tarda un poco en aprobarlo.</p>
