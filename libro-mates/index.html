@@ -71,7 +71,7 @@ main{padding:1rem .6rem 3rem}
 <main id="libro"></main>
 <script>
 const URL_SB='https://pnjglzuxsyahxcbgjwvq.supabase.co';
-const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuamdsenV4c3lhaHhjYmdqd3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1NjI0ODcsImV4cCI6MjA5NzEzODQ4N30.iD-yLgcC5GiGWQseAykLnONTCr1qA7kXSWgqVQ3-gfM';
+const KEY='sb_publishable_f3roew_gvKiClDkdKYieYg_d0_7fWUk';
 const LIBRO=(()=>{const l=new URLSearchParams(location.search).get('libro')||'matematicas-1o';return /^[a-z0-9-]{3,40}$/.test(l)?l:'matematicas-1o'})();
 
 const quitar=s=>String(s==null?'':s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
