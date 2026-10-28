@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#c2410c">
+<title>Academia del Director</title>
+<style>
+:root{--bg:#fbf7f1;--card:#fff;--tx:#2a2420;--sub:#6f655d;--line:#ece3d8;--ac:#c2410c;--ac2:#fde7d9;--ok:#15803d;--ok2:#dcfce7;--bad:#b91c1c;--bad2:#fee2e2;--warn:#a16207;--warn2:#fef3c7}
+@media (prefers-color-scheme:dark){:root{--bg:#17130f;--card:#221c17;--tx:#f4ede6;--sub:#b7aca1;--line:#3a3129;--ac:#fb923c;--ac2:#3b2416;--ok:#4ade80;--ok2:#14301f;--bad:#f87171;--bad2:#3a1515;--warn:#facc15;--warn2:#33290d}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.5}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+header h1{margin:0;font-size:1.05rem}
+header small{display:block;color:var(--sub);font-size:.78rem}
+main{max-width:720px;margin:0 auto;padding:14px 16px 96px}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:5;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom)}
+nav button{border:0;background:none;color:var(--sub);font:inherit;font-size:.72rem;padding:8px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+nav button span{font-size:1.25rem;line-height:1}
+nav button.on{color:var(--ac);font-weight:700}
+h2{font-size:1.15rem;margin:4px 0 12px}
+h3{font-size:1rem;margin:0 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.sub{color:var(--sub);font-size:.88rem}
+.btn{display:block;width:100%;border:0;border-radius:12px;background:var(--ac);color:#fff;font:inherit;font-weight:700;padding:13px;cursor:pointer;text-align:center;text-decoration:none}
+.btn.sec{background:var(--ac2);color:var(--tx)}
+.btn:disabled{opacity:.6}
+.fila{display:flex;gap:8px}.fila>*{flex:1}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
+.kpi b{display:block;font-size:1.35rem}
+.kpi small{color:var(--sub);font-size:.78rem}
+.barra{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:6px}
+.barra i{display:block;height:100%;background:var(--ac);border-radius:99px}
+.mat{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.mat:last-child{border-bottom:0}
+.dia{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:var(--card);cursor:pointer;width:100%;text-align:left;font:inherit;color:inherit}
+.dia .n{flex:0 0 auto;width:38px;height:38px;border-radius:10px;background:var(--ac2);display:grid;place-items:center;font-weight:700;font-size:.8rem}
+.dia .t{flex:1;min-width:0}
+.dia .t b{display:block;font-size:.95rem}
+.chip{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:99px;background:var(--ac2);color:var(--tx);margin:2px 4px 2px 0}
+.chip.ok{background:var(--ok2);color:var(--ok)}.chip.warn{background:var(--warn2);color:var(--warn)}.chip.bad{background:var(--bad2);color:var(--bad)}
+.parte{margin:12px 0}
+.parte h4{margin:0 0 4px;font-size:.88rem;color:var(--ac)}
+textarea,input,select{width:100%;font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px}
+textarea{min-height:120px;resize:vertical}
+.retro{white-space:pre-wrap;background:var(--ac2);border-radius:12px;padding:12px;margin-top:10px}
+.oculto{filter:blur(6px);cursor:pointer;user-select:none}
+.tarjeta{min-height:150px;display:flex;flex-direction:column;justify-content:center;text-align:center;font-size:1.05rem}
+.err{color:var(--bad);font-weight:600}
+.okt{color:var(--ok);font-weight:600}
+.cargando{color:var(--sub);font-style:italic}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:12px}
+.tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:99px;padding:7px 12px;font:inherit;font-size:.85rem;cursor:pointer}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.msg{white-space:pre-wrap;padding:10px 12px;border-radius:12px;margin:6px 0;max-width:92%}
+.msg.yo{background:var(--ac);color:#fff;margin-left:auto}
+.msg.tu{background:var(--card);border:1px solid var(--line)}
+a{color:var(--ac)}
+.enfoque header,.enfoque nav{display:none}
+.enfoque main{padding-top:20px}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>🎓 Academia del Director</h1><small id="subt">Tu escuela personal</small></div>
+  <button class="btn sec" id="salir" style="width:auto;padding:8px 12px" hidden>Salir</button>
+</header>
+
+<main>
+  <!-- Entrar -->
+  <section id="v-entrar" hidden>
+    <div class="card">
+      <h2>Entrar</h2>
+      <p class="sub">Escribe tu código de acceso del Director. Se guarda solo en este teléfono para no pedírtelo cada vez; tu avance vive en tu base de datos, no en el teléfono.</p>
+      <input id="clave" type="password" autocomplete="current-password" placeholder="Código de acceso">
+      <p></p><button class="btn" id="entrar">Entrar</button>
+      <p class="err" id="entrarErr"></p>
+    </div>
+  </section>
+
+  <!-- Inicio -->
+  <section id="v-inicio" hidden></section>
+  <!-- Plan -->
+  <section id="v-plan" hidden></section>
+  <!-- Lección -->
+  <section id="v-leccion" hidden></section>
+  <!-- Tarjetas -->
+  <section id="v-tarjetas" hidden></section>
+  <!-- Biblioteca -->
+  <section id="v-biblio" hidden></section>
+  <!-- Tutor -->
+  <section id="v-tutor" hidden></section>
+  <!-- Práctica -->
+  <section id="v-practica" hidden></section>
+</main>
+
+<nav id="nav" hidden>
+  <button data-v="inicio" class="on"><span>🏠</span>Inicio</button>
+  <button data-v="plan"><span>🗺️</span>Plan</button>
+  <button data-v="tarjetas"><span>🔁</span>Repaso</button>
+  <button data-v="practica"><span>🧪</span>Práctica</button>
+  <button data-v="tutor"><span>💬</span>Tutor</button>
+</nav>
+
+<script>
+const FN = "https://pnjglzuxsyahxcbgjwvq.supabase.co/functions/v1/estudio";
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = (t) => esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/(https?:\/\/[^\s<)]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+// Solo el código se guarda en el teléfono (comodidad); el avance vive en Supabase. Misma llave que la página del Director.
+const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }, del(k) { try { localStorage.removeItem(k); } catch (e) {} } };
+let clave = ls.get("director_clave") || "";
+let vista = "inicio", temaActual = null, inicioLeccion = 0;
+
+async function api(accion, cuerpo = {}) {
+  const r = await fetch(`${FN}?accion=${accion}`, { method: "POST", headers: { "Content-Type": "application/json", "x-fabrica-clave": clave }, body: JSON.stringify(cuerpo) });
+  const d = await r.json().catch(() => ({ error: "El servidor no respondió bien. Intenta otra vez." }));
+  if (r.status === 401) { salir(); throw new Error("Tu código no es correcto. Vuelve a entrar."); }
+  if (!r.ok || d.error) throw new Error(d.error || `Error ${r.status}`);
+  return d;
+}
+function mostrar(v) {
+  vista = v;
+  for (const s of document.querySelectorAll("main>section")) s.hidden = s.id !== "v-" + v;
+  for (const b of document.querySelectorAll("nav button")) b.classList.toggle("on", b.dataset.v === v);
+  window.scrollTo(0, 0);
+}
+function fallo(cont, e) { cont.innerHTML = `<div class="card"><p class="err">⚠️ ${esc(e.message)}</p><button class="btn sec" onclick="ir('${vista}')">Reintentar</button></div>`; }
+function salir() { ls.del("director_clave"); clave = ""; $("nav").hidden = true; $("salir").hidden = true; mostrar("entrar"); }
+
+// Dictado por voz (Chrome de Android). Si no hay, el micrófono del teclado también sirve.
+let usoVoz = false;
+function botonVoz(idCaja) {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) return `<p class="sub">🎙️ Para dictar, usa el micrófono de tu teclado.</p>`;
+  return `<button class="btn sec" type="button" onclick="dictar('${idCaja}', this)">🎙️ Dictar con voz</button>`;
+}
+function dictar(id, btn) {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const r = new SR(); r.lang = "es-MX"; r.interimResults = false; r.continuous = false;
+  btn.textContent = "🎙️ Escuchando… habla ahora"; btn.disabled = true;
+  r.onresult = (e) => { const t = Array.from(e.results).map((x) => x[0].transcript).join(" "); const c = $(id); c.value = (c.value ? c.value + " " : "") + t; usoVoz = true; };
+  r.onend = () => { btn.textContent = "🎙️ Dictar con voz"; btn.disabled = false; };
+  r.onerror = () => { btn.textContent = "🎙️ No te escuché, toca otra vez"; btn.disabled = false; };
+  r.start();
+}
+
+// ---------- Inicio ----------
+async function inicio() {
+  const c = $("v-inicio"); c.innerHTML = `<p class="cargando">Cargando tu avance…</p>`;
+  try {
+    const p = await api("panel");
+    const pct = p.total_plan ? Math.round((p.completados / p.total_plan) * 100) : 0;
+    const la = p.leccion_actual;
+    c.innerHTML = `
+      ${la ? `<div class="card"><span class="chip">Semana ${la.semana} · día ${la.dia}</span><span class="chip">${esc(la.nombre_materia)}</span>
+        <h2 style="margin-top:6px">${esc(la.titulo)}</h2>
+        <button class="btn" onclick="abrirLeccion(${la.tema_id})">▶️ Estudiar esta lección</button></div>` : `<div class="card"><h2>🎉 Terminaste el plan de 4 semanas</h2><p class="sub">Puedes repasar cualquier lección en el Plan.</p></div>`}
+      ${p.repasos_vencidos ? `<div class="card"><h3>🔁 Tienes ${p.repasos_vencidos} repaso(s) pendiente(s)</h3><p class="sub">Contestar de memoria es lo que más fortalece lo que aprendiste.</p><button class="btn sec" onclick="ir('tarjetas')">Repasar ahora</button></div>` : ""}
+      <div class="kpis">
+        <div class="kpi"><b>${p.completados}/${p.total_plan}</b><small>lecciones del plan completadas</small><div class="barra"><i style="width:${pct}%"></i></div></div>
+        <div class="kpi"><b>${p.racha_dias} 🔥</b><small>días seguidos estudiando</small></div>
+        <div class="kpi"><b>${p.respuestas}</b><small>respuestas corregidas (web y Telegram)</small></div>
+        <div class="kpi"><b>${p.tarjetas_dominadas}/${p.tarjetas_total}</b><small>tarjetas dominadas</small></div>
+        <div class="kpi"><b>${p.minutos_medidos} min</b><small>tiempo medido en esta página</small></div>
+        <div class="kpi"><b>${p.repasos_vencidos}</b><small>repasos vencidos</small></div>
+      </div>
+      <div class="card"><h3>Avance por materia</h3>
+        ${p.materias.map((m) => `<div class="mat"><div style="flex:1"><b>${esc(m.nombre)}</b><div class="barra"><i style="width:${m.temas ? Math.round(m.completados / m.temas * 100) : 0}%"></i></div></div><div class="sub" style="text-align:right">${m.completados}/${m.temas}${m.promedio !== null ? `<br>prom. ${m.promedio}` : ""}</div></div>`).join("")}
+      </div>
+      ${p.errores_frecuentes.length ? `<div class="card"><h3>✍️ Errores que más repites</h3>${p.errores_frecuentes.map((e) => `<div class="sub">• ${esc(e)}</div>`).join("")}</div>` : ""}
+      <div class="card"><h3>Más</h3>
+        <div class="fila"><button class="btn sec" onclick="actividad('diagnostico')">🧪 Prueba de nivel</button><button class="btn sec" onclick="actividad('reto')">⚡ Reto 2 min</button></div><p></p>
+        <div class="fila"><button class="btn sec" onclick="ir('biblio')">📚 Biblioteca</button><button class="btn sec" onclick="historial()">🕘 Historial</button></div><p></p>
+        <div class="fila"><button class="btn sec" onclick="actividad('diario')">✍️ Diario</button><button class="btn sec" onclick="actividad('acertijo')">🧩 Acertijo</button></div><p></p>
+        <button class="btn sec" onclick="exportar()">⬇️ Exportar mis datos de estudio</button>
+      </div>
+      <p class="sub" style="text-align:center">Los números salen de tus registros reales. Si aún no estudias una materia, aparece en cero.</p>`;
+  } catch (e) { fallo(c, e); }
+}
+
+// ---------- Plan ----------
+async function plan() {
+  const c = $("v-plan"); c.innerHTML = `<p class="cargando">Cargando el plan…</p>`;
+  try {
+    const { plan } = await api("plan");
+    const dias = ["", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+    let h = `<h2>🗺️ Plan de 4 semanas</h2><p class="sub">20 minutos de lunes a sábado y hasta 60 el domingo. Si faltas un día, no pasa nada: sigues donde te quedaste.</p>`;
+    for (let s = 1; s <= 4; s++) {
+      const nombres = ["", "Fundamentos", "Conexiones", "Razonamiento y herramientas", "Integración"];
+      h += `<h3 style="margin-top:16px">Semana ${s} · ${nombres[s]}</h3>`;
+      for (const t of plan.filter((x) => x.semana === s)) {
+        const est = t.calificacion !== null ? `<span class="chip ok">✓ ${t.calificacion}/10</span>` : t.visto_en ? `<span class="chip warn">empezada</span>` : "";
+        h += `<button class="dia" onclick="abrirLeccion(${t.id})"><div class="n">${dias[t.dia]}</div><div class="t"><b>${esc(t.titulo)}</b><span class="sub">${esc(t.nombre_materia)}</span> ${est}</div></button>`;
+      }
+    }
+    c.innerHTML = h;
+  } catch (e) { fallo(c, e); }
+}
+
+// ---------- Lección ----------
+async function abrirLeccion(id) {
+  mostrar("leccion"); temaActual = id;
+  const c = $("v-leccion"); c.innerHTML = `<p class="cargando">Preparando tu lección… (la primera vez tarda unos segundos)</p>`;
+  try {
+    const { tema, leccion: l, recursos } = await api("leccion_web", { tema_id: id });
+    inicioLeccion = Date.now(); usoVoz = false;
+    const parte = (ico, tit, txt) => txt ? `<div class="parte"><h4>${ico} ${tit}</h4><div>${fmt(txt)}</div></div>` : "";
+    c.innerHTML = `
+      <div style="display:flex;justify-content:space-between;gap:8px"><button class="btn sec" style="width:auto;padding:8px 12px" onclick="ir('plan')">← Plan</button>
+      <button class="btn sec" style="width:auto;padding:8px 12px" onclick="document.body.classList.toggle('enfoque')">🧘 Modo enfoque</button></div>
+      <div class="card" style="margin-top:10px">
+        <span class="chip">Semana ${tema.semana} · día ${tema.dia}</span><span class="chip">${esc(tema.nombre_materia)}</span><span class="chip">${esc(l.dificultad)}</span>
+        <h2 style="margin-top:6px">${esc(tema.titulo)}</h2>
+        ${parte("💡", "La idea", l.explicacion)}
+        ${parte("🏠", "Ejemplo de la vida diaria", l.ejemplo_cotidiano)}
+        ${parte("🛠️", "En tus proyectos", l.ejemplo_proyecto)}
+        ${parte("⚠️", "Error frecuente", l.error_frecuente)}
+        ${l.lo_clave ? `<div class="retro"><b>Lo clave:</b> ${fmt(l.lo_clave)}</div>` : ""}
+      </div>
+      <div class="card">
+        <h3>🧩 Pregunta para recordar</h3>
+        <p>${fmt(l.pregunta_recuperacion)}</p>
+        <p class="sub">Piénsala sin ver. Luego toca para comprobar.</p>
+        <div class="retro oculto" onclick="this.classList.remove('oculto')">${fmt(l.respuesta_explicada)}</div>
+      </div>
+      <div class="card">
+        <h3>✏️ Ejercicio</h3>
+        <p>${fmt(l.ejercicio)}</p>
+        <textarea id="resp" placeholder="Escribe aquí tu respuesta, con tus palabras. También puedes contestar la pregunta para recordar."></textarea>
+        <p></p>${botonVoz("resp")}<p></p>
+        <button class="btn" id="enviarResp" onclick="enviarEjercicio()">Revisar mi respuesta</button>
+        <div id="retro"></div>
+      </div>
+      ${recursos.length ? `<div class="card"><h3>📎 Para saber más</h3>${recursos.map((r) => `<p>${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.nombre)}</a>` : `<b>${esc(r.nombre)}</b>`}<br><span class="sub">${esc(r.autor || "")} · ${esc(r.acceso)} · ${esc(r.idioma)}</span></p>`).join("")}</div>` : ""}
+      ${l.proximo_paso ? `<div class="card"><h3>➡️ Próximo paso</h3><p>${fmt(l.proximo_paso)}</p></div>` : ""}
+      <button class="btn sec" onclick="ir('tutor', ${id})">💬 Preguntarle al tutor sobre esta lección</button>`;
+  } catch (e) { fallo(c, e); }
+}
+async function enviarEjercicio() {
+  const t = $("resp").value.trim(); const out = $("retro"), b = $("enviarResp");
+  if (t.length < 2) { out.innerHTML = `<p class="err">Escribe tu respuesta primero.</p>`; return; }
+  b.disabled = true; b.textContent = "Revisando…"; out.innerHTML = `<p class="cargando">Tu tutor está revisando…</p>`;
+  try {
+    const r = await api("ejercicio_web", { tema_id: temaActual, respuesta: t, voz: usoVoz, segundos: Math.round((Date.now() - inicioLeccion) / 1000) });
+    out.innerHTML = `<div class="retro">${fmt(r.texto)}</div>
+      <details style="margin-top:10px"><summary>Ver una respuesta de ejemplo</summary><div class="retro">${fmt(r.solucion)}</div></details>
+      <p></p><button class="btn sec" onclick="ir('plan')">Volver al plan</button>`;
+    b.textContent = "Revisada ✓";
+  } catch (e) { out.innerHTML = `<p class="err">⚠️ ${esc(e.message)}</p>`; b.disabled = false; b.textContent = "Revisar mi respuesta"; }
+}
+
+// ---------- Actividades (prueba de nivel, reto, diario, acertijo) ----------
+async function actividad(tipo) {
+  mostrar("leccion"); temaActual = null;
+  const c = $("v-leccion"); c.innerHTML = `<p class="cargando">Preparando la actividad…</p>`;
+  try {
+    const a = await api("actividad_web", { tipo });
+    inicioLeccion = Date.now(); usoVoz = false;
+    c.innerHTML = `<button class="btn sec" style="width:auto;padding:8px 12px" onclick="ir('inicio')">← Inicio</button>
+      <div class="card" style="margin-top:10px"><h2>🎯 ${esc(a.nombre)}</h2><div>${fmt(a.leccion)}</div></div>
+      <div class="card"><h3>✏️ Tu turno</h3><p>${fmt(a.ejercicio)}</p>
+        <textarea id="resp" placeholder="Escribe tu respuesta aquí"></textarea><p></p>${botonVoz("resp")}<p></p>
+        <button class="btn" id="enviarResp" onclick="enviarActividad(${a.sesion})">Revisar mi respuesta</button><div id="retro"></div></div>`;
+  } catch (e) { fallo(c, e); }
+}
+async function enviarActividad(sesion) {
+  const t = $("resp").value.trim(); const out = $("retro"), b = $("enviarResp");
+  if (t.length < 2) { out.innerHTML = `<p class="err">Escribe tu respuesta primero.</p>`; return; }
+  b.disabled = true; b.textContent = "Revisando…";
+  try {
+    const r = await api("responder_web", { sesion, respuesta: t, voz: usoVoz, segundos: Math.round((Date.now() - inicioLeccion) / 1000) });
+    out.innerHTML = `<div class="retro">${fmt(r.texto)}</div><p></p><button class="btn sec" onclick="ir('inicio')">Volver al inicio</button>`;
+    b.textContent = "Revisada ✓";
+  } catch (e) { out.innerHTML = `<p class="err">⚠️ ${esc(e.message)}</p>`; b.disabled = false; b.textContent = "Revisar mi respuesta"; }
+}
+
+// ---------- Tarjetas de repaso ----------
+let cola = [];
+async function tarjetas() {
+  const c = $("v-tarjetas"); c.innerHTML = `<p class="cargando">Buscando tus repasos…</p>`;
+  try {
+    const d = await api("tarjetas"); cola = d.pendientes;
+    const cuenta = (n) => d.todas.filter((x) => x.dominio === n).length;
+    c.innerHTML = `<h2>🔁 Repaso</h2><p class="sub">Contesta de memoria, luego voltea la tarjeta y di qué tan bien te fue. Los días de espera (${d.intervalos.join(", ")}…) son una guía, no una fórmula perfecta.</p>
+      <div class="kpis"><div class="kpi"><b>${d.pendientes.length}</b><small>para hoy</small></div><div class="kpi"><b>${cuenta("dominada")}</b><small>dominadas</small></div><div class="kpi"><b>${cuenta("aprendiendo")}</b><small>aprendiendo</small></div><div class="kpi"><b>${cuenta("nueva")}</b><small>nuevas</small></div></div>
+      <div id="tj"></div>`;
+    siguienteTarjeta();
+  } catch (e) { fallo(c, e); }
+}
+function siguienteTarjeta() {
+  const box = $("tj"); const t = cola[0];
+  if (!t) { box.innerHTML = `<div class="card tarjeta"><b>✅ No tienes repasos pendientes hoy</b><span class="sub">Cada lección agrega tarjetas nuevas. Vuelve mañana.</span></div>`; return; }
+  box.innerHTML = `<div class="card tarjeta"><span class="sub">${esc(t.materia)} · quedan ${cola.length}</span><p><b>${fmt(t.pregunta)}</b></p>
+    <div id="resT" class="retro oculto" onclick="this.classList.remove('oculto');document.getElementById('cal').hidden=false">${fmt(t.respuesta)}</div></div>
+    <div id="cal" hidden><p class="sub" style="text-align:center">¿Cómo te fue?</p><div class="fila">
+      <button class="btn sec" onclick="calificar(${t.id},'mal')">😕 No me acordé</button>
+      <button class="btn sec" onclick="calificar(${t.id},'regular')">🤔 Más o menos</button>
+      <button class="btn" onclick="calificar(${t.id},'bien')">😀 Bien</button></div></div>`;
+}
+async function calificar(id, resultado) {
+  try { await api("repasar", { id, resultado }); cola.shift(); siguienteTarjeta(); }
+  catch (e) { $("tj").insertAdjacentHTML("beforeend", `<p class="err">⚠️ ${esc(e.message)}</p>`); }
+}
+
+// ---------- Biblioteca ----------
+async function biblio() {
+  mostrar("biblio");
+  const c = $("v-biblio"); c.innerHTML = `<p class="cargando">Cargando la biblioteca…</p>`;
+  try {
+    const { recursos } = await api("recursos");
+    const mats = { ia: "🤖 Integración de IA", mente: "🧠 Aprender y pensar", mate: "🔢 Matemáticas", escritura: "✍️ Escritura" };
+    const est = (r) => r.estado_url === "verificado" ? `<span class="chip ok">enlace verificado</span>` : r.url ? `<span class="chip warn">${esc(r.estado_url)}</span>` : `<span class="chip">sin enlace (libro)</span>`;
+    const acc = (a) => /pago/.test(a) && !/gratis/.test(a) ? "bad" : /cuenta|certificado/.test(a) ? "warn" : "ok";
+    let h = `<button class="btn sec" style="width:auto;padding:8px 12px" onclick="ir('inicio')">← Inicio</button><h2 style="margin-top:10px">📚 Biblioteca de cursos y recursos</h2><p class="sub">Solo recursos reales. La página revisa que cada enlace abra.</p>`;
+    for (const [m, n] of Object.entries(mats)) {
+      h += `<h3 style="margin-top:14px">${n}</h3>`;
+      for (const r of recursos.filter((x) => x.materia === m)) h += `<div class="card"><b>${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.nombre)}</a>` : esc(r.nombre)}</b>
+        <div class="sub">${esc(r.tipo)} · ${esc(r.autor || "")} · ${esc(r.idioma)} · ${esc(r.nivel)}${r.duracion ? " · " + esc(r.duracion) : ""}</div>
+        <p style="margin:6px 0">${esc(r.descripcion || "")}</p><span class="chip ${acc(r.acceso)}">${esc(r.acceso)}</span>${est(r)}${r.verificado_en ? `<span class="sub"> revisado ${new Date(r.verificado_en).toLocaleDateString("es-MX")}</span>` : ""}</div>`;
+    }
+    h += `<button class="btn sec" id="verif" onclick="verificar()">🔎 Volver a revisar los enlaces</button>`;
+    c.innerHTML = h;
+  } catch (e) { fallo(c, e); }
+}
+async function verificar() { const b = $("verif"); b.disabled = true; b.textContent = "Revisando enlaces…"; try { const r = await api("verificar_recursos"); b.textContent = `✓ ${r.verificados} de ${r.revisados} enlaces abren`; setTimeout(biblio, 1200); } catch (e) { b.textContent = "⚠️ " + e.message; } }
+
+// ---------- Tutor ----------
+let temaTutor = null;
+function tutor(tema) {
+  temaTutor = tema || null;
+  const c = $("v-tutor");
+  c.innerHTML = `<h2>💬 Tu tutor</h2><p class="sub">Pregúntale lo que no entiendas, pídele un ejercicio o que corrija un texto. Si no sabe algo, te lo dice.${temaTutor ? " Ahora sabe qué lección estás viendo." : ""}</p>
+    <div id="chat"></div>
+    <textarea id="preg" placeholder="Ej.: explícame otra vez qué es un webhook, o corrige este texto: …" style="min-height:90px"></textarea><p></p>
+    ${botonVoz("preg")}<p></p><button class="btn" id="mandar" onclick="preguntar()">Preguntar</button>
+    <div class="fila" style="margin-top:8px"><button class="btn sec" onclick="sugerir('Dame un ejercicio corto de porcentajes con números de ejemplo')">Ejercicio de mate</button><button class="btn sec" onclick="sugerir('Corrige este texto y explícame cada cambio: ')">Corregir texto</button></div>`;
+}
+function sugerir(t) { $("preg").value = t; $("preg").focus(); }
+async function preguntar() {
+  const q = $("preg").value.trim(); if (q.length < 3) return;
+  const chat = $("chat"), b = $("mandar");
+  chat.insertAdjacentHTML("beforeend", `<div class="msg yo">${esc(q)}</div><div class="msg tu cargando" id="pens">Pensando…</div>`);
+  $("preg").value = ""; b.disabled = true;
+  try { const r = await api("tutor", { pregunta: q, tema_id: temaTutor }); $("pens").outerHTML = `<div class="msg tu">${fmt(r.respuesta)}</div>`; }
+  catch (e) { $("pens").outerHTML = `<div class="msg tu err">⚠️ ${esc(e.message)}</div>`; }
+  b.disabled = false; window.scrollTo(0, document.body.scrollHeight);
+}
+
+// ---------- Práctica que se califica sola (sin IA) ----------
+const rnd = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+const dinero = (n) => "$" + n.toLocaleString("es-MX", { maximumFractionDigits: 2 });
+let prob = null;
+function practica(tipo = "porcentaje") {
+  const c = $("v-practica");
+  const tipos = { porcentaje: "Porcentajes", comision: "Comisiones", regla3: "Regla de tres", margen: "Ganancia y margen", json: "Revisar JSON", http: "Códigos HTTP" };
+  c.innerHTML = `<h2>🧪 Práctica rápida</h2><p class="sub">Estos ejercicios se califican solos, al instante. Los números son de ejemplo (ficticios).</p>
+    <div class="tabs">${Object.entries(tipos).map(([k, v]) => `<button class="${k === tipo ? "on" : ""}" onclick="practica('${k}')">${v}</button>`).join("")}</div><div id="ej"></div>`;
+  if (tipo === "json") return ejJSON();
+  if (tipo === "http") return ejHTTP();
+  nuevoProblema(tipo);
+}
+function nuevoProblema(tipo) {
+  let p;
+  if (tipo === "porcentaje") { const pc = [10, 15, 20, 25, 30, 50][rnd(0, 5)], v = rnd(2, 40) * 50; p = { q: `¿Cuánto es el ${pc}% de ${dinero(v)}?`, a: v * pc / 100, e: `${pc}% = ${pc}/100 = ${pc / 100}. Entonces ${dinero(v)} × ${pc / 100} = ${dinero(v * pc / 100)}. Truco: el 10% es mover el punto un lugar (${dinero(v / 10)}).` }; }
+  if (tipo === "comision") { const pc = [3, 5, 8, 10, 12][rnd(0, 4)], v = rnd(4, 60) * 25; p = { q: `Un cliente compra con tu enlace de afiliado un producto de ${dinero(v)}. Tu comisión es del ${pc}%. ¿Cuánto ganas de comisión?`, a: v * pc / 100, e: `Comisión = venta × porcentaje = ${dinero(v)} × ${pc / 100} = ${dinero(v * pc / 100)}. Ojo: la venta (${dinero(v)}) es del vendedor; tu ingreso es solo la comisión.` }; }
+  if (tipo === "regla3") { const vis = rnd(2, 9) * 100, vent = rnd(2, 9), meta = rnd(10, 40) * 100; p = { q: `Si ${vis} visitas a tu página te dan ${vent} ventas, ¿cuántas ventas esperarías con ${meta} visitas? (misma proporción)`, a: vent * meta / vis, e: `Regla de tres: ${vis} → ${vent}, ${meta} → x. x = ${meta} × ${vent} ÷ ${vis} = ${Math.round(vent * meta / vis * 100) / 100}. Es una estimación: en la realidad la proporción cambia.` }; }
+  if (tipo === "margen") { const costo = rnd(3, 20) * 5, precio = costo + rnd(2, 20) * 5; p = { q: `Un cuaderno te cuesta ${dinero(costo)} hacerlo y lo vendes en ${dinero(precio)}. ¿Qué margen de ganancia tienes en porcentaje? (redondea a un decimal)`, a: Math.round((precio - costo) / precio * 1000) / 10, tol: 0.15, e: `Ganancia = ${dinero(precio)} − ${dinero(costo)} = ${dinero(precio - costo)}. Margen = ganancia ÷ precio × 100 = ${Math.round((precio - costo) / precio * 1000) / 10}%. No es lo mismo que el aumento sobre el costo (${Math.round((precio - costo) / costo * 1000) / 10}%).` }; }
+  prob = { ...p, tipo };
+  $("ej").innerHTML = `<div class="card"><p><b>${esc(p.q)}</b></p><input id="rp" inputmode="decimal" placeholder="Tu resultado (solo el número)"><p></p>
+    <button class="btn" onclick="revisarProblema()">Revisar</button><div id="rr"></div></div>`;
+}
+function revisarProblema() {
+  const v = parseFloat(String($("rp").value).replace(/[$,%\s]/g, "").replace(",", "."));
+  const ok = !isNaN(v) && Math.abs(v - prob.a) <= (prob.tol ?? Math.max(0.01, Math.abs(prob.a) * 0.005));
+  $("rr").innerHTML = `<div class="retro"><span class="${ok ? "okt" : "err"}">${ok ? "✅ ¡Correcto!" : `❌ Todavía no. El resultado es ${Math.round(prob.a * 100) / 100}.`}</span>\n${esc(prob.e)}</div><p></p>
+    <div class="fila">${ok ? "" : `<button class="btn sec" onclick="document.getElementById('rp').value='';document.getElementById('rr').innerHTML=''">Intentar otra vez</button>`}<button class="btn" onclick="nuevoProblema('${prob.tipo}')">Otro ejercicio</button></div>`;
+}
+const JSONS = [
+  '{"libro": "Navidad", "precio": 79, "disponible": true}',
+  "{'libro': 'Navidad', 'precio': 79}",
+  '{"libros": ["Navidad", "Día de Muertos",], "total": 2}',
+  '{"cliente": {"nombre": "Ana", "ciudad": "Nogales"}, "pagado": false}',
+  '{"precio": 79, "moneda": "MXN"',
+  '[{"id": 1, "titulo": "Tablas"}, {"id": 2, "titulo": "Trazos"}]',
+  '{"activo": True, "usos": 3}',
+];
+function ejJSON() {
+  const ej = JSONS[rnd(0, JSONS.length - 1)];
+  $("ej").innerHTML = `<div class="card"><p><b>¿Este JSON es válido?</b> Si no, corrígelo en la caja y vuelve a revisar.</p>
+    <textarea id="js" style="font-family:monospace;min-height:110px">${esc(ej)}</textarea><p></p>
+    <div class="fila"><button class="btn" onclick="revisarJSON()">Revisar</button><button class="btn sec" onclick="ejJSON()">Otro</button></div><div id="jr"></div></div>`;
+}
+function revisarJSON() {
+  const t = $("js").value;
+  try { const o = JSON.parse(t); $("jr").innerHTML = `<div class="retro"><span class="okt">✅ JSON válido.</span>\nTiene ${Array.isArray(o) ? `una lista con ${o.length} elemento(s)` : `un objeto con las llaves: ${Object.keys(o).join(", ")}`}.</div>`; }
+  catch (e) {
+    const pistas = [];
+    if (/'/.test(t)) pistas.push("JSON solo acepta comillas dobles \" \", no sencillas ' '.");
+    if (/,\s*[\]}]/.test(t)) pistas.push("Sobra una coma antes de cerrar ] o }.");
+    if (/\bTrue\b|\bFalse\b|\bNone\b/.test(t)) pistas.push("Verdadero y falso se escriben en minúsculas: true y false (y vacío es null).");
+    const ab = (t.match(/[{[]/g) || []).length, ce = (t.match(/[}\]]/g) || []).length;
+    if (ab !== ce) pistas.push(`Hay ${ab} llaves o corchetes que abren y ${ce} que cierran: falta cerrar alguno.`);
+    $("jr").innerHTML = `<div class="retro"><span class="err">❌ No es válido.</span>\n${esc(pistas.join("\n") || "Revisa comillas, comas y que cada { tenga su }.")}</div>`;
+  }
+}
+const CODIGOS = [[200, "Todo salió bien (OK)"], [201, "Se creó algo nuevo"], [400, "La solicitud venía mal armada"], [401, "Falta la clave o no es correcta (no autorizado)"], [403, "Tienes clave, pero no permiso para eso"], [404, "No se encontró lo que pediste"], [429, "Demasiadas solicitudes: espera un poco"], [500, "Falló el servidor por dentro"]];
+function ejHTTP() {
+  const i = rnd(0, CODIGOS.length - 1), [cod, ok] = CODIGOS[i];
+  const ops = [ok, ...CODIGOS.filter((x, j) => j !== i).sort(() => Math.random() - .5).slice(0, 3).map((x) => x[1])].sort(() => Math.random() - .5);
+  $("ej").innerHTML = `<div class="card"><p><b>Una API te respondió con el código ${cod}. ¿Qué significa?</b></p>
+    ${ops.map((o) => `<button class="btn sec" style="margin-bottom:8px;text-align:left" onclick="resHTTP(this, ${o === ok})">${esc(o)}</button>`).join("")}<div id="hr"></div></div>`;
+}
+function resHTTP(btn, ok) {
+  $("hr").innerHTML = `<div class="retro"><span class="${ok ? "okt" : "err"}">${ok ? "✅ ¡Exacto!" : "❌ No es esa."}</span>\nLos 200 son éxito, los 400 son errores de quien pide (dirección, clave, permisos, exceso) y los 500 son fallas del servidor.</div><p></p><button class="btn" onclick="ejHTTP()">Otro código</button>`;
+}
+
+// ---------- Historial y exportar ----------
+async function historial() {
+  mostrar("leccion");
+  const c = $("v-leccion"); c.innerHTML = `<p class="cargando">Cargando tu historial…</p>`;
+  try {
+    const { historial: h } = await api("historial");
+    c.innerHTML = `<button class="btn sec" style="width:auto;padding:8px 12px" onclick="ir('inicio')">← Inicio</button><h2 style="margin-top:10px">🕘 Historial</h2>` +
+      (h.length ? h.map((x) => `<div class="card"><span class="chip">${esc(x.canal)}</span><span class="chip">${esc(x.tipo)}</span>${x.calificacion !== null ? `<span class="chip ok">${x.calificacion}/10</span>` : `<span class="chip warn">${esc(x.estado)}</span>`}
+        <b style="display:block;margin-top:4px">${esc(x.estudio_plan?.titulo || "Actividad")}</b><span class="sub">${new Date(x.creado).toLocaleString("es-MX")}</span>
+        ${x.retro ? `<details><summary>Ver corrección</summary><div class="retro">${fmt(x.retro)}</div></details>` : ""}</div>`).join("") : `<p class="sub">Todavía no hay actividad.</p>`);
+  } catch (e) { fallo(c, e); }
+}
+async function exportar() {
+  try {
+    const d = await api("exportar");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: "application/json" }));
+    a.download = `academia-${new Date().toISOString().slice(0, 10)}.json`; a.click();
+  } catch (e) { alert(e.message); }
+}
+
+// ---------- Navegación ----------
+function ir(v, extra) {
+  document.body.classList.remove("enfoque");
+  if (v === "biblio") return biblio();
+  mostrar(v);
+  if (v === "inicio") inicio(); else if (v === "plan") plan(); else if (v === "tarjetas") tarjetas(); else if (v === "tutor") tutor(extra); else if (v === "practica") practica();
+}
+for (const b of document.querySelectorAll("nav button")) b.onclick = () => ir(b.dataset.v);
+$("salir").onclick = salir;
+$("entrar").onclick = async () => {
+  clave = $("clave").value.trim().toLowerCase(); $("entrarErr").textContent = "";
+  try { await api("panel"); ls.set("director_clave", clave); arrancar(); } catch (e) { $("entrarErr").textContent = e.message; }
+};
+$("clave").addEventListener("keydown", (e) => { if (e.key === "Enter") $("entrar").click(); });
+function arrancar() { $("nav").hidden = false; $("salir").hidden = false; ir("inicio"); }
+if (clave) arrancar(); else mostrar("entrar");
+</script>
+</body>
+</html>
