@@ -3,110 +3,133 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Escucha tu fábula · Ediciones Guizar</title>
-<meta name="description" content="Escucha las fábulas del libro Fábulas para leer y escuchar: cada palabra se ilumina mientras la narradora lee.">
+<title>Escucha y lee · Ediciones Guizar</title>
+<meta name="description" content="Audiolibros de Ediciones Guizar: escucha el cuento con cada palabra iluminada y luego léelo tú en voz alta.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fff8ec;--ink:#2a2430;--muted:#776c80;--mor:#6a1b9a;--nar:#ef6c00;--ver:#2e7d32;--rojo:#d32f2f;--line:#eadff0}
+:root{--bg:#fff8ec;--ink:#2a2430;--muted:#776c80;--c1:#6a1b9a;--c2:#ef6c00;--rojo:#d32f2f;--verde:#2e7d32;--line:#eadff0}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
-header{background:linear-gradient(160deg,#6a1b9a,#ef6c00);color:#fff;text-align:center;padding:14px 16px}
+header{background:linear-gradient(160deg,var(--c1),var(--c2));color:#fff;text-align:center;padding:14px 16px}
 header a{color:#fff;text-decoration:none;font:800 1rem "Baloo 2",system-ui}
 main{max-width:720px;margin:auto;padding:16px 16px 40px}
-h1{font:800 clamp(1.7rem,7vw,2.6rem)/1.25 "Baloo 2",system-ui;color:var(--ink);text-align:center;margin:8px 0 12px}
+h1{font:800 clamp(1.7rem,7vw,2.6rem)/1.25 "Baloo 2",system-ui;text-align:center;margin:8px 0 12px}
 .dibujo{background:#fff;border:2px solid var(--line);border-radius:16px;padding:8px}
 .dibujo img{width:100%;display:block;border-radius:10px}
 .controles{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0 8px}
-.play{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;border:0;border-radius:999px;padding:15px;background:var(--nar);color:#fff;font:800 1.35rem "Baloo 2",system-ui;cursor:pointer;box-shadow:0 6px 16px rgba(239,108,0,.35)}
-.play:active{transform:scale(.98)}
-.play svg{width:30px;height:30px;fill:#fff}
+.modos{display:flex;gap:8px;margin-bottom:10px}
+.modos button{flex:1;border:2px solid var(--line);background:#fff;border-radius:14px;padding:9px 6px;font:800 1rem "Baloo 2",system-ui;color:var(--ink);cursor:pointer}
+.modos button.on{border-color:var(--c2);background:#fff3e0}
+.play{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;border:0;border-radius:999px;padding:15px;background:var(--c2);color:#fff;font:800 1.3rem "Baloo 2",system-ui;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.play.mic{background:var(--verde)}
+.play.mic.escuchando{background:var(--rojo);animation:latido 1.2s infinite}
+@keyframes latido{50%{box-shadow:0 0 0 10px rgba(211,47,47,.15)}}
+.play svg{width:28px;height:28px;fill:#fff}
 .barra{height:8px;background:#f1e4d6;border-radius:99px;overflow:hidden;margin-top:10px}
 .barra div{height:100%;width:0;background:var(--rojo)}
 .vel{display:flex;justify-content:center;gap:8px;margin-top:8px;font-size:.9rem;color:var(--muted)}
 .vel button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 12px;font:700 .9rem Nunito,system-ui;color:var(--ink);cursor:pointer}
-.vel button.on{background:var(--mor);color:#fff;border-color:var(--mor)}
+.vel button.on{background:var(--c1);color:#fff;border-color:var(--c1)}
 .texto p{font-size:1.4rem;line-height:2.15;margin:0 0 14px;word-spacing:.22em}
 .w{display:inline-block;transition:transform .12s ease,color .12s ease,background-color .12s ease;border-radius:6px;padding:0 .08em;cursor:pointer;transform-origin:50% 70%}
 .w.leida{color:var(--rojo)}
 .w.ahora{color:#fff;background:var(--rojo);transform:scale(1.22);position:relative;z-index:2;box-shadow:0 3px 10px rgba(211,47,47,.35)}
 h1 .w.ahora{transform:scale(1.12)}
-.moraleja{word-spacing:.2em}
-.moraleja{background:#f3e5f5;border-left:6px solid var(--mor);border-radius:12px;padding:12px 14px;font-weight:700;margin-top:6px;font-size:1.25rem;line-height:2}
-.consejo{text-align:center;color:var(--muted);font-size:.9rem;margin:6px 0 0}
-h2{font:800 1.3rem "Baloo 2",system-ui;color:var(--mor);margin:28px 0 8px}
+.w.bien{color:var(--verde)}
+.w.saltada{color:#ef6c00;text-decoration:underline wavy #ef6c00}
+.w.sigue{background:#fff59d;outline:2px dashed var(--verde);outline-offset:2px}
+.cierre{background:#f3e5f5;border-left:6px solid var(--c1);border-radius:12px;padding:12px 14px;font-weight:700;margin-top:6px;font-size:1.25rem;line-height:2;word-spacing:.2em}
+.consejo{text-align:center;color:var(--muted);font-size:.92rem;margin:6px 0 0}
+.resultado{display:none;background:#fff;border:3px solid var(--verde);border-radius:18px;padding:16px;text-align:center;margin:14px 0}
+.resultado .estrellas{font-size:2.6rem;letter-spacing:6px}
+.resultado b{font:800 1.4rem "Baloo 2",system-ui}
+.resultado .dato{display:inline-block;margin:6px 10px;font-size:1.05rem}
+.resultado button{margin-top:10px;border:0;border-radius:999px;padding:10px 18px;background:var(--c2);color:#fff;font:800 1rem "Baloo 2",system-ui;cursor:pointer}
+h2{font:800 1.3rem "Baloo 2",system-ui;color:var(--c1);margin:28px 0 8px}
 .lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .lista a{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-decoration:none;color:var(--ink);font-weight:700;font-size:.92rem}
-.lista a.actual{border-color:var(--nar);background:#fff3e0}
+.lista a.actual{border-color:var(--c2);background:#fff3e0}
+.lista a small{display:block;color:var(--verde);font-weight:800}
 .aviso{text-align:center;color:var(--muted)}
 footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 28px}
-footer a{color:var(--mor);font-weight:700}
+footer a{color:var(--c1);font-weight:700}
 @media (prefers-reduced-motion: reduce){.w{transition:none}.w.ahora{transform:none}}
 </style>
 </head>
 <body>
-<header><a href="../libro-fabulas/">📖 Fábulas para leer y escuchar</a></header>
+<header><a id="volver" href="#">📖</a></header>
 <main>
-  <div id="vista"><p class="aviso">Cargando tu fábula…</p></div>
-  <h2>Todas las fábulas</h2>
+  <div id="vista"><p class="aviso">Cargando…</p></div>
+  <h2>Todos los cuentos</h2>
   <div class="lista" id="lista"></div>
 </main>
-<footer>© 2026 Ediciones Guizar · <a href="../libro-fabulas/">Conoce el libro</a></footer>
+<footer>© 2026 Ediciones Guizar · <a id="conoce" href="#">Conoce el libro</a></footer>
 <script>
-const F = {"liebre-tortuga": {"t": "La liebre y la tortuga", "p": ["En el bosque vivía una liebre muy veloz que siempre presumía: «¡Nadie corre como yo!». Un día, una tortuga le dijo con calma: «Te reto a una carrera».", "Todos los animales se rieron, pero la carrera empezó. La liebre salió como un rayo y pronto dejó muy atrás a la tortuga. «Tengo tiempo de sobra», pensó, y se acostó a dormir bajo un árbol.", "Mientras tanto, la tortuga caminaba paso a paso, sin detenerse nunca. Pasó junto a la liebre dormida y siguió adelante.", "Cuando la liebre despertó, corrió con todas sus fuerzas, pero ya era tarde: la tortuga estaba cruzando la meta. Todos aplaudieron a la tortuga, que sonreía feliz."], "m": "Poco a poco y sin rendirse, se llega más lejos que corriendo y presumiendo."}, "leon-raton": {"t": "El león y el ratón", "p": ["Un león dormía bajo el sol cuando un ratoncito, jugando, le pasó por encima de la nariz. El león despertó enojado y lo atrapó con su enorme pata.", "«¡Por favor, déjame ir!», le pidió el ratón. «Algún día yo te ayudaré». El león soltó una carcajada: «¿Tú, tan pequeño, ayudarme a mí?». Pero lo dejó ir.", "Días después, unos cazadores atraparon al león con una red. El león rugía y rugía, pero no podía salir.", "El ratoncito escuchó los rugidos y llegó corriendo. Con sus dientes pequeños y filosos mordió la cuerda, una y otra vez, hasta que la red se rompió. El león quedó libre y le dijo: «Gracias, amigo. Ahora sé que los pequeños también pueden ayudar mucho»."], "m": "Nadie es tan pequeño que no pueda ayudar. Haz el bien, y el bien regresa."}, "cigarra-hormiga": {"t": "La cigarra y la hormiga", "p": ["Todo el verano, la cigarra cantaba y tocaba su guitarra bajo los árboles. La hormiga, en cambio, pasaba los días cargando granos de trigo a su casa.", "«¿Por qué trabajas tanto?», se burlaba la cigarra. «Ven a cantar conmigo». «Estoy guardando comida para el invierno», respondía la hormiga.", "Llegó el invierno con su frío y su nieve. La cigarra no tenía nada que comer y tocó temblando a la puerta de la hormiga.", "La hormiga la dejó pasar y compartió su comida con ella. «Gracias», dijo la cigarra, avergonzada. «El próximo verano voy a cantar, pero también voy a guardar para cuando haga falta»."], "m": "Hay tiempo para jugar y tiempo para trabajar: el que guarda hoy, mañana tiene."}, "pastorcito": {"t": "El pastorcito mentiroso", "p": ["Un pastorcito cuidaba sus ovejas en el cerro. Un día, aburrido, gritó: «¡Auxilio, viene el lobo!». La gente del pueblo subió corriendo a ayudarlo, pero no había ningún lobo. El pastorcito se rio mucho.", "Días después volvió a gritar: «¡El lobo, el lobo!». Otra vez la gente subió corriendo, y otra vez era mentira.", "Una tarde, el lobo apareció de verdad. «¡Auxilio, el lobo está aquí!», gritó el pastorcito con todas sus fuerzas. Pero esta vez nadie subió, porque nadie le creyó.", "El lobo asustó a las ovejas y se las llevó. El pastorcito, muy triste, aprendió que cuando uno miente, después nadie le cree aunque diga la verdad."], "m": "Di siempre la verdad: la confianza cuesta mucho ganarla y muy poco perderla."}, "zorra-uvas": {"t": "La zorra y las uvas", "p": ["Una zorra con mucha hambre caminaba por el campo cuando vio unas uvas moradas que colgaban de una parra muy alta. «¡Qué ricas se ven!», pensó.", "Saltó para alcanzarlas, pero no llegó. Saltó otra vez, más alto, y tampoco. Lo intentó muchas veces hasta que quedó cansada y sin aire.", "Entonces levantó la nariz, dio media vuelta y dijo: «Bah, ni las quiero. Seguro están verdes y agrias».", "Un pajarito que la vio desde una rama le dijo: «No están verdes, amiga zorra. Lo que pasa es que no pudiste alcanzarlas». La zorra se fue, un poco apenada."], "m": "Cuando no logramos algo, es mejor aceptarlo o intentarlo de otra forma, que decir que no lo queríamos."}, "cuervo-jarra": {"t": "El cuervo y la jarra", "p": ["Era un día muy caluroso y un cuervo tenía mucha sed. Voló y voló hasta que encontró una jarra con un poquito de agua en el fondo.", "Metió el pico, pero no alcanzaba el agua. Intentó tirar la jarra, pero pesaba demasiado. El cuervo se quedó pensando.", "Entonces tuvo una idea: tomó una piedrita con el pico y la dejó caer dentro de la jarra. Luego otra, y otra más. Con cada piedrita, el agua subía un poquito.", "Después de muchas piedritas, el agua llegó hasta arriba. El cuervo bebió feliz hasta que se le quitó la sed. Pensando con calma, había encontrado la solución."], "m": "Cuando algo parece imposible, piensa con calma: muchas veces la inteligencia y la paciencia encuentran el camino."}, "gallina-oro": {"t": "La gallina de los huevos de oro", "p": ["Un granjero y su esposa tenían una gallina muy especial: cada mañana ponía un huevo de oro. Con cada huevo compraban lo que necesitaban y vivían tranquilos.", "Pero un día el granjero pensó: «Si la gallina pone huevos de oro, por dentro debe estar llena de oro. ¡Así seremos ricos de una vez!».", "Su esposa le dijo: «Espera, mejor sigamos así», pero él no la escuchó. Sin pensarlo más, abrió a la gallina para buscar el tesoro.", "Por dentro no había nada de oro: era una gallina como cualquier otra. Y desde ese día ya no hubo más huevos de oro. El granjero entendió, muy tarde, que por querer todo de golpe lo perdió todo."], "m": "Quien todo lo quiere, todo lo pierde. Cuida y agradece lo que tienes."}, "zorra-ciguena": {"t": "La zorra y la cigüeña", "p": ["Una zorra bromista invitó a comer a la cigüeña. Le sirvió una sopa muy rica, pero en un plato plano. La zorra se la tomó a lengüetazos, mientras la cigüeña, con su pico largo, no pudo probar ni una gota.", "«¿No te gustó?», preguntó la zorra, riéndose. La cigüeña no dijo nada y, al despedirse, la invitó a comer al día siguiente.", "Cuando llegó la zorra, la cigüeña sirvió la comida en jarras altas y delgadas. La cigüeña comía feliz metiendo su pico largo, pero la zorra no podía meter el hocico.", "La zorra se fue con hambre, pensando: «Ahora sé cómo se sintió ella». Desde entonces, cuando invita a alguien, piensa primero en lo que necesita su invitado."], "m": "Trata a los demás como te gustaría que te trataran a ti."}, "amigos-oso": {"t": "Los dos amigos y el oso", "p": ["Dos amigos caminaban juntos por el bosque. «Pase lo que pase, nos cuidamos el uno al otro», se prometieron.", "De pronto, apareció un oso enorme. Uno de los amigos, sin pensar en el otro, subió rápido a un árbol y se escondió entre las ramas.", "El otro amigo no alcanzó a subir. Se acostó en el suelo y se quedó muy quieto, sin respirar. El oso se acercó, lo olfateó... y, como no se movía, se fue por donde vino.", "El amigo del árbol bajó y le preguntó, nervioso: «¿Qué te dijo el oso al oído?». El otro respondió: «Me dijo que no camine con amigos que me dejan solo cuando hay peligro»."], "m": "Los amigos de verdad se conocen en los momentos difíciles."}, "viento-sol": {"t": "El viento y el sol", "p": ["Un día, el viento y el sol discutían quién era el más fuerte. «Veamos quién logra que ese señor se quite el abrigo», dijo el sol.", "El viento empezó primero. Sopló y sopló con muchísima fuerza. Pero entre más soplaba, más se agarraba el señor su abrigo para no tener frío.", "Cansado, el viento se rindió. Entonces el sol salió de entre las nubes y brilló suave y calientito.", "El señor sintió el calor, se secó la frente y, muy a gusto, se quitó el abrigo solito. El viento entendió que el sol había ganado sin gritar y sin empujar, solo con su calor."], "m": "Con amabilidad se logra más que con fuerza."}};
-const AUDIO = id => `https://res.cloudinary.com/dgdw8fbku/video/upload/ediciones-guizar/fabulas/audio/${id}.mp3`;
-const IMG = id => `https://res.cloudinary.com/dgdw8fbku/image/upload/c_limit,w_900/f_auto,q_auto/ediciones-guizar/fabulas/${id}.png`;
-const TIEMPOS = id => `https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/cuentos-audio/fabulas/${id}.tiempos.json`;
+const LIBROS = {"f": {"nombre": "Fábulas para leer y escuchar", "carpeta": "fabulas", "venta": "../libro-fabulas/", "cierre": "Moraleja:", "img": "https://res.cloudinary.com/dgdw8fbku/image/upload/c_limit,w_900/f_auto,q_auto/ediciones-guizar/fabulas/{id}.png", "c1": "#6a1b9a", "c2": "#ef6c00", "items": [{"id": "liebre-tortuga", "t": "La liebre y la tortuga", "p": ["En el bosque vivía una liebre muy veloz que siempre presumía: «¡Nadie corre como yo!». Un día, una tortuga le dijo con calma: «Te reto a una carrera».", "Todos los animales se rieron, pero la carrera empezó. La liebre salió como un rayo y pronto dejó muy atrás a la tortuga. «Tengo tiempo de sobra», pensó, y se acostó a dormir bajo un árbol.", "Mientras tanto, la tortuga caminaba paso a paso, sin detenerse nunca. Pasó junto a la liebre dormida y siguió adelante.", "Cuando la liebre despertó, corrió con todas sus fuerzas, pero ya era tarde: la tortuga estaba cruzando la meta. Todos aplaudieron a la tortuga, que sonreía feliz."], "m": "Poco a poco y sin rendirse, se llega más lejos que corriendo y presumiendo."}, {"id": "leon-raton", "t": "El león y el ratón", "p": ["Un león dormía bajo el sol cuando un ratoncito, jugando, le pasó por encima de la nariz. El león despertó enojado y lo atrapó con su enorme pata.", "«¡Por favor, déjame ir!», le pidió el ratón. «Algún día yo te ayudaré». El león soltó una carcajada: «¿Tú, tan pequeño, ayudarme a mí?». Pero lo dejó ir.", "Días después, unos cazadores atraparon al león con una red. El león rugía y rugía, pero no podía salir.", "El ratoncito escuchó los rugidos y llegó corriendo. Con sus dientes pequeños y filosos mordió la cuerda, una y otra vez, hasta que la red se rompió. El león quedó libre y le dijo: «Gracias, amigo. Ahora sé que los pequeños también pueden ayudar mucho»."], "m": "Nadie es tan pequeño que no pueda ayudar. Haz el bien, y el bien regresa."}, {"id": "cigarra-hormiga", "t": "La cigarra y la hormiga", "p": ["Todo el verano, la cigarra cantaba y tocaba su guitarra bajo los árboles. La hormiga, en cambio, pasaba los días cargando granos de trigo a su casa.", "«¿Por qué trabajas tanto?», se burlaba la cigarra. «Ven a cantar conmigo». «Estoy guardando comida para el invierno», respondía la hormiga.", "Llegó el invierno con su frío y su nieve. La cigarra no tenía nada que comer y tocó temblando a la puerta de la hormiga.", "La hormiga la dejó pasar y compartió su comida con ella. «Gracias», dijo la cigarra, avergonzada. «El próximo verano voy a cantar, pero también voy a guardar para cuando haga falta»."], "m": "Hay tiempo para jugar y tiempo para trabajar: el que guarda hoy, mañana tiene."}, {"id": "pastorcito", "t": "El pastorcito mentiroso", "p": ["Un pastorcito cuidaba sus ovejas en el cerro. Un día, aburrido, gritó: «¡Auxilio, viene el lobo!». La gente del pueblo subió corriendo a ayudarlo, pero no había ningún lobo. El pastorcito se rio mucho.", "Días después volvió a gritar: «¡El lobo, el lobo!». Otra vez la gente subió corriendo, y otra vez era mentira.", "Una tarde, el lobo apareció de verdad. «¡Auxilio, el lobo está aquí!», gritó el pastorcito con todas sus fuerzas. Pero esta vez nadie subió, porque nadie le creyó.", "El lobo asustó a las ovejas y se las llevó. El pastorcito, muy triste, aprendió que cuando uno miente, después nadie le cree aunque diga la verdad."], "m": "Di siempre la verdad: la confianza cuesta mucho ganarla y muy poco perderla."}, {"id": "zorra-uvas", "t": "La zorra y las uvas", "p": ["Una zorra con mucha hambre caminaba por el campo cuando vio unas uvas moradas que colgaban de una parra muy alta. «¡Qué ricas se ven!», pensó.", "Saltó para alcanzarlas, pero no llegó. Saltó otra vez, más alto, y tampoco. Lo intentó muchas veces hasta que quedó cansada y sin aire.", "Entonces levantó la nariz, dio media vuelta y dijo: «Bah, ni las quiero. Seguro están verdes y agrias».", "Un pajarito que la vio desde una rama le dijo: «No están verdes, amiga zorra. Lo que pasa es que no pudiste alcanzarlas». La zorra se fue, un poco apenada."], "m": "Cuando no logramos algo, es mejor aceptarlo o intentarlo de otra forma, que decir que no lo queríamos."}, {"id": "cuervo-jarra", "t": "El cuervo y la jarra", "p": ["Era un día muy caluroso y un cuervo tenía mucha sed. Voló y voló hasta que encontró una jarra con un poquito de agua en el fondo.", "Metió el pico, pero no alcanzaba el agua. Intentó tirar la jarra, pero pesaba demasiado. El cuervo se quedó pensando.", "Entonces tuvo una idea: tomó una piedrita con el pico y la dejó caer dentro de la jarra. Luego otra, y otra más. Con cada piedrita, el agua subía un poquito.", "Después de muchas piedritas, el agua llegó hasta arriba. El cuervo bebió feliz hasta que se le quitó la sed. Pensando con calma, había encontrado la solución."], "m": "Cuando algo parece imposible, piensa con calma: muchas veces la inteligencia y la paciencia encuentran el camino."}, {"id": "gallina-oro", "t": "La gallina de los huevos de oro", "p": ["Un granjero y su esposa tenían una gallina muy especial: cada mañana ponía un huevo de oro. Con cada huevo compraban lo que necesitaban y vivían tranquilos.", "Pero un día el granjero pensó: «Si la gallina pone huevos de oro, por dentro debe estar llena de oro. ¡Así seremos ricos de una vez!».", "Su esposa le dijo: «Espera, mejor sigamos así», pero él no la escuchó. Sin pensarlo más, abrió a la gallina para buscar el tesoro.", "Por dentro no había nada de oro: era una gallina como cualquier otra. Y desde ese día ya no hubo más huevos de oro. El granjero entendió, muy tarde, que por querer todo de golpe lo perdió todo."], "m": "Quien todo lo quiere, todo lo pierde. Cuida y agradece lo que tienes."}, {"id": "zorra-ciguena", "t": "La zorra y la cigüeña", "p": ["Una zorra bromista invitó a comer a la cigüeña. Le sirvió una sopa muy rica, pero en un plato plano. La zorra se la tomó a lengüetazos, mientras la cigüeña, con su pico largo, no pudo probar ni una gota.", "«¿No te gustó?», preguntó la zorra, riéndose. La cigüeña no dijo nada y, al despedirse, la invitó a comer al día siguiente.", "Cuando llegó la zorra, la cigüeña sirvió la comida en jarras altas y delgadas. La cigüeña comía feliz metiendo su pico largo, pero la zorra no podía meter el hocico.", "La zorra se fue con hambre, pensando: «Ahora sé cómo se sintió ella». Desde entonces, cuando invita a alguien, piensa primero en lo que necesita su invitado."], "m": "Trata a los demás como te gustaría que te trataran a ti."}, {"id": "amigos-oso", "t": "Los dos amigos y el oso", "p": ["Dos amigos caminaban juntos por el bosque. «Pase lo que pase, nos cuidamos el uno al otro», se prometieron.", "De pronto, apareció un oso enorme. Uno de los amigos, sin pensar en el otro, subió rápido a un árbol y se escondió entre las ramas.", "El otro amigo no alcanzó a subir. Se acostó en el suelo y se quedó muy quieto, sin respirar. El oso se acercó, lo olfateó... y, como no se movía, se fue por donde vino.", "El amigo del árbol bajó y le preguntó, nervioso: «¿Qué te dijo el oso al oído?». El otro respondió: «Me dijo que no camine con amigos que me dejan solo cuando hay peligro»."], "m": "Los amigos de verdad se conocen en los momentos difíciles."}, {"id": "viento-sol", "t": "El viento y el sol", "p": ["Un día, el viento y el sol discutían quién era el más fuerte. «Veamos quién logra que ese señor se quite el abrigo», dijo el sol.", "El viento empezó primero. Sopló y sopló con muchísima fuerza. Pero entre más soplaba, más se agarraba el señor su abrigo para no tener frío.", "Cansado, el viento se rindió. Entonces el sol salió de entre las nubes y brilló suave y calientito.", "El señor sintió el calor, se secó la frente y, muy a gusto, se quitó el abrigo solito. El viento entendió que el sol había ganado sin gritar y sin empujar, solo con su calor."], "m": "Con amabilidad se logra más que con fuerza."}]}, "c": {"nombre": "Cuentos de Navidad para leer y escuchar", "carpeta": "navidad", "venta": "../libro-cuentos-navidad/", "cierre": "Para pensar:", "img": "https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/libros/navidad/{id}.jpg", "c1": "#b71c1c", "c2": "#2e7d32", "items": [{"id": "posada", "t": "La posada de la calle Luna", "p": ["En la calle Luna, todos los vecinos se juntaban cada diciembre para hacer la posada. Ese año le tocaba a la familia de Lupita.", "Por la tarde, los niños recibieron velitas y faroles de papel. Caminaron despacio, cantando, de casa en casa, pidiendo posada como hicieron José y María hace mucho tiempo.", "En la última casa, la puerta se abrió y todos gritaron de gusto: «¡Entren, peregrinos!». Adentro había ponche calientito, tamales y una piñata enorme.", "Lupita vio que Don Ramón, el vecino de la esquina, miraba desde su ventana. «Mamá, ¿lo invitamos?», preguntó. Don Ramón llegó sonriendo. «Hace años que nadie me invitaba», dijo. Esa noche, la posada fue más alegre que nunca."], "m": "La Navidad se disfruta más cuando nadie se queda afuera."}, {"id": "pinata", "t": "La piñata de siete picos", "p": ["Mateo y su abuelo hicieron una piñata de estrella con siete picos. Usaron una olla de barro, papel periódico, engrudo y mucho papel de colores.", "«¿Por qué tiene siete picos, abuelo?», preguntó Mateo. El abuelo le explicó: «Dicen que cada pico es algo que queremos sacar de nuestra vida, como el enojo, la flojera o el egoísmo. Al romper la piñata, salen cosas buenas».", "En la posada, Mateo se puso la venda en los ojos. Todos cantaban: «¡Dale, dale, dale!». Pegó una vez, dos veces... ¡y la piñata se rompió! Cayeron cacahuates, mandarinas, cañas y dulces.", "Mateo llenó sus manos, pero vio a su prima pequeña sin nada. Sin pensarlo, le dio la mitad. El abuelo le guiñó un ojo: el egoísmo ya se había ido."], "m": "Lo que compartes vale más que lo que guardas para ti solo."}, {"id": "nacimiento", "t": "El borreguito del nacimiento", "p": ["Cada año, Sofía ayudaba a su abuela a poner el nacimiento. Sacaban de una caja a María, a José, al burrito, al buey, a los pastores y a los borreguitos.", "Pero esa vez faltaba un borreguito. Buscaron en toda la caja y no apareció. Sofía se puso triste: «El nacimiento no va a estar completo».", "La abuela sacó un poco de barro y le dijo: «Vamos a hacer uno nuevo». Con sus dedos, Sofía le dio forma: el cuerpo redondo, las orejitas y cuatro patitas. Lo dejó secar y lo pintó de blanco.", "No quedó perfecto: tenía una oreja más grande que la otra. Pero cuando lo puso junto a los pastores, la abuela dijo: «Es el borreguito más especial, porque lo hiciste tú». Y desde entonces, cada diciembre, Sofía lo busca primero."], "m": "Lo que hacemos con nuestras manos y con cariño tiene un valor especial."}, {"id": "nochebuena", "t": "La flor de Nochebuena", "p": ["Hace mucho tiempo, en un pueblo de México, vivía una niña llamada Pepita. En Nochebuena, todos llevaban un regalo al niño Dios en la iglesia del pueblo.", "Pepita era muy pobre y no tenía nada que llevar. Caminaba triste cuando vio unas ramitas verdes junto al camino. «Es poquito, pero lo doy con todo mi corazón», pensó, y las cortó.", "Algunos niños se rieron de ella: «¡Solo son hierbas!». Pepita no dijo nada. Entró a la iglesia y puso sus ramitas con mucho cariño.", "Entonces sucedió algo maravilloso: las hojas de arriba se pintaron de un rojo brillante, como estrellas. Desde ese día, a esa flor se le llama Nochebuena, y adorna las casas cada diciembre. Los antiguos mexicanos la conocían como cuetlaxóchitl."], "m": "Lo que importa de un regalo es el cariño con que se da, no su precio."}, {"id": "tamales", "t": "Los tamales de Nochebuena", "p": ["El 24 de diciembre, la cocina de la casa de Emiliano se llenó de gente. Toda la familia iba a hacer tamales para la cena de Nochebuena.", "La abuela preparaba la masa. Papá ponía a remojar las hojas de maíz. Mamá cocinaba el relleno de pollo con salsa verde, y la tía Rosa hacía los de dulce, color de rosa.", "«¿Y yo qué hago?», preguntó Emiliano. «Tú vas a untar la masa en las hojas», le dijo la abuela. Al principio le salían chuecos, pero poco a poco le quedaron cada vez mejor.", "En la noche, cuando la olla dejó salir su vapor delicioso, todos se sentaron a la mesa. «Estos tamales saben mejor porque los hicimos todos juntos», dijo la abuela. Y Emiliano sonrió, con la cara llena de masa."], "m": "Cuando todos ayudan, el trabajo se vuelve fiesta."}, {"id": "ponche", "t": "El ponche de Don Chuy", "p": ["Don Chuy vendía elotes en la esquina, pero cada diciembre cambiaba su carrito por una olla grande de ponche. Los niños de la colonia lo esperaban con ansias.", "«¿Qué le pone a su ponche, Don Chuy?», preguntó Camila. Él le enseñó: «Guayaba, tejocote, caña, manzana, ciruela pasa, canela y piloncillo. Y lo más importante: paciencia, para que hierva despacito».", "Un día de mucho frío, Camila vio que algunos señores que barrían la calle tenían las manos heladas. Le dijo a Don Chuy: «¿Y si les damos ponche?». Don Chuy sonrió y llenó varios vasos.", "Los señores se calentaron las manos con los vasos y dieron las gracias. Esa tarde, Camila aprendió que el ponche calienta la panza, pero compartirlo calienta el corazón."], "m": "Un pequeño gesto de bondad puede calentar el día de alguien."}, {"id": "estrella", "t": "La estrella que llegó tarde", "p": ["En el cielo vivía una estrellita muy pequeña que siempre llegaba tarde a todo. Las estrellas grandes se burlaban: «¡Eres tan chiquita que nadie te ve!».", "La noche de Navidad, todas las estrellas se pusieron en su lugar para brillar sobre el mundo. La estrellita, como siempre, se quedó dormida y llegó al final.", "Mientras buscaba su lugar, vio a un niño perdido en el campo, llorando, sin encontrar el camino a su casa. Nadie más lo había visto. La estrellita bajó un poco y brilló con todas sus fuerzas.", "El niño siguió su luz hasta llegar a su pueblo, donde su familia lo abrazó. Desde esa noche, las estrellas grandes ya no se burlaron. Aprendieron que no hay luz tan pequeña que no pueda guiar a alguien."], "m": "No importa qué tan pequeño seas: siempre puedes ayudar a alguien."}, {"id": "carta-reyes", "t": "La carta de Valeria a los Reyes Magos", "p": ["El 5 de enero, Valeria se sentó a escribir su carta a los Reyes Magos: Melchor, Gaspar y Baltasar. Tenía muchas ganas de pedir una bicicleta.", "Pero se acordó de su hermanito Tomás, que siempre jugaba con una pelota rota. Y de su abuelita, que tenía frío en las mañanas. Valeria pensó un rato, borró la bicicleta y escribió otra cosa.", "«Queridos Reyes Magos: este año quiero pedirles una pelota nueva para Tomás y una cobija calientita para mi abuela. Si les sobra algo, una caja de colores para mí. Con cariño, Valeria».", "Dejó la carta en su zapato junto a la ventana. A la mañana siguiente, había una pelota, una cobija... y una caja de colores con una notita: «Gracias por pensar en los demás. Melchor, Gaspar y Baltasar»."], "m": "Pensar en los demás también nos llena de alegría a nosotros."}, {"id": "rosca", "t": "El muñequito de la rosca", "p": ["El 6 de enero, la familia de Diego se reunió para partir la rosca de Reyes. Era grande, redonda, con ate de colores y azúcar encima, y una taza de chocolate caliente para cada uno.", "«Adentro de la rosca hay un muñequito escondido», explicó mamá. «Quien lo encuentre, tendrá que invitar los tamales el 2 de febrero, Día de la Candelaria».", "Cada quien cortó su pedazo con cuidado. El tío Beto no encontró nada. La abuela tampoco. Diego mordió su pan y... ¡ahí estaba el muñequito! Todos aplaudieron y gritaron: «¡Diego invita los tamales!».", "Diego se preocupó: «Pero yo no sé hacer tamales». La abuela lo abrazó: «No te preocupes, los hacemos juntos, como en Nochebuena». Y así, la fiesta ya tenía fecha para volver a reunirse."], "m": "Las tradiciones son un pretexto para volver a estar juntos."}, {"id": "uvas", "t": "Las doce uvas de Sofía", "p": ["El 31 de diciembre, la familia de Sofía preparó la cena de Año Nuevo. Antes de las doce de la noche, la mamá le dio a cada uno un platito con doce uvas.", "«Con cada campanada del reloj, te comes una uva y pides un deseo», le explicó. «Son doce, una por cada mes del año que empieza».", "Sofía pensó en sus deseos con mucho cuidado: aprender a andar en bici, que su perro Canelo se aliviara, sacar buenas notas, leer más cuentos... y otros más. Cuando el reloj empezó a sonar, se comió las uvas tan rápido que casi se atraganta y todos se rieron.", "Después de la última campanada, todos se abrazaron: «¡Feliz Año Nuevo!». Su papá le dijo: «Los deseos se cumplen más fácil si los ayudamos con esfuerzo cada día». Y Sofía escribió sus doce deseos en una hoja para no olvidarlos."], "m": "Un deseo se vuelve realidad cuando trabajamos un poquito por él cada día."}]}};
+const q = new URLSearchParams(location.search);
+const clave = Object.keys(LIBROS).find(k => q.has(k)) || "f";
+const L = LIBROS[clave];
+document.documentElement.style.setProperty("--c1", L.c1); document.documentElement.style.setProperty("--c2", L.c2);
+document.getElementById("volver").textContent = "📖 " + L.nombre; document.getElementById("volver").href = L.venta; document.getElementById("conoce").href = L.venta;
+const items = L.items;
+let pos = q.get(clave);
+let idx = /^\d+$/.test(pos || "") ? Number(pos) - 1 : items.findIndex(x => x.id === pos);
+if (!(idx >= 0 && idx < items.length)) idx = 0;
+const f = items[idx], id = f.id;
+const AUDIO = `https://res.cloudinary.com/dgdw8fbku/video/upload/ediciones-guizar/${L.carpeta}/audio/${id}.mp3`;
+const TIEMPOS = `https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/cuentos-audio/${L.carpeta}/${id}.tiempos.json`;
 const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const ids = Object.keys(F);
-let id = new URLSearchParams(location.search).get("f");
-if (/^\d+$/.test(id || "")) id = ids[Number(id) - 1];
-if (!F[id]) id = ids[0];
-const f = F[id];
-document.title = f.t + " · Escucha tu fábula";
+const guardar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const leer = k => { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } };
+document.title = f.t + " · " + L.nombre;
 let n = 0;
 const palabras = s => s.split(/\s+/).filter(Boolean).map(w => `<span class="w" data-i="${n++}">${esc(w)}</span>`).join(" ");
 const tituloHTML = palabras(f.t);
+const inicioTexto = n;
 const parrafosHTML = f.p.map(p => `<p>${palabras(p)}</p>`).join("");
-const moralejaHTML = palabras("Moraleja: " + f.m);
+const cierreHTML = palabras(L.cierre + " " + f.m);
+const tieneVoz = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
 document.getElementById("vista").innerHTML = `
   <h1>${tituloHTML}</h1>
-  <div class="dibujo"><img src="${IMG(id)}" alt="Dibujo de ${esc(f.t)}"></div>
+  <div class="dibujo"><img src="${L.img.replace("{id}", id)}" alt="Dibujo de ${esc(f.t)}"></div>
   <div class="controles">
-    <button class="play" id="play" aria-label="Escuchar la fábula"><svg viewBox="0 0 24 24" id="ico"><path d="M8 5v14l11-7z"/></svg><span id="lbl">Escuchar la fábula</span></button>
-    <div class="barra"><div id="avance"></div></div>
-    <div class="vel">Velocidad: <button data-v="0.8">Despacio</button><button data-v="1" class="on">Normal</button></div>
+    <div class="modos"><button id="mEsc" class="on">🎧 Escuchar</button><button id="mLee">🎤 Ahora léelo tú</button></div>
+    <div id="panelEsc">
+      <button class="play" id="play"><svg viewBox="0 0 24 24" id="ico"><path d="M8 5v14l11-7z"/></svg><span id="lbl">Escuchar el cuento</span></button>
+      <div class="barra"><div id="avance"></div></div>
+      <div class="vel">Velocidad: <button data-v="0.8">Despacio</button><button data-v="1" class="on">Normal</button></div>
+    </div>
+    <div id="panelLee" style="display:none">
+      <button class="play mic" id="mic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z"/></svg><span id="lblMic">Empezar a leer</span></button>
+    </div>
   </div>
-  <audio id="audio" src="${AUDIO(id)}" preload="auto"></audio>
-  <p class="consejo">Sigue con tu dedo la palabra que se ilumina. Toca cualquier palabra para escuchar desde ahí.</p>
+  <audio id="audio" src="${AUDIO}" preload="auto"></audio>
+  <p class="consejo" id="consejo">Sigue con tu dedo la palabra que se ilumina. Toca cualquier palabra para escuchar desde ahí.</p>
+  <div class="resultado" id="resultado"></div>
   <div class="texto">${parrafosHTML}</div>
-  <div class="moraleja">${moralejaHTML}</div>`;
+  <div class="cierre">${cierreHTML}</div>`;
 const W = [...document.querySelectorAll(".w")];
 const a = document.getElementById("audio"), lbl = document.getElementById("lbl"), ico = document.getElementById("ico");
 const PLAY = '<path d="M8 5v14l11-7z"/>', PAUSA = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
-let T = null, actual = -1;
-// tiempos de cada palabra (si no cargan, se reparten por largo de palabra)
-fetch(TIEMPOS(id)).then(r => r.ok ? r.json() : null).then(d => { if (d && d.t && d.t.length === W.length) T = d.t; }).catch(() => {});
+let T = null, actual = -1, modo = "esc";
+fetch(TIEMPOS).then(r => r.ok ? r.json() : null).then(d => { if (d && d.t && d.t.length === W.length) T = d.t; }).catch(() => {});
+function limpiar() { W.forEach(w => w.classList.remove("leida", "ahora", "bien", "saltada", "sigue")); actual = -1; }
 function estimar() {
   const dur = a.duration || 60, largo = W.map(w => w.textContent.length + 2), tot = largo.reduce((x, y) => x + y, 0);
   let acc = 0.6; T = largo.map(l => { const d = (dur - 1.2) * l / tot; const r = [acc, acc + d]; acc += d; return r; });
 }
+function verPalabra(w) {
+  if (!w) return;
+  const r = w.getBoundingClientRect(), alto = document.querySelector(".controles").offsetHeight;
+  if (r.top < alto + 10 || r.bottom > innerHeight - 40) w.scrollIntoView({ block: "center", behavior: "smooth" });
+}
 function marcar(i) {
   if (i === actual) return;
   W.forEach((w, k) => { w.classList.toggle("leida", k < i); w.classList.toggle("ahora", k === i); });
-  actual = i;
-  const w = W[i];
-  if (w && !a.paused) {
-    const r = w.getBoundingClientRect(), alto = document.querySelector(".controles").offsetHeight;
-    if (r.top < alto + 10 || r.bottom > innerHeight - 40) w.scrollIntoView({ block: "center", behavior: "smooth" });
-  }
+  actual = i; if (!a.paused) verPalabra(W[i]);
 }
-function indice(t) {
-  if (!T) return -1;
-  let i = -1;
-  for (let k = 0; k < T.length; k++) { if (T[k][0] <= t + 0.05) i = k; else break; }
-  return i;
-}
+function indice(t) { if (!T) return -1; let i = -1; for (let k = 0; k < T.length; k++) { if (T[k][0] <= t + 0.05) i = k; else break; } return i; }
 function ciclo() {
   if (!T && a.duration) estimar();
   if (a.duration) document.getElementById("avance").style.width = (100 * a.currentTime / a.duration) + "%";
@@ -119,14 +142,100 @@ a.onpause = () => { lbl.textContent = a.ended ? "Escuchar otra vez" : "Seguir es
 a.onended = () => { lbl.textContent = "Escuchar otra vez"; ico.innerHTML = PLAY; W.forEach(w => { w.classList.add("leida"); w.classList.remove("ahora"); }); actual = W.length; };
 a.onerror = () => { lbl.textContent = "Revisa tu internet e intenta de nuevo"; };
 W.forEach((w, k) => w.addEventListener("click", () => {
+  if (modo !== "esc") return;
   if (!T && a.duration) estimar();
   if (!T) return;
   a.currentTime = Math.max(0, T[k][0] - 0.05); actual = -1; a.play().catch(() => {}); ciclo();
 }));
-document.querySelectorAll(".vel button").forEach(b => b.onclick = () => {
-  a.playbackRate = Number(b.dataset.v); document.querySelectorAll(".vel button").forEach(x => x.classList.toggle("on", x === b));
-});
-document.getElementById("lista").innerHTML = ids.map((k, i) => `<a href="?f=${i + 1}" class="${k === id ? "actual" : ""}">${i + 1}. ${esc(F[k].t)}</a>`).join("");
+document.querySelectorAll(".vel button").forEach(b => b.onclick = () => { a.playbackRate = Number(b.dataset.v); document.querySelectorAll(".vel button").forEach(x => x.classList.toggle("on", x === b)); });
+
+// ---------- Modo "Ahora léelo tú" ----------
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9ñ]/g, "");
+const TXT = W.map(w => norm(w.textContent));
+function parecida(a1, b1) {
+  if (!a1 || !b1) return false; if (a1 === b1) return true;
+  if (Math.min(a1.length, b1.length) < 4) return false;
+  if (Math.abs(a1.length - b1.length) > 1) return a1.startsWith(b1) || b1.startsWith(a1);
+  let d = 0, i = 0, j = 0;
+  while (i < a1.length && j < b1.length) { if (a1[i] === b1[j]) { i++; j++; continue; } d++; if (d > 1) return false; if (a1.length > b1.length) i++; else if (b1.length > a1.length) j++; else { i++; j++; } }
+  return d + (a1.length - i) + (b1.length - j) <= 1;
+}
+let rec = null, activo = false, finales = [], provisional = "", t0 = 0, puntero = inicioTexto;
+function evaluar(terminar) {
+  const oido = (finales.join(" ") + " " + provisional).split(/\s+/).map(norm).filter(Boolean);
+  const estado = W.map((_, k) => k < inicioTexto ? "bien" : "");
+  let p = inicioTexto;
+  for (const o of oido) {
+    if (p >= W.length) break;
+    for (let s = 0; s <= 3 && p + s < W.length; s++) {
+      if (parecida(o, TXT[p + s])) { for (let k = p; k < p + s; k++) estado[k] = "saltada"; estado[p + s] = "bien"; p = p + s + 1; break; }
+    }
+  }
+  W.forEach((w, k) => { w.classList.remove("leida", "ahora"); w.classList.toggle("bien", estado[k] === "bien"); w.classList.toggle("saltada", estado[k] === "saltada"); w.classList.toggle("sigue", k === p && !terminar); });
+  if (p !== puntero) { puntero = p; verPalabra(W[p]); }
+  if (p >= W.length && !terminar) parar(true);
+  return estado;
+}
+function resultado(estado) {
+  const total = W.length - inicioTexto;
+  const bien = estado.slice(inicioTexto).filter(x => x === "bien").length;
+  const min = Math.max((Date.now() - t0) / 60000, 0.1);
+  const ppm = Math.round(bien / min), pct = Math.round(100 * bien / total);
+  const estrellas = pct >= 90 ? 3 : pct >= 70 ? 2 : pct >= 40 ? 1 : 0;
+  const clave_r = `lectura-${L.carpeta}-${id}`, antes = leer(clave_r);
+  const mejor = !antes || ppm > antes.ppm;
+  if (mejor && estrellas > 0) guardar(clave_r, { ppm, pct, estrellas, fecha: new Date().toISOString().slice(0, 10) });
+  const frases = ["¡Sigue practicando, tú puedes!", "¡Muy bien, vas mejorando!", "¡Excelente lectura!", "¡Eres un gran lector!"];
+  const r = document.getElementById("resultado");
+  r.style.display = "block";
+  r.innerHTML = `<div class="estrellas">${"⭐".repeat(estrellas)}${"☆".repeat(3 - estrellas)}</div><b>${frases[estrellas]}</b><br>
+    <span class="dato">✅ Leíste bien <b>${bien}</b> de ${total} palabras</span><span class="dato">⏱️ <b>${ppm}</b> palabras por minuto</span>
+    ${antes && !mejor ? `<br><span class="dato">Tu mejor marca: ${antes.ppm} palabras por minuto</span>` : (antes ? `<br><span class="dato">🏆 ¡Nueva mejor marca!</span>` : "")}
+    <br><small style="color:#776c80">Las palabras en naranja se saltaron o no se escucharon claro. ¡Practícalas!</small><br><button id="otraVez">Leer otra vez</button>`;
+  document.getElementById("otraVez").onclick = () => { r.style.display = "none"; empezar(); };
+  r.scrollIntoView({ block: "center", behavior: "smooth" });
+  pintarLista();
+}
+function parar(fin) {
+  activo = false; try { rec && rec.stop(); } catch (e) {}
+  const b = document.getElementById("mic"); b.classList.remove("escuchando"); document.getElementById("lblMic").textContent = "Empezar a leer";
+  if (fin) resultado(evaluar(true));
+}
+function empezar() {
+  if (!tieneVoz) { document.getElementById("consejo").textContent = "Para leer en voz alta abre esta página en Google Chrome (Android o computadora)."; return; }
+  a.pause(); limpiar(); finales = []; provisional = ""; puntero = inicioTexto; t0 = Date.now(); activo = true;
+  document.getElementById("resultado").style.display = "none";
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  rec = new SR(); rec.lang = "es-MX"; rec.continuous = true; rec.interimResults = true;
+  rec.onresult = e => {
+    provisional = "";
+    for (let k = e.resultIndex; k < e.results.length; k++) { const t = e.results[k][0].transcript; if (e.results[k].isFinal) finales.push(t); else provisional += " " + t; }
+    evaluar(false);
+  };
+  rec.onerror = e => { if (e.error === "not-allowed" || e.error === "service-not-allowed") { activo = false; document.getElementById("consejo").textContent = "Necesito permiso del micrófono. Tócale a «Permitir» y vuelve a intentar."; parar(false); } };
+  rec.onend = () => { if (activo) { try { rec.start(); } catch (e) {} } };
+  try { rec.start(); } catch (e) {}
+  document.getElementById("mic").classList.add("escuchando"); document.getElementById("lblMic").textContent = "Terminé de leer";
+  evaluar(false);
+}
+document.getElementById("mic").onclick = () => activo ? parar(true) : empezar();
+function cambiarModo(m) {
+  modo = m; parar(false); a.pause(); limpiar();
+  document.getElementById("mEsc").classList.toggle("on", m === "esc"); document.getElementById("mLee").classList.toggle("on", m === "lee");
+  document.getElementById("panelEsc").style.display = m === "esc" ? "" : "none"; document.getElementById("panelLee").style.display = m === "lee" ? "" : "none";
+  document.getElementById("resultado").style.display = "none";
+  document.getElementById("consejo").textContent = m === "esc" ? "Sigue con tu dedo la palabra que se ilumina. Toca cualquier palabra para escuchar desde ahí."
+    : (tieneVoz ? "Toca «Empezar a leer» y lee en voz alta. Las palabras se ponen verdes cuando las dices bien. La amarilla es la que sigue." : "Para leer en voz alta abre esta página en Google Chrome (Android o computadora).");
+}
+document.getElementById("mEsc").onclick = () => cambiarModo("esc");
+document.getElementById("mLee").onclick = () => cambiarModo("lee");
+function pintarLista() {
+  document.getElementById("lista").innerHTML = items.map((x, i) => {
+    const r = leer(`lectura-${L.carpeta}-${x.id}`);
+    return `<a href="?${clave}=${i + 1}" class="${x.id === id ? "actual" : ""}">${i + 1}. ${esc(x.t)}${r ? `<small>${"⭐".repeat(r.estrellas)} ${r.ppm} pal/min</small>` : ""}</a>`;
+  }).join("");
+}
+pintarLista();
 </script>
 </body>
 </html>
