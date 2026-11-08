@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escucha tu fábula · Ediciones Guizar</title>
+<meta name="description" content="Escucha las fábulas del libro Fábulas para leer y escuchar de Ediciones Guizar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff8ec;--ink:#2a2430;--muted:#776c80;--mor:#6a1b9a;--nar:#ef6c00;--ver:#2e7d32;--line:#eadff0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+header{background:linear-gradient(160deg,#6a1b9a,#ef6c00);color:#fff;text-align:center;padding:14px 16px}
+header a{color:#fff;text-decoration:none;font:800 1rem "Baloo 2",system-ui}
+main{max-width:720px;margin:auto;padding:16px 16px 40px}
+h1{font:800 clamp(1.7rem,7vw,2.6rem)/1.1 "Baloo 2",system-ui;color:var(--mor);text-align:center;margin:8px 0 12px}
+.dibujo{background:#fff;border:2px solid var(--line);border-radius:16px;padding:8px}
+.dibujo img{width:100%;display:block;border-radius:10px}
+.play{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin:16px 0;border:0;border-radius:999px;padding:16px;background:var(--nar);color:#fff;font:800 1.4rem "Baloo 2",system-ui;cursor:pointer;box-shadow:0 6px 16px rgba(239,108,0,.35)}
+.play:active{transform:scale(.98)}
+.play svg{width:30px;height:30px;fill:#fff}
+.barra{height:8px;background:#f1e4d6;border-radius:99px;overflow:hidden;margin:-6px 0 14px}
+.barra div{height:100%;width:0;background:var(--ver);transition:width .3s}
+.texto p{font-size:1.18rem;line-height:1.6;margin:0 0 12px}
+.moraleja{background:#f3e5f5;border-left:6px solid var(--mor);border-radius:12px;padding:12px 14px;font-weight:700;margin-top:6px}
+.moraleja b{color:var(--mor)}
+h2{font:800 1.3rem "Baloo 2",system-ui;color:var(--mor);margin:28px 0 8px}
+.lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.lista a{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-decoration:none;color:var(--ink);font-weight:700;font-size:.92rem}
+.lista a.actual{border-color:var(--nar);background:#fff3e0}
+.aviso{text-align:center;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 28px}
+footer a{color:var(--mor);font-weight:700}
+</style>
+</head>
+<body>
+<header><a href="../libro-fabulas/">📖 Fábulas para leer y escuchar</a></header>
+<main>
+  <div id="vista"><p class="aviso">Cargando tu fábula…</p></div>
+  <h2>Todas las fábulas</h2>
+  <div class="lista" id="lista"></div>
+</main>
+<footer>© 2026 Ediciones Guizar · <a href="../libro-fabulas/">Conoce el libro</a></footer>
+<script>
+const F = {"liebre-tortuga": {"t": "La liebre y la tortuga", "p": ["En el bosque vivía una liebre muy veloz que siempre presumía: «¡Nadie corre como yo!». Un día, una tortuga le dijo con calma: «Te reto a una carrera».", "Todos los animales se rieron, pero la carrera empezó. La liebre salió como un rayo y pronto dejó muy atrás a la tortuga. «Tengo tiempo de sobra», pensó, y se acostó a dormir bajo un árbol.", "Mientras tanto, la tortuga caminaba paso a paso, sin detenerse nunca. Pasó junto a la liebre dormida y siguió adelante.", "Cuando la liebre despertó, corrió con todas sus fuerzas, pero ya era tarde: la tortuga estaba cruzando la meta. Todos aplaudieron a la tortuga, que sonreía feliz."], "m": "Poco a poco y sin rendirse, se llega más lejos que corriendo y presumiendo."}, "leon-raton": {"t": "El león y el ratón", "p": ["Un león dormía bajo el sol cuando un ratoncito, jugando, le pasó por encima de la nariz. El león despertó enojado y lo atrapó con su enorme pata.", "«¡Por favor, déjame ir!», le pidió el ratón. «Algún día yo te ayudaré». El león soltó una carcajada: «¿Tú, tan pequeño, ayudarme a mí?». Pero lo dejó ir.", "Días después, unos cazadores atraparon al león con una red. El león rugía y rugía, pero no podía salir.", "El ratoncito escuchó los rugidos y llegó corriendo. Con sus dientes pequeños y filosos mordió la cuerda, una y otra vez, hasta que la red se rompió. El león quedó libre y le dijo: «Gracias, amigo. Ahora sé que los pequeños también pueden ayudar mucho»."], "m": "Nadie es tan pequeño que no pueda ayudar. Haz el bien, y el bien regresa."}, "cigarra-hormiga": {"t": "La cigarra y la hormiga", "p": ["Todo el verano, la cigarra cantaba y tocaba su guitarra bajo los árboles. La hormiga, en cambio, pasaba los días cargando granos de trigo a su casa.", "«¿Por qué trabajas tanto?», se burlaba la cigarra. «Ven a cantar conmigo». «Estoy guardando comida para el invierno», respondía la hormiga.", "Llegó el invierno con su frío y su nieve. La cigarra no tenía nada que comer y tocó temblando a la puerta de la hormiga.", "La hormiga la dejó pasar y compartió su comida con ella. «Gracias», dijo la cigarra, avergonzada. «El próximo verano voy a cantar, pero también voy a guardar para cuando haga falta»."], "m": "Hay tiempo para jugar y tiempo para trabajar: el que guarda hoy, mañana tiene."}, "pastorcito": {"t": "El pastorcito mentiroso", "p": ["Un pastorcito cuidaba sus ovejas en el cerro. Un día, aburrido, gritó: «¡Auxilio, viene el lobo!». La gente del pueblo subió corriendo a ayudarlo, pero no había ningún lobo. El pastorcito se rio mucho.", "Días después volvió a gritar: «¡El lobo, el lobo!». Otra vez la gente subió corriendo, y otra vez era mentira.", "Una tarde, el lobo apareció de verdad. «¡Auxilio, el lobo está aquí!», gritó el pastorcito con todas sus fuerzas. Pero esta vez nadie subió, porque nadie le creyó.", "El lobo asustó a las ovejas y se las llevó. El pastorcito, muy triste, aprendió que cuando uno miente, después nadie le cree aunque diga la verdad."], "m": "Di siempre la verdad: la confianza cuesta mucho ganarla y muy poco perderla."}, "zorra-uvas": {"t": "La zorra y las uvas", "p": ["Una zorra con mucha hambre caminaba por el campo cuando vio unas uvas moradas que colgaban de una parra muy alta. «¡Qué ricas se ven!», pensó.", "Saltó para alcanzarlas, pero no llegó. Saltó otra vez, más alto, y tampoco. Lo intentó muchas veces hasta que quedó cansada y sin aire.", "Entonces levantó la nariz, dio media vuelta y dijo: «Bah, ni las quiero. Seguro están verdes y agrias».", "Un pajarito que la vio desde una rama le dijo: «No están verdes, amiga zorra. Lo que pasa es que no pudiste alcanzarlas». La zorra se fue, un poco apenada."], "m": "Cuando no logramos algo, es mejor aceptarlo o intentarlo de otra forma, que decir que no lo queríamos."}, "cuervo-jarra": {"t": "El cuervo y la jarra", "p": ["Era un día muy caluroso y un cuervo tenía mucha sed. Voló y voló hasta que encontró una jarra con un poquito de agua en el fondo.", "Metió el pico, pero no alcanzaba el agua. Intentó tirar la jarra, pero pesaba demasiado. El cuervo se quedó pensando.", "Entonces tuvo una idea: tomó una piedrita con el pico y la dejó caer dentro de la jarra. Luego otra, y otra más. Con cada piedrita, el agua subía un poquito.", "Después de muchas piedritas, el agua llegó hasta arriba. El cuervo bebió feliz hasta que se le quitó la sed. Pensando con calma, había encontrado la solución."], "m": "Cuando algo parece imposible, piensa con calma: muchas veces la inteligencia y la paciencia encuentran el camino."}, "gallina-oro": {"t": "La gallina de los huevos de oro", "p": ["Un granjero y su esposa tenían una gallina muy especial: cada mañana ponía un huevo de oro. Con cada huevo compraban lo que necesitaban y vivían tranquilos.", "Pero un día el granjero pensó: «Si la gallina pone huevos de oro, por dentro debe estar llena de oro. ¡Así seremos ricos de una vez!».", "Su esposa le dijo: «Espera, mejor sigamos así», pero él no la escuchó. Sin pensarlo más, abrió a la gallina para buscar el tesoro.", "Por dentro no había nada de oro: era una gallina como cualquier otra. Y desde ese día ya no hubo más huevos de oro. El granjero entendió, muy tarde, que por querer todo de golpe lo perdió todo."], "m": "Quien todo lo quiere, todo lo pierde. Cuida y agradece lo que tienes."}, "zorra-ciguena": {"t": "La zorra y la cigüeña", "p": ["Una zorra bromista invitó a comer a la cigüeña. Le sirvió una sopa muy rica, pero en un plato plano. La zorra se la tomó a lengüetazos, mientras la cigüeña, con su pico largo, no pudo probar ni una gota.", "«¿No te gustó?», preguntó la zorra, riéndose. La cigüeña no dijo nada y, al despedirse, la invitó a comer al día siguiente.", "Cuando llegó la zorra, la cigüeña sirvió la comida en jarras altas y delgadas. La cigüeña comía feliz metiendo su pico largo, pero la zorra no podía meter el hocico.", "La zorra se fue con hambre, pensando: «Ahora sé cómo se sintió ella». Desde entonces, cuando invita a alguien, piensa primero en lo que necesita su invitado."], "m": "Trata a los demás como te gustaría que te trataran a ti."}, "amigos-oso": {"t": "Los dos amigos y el oso", "p": ["Dos amigos caminaban juntos por el bosque. «Pase lo que pase, nos cuidamos el uno al otro», se prometieron.", "De pronto, apareció un oso enorme. Uno de los amigos, sin pensar en el otro, subió rápido a un árbol y se escondió entre las ramas.", "El otro amigo no alcanzó a subir. Se acostó en el suelo y se quedó muy quieto, sin respirar. El oso se acercó, lo olfateó... y, como no se movía, se fue por donde vino.", "El amigo del árbol bajó y le preguntó, nervioso: «¿Qué te dijo el oso al oído?». El otro respondió: «Me dijo que no camine con amigos que me dejan solo cuando hay peligro»."], "m": "Los amigos de verdad se conocen en los momentos difíciles."}, "viento-sol": {"t": "El viento y el sol", "p": ["Un día, el viento y el sol discutían quién era el más fuerte. «Veamos quién logra que ese señor se quite el abrigo», dijo el sol.", "El viento empezó primero. Sopló y sopló con muchísima fuerza. Pero entre más soplaba, más se agarraba el señor su abrigo para no tener frío.", "Cansado, el viento se rindió. Entonces el sol salió de entre las nubes y brilló suave y calientito.", "El señor sintió el calor, se secó la frente y, muy a gusto, se quitó el abrigo solito. El viento entendió que el sol había ganado sin gritar y sin empujar, solo con su calor."], "m": "Con amabilidad se logra más que con fuerza."}};
+const AUDIO = id => `https://res.cloudinary.com/dgdw8fbku/video/upload/ediciones-guizar/fabulas/audio/${id}.mp3`;
+const IMG = id => `https://res.cloudinary.com/dgdw8fbku/image/upload/c_limit,w_900/f_auto,q_auto/ediciones-guizar/fabulas/${id}.png`;
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ids = Object.keys(F);
+let id = new URLSearchParams(location.search).get("f");
+if (/^\d+$/.test(id || "")) id = ids[Number(id) - 1];
+if (!F[id]) id = ids[0];
+const f = F[id];
+document.title = f.t + " · Escucha tu fábula";
+document.getElementById("vista").innerHTML = `
+  <h1>${esc(f.t)}</h1>
+  <div class="dibujo"><img src="${IMG(id)}" alt="Dibujo de ${esc(f.t)}"></div>
+  <button class="play" id="play" aria-label="Escuchar la fábula"><svg viewBox="0 0 24 24" id="ico"><path d="M8 5v14l11-7z"/></svg><span id="lbl">Escuchar la fábula</span></button>
+  <div class="barra"><div id="avance"></div></div>
+  <audio id="audio" src="${AUDIO(id)}" preload="metadata"></audio>
+  <div class="texto">${f.p.map(p => `<p>${esc(p)}</p>`).join("")}</div>
+  <div class="moraleja"><b>Moraleja:</b> ${esc(f.m)}</div>`;
+const a = document.getElementById("audio"), lbl = document.getElementById("lbl"), ico = document.getElementById("ico");
+const PLAY = '<path d="M8 5v14l11-7z"/>', PAUSA = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+document.getElementById("play").onclick = () => { if (a.paused) a.play().catch(() => { lbl.textContent = "Toca otra vez para escuchar"; }); else a.pause(); };
+a.onplay = () => { lbl.textContent = "Pausa"; ico.innerHTML = PAUSA; };
+a.onpause = () => { lbl.textContent = a.ended ? "Escuchar otra vez" : "Seguir escuchando"; ico.innerHTML = PLAY; };
+a.onended = () => { lbl.textContent = "Escuchar otra vez"; ico.innerHTML = PLAY; };
+a.ontimeupdate = () => { if (a.duration) document.getElementById("avance").style.width = (100 * a.currentTime / a.duration) + "%"; };
+a.onerror = () => { lbl.textContent = "Revisa tu internet e intenta de nuevo"; };
+document.getElementById("lista").innerHTML = ids.map((k, i) => `<a href="?f=${i + 1}" class="${k === id ? "actual" : ""}">${i + 1}. ${esc(F[k].t)}</a>`).join("");
+</script>
+</body>
+</html>
