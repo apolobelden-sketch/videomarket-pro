@@ -166,7 +166,14 @@ const W = [...document.querySelectorAll(".w")];
 const a = document.getElementById("audio"), lbl = document.getElementById("lbl"), ico = document.getElementById("ico");
 const PLAY = '<path d="M8 5v14l11-7z"/>', PAUSA = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
 let T = null, actual = -1, modo = "esc";
-fetch(TIEMPOS).then(r => r.ok ? r.json() : null).then(d => { if (d && d.t && d.t.length === W.length) T = d.t; }).catch(() => {});
+fetch(TIEMPOS).then(r => r.ok ? r.json() : (EN ? Promise.reject("sin-audio") : null)).then(d => { if (d && d.t && d.t.length === W.length) T = d.t; }).catch(e => { if (e === "sin-audio") sinIngles(); });
+function sinIngles() {
+  const b = document.getElementById("play"); b.disabled = true; b.style.opacity = ".55";
+  lbl.textContent = "Muy pronto en inglés";
+  const c = document.getElementById("consejo");
+  const lista = clave === "f" ? `<a href="?f=2&lang=en" style="color:var(--c1);font-weight:800">«The Lion and the Mouse»</a>` : `<a href="?f=2&lang=en" style="color:var(--c1);font-weight:800">la fábula «The Lion and the Mouse»</a>`;
+  c.innerHTML = `🇺🇸 <b>Este cuento en inglés todavía se está grabando.</b> Estará listo muy pronto. Mientras, ya puedes escuchar en inglés ${lista}, o leer este en voz alta con «Read it».`;
+}
 function limpiar() { W.forEach(w => w.classList.remove("leida", "ahora", "bien", "saltada", "sigue")); actual = -1; }
 function estimar() {
   const dur = a.duration || 60, largo = W.map(w => w.textContent.length + 2), tot = largo.reduce((x, y) => x + y, 0);
