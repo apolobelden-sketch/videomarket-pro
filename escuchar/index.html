@@ -203,7 +203,7 @@ a.onplay = () => { lbl.textContent = "Pausa"; ico.innerHTML = PAUSA; requestAnim
 a.onpause = () => { lbl.textContent = a.ended ? "Escuchar otra vez" : "Seguir escuchando"; ico.innerHTML = PLAY; };
 a.onended = () => { lbl.textContent = "Escuchar otra vez"; ico.innerHTML = PLAY; W.forEach(w => { w.classList.add("leida"); w.classList.remove("ahora"); }); actual = W.length; ganarEstampa(); if (modo === "adv") resumenFrases(); else resumenPreguntas(); };
 let respaldo = false;
-a.onerror = () => { if (!respaldo) { respaldo = true; a.src = AUDIO2; a.load(); return; } lbl.textContent = EN ? "The English version is coming very soon" : "Revisa tu internet e intenta de nuevo"; };
+a.onerror = () => { if (!respaldo) { respaldo = true; a.src = AUDIO2; a.load(); return; } lbl.textContent = EN ? "Muy pronto en inglés" : "Revisa tu internet e intenta de nuevo"; };
 W.forEach((w, k) => w.addEventListener("click", () => {
   if (w.classList.contains("magica") && modo !== "lee") { mostrarMagica(w); return; }
   if (modo === "lee" || w.classList.contains("oculta")) return;
