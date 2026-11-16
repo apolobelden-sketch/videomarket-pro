@@ -23,6 +23,7 @@
 .moraleja span{display:block;font:700 13px Fredoka,sans-serif;color:#92400e;letter-spacing:.5px}
 .marco{margin:22px 0;border:4px dashed #b8a58a;border-radius:16px;min-height:260px;display:flex;align-items:flex-end;justify-content:center;padding:12px;text-align:center;font-size:14px;color:#7a6a58;background:#fff}
 .ilus{margin:22px 0;text-align:center}.ilus img{width:100%;max-width:520px;border-radius:14px;border:3px solid #e9dcc3;background:#fff}.ilus figcaption{font:700 14px Fredoka,sans-serif;color:var(--verde);margin-top:6px}
+.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.galeria figure{margin:0;background:#fff;border:3px solid #e9dcc3;border-radius:12px;padding:8px;text-align:center;font-size:14px}.galeria img{width:100%;height:auto;display:block}
 .trazo{margin-top:22px;text-align:center}.trazo h3{font:700 16px Fredoka,sans-serif;color:var(--verde);margin:0 0 6px}
 .trazo svg{width:100%;height:auto;display:block}
 .espera{color:#7a6a58;font-style:italic;text-align:center}
@@ -41,6 +42,7 @@ footer{text-align:center;padding:30px;font-size:14px;color:#7a6a58}
 </section>
 <section class="indice"><h2>Contenido</h2><ol id="indice"></ol></section>
 <main id="libro"></main>
+<section class="indice" id="dibujos"><h2>Dibujos para colorear</h2><p>20 dibujos navideños más, uno por página al imprimir.</p><div id="galeria" class="galeria"></div></section>
 <footer>Textos: Bibi · Armado: Claude · Aprobación final: Jairo Guizar</footer>
 <script>
 {
@@ -52,7 +54,7 @@ const ARCHIVOS = [
   "cuento-05-el-pino-chiquito.md",
 ];
 const IMG = "https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/libros/navidad-2026/";
-const ILUSTRACIONES = ["cuento-01.jpg", "cuento-02.jpg", "cuento-03.jpg", "cuento-04.jpg", "cuento-05.jpg"];
+const ILUSTRACIONES = ["cuento-01.jpg", "cuento-02-v2.jpg", "cuento-03.jpg", "cuento-04.jpg", "cuento-05-v2.jpg"];
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const inl = (x) => esc(x).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>").replace(/\n/g, "<br>");
 function secciones(t) {
@@ -100,5 +102,12 @@ async function cargar() {
 cargar();
 }
 </script>
+<script>
+{
+const DIB = [["01-santa","Santa Claus"],["02-trineo","Trineo con regalos"],["03-campana","Campana"],["04-baston","Bastón de caramelo"],["05-regalo","Regalo"],["06-calcetin","Calcetín"],["07-corona","Corona navideña"],["08-angel","Ángel"],["09-vela","Vela"],["10-copo","Copo de nieve"],["11-jengibre","Hombre de jengibre"],["12-duende","Duende"],["13-pinguino","Pingüino"],["14-taza","Taza de chocolate"],["15-esfera","Esfera"],["16-farol","Farol"],["17-pesebre","Pesebre"],["18-arbol","Árbol con regalos"],["19-galleta","Galleta de estrella"],["20-bolsa","Bolsa de Santa"]];
+document.getElementById("galeria").innerHTML = DIB.map(([f, t], i) => `<figure><img src="dibujos/${f}.svg?v=1" alt="${t}" loading="lazy"><figcaption>${i + 6}. ${t}</figcaption></figure>`).join("");
+}
+</script>
+<style>@media print{.galeria{display:block}.galeria figure{page-break-before:always;border:0}.galeria img{max-width:100%}}</style>
 </body>
 </html>
