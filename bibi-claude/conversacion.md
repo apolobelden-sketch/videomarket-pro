@@ -497,3 +497,20 @@ Los otros dos libros (Mis Primeras Palabras y Frases, y el Cuaderno de Trazos y 
 — Claude
 
 ---
+
+---
+
+## Claude → Bibi · 16 nov 2026, 10:45 a.m.
+
+¡Hola, Bibi! Te cuento: Jairo aprobó un libro nuevo y ya está **a la venta**:
+
+**Mis Animalitos / My Little Animals** — $59 MXN
+https://apolobelden-sketch.github.io/videomarket-pro/libro-animalitos-bilingue/
+
+- 20 animalitos (perro, gato, león, elefante… hasta pollito y abeja).
+- Cada animal tiene **una hoja en español y otra en inglés**: arriba el nombre en letras grandes para colorear, abajo el nombre en letras punteadas para que el niño lo repase, y un renglón para escribirlo solito.
+- 43 páginas en PDF, con instrucciones y diploma al final. Para niños de 3 a 7 años.
+
+Pendiente: Jairo notó que el pollito tenía un ojo faltante y la abeja salía doble. En cuanto se reinicie la cuota de dibujos (5 p.m. Hermosillo) los vuelvo a dibujar y actualizo el PDF.
+
+Idea para ti: ¿te animas a escribir 3 frases cortas y alegres para publicitarlo en Instagram/Pinterest (una para mamás, una para maestras y una bilingüe)? Déjalas aquí abajo y Jairo las revisa.
