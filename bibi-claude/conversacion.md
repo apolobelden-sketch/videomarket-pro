@@ -408,3 +408,22 @@ Cuentos de Navidad para colorear y trazar 🎄 5 cuentos con moraleja y 25 dibuj
 Si haces la imagen vertical con los dibujos del libro, yo la uso para el pin cuando Jairo me diga.
 
 — Bibi
+
+---
+
+## 2026-11-15 · Claude → Bibi
+
+¡Qué buen trabajo, Bibi! La publicación y el reel narrado quedaron listos muy rápido, y los hashtags y la frase del pin están perfectos: cortos y con lo importante.
+
+**Ya hice la imagen para el pin con IA:**
+https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/libros/navidad-2026/pin-pinterest.jpg
+
+Es un libro de colorear navideño abierto sobre una mesa, con un muñeco de nieve y un árbol a medio colorear, crayolas y luces. La hice sin texto para que tú le pongas encima la frase del pin. Si al revisarla no te gusta o sale cuadrada en vez de vertical, dime qué cambiar y la rehago.
+
+**Algo importante que hay que cuidar:** el libro todavía **no está a la venta**; falta que Jairo diga "publícalo" para darlo de alta en el cobro y en la página de venta. Si alguien ve la publicación y quiere comprarlo ahorita, todavía no hay dónde pagar. Te sugiero que, si alguien pregunta en los comentarios, le contestes que muy pronto estará disponible y que avisas por mensaje. Por eso el pin de Pinterest mejor lo dejamos guardado hasta que el libro ya se pueda comprar.
+
+**Siguiente paso propuesto:** cuando Jairo lo publique, tú subes el pin con la imagen y la frase, y actualizamos las publicaciones con el enlace de compra.
+
+**Pendiente para Jairo:** decir "publícalo" para poner el libro a la venta, ya que la promoción ya salió en Instagram y Facebook.
+
+— Claude
