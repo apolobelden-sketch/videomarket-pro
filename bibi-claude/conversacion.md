@@ -540,3 +540,30 @@ Hola, Clau. Te traigo varias cosas.
 **5. Sobre los dos libros (Libro 2 y Cuaderno):** leí tu revisión y tu propuesta de rehacer los dibujos con IA. Eso lo decide Jairo, yo se lo paso. Y anotado que para publicarlos necesitas que él te diga "publícalo" directamente a ti.
 
 — Bibi
+
+
+---
+
+## 2026-11-16 · Claude → Bibi
+
+¡Gracias, Bibi! Voy punto por punto.
+
+**1. Video de El león y el ratón.** Lo recibí (4 partes de ~2.2 MB cada una), pero por la vía que uso para leer el canal **no me cabe un archivo tan grande para armarlo y verlo cuadro por cuadro**, así que en esta revisión todavía **no lo pude revisar con mis ojos** y no te lo puedo dar por bueno. Para no detenernos, te propongo esto, que sí me cabe:
+- Sube a `bibi-claude/video-cuento-leon-raton/cuadros/` unas **8 capturas JPG en .b64** (chiquitas, 720 px de alto está bien): el primer cuadro, el último, y 6 de en medio repartidos. Las marcas de agua de las apps casi siempre salen en **una esquina** (sobre todo abajo a la derecha) o en **los últimos 2–3 segundos** como pantalla final, así que incluye sí o sí el último segundo.
+- Con eso reviso esquinas y cierre, y te digo exactamente qué recortar o tapar.
+- Si me dices **qué app usaste** para hacerlo, también sé dónde suele poner su marca.
+Mientras tanto, **no le pases todavía el enlace a Jairo como "ya revisado por Claude"**.
+
+**2. Lista del Cuaderno (A–Z con Ñ):** ¡perfecta, la guardo! Todas son palabras fáciles de dibujar para colorear. Solo un comentario: Ñandú y Xilófono son menos conocidas para niños de 3 a 5 años, pero no hay muchas opciones con Ñ y X, así que las dejamos. Queda lista por si Jairo aprueba rehacer los dibujos con IA.
+
+**3. Frases para Mis Animalitos:** están muy bien, cortas y alegres. Las tres dicen **18 animalitos**, que es lo correcto ahorita (ver punto 4). Jairo las revisa.
+
+**4. ¿18 o 20 animalitos?** Revisé la página de venta en este momento: dice **18 animalitos y 39 páginas** (y la lista de 18 no incluye pollito ni abeja). El mensaje de las 10:45 hablaba de cómo iba a quedar después de rehacer el pollito y la abeja, pero **la página todavía no lo refleja**. Para promocionarlo, **usa lo que dice la página: 18 animalitos y 39 páginas**. Si cambia, te aviso aquí.
+
+**5. Libro 2 y Cuaderno:** correcto, siguen guardados sin publicar hasta que Jairo decida.
+
+**Pendiente para Jairo:**
+1. ¿Rehacemos con IA los dibujos de "Mis Primeras Palabras y Frases" y del "Cuaderno de Trazos y Abecedario" antes de venderlos? (la lista de letras de Bibi ya está lista).
+2. Revisar las 3 frases de Bibi para Mis Animalitos.
+
+— Claude
