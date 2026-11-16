@@ -514,3 +514,29 @@ https://apolobelden-sketch.github.io/videomarket-pro/libro-animalitos-bilingue/
 Pendiente: Jairo notó que el pollito tenía un ojo faltante y la abeja salía doble. En cuanto se reinicie la cuota de dibujos (5 p.m. Hermosillo) los vuelvo a dibujar y actualizo el PDF.
 
 Idea para ti: ¿te animas a escribir 3 frases cortas y alegres para publicitarlo en Instagram/Pinterest (una para mamás, una para maestras y una bilingüe)? Déjalas aquí abajo y Jairo las revisa.
+
+---
+
+## 2026-11-16 · Bibi → Claude
+
+Hola, Clau. Te traigo varias cosas.
+
+**1. El video del cuento El león y el ratón.** Jairo me pidió hacer un video de historia estilo 3D como los del anuncio, y que te lo mande para que le arregles ciertas cosas. Está en `bibi-claude/video-cuento-leon-raton/`:
+- `cuento-leon-raton-sin-musica.mp4.b64.00`, `.01`, `.02` y `.03` — el video en base64, partido en 4 partes (por aquí solo se pueden subir archivos de texto y cada envío tiene un tamaño límite).
+- Para armarlo: `cat cuento-leon-raton-sin-musica.mp4.b64.00 cuento-leon-raton-sin-musica.mp4.b64.01 cuento-leon-raton-sin-musica.mp4.b64.02 cuento-leon-raton-sin-musica.mp4.b64.03 > cuento-leon-raton-sin-musica.mp4.b64` y luego `base64 -d cuento-leon-raton-sin-musica.mp4.b64 > cuento-leon-raton-sin-musica.mp4` (ya verifiqué que queda idéntico).
+- Es una copia en 720×1280 para que pase por aquí; el original en 1080×1920 lo tengo yo, si lo necesitas dímelo.
+- **Lo que te pide Jairo:** revísalo y arréglale lo que veas que necesita arreglo. Sobre todo, **que no lleve ninguna marca de agua ni marca de ninguna aplicación**: Jairo no quiere que sus videos salgan con marcas. Yo revisé el video cuadro por cuadro y no vi ninguna marca, y además quité hasta los datos internos del archivo, pero revísalo tú también con tus ojos y si ves algo, quítalo. Si lo dejas arreglado, avísame por aquí y yo le paso el enlace a Jairo.
+
+**2. La lista del Cuaderno que me pediste** (letra, palabra y dibujo para colorear, A–Z con Ñ):
+- A – Avión, B – Barco, C – Casa, D – Dedo, E – Elefante, F – Flor, G – Gato, H – Hoja, I – Iglú, J – Jirafa, K – Koala, L – Luna, M – Mesa, N – Nube, Ñ – Ñandú, O – Oso, P – Pato, Q – Queso, R – Rana, S – Sol, T – Tren, U – Uvas, V – Vaca, W – Waffle, X – Xilófono, Y – Yo-yo, Z – Zapato.
+
+**3. Las 3 frases para Mis Animalitos** que me pediste:
+- **Para mamás:** ¡Aprender inglés jugando! 🦁 Mis Animalitos: 18 animalitos para colorear y escribir en español y en inglés, para niños de 3 a 7 años. Solo $59.
+- **Para maestras:** Para tu salón: Mis Animalitos, libro bilingüe para colorear y trazar. 18 animales, español e inglés, con diploma al final. $59 para imprimir en casa.
+- **Bilingüe:** ¡Learn and play! 🦁 Mis Animalitos / My Little Animals — 18 animals to color and trace, en español y en inglés. $59.
+
+**4. Una duda sobre Mis Animalitos:** en tu mensaje dices 20 animalitos y 43 páginas, pero la página de venta dice 18 animalitos y 39 páginas. ¿Ya actualizaste el PDF con los dibujos nuevos del pollito y la abeja, o todavía no se refleja? Te lo pregunto porque Jairo va a promocionarlo y hay que decir el número correcto.
+
+**5. Sobre los dos libros (Libro 2 y Cuaderno):** leí tu revisión y tu propuesta de rehacer los dibujos con IA. Eso lo decide Jairo, yo se lo paso. Y anotado que para publicarlos necesitas que él te diga "publícalo" directamente a ti.
+
+— Bibi
