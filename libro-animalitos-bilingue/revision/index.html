@@ -19,12 +19,12 @@ svg{width:100%;height:auto;display:block}
 </style>
 </head>
 <body>
-<div class="barra">📖 Revisión de <b>Mis Animalitos / My Little Animals</b> · 20 animalitos · hoja en español e inglés · no está a la venta</div>
+<div class="barra">📖 Revisión de <b>Mis Animalitos / My Little Animals</b> · 18 animalitos · hoja en español e inglés · ya está a la venta</div>
 <div id="libro"></div>
 <script>
 {
 const IMG = "https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/libros/animalitos-bilingue/";
-const A = [["perro","perro","dog"],["gato","gato","cat"],["leon","león","lion"],["elefante","elefante","elephant"],["jirafa","jirafa","giraffe"],["conejo","conejo","rabbit"],["oso","oso","bear"],["pato","pato","duck"],["pez","pez","fish"],["vaca","vaca","cow"],["cerdo","cerdo","pig"],["caballo","caballo","horse"],["mono","mono","monkey"],["tortuga","tortuga","turtle"],["buho","búho","owl"],["rana","rana","frog"],["tigre","tigre","tiger"],["oveja","oveja","sheep"],["pollito","pollito","chick"],["abeja","abeja","bee"]];
+const A = [["perro","perro","dog"],["gato","gato","cat"],["leon","león","lion"],["elefante","elefante","elephant"],["jirafa","jirafa","giraffe"],["conejo","conejo","rabbit"],["oso","oso","bear"],["pato","pato","duck"],["pez","pez","fish"],["vaca","vaca","cow"],["cerdo","cerdo","pig"],["caballo","caballo","horse"],["mono","mono","monkey"],["tortuga","tortuga","turtle"],["buho","búho","owl"],["rana","rana","frog"],["tigre","tigre","tiger"],["oveja","oveja","sheep"]];
 const titulo = (t) => `<svg viewBox="0 0 500 110"><text x="250" y="88" text-anchor="middle" font-family="Fredoka One" font-size="${Math.min(92, 860 / t.length)}" fill="none" stroke="#111" stroke-width="2.4" stroke-linejoin="round">${t}</text></svg>`;
 const renglon = (y) => `<line x1="10" y1="${y-48}" x2="490" y2="${y-48}" stroke="#c9bdaa"/><line x1="10" y1="${y-24}" x2="490" y2="${y-24}" stroke="#e1d9cc" stroke-dasharray="6 6"/><line x1="10" y1="${y}" x2="490" y2="${y}" stroke="#9e8c78" stroke-width="1.4"/>`;
 const trazo = (w) => `<svg viewBox="0 0 500 70">${renglon(60)}<text x="250" y="60" text-anchor="middle" font-family="Andika" font-size="64" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="1 5" stroke-linecap="round">${w}</text></svg>`;
@@ -32,7 +32,7 @@ const libre = `<svg viewBox="0 0 500 70">${renglon(60)}</svg>`;
 let h = "";
 A.forEach(([f, es, en], i) => {
   [["es", es, "ESPAÑOL", "Repasa la palabra:", "Ahora escríbela tú:"], ["en", en, "ENGLISH", "Trace the word:", "Now write it yourself:"]].forEach(([l, w, tag, t1, t2]) => {
-    h += `<section class="hoja ${l}"><div class="tag">${tag}</div><div class="num">${i + 1} / 20</div>${titulo(w.toUpperCase())}<img class="img" loading="lazy" src="${IMG}${String(i + 1).padStart(2, "0")}-${f}.jpg" alt="${w}"><div class="lbl">${t1}</div>${trazo(w)}<div class="lbl">${t2}</div>${libre}</section>`;
+    h += `<section class="hoja ${l}"><div class="tag">${tag}</div><div class="num">${i + 1} / ${A.length}</div>${titulo(w.toUpperCase())}<img class="img" loading="lazy" src="${IMG}${String(i + 1).padStart(2, "0")}-${f}.jpg" alt="${w}"><div class="lbl">${t1}</div>${trazo(w)}<div class="lbl">${t2}</div>${libre}</section>`;
   });
 });
 document.getElementById("libro").innerHTML = h;
