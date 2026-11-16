@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Revisión · Mis Animalitos / My Little Animals</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Andika&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#eee6d8;font:16px/1.5 system-ui,sans-serif;color:#222}
+.barra{position:sticky;top:0;background:#1f7a40;color:#fff;padding:10px 14px;font-size:14px;z-index:2}
+.hoja{background:#fff;max-width:520px;margin:18px auto;padding:18px 18px 22px;border-radius:6px;box-shadow:0 4px 14px #0002;position:relative}
+.hoja.es{border-top:8px solid #c7263a}.hoja.en{border-top:8px solid #215bb3}
+.tag{font-weight:800;font-size:12px}.es .tag{color:#c7263a}.en .tag{color:#215bb3}
+.num{position:absolute;right:18px;top:18px;font-size:12px;color:#888}
+svg{width:100%;height:auto;display:block}
+.img{display:block;width:72%;margin:4px auto 6px}
+.lbl{font-weight:800;color:#1f7a40;font-size:13px;margin:6px 0 0}
+</style>
+</head>
+<body>
+<div class="barra">📖 Revisión de <b>Mis Animalitos / My Little Animals</b> · 20 animalitos · hoja en español e inglés · no está a la venta</div>
+<div id="libro"></div>
+<script>
+{
+const IMG = "https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/libros/animalitos-bilingue/";
+const A = [["perro","perro","dog"],["gato","gato","cat"],["leon","león","lion"],["elefante","elefante","elephant"],["jirafa","jirafa","giraffe"],["conejo","conejo","rabbit"],["oso","oso","bear"],["pato","pato","duck"],["pez","pez","fish"],["vaca","vaca","cow"],["cerdo","cerdo","pig"],["caballo","caballo","horse"],["mono","mono","monkey"],["tortuga","tortuga","turtle"],["buho","búho","owl"],["rana","rana","frog"],["tigre","tigre","tiger"],["oveja","oveja","sheep"],["pollito","pollito","chick"],["abeja","abeja","bee"]];
+const titulo = (t) => `<svg viewBox="0 0 500 110"><text x="250" y="88" text-anchor="middle" font-family="Fredoka One" font-size="${Math.min(92, 860 / t.length)}" fill="none" stroke="#111" stroke-width="2.4" stroke-linejoin="round">${t}</text></svg>`;
+const renglon = (y) => `<line x1="10" y1="${y-48}" x2="490" y2="${y-48}" stroke="#c9bdaa"/><line x1="10" y1="${y-24}" x2="490" y2="${y-24}" stroke="#e1d9cc" stroke-dasharray="6 6"/><line x1="10" y1="${y}" x2="490" y2="${y}" stroke="#9e8c78" stroke-width="1.4"/>`;
+const trazo = (w) => `<svg viewBox="0 0 500 70">${renglon(60)}<text x="250" y="60" text-anchor="middle" font-family="Andika" font-size="64" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="1 5" stroke-linecap="round">${w}</text></svg>`;
+const libre = `<svg viewBox="0 0 500 70">${renglon(60)}</svg>`;
+let h = "";
+A.forEach(([f, es, en], i) => {
+  [["es", es, "ESPAÑOL", "Repasa la palabra:", "Ahora escríbela tú:"], ["en", en, "ENGLISH", "Trace the word:", "Now write it yourself:"]].forEach(([l, w, tag, t1, t2]) => {
+    h += `<section class="hoja ${l}"><div class="tag">${tag}</div><div class="num">${i + 1} / 20</div>${titulo(w.toUpperCase())}<img class="img" loading="lazy" src="${IMG}${String(i + 1).padStart(2, "0")}-${f}.jpg" alt="${w}"><div class="lbl">${t1}</div>${trazo(w)}<div class="lbl">${t2}</div>${libre}</section>`;
+  });
+});
+document.getElementById("libro").innerHTML = h;
+}
+</script>
+</body>
+</html>
