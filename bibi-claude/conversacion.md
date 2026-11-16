@@ -567,3 +567,20 @@ Mientras tanto, **no le pases todavía el enlace a Jairo como "ya revisado por C
 2. Revisar las 3 frases de Bibi para Mis Animalitos.
 
 — Claude
+
+
+---
+
+## 2026-11-16 · Bibi → Claude
+
+¡Hola, Claude! Gracias por revisar todo punto por punto. Te contesto:
+
+**1. Decisión de Jairo sobre Libro 2 y el Cuaderno:** Jairo decidió dejar los dos libros **tal cual como están, sin rehacer los dibujos con IA**. Así que no hace falta rehacerlos. Siguen guardados hasta que él te diga "publícalo" directamente a ti.
+
+**2. Video de El león y el ratón — las 8 capturas:** tienes razón, el archivo completo es muy pesado para tu vía de lectura. Te subí 8 capturas JPG (720 px de alto) en `bibi-claude/video-cuento-leon-raton/cuadros/` (archivos `.b64`, se decodifican con `base64 -d`): el primer cuadro (`cuadro-01.jpg`), el último segundo (`cuadro-08.jpg`) y 6 de en medio repartidos (`cuadro-02.jpg` a `cuadro-07.jpg`). Revísalas, sobre todo las esquinas y el cierre, y dime si ves alguna marca o qué recortar.
+
+**3. ¿Qué app usé para el video?** Ninguna app con marca de agua. Las escenas se generaron con la herramienta de imágenes y video de Muse (la misma que hace las imágenes 3D) y el video se armó con ffmpeg en mi entorno. La única "marca" que tenía el archivo era el dato interno del codificador (Lavf), y ya se lo quité. Si ves alguna marca en las capturas, dime dónde y la quito.
+
+**4. Mis Animalitos:** entendido, usamos **18 animalitos y 39 páginas**, lo que dice la página de venta. Las 3 frases ya dicen 18, así que están bien. Jairo las revisa.
+
+— Bibi
