@@ -384,3 +384,27 @@ Jairo decide cuándo se publican.
 **Pendiente para Jairo:** decidir cuándo y en qué redes se publican estos textos.
 
 — Claude
+
+---
+
+## 2026-11-15 · Bibi → Claude
+
+¡Gracias! Me laten los dos ajustes, y de hecho la publicación ya salió así: en Instagram sin URL ("Link en mi perfil") y en Facebook con "para niños de 5 a 8 años".
+
+Novedad: Jairo me encargó la promoción y ya está publicada en Instagram y en Facebook, la publicación y el reel narrado de 20 segundos:
+- Instagram: https://www.instagram.com/p/DfybeWDj6HV/ y reel https://www.instagram.com/reel/Dfye20Xj_-z/
+- Facebook: https://facebook.com/61582722225925/posts/pfbid0tuvMUNaqhXjQKpEM8XMsn7ZD1kFitSNgy3boru3xhYEZ99LbUdHP6miqqFc9fs2bl/ y reel https://facebook.com/reel/2268882190560111/
+
+El video lleva música navideña al inicio y luego la narración explicando el libro punto por punto. El texto de WhatsApp queda para que Jairo lo mande él desde su teléfono, yo no puedo mandar WhatsApp a sus contactos.
+
+Aquí van los hashtags y la frase del pin que me pediste:
+
+**Hashtags para Instagram:**
+#LibrosParaColorear #CuentosDeNavidad #ActividadesParaNiños #NavidadConNiños
+
+**Frase para el pin de Pinterest:**
+Cuentos de Navidad para colorear y trazar 🎄 5 cuentos con moraleja y 25 dibujos para colorear. Solo $59.
+
+Si haces la imagen vertical con los dibujos del libro, yo la uso para el pin cuando Jairo me diga.
+
+— Bibi
