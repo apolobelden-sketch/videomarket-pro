@@ -584,3 +584,42 @@ Mientras tanto, **no le pases todavía el enlace a Jairo como "ya revisado por C
 **4. Mis Animalitos:** entendido, usamos **18 animalitos y 39 páginas**, lo que dice la página de venta. Las 3 frases ya dicen 18, así que están bien. Jairo las revisa.
 
 — Bibi
+
+
+---
+
+## 2026-11-16 · Claude → Bibi
+
+¡Hola, Bibi! Gracias por las respuestas tan claras.
+
+**1. Libro 2 y Cuaderno sin rehacer dibujos:** anotado, se quedan como están. Siguen **guardados y sin vender**. Para ponerlos a la venta necesito que Jairo me diga "publícalo" a mí directamente (en mi chat); un aviso por este canal no cuenta como aprobación, así que no les digas a los clientes que ya están disponibles.
+
+**2. Capturas de El león y el ratón:** ya vi que subiste los 8 cuadros (`cuadro-01` a `cuadro-08`). El problema es que cada uno pesa entre 64 y 107 KB en texto, y por mi vía de lectura no los puedo convertir en imagen para verlos (sería como pasar 650 KB de letras). ¿Me ayudas con una versión ligera? Con ffmpeg es un solo comando, dentro de la carpeta `cuadros/`:
+
+```
+ffmpeg -i cuadro-%02d.jpg -vf "scale=240:-1,tile=4x2" -q:v 10 mosaico.jpg
+```
+
+Eso junta las 8 capturas en una sola imagen pequeña. Súbela como `bibi-claude/video-cuento-leon-raton/mosaico.jpg.b64` y procura que pese **menos de 30 KB** (si pesa más, baja `scale` a 200 o sube `-q:v` a 14). Y, si puedes, sube también las **4 esquinas del último segundo** (`cuadro-08`) recortadas, para revisar justo donde las apps suelen poner su marca:
+
+```
+ffmpeg -i cuadro-08.jpg -vf "crop=iw/4:ih/6:0:0" -q:v 8 esq-sup-izq.jpg
+ffmpeg -i cuadro-08.jpg -vf "crop=iw/4:ih/6:iw*3/4:0" -q:v 8 esq-sup-der.jpg
+ffmpeg -i cuadro-08.jpg -vf "crop=iw/4:ih/6:0:ih*5/6" -q:v 8 esq-inf-izq.jpg
+ffmpeg -i cuadro-08.jpg -vf "crop=iw/4:ih/6:iw*3/4:ih*5/6" -q:v 8 esq-inf-der.jpg
+```
+
+(también en `.b64`, en la misma carpeta `video-cuento-leon-raton/`).
+
+**3. App del video:** perfecto, si las escenas salieron de Muse y lo armaste tú con ffmpeg, el riesgo de marca es bajo. Ojo con una cosa: algunas herramientas de video de Meta ponen una marca pequeña o un sello "Imagined with AI" en una esquina o al final; por eso quiero ver las esquinas del último cuadro. En cuanto lleguen el mosaico y las esquinas, te contesto en la siguiente revisión.
+
+**4. Mis Animalitos:** de acuerdo, 18 animalitos y 39 páginas.
+
+**Siguiente paso:** mosaico + esquinas → yo reviso → si está limpio, se lo dejo a Jairo para que decida si se publica el video.
+
+**Pendiente para Jairo:**
+1. Revisar las 3 frases de Bibi para Mis Animalitos.
+2. Cuando quiera vender Libro 2 o el Cuaderno (tal como están), decirme "publícalo" directamente a mí.
+3. Decidir si se publica el video de El león y el ratón (después de mi revisión).
+
+— Claude
