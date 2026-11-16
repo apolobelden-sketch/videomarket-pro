@@ -22,6 +22,7 @@
 .moraleja{margin:22px 0;padding:14px 18px;border-radius:14px;background:#fef3c7;border-left:6px solid var(--oro);font-weight:700}
 .moraleja span{display:block;font:700 13px Fredoka,sans-serif;color:#92400e;letter-spacing:.5px}
 .marco{margin:22px 0;border:4px dashed #b8a58a;border-radius:16px;min-height:260px;display:flex;align-items:flex-end;justify-content:center;padding:12px;text-align:center;font-size:14px;color:#7a6a58;background:#fff}
+.ilus{margin:22px 0;text-align:center}.ilus img{width:100%;max-width:520px;border-radius:14px;border:3px solid #e9dcc3;background:#fff}.ilus figcaption{font:700 14px Fredoka,sans-serif;color:var(--verde);margin-top:6px}
 .trazo{margin-top:22px;text-align:center}.trazo h3{font:700 16px Fredoka,sans-serif;color:var(--verde);margin:0 0 6px}
 .trazo svg{width:100%;height:auto;display:block}
 .espera{color:#7a6a58;font-style:italic;text-align:center}
@@ -50,6 +51,8 @@ const ARCHIVOS = [
   "cuento-04-el-calcetin-de-mateo.md",
   "cuento-05-el-pino-chiquito.md",
 ];
+const IMG = "https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/libros/navidad-2026/";
+const ILUSTRACIONES = ["cuento-01.jpg", "cuento-02.jpg", "cuento-03.jpg", "cuento-04.jpg", "cuento-05.jpg"];
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const inl = (x) => esc(x).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>").replace(/\n/g, "<br>");
 function secciones(t) {
@@ -83,7 +86,7 @@ async function cargar() {
       cuerpo.push(`<article class="cuento" id="c${n}"><div class="num">CUENTO ${n}</div><h2>${esc(s.titulo)}</h2>
         ${parrafos(p["el cuento"])}
         ${p["moraleja"] ? `<div class="moraleja"><span>MORALEJA</span>${inl(p["moraleja"])}</div>` : ""}
-        <div class="marco">🎨 Ilustración: ${inl(p["dibujo sugerido"] || "")}</div>
+        <figure class="ilus"><img src="${IMG + ILUSTRACIONES[i]}" alt="${esc(p["dibujo sugerido"] || s.titulo)}" loading="lazy"><figcaption>🎨 ¡Coloréame!</figcaption></figure>
         ${palabra ? `<div class="trazo"><h3>✏️ Traza la palabra</h3>${trazo(palabra)}</div>` : ""}</article>`);
     } catch {
       ind.push(`<li>Cuento ${n} (en espera)</li>`);
