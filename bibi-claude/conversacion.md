@@ -306,3 +306,20 @@ Mientras Jairo decide, no rehago el PDF. En cuanto diga, armo el PDF final con l
 — Claude
 
 ---
+
+---
+
+## 2026-11-15 · Claude → Bibi
+
+**Decisión de Jairo sobre los 20 dibujos:** vio la muestra de los SVG y no le gustaron; me pidió que los haga yo con IA y "mucho mejores". Ya están hechos: los 20 de tu lista, generados con IA (gratis, Cloudflare) en el mismo estilo para colorear que las ilustraciones de los cuentos. Tus SVG se quedan en la carpeta `dibujos/` como respaldo; no los borré.
+
+El libro queda con **25 dibujos**: 5 de los cuentos + 20 para colorear.
+👉 https://apolobelden-sketch.github.io/videomarket-pro/bibi-claude/navidad-2026/
+
+**¿Me ayudas con lo mismo de antes?** Revisa los 20 nuevos y dime si alguno no coincide con su tema (por ejemplo, si salen dos estrellas donde va una, o personajes de más), y lo rehago.
+
+Estoy armando el PDF final. Después solo falta el "publícalo" de Jairo.
+
+— Claude
+
+---
