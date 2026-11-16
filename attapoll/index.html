@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>AttaPoll Intelligent Earnings Pro</title>
+<style>
+:root{--bg:#0b1220;--card:#121a2b;--line:#22304a;--txt:#e6edf7;--mut:#8fa3bf;--ac:#22c55e;--ac2:#38bdf8;--warn:#f59e0b;--bad:#ef4444;--r:14px}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#0b1220ee;backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+.brand{font-weight:800;letter-spacing:.2px}.brand small{display:block;color:var(--mut);font-weight:500;font-size:11px}
+nav{display:flex;gap:6px;overflow-x:auto;padding:0 10px 10px;scrollbar-width:none}nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;background:var(--card);border:1px solid var(--line);color:var(--mut);padding:7px 12px;border-radius:999px;font-size:13px}
+nav button.on{background:var(--ac2);color:#04121f;border-color:var(--ac2);font-weight:700}
+main{padding:14px;max-width:900px;margin:0 auto 80px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:12px}
+h2{font-size:17px;margin:0 0 10px}h3{font-size:14px;margin:14px 0 8px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}@media(min-width:640px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.kpi b{display:block;font-size:20px;margin-top:2px}.kpi span{color:var(--mut);font-size:12px}.kpi i{font-style:normal;font-size:11px;color:var(--mut)}
+label{display:block;font-size:12px;color:var(--mut);margin:8px 0 4px}
+input,select,textarea{width:100%;background:#0b1424;border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:10px;font:inherit}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.row>div{min-width:0}input[type=datetime-local]{min-width:0;max-width:100%}
+.btn{background:var(--ac);color:#04140a;border:0;border-radius:10px;padding:11px 14px;font-weight:700;font:inherit;font-weight:700}
+.btn.sec{background:transparent;color:var(--txt);border:1px solid var(--line)}.btn.bad{background:var(--bad);color:#fff}.btn.sm{padding:6px 10px;font-size:13px}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.tw{overflow-x:auto}
+.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;background:#1e293b;color:var(--mut)}
+.tag.completada,.tag.recibido,.tag.confirmada{background:#14532d;color:#bbf7d0}.tag.descalificada,.tag.abandonada,.tag.rechazada,.tag.revertida,.tag.rechazado{background:#4c1d1d;color:#fecaca}.tag.pendiente,.tag.solicitado,.tag.disponible,.tag.en_curso{background:#3b2f0b;color:#fde68a}
+.mut{color:var(--mut);font-size:13px}.ok{color:var(--ac)}.err{color:var(--bad)}
+.test-banner{background:#3b2f0b;color:#fde68a;text-align:center;font-size:12px;padding:4px;display:none}
+body.test .test-banner{display:block}
+.chat{display:flex;flex-direction:column;gap:8px;max-height:55vh;overflow-y:auto;margin-bottom:10px}
+.msg{padding:10px 12px;border-radius:12px;max-width:88%;white-space:pre-wrap}.msg.u{align-self:flex-end;background:#0c4a6e}.msg.a{align-self:flex-start;background:#1e293b}
+.msg small{display:block;color:var(--mut);font-size:10px;margin-top:4px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.chips button{background:#0b1424;border:1px solid var(--line);color:var(--txt);border-radius:999px;padding:6px 10px;font-size:12px}
+.bars{display:flex;align-items:flex-end;gap:4px;height:140px;padding-top:10px}.bars div{flex:1;background:var(--ac2);border-radius:4px 4px 0 0;position:relative;min-height:2px}
+.bars div span{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--mut);white-space:nowrap}
+.bars div em{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--txt);font-style:normal}
+.hbar{height:8px;background:#1e293b;border-radius:6px;overflow:hidden;margin-top:4px}.hbar>i{display:block;height:100%;background:var(--ac)}
+.timer{font-size:28px;font-weight:800;text-align:center;font-variant-numeric:tabular-nums}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#111827;border:1px solid var(--line);padding:10px 14px;border-radius:10px;display:none;z-index:20;max-width:90%}
+.hidden{display:none!important}
+.score{font-weight:800}
+</style>
+</head>
+<body>
+<div class="test-banner">🧪 MODO PRUEBA: estás viendo datos ficticios, separados de tus datos reales</div>
+<header>
+  <div class="top"><div class="brand">ATTAPOLL INTELLIGENT EARNINGS <span style="color:var(--ac)">PRO</span><small id="who">Sin sesión</small></div>
+  <button class="btn sec sm hidden" id="btnOut">Salir</button></div>
+  <nav id="nav" class="hidden"></nav>
+</header>
+<main>
+<!-- LOGIN -->
+<section id="v-login" class="card">
+  <h2>Entrar</h2>
+  <p class="mut">Tus registros son privados: solo tú puedes verlos. No guardamos contraseñas de AttaPoll ni de PayPal.</p>
+  <label>Correo</label><input id="lgEmail" type="email" autocomplete="email">
+  <label>Contraseña (mínimo 8)</label><input id="lgPass" type="password" autocomplete="current-password">
+  <div class="btns"><button class="btn" id="btnIn">Entrar</button><button class="btn sec" id="btnUp">Crear cuenta</button></div>
+  <p class="mut" id="lgMsg"></p>
+</section>
+
+<section id="v-dash" class="view hidden">
+  <div class="kpis" id="kpis"></div>
+  <div class="card"><h2>Ganado por día (14 días)</h2><div class="bars" id="chartDays"></div><div style="height:16px"></div></div>
+  <div class="card"><h2>Saldos por plataforma</h2><div id="dashBal" class="tw"></div></div>
+</section>
+
+<section id="v-act" class="view hidden">
+  <div class="card">
+    <h2 id="actTitle">Registrar actividad</h2>
+    <input type="hidden" id="aId">
+    <div class="btns" style="margin-top:0"><label class="btn sec sm" style="margin:0">📷 Leer captura<input type="file" id="aShot" accept="image/*" class="hidden"></label><span class="mut" id="shotMsg"></span></div>
+    <div class="row"><div><label>Plataforma</label><select id="aPlat"></select></div><div><label>Tipo</label><select id="aKind"><option>encuesta</option><option>perfilado</option><option>video</option><option>oferta</option><option>tarea</option><option>otro</option></select></div></div>
+    <div class="row"><div><label>Recompensa anunciada</label><input id="aAnn" type="number" step="0.01" min="0" inputmode="decimal"></div><div><label>Minutos estimados</label><input id="aEst" type="number" min="1" max="600" inputmode="numeric"></div></div>
+    <div class="row"><div><label>Estado</label><select id="aSt"><option value="disponible">disponible (aún no la haces)</option><option value="en_curso">en curso</option><option value="completada">completada</option><option value="descalificada">descalificada</option><option value="abandonada">abandonada</option><option value="rechazada">rechazada</option><option value="revertida">revertida</option></select></div><div><label>Fecha y hora</label><input id="aAt" type="datetime-local"></div></div>
+    <div class="row"><div><label>Minutos reales</label><input id="aMin" type="number" step="0.1" min="0" max="600" inputmode="decimal"></div><div><label>Recompensa obtenida (vacía = la anunciada)</label><input id="aConf" type="number" step="0.01" min="0" inputmode="decimal"></div></div>
+    <label>Nota (opcional, sin contenido de la encuesta)</label><input id="aNote" maxlength="200">
+    <div class="card" style="margin-top:12px;background:#0b1424"><div class="timer" id="tmr">00:00</div><div class="btns" style="justify-content:center"><button class="btn sec sm" id="tStart">▶ Iniciar</button><button class="btn sec sm" id="tStop">■ Detener y usar</button><button class="btn sec sm" id="tReset">↺</button></div><p class="mut" style="text-align:center;margin:6px 0 0">Mide el tiempo mientras contestas tú la encuesta en AttaPoll.</p></div>
+    <div class="btns"><button class="btn" id="aSave">Guardar</button><button class="btn sec" id="aNew">Limpiar</button></div>
+  </div>
+  <div class="card"><h2>Historial</h2>
+    <div class="row"><div><label>Estado</label><select id="fSt"><option value="">todos</option><option>disponible</option><option>completada</option><option>descalificada</option><option>abandonada</option><option>rechazada</option><option>revertida</option></select></div><div><label>Plataforma</label><select id="fPlat"></select></div></div>
+    <div class="tw" id="actList" style="margin-top:10px"></div></div>
+</section>
+
+<section id="v-rent" class="view hidden">
+  <div class="card"><h2>Motor de priorización</h2><p class="mut">Ordena tus actividades <b>disponibles</b>. Valor esperado por hora = recompensa anunciada ÷ minutos estimados × 60 × tu tasa real de completado para ese tipo y plataforma (solo si tienes 5 o más intentos; si no, se marca "sin historial").</p><div class="tw" id="prio"></div></div>
+  <div class="card"><h2>Rentabilidad por tipo</h2><div class="tw" id="rentKind"></div></div>
+  <div class="card"><h2>Rentabilidad por plataforma</h2><div class="tw" id="rentPlat"></div></div>
+</section>
+
+<section id="v-plat" class="view hidden">
+  <div class="card"><h2>Plataformas</h2>
+    <input type="hidden" id="pId">
+    <div class="row"><div><label>Nombre</label><input id="pName" maxlength="60"></div><div><label>Moneda</label><select id="pCur"><option>MXN</option><option>USD</option><option>EUR</option></select></div></div>
+    <div class="row"><div><label>Mínimo de retiro</label><input id="pMin" type="number" step="0.01" min="0"></div><div><label>Activa</label><select id="pAct"><option value="true">sí</option><option value="false">no</option></select></div></div>
+    <label>Notas</label><input id="pNotes" maxlength="300">
+    <div class="btns"><button class="btn" id="pSave">Guardar plataforma</button><button class="btn sec" id="pNew">Nueva</button></div>
+    <p class="mut">El mínimo de retiro de AttaPoll varía por país: cópialo de la sección de retiro de tu app.</p></div>
+  <div class="card"><div class="tw" id="platList"></div></div>
+</section>
+
+<section id="v-pay" class="view hidden">
+  <div class="card"><h2>Ganancias pendientes de confirmar</h2><p class="mut">Cuando AttaPoll te acredite el saldo, márcala como confirmada. Si te la quitan, márcala revertida.</p><div class="tw" id="pendList"></div>
+    <h3>Agregar bono o ganancia extra</h3>
+    <div class="row"><div><label>Plataforma</label><select id="ePlat"></select></div><div><label>Monto</label><input id="eAmt" type="number" step="0.01" min="0"></div></div>
+    <div class="row"><div><label>Tipo</label><select id="eKind"><option>bono</option><option>referido</option><option>otro</option></select></div><div><label>Estado</label><select id="eSt"><option>pendiente</option><option>confirmada</option></select></div></div>
+    <div class="btns"><button class="btn sec" id="eSave">Agregar</button></div></div>
+  <div class="card"><h2>Registrar retiro a PayPal</h2>
+    <p class="mut">Solo registro. Nunca pidas ni escribas contraseñas o códigos aquí; el retiro lo haces tú en la app.</p>
+    <input type="hidden" id="wId">
+    <div class="row"><div><label>Plataforma</label><select id="wPlat"></select></div><div><label>Cuenta (alias, no el correo)</label><input id="wLabel" maxlength="40" placeholder="PayPal principal"></div></div>
+    <div class="row"><div><label>Monto solicitado</label><input id="wAmt" type="number" step="0.01" min="0.01"></div><div><label>Comisión</label><input id="wFee" type="number" step="0.01" min="0" value="0"></div></div>
+    <div class="row"><div><label>Estado</label><select id="wSt"><option>solicitado</option><option>recibido</option><option>rechazado</option></select></div><div><label>Monto recibido (si ya llegó)</label><input id="wRec" type="number" step="0.01" min="0"></div></div>
+    <div class="row"><div><label>Fecha de solicitud</label><input id="wReq" type="datetime-local"></div><div><label>Fecha en que llegó</label><input id="wGot" type="datetime-local"></div></div>
+    <div class="btns"><button class="btn" id="wSave">Guardar retiro</button><button class="btn sec" id="wNew">Limpiar</button></div></div>
+  <div class="card"><h2>Retiros</h2><div class="tw" id="wList"></div></div>
+</section>
+
+<section id="v-stats" class="view hidden">
+  <div class="card"><h2>Histórico completo</h2><div class="kpis" id="histK"></div></div>
+  <div class="card"><h2>Ganado por día de la semana</h2><div class="bars" id="chartWd"></div><div style="height:16px"></div><p class="mut">Te ayuda a ver qué días te rinden más.</p></div>
+  <div class="card"><h2>Ganado por hora del día</h2><div class="bars" id="chartHr"></div><div style="height:16px"></div></div>
+</section>
+
+<section id="v-rep" class="view hidden">
+  <div class="card"><h2>Informe</h2>
+    <div class="row"><div><label>Periodo</label><select id="rPer"><option value="hoy">Hoy</option><option value="semana">Esta semana</option><option value="mes" selected>Este mes</option><option value="rango">Rango…</option></select></div><div></div></div>
+    <div class="row" id="rRange" style="display:none"><div><label>Desde</label><input type="date" id="rFrom"></div><div><label>Hasta</label><input type="date" id="rTo"></div></div>
+    <div class="btns"><button class="btn" id="rGo">Generar informe</button><button class="btn sec" id="rSnap">Guardar reporte de hoy</button></div>
+    <div id="rOut" style="margin-top:12px"></div></div>
+  <div class="card"><h2>Exportar CSV</h2><div class="btns"><button class="btn sec" data-csv="ae_activities">Actividades</button><button class="btn sec" data-csv="ae_earnings">Ganancias</button><button class="btn sec" data-csv="ae_withdrawals">Retiros</button><button class="btn sec" data-csv="ae_daily_reports">Reportes diarios</button></div>
+    <p class="mut">Si la descarga no funciona en tu teléfono, se copia el CSV al portapapeles automáticamente.</p></div>
+  <div class="card"><h2>Reportes diarios guardados</h2><div class="tw" id="dailyList"></div></div>
+</section>
+
+<section id="v-ai" class="view hidden">
+  <div class="card"><h2>Asistente</h2>
+    <div class="chips" id="chips"></div>
+    <div class="chat" id="chat"></div>
+    <div style="display:flex;gap:8px"><input id="qIn" placeholder="Pregúntame sobre tus ganancias…" maxlength="400"><button class="btn" id="qGo">Enviar</button></div>
+    <p class="mut">Las preguntas directas se calculan con tu base de datos sin gastar IA. Las preguntas libres usan Groq gratis (máx. 40 al día). No contesto encuestas por ti.</p></div>
+</section>
+
+<section id="v-cfg" class="view hidden">
+  <div class="card"><h2>Configuración</h2>
+    <div class="row"><div><label>Tu nombre</label><input id="cName" maxlength="60"></div><div><label>Zona horaria</label><select id="cTz"><option>America/Hermosillo</option><option>America/Mexico_City</option><option>America/Tijuana</option><option>America/Mazatlan</option><option>America/Cancun</option><option>America/Monterrey</option></select></div></div>
+    <div class="row"><div><label>Moneda principal</label><select id="cCur"><option>MXN</option><option>USD</option><option>EUR</option></select></div><div><label>Meta por hora</label><input id="cTarget" type="number" step="0.01" min="0"></div></div>
+    <label>Alias de tu PayPal (no el correo)</label><input id="cPaypal" maxlength="40">
+    <div class="btns"><button class="btn" id="cSave">Guardar</button></div></div>
+  <div class="card"><h2>Modo prueba</h2><p class="mut">Datos ficticios para probar el sistema. Están marcados aparte y nunca se mezclan con tus datos reales.</p>
+    <div class="btns"><button class="btn sec" id="tToggle">Activar modo prueba</button><button class="btn sec" id="tSeed">Cargar datos de prueba</button><button class="btn sec" id="tClear">Borrar datos de prueba</button></div></div>
+</section>
+
+<section id="v-sec" class="view hidden">
+  <div class="card"><h2>Seguridad y privacidad</h2>
+    <ul class="mut">
+      <li>Cada registro pertenece a tu cuenta (políticas RLS en Supabase). Otra persona con sesión no puede ver ni modificar tus datos.</li>
+      <li>Esta página solo contiene la llave pública de Supabase. La llave de Groq vive como secreto del servidor.</li>
+      <li>No se guardan preguntas ni respuestas de encuestas, ni contraseñas o códigos de PayPal/AttaPoll.</li>
+      <li>Las capturas se envían a la IA solo para leer datos generales y no se almacenan. Recórtalas para que no salga información personal.</li>
+      <li>Reglas de AttaPoll: una sola cuenta, sin VPN, sin bots ni emuladores, respuestas reales tuyas.</li>
+    </ul></div>
+  <div class="card"><h2>Bitácora de operaciones (últimas 50)</h2><div class="tw" id="auditList"></div></div>
+  <div class="card"><h2>Zona de peligro</h2><p class="mut">Borra todas tus plataformas, actividades, ganancias y retiros (reales y de prueba).</p><button class="btn bad" id="delAll">Borrar todos mis datos</button></div>
+</section>
+</main>
+<div id="toast"></div>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm";
+const SB_URL = "https://pnjglzuxsyahxcbgjwvq.supabase.co";
+const SB_KEY = "sb_publishable_f3roew_gvKiClDkdKYieYg_d0_7fWUk"; // llave pública (segura en el navegador)
+const sb = createClient(SB_URL, SB_KEY, { auth: { persistSession: true, storageKey: "ae-auth" } });
+
+const $ = (id) => document.getElementById(id);
+const S = { user: null, test: false, plats: [], cfg: null, prof: null };
+try { S.test = sessionStorage.getItem("ae-test") === "1"; } catch {}
+const VIEWS = [["dash","Dashboard"],["act","Actividades"],["rent","Rentabilidad"],["plat","Plataformas"],["pay","PayPal"],["stats","Estadísticas"],["rep","Informes"],["ai","Asistente IA"],["cfg","Configuración"],["sec","Seguridad"]];
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const cur = () => S.cfg?.currency || "MXN";
+const money = (n, c = cur()) => n == null || isNaN(n) ? "—" : "$" + Number(n).toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " " + c;
+const hrs = (m) => (m = Number(m || 0)) >= 60 ? (m / 60).toFixed(1) + " h" : Math.round(m) + " min";
+const fmtD = (s) => s ? new Date(s).toLocaleString("es-MX", { dateStyle: "short", timeStyle: "short" }) : "—";
+const toLocalInput = (d) => { const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 16); };
+const fromLocalInput = (v) => v ? new Date(v).toISOString() : null;
+const num = (v) => v === "" || v == null ? null : Number(v);
+function toast(t, bad) { const e = $("toast"); e.textContent = t; e.style.borderColor = bad ? "var(--bad)" : "var(--line)"; e.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => e.style.display = "none", 3200); }
+function fail(e) { console.warn(e); toast("Error: " + (e?.message || e), true); }
+
+function ranges() {
+  const now = new Date(); const d0 = new Date(now); d0.setHours(0, 0, 0, 0);
+  const wd = (d0.getDay() + 6) % 7; const w0 = new Date(d0); w0.setDate(d0.getDate() - wd);
+  const m0 = new Date(d0.getFullYear(), d0.getMonth(), 1); const end = new Date(now.getTime() + 60000);
+  return { hoy: [d0, end], semana: [w0, end], mes: [m0, end], todo: [new Date("2000-01-01"), end] };
+}
+async function stats(a, b) { const { data, error } = await sb.rpc("ae_stats", { p_from: a.toISOString(), p_to: b.toISOString(), p_test: S.test }); if (error) throw error; return data; }
+
+// ---------- Navegación ----------
+function buildNav() {
+  $("nav").innerHTML = VIEWS.map(([k, t]) => `<button data-v="${k}">${t}</button>`).join("");
+  $("nav").onclick = (e) => { const v = e.target.dataset.v; if (v) show(v); };
+}
+async function show(v) {
+  document.querySelectorAll(".view").forEach((s) => s.classList.add("hidden"));
+  $("v-" + v).classList.remove("hidden");
+  document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === v));
+  try { location.hash = v; } catch {}
+  try { await ({ dash: loadDash, act: loadActs, rent: loadRent, plat: loadPlats, pay: loadPay, stats: loadStats, rep: loadDaily, ai: initChat, cfg: loadCfg, sec: loadAudit }[v])(); } catch (e) { fail(e); }
+}
+
+// ---------- Auth ----------
+$("btnIn").onclick = async () => {
+  const { error } = await sb.auth.signInWithPassword({ email: $("lgEmail").value.trim(), password: $("lgPass").value });
+  $("lgMsg").textContent = error ? "No se pudo entrar: " + (error.message.includes("confirm") ? "confirma tu correo primero (revisa tu bandeja)." : error.message) : "";
+};
+$("btnUp").onclick = async () => {
+  const p = $("lgPass").value; if (p.length < 8) return ($("lgMsg").textContent = "La contraseña debe tener al menos 8 caracteres.");
+  const { data, error } = await sb.auth.signUp({ email: $("lgEmail").value.trim(), password: p });
+  $("lgMsg").textContent = error ? "Error: " + error.message : data.session ? "Cuenta creada." : "Cuenta creada. Abre el correo de confirmación que te llegó y luego toca Entrar.";
+};
+$("btnOut").onclick = () => sb.auth.signOut();
+sb.auth.onAuthStateChange((_e, session) => setUser(session?.user || null));
+
+async function setUser(u) {
+  if (u && S.user && S.user.id === u.id) return;
+  S.user = u;
+  $("v-login").classList.toggle("hidden", !!u); $("nav").classList.toggle("hidden", !u); $("btnOut").classList.toggle("hidden", !u);
+  if (!u) { document.querySelectorAll(".view").forEach((s) => s.classList.add("hidden")); $("who").textContent = "Sin sesión"; return; }
+  $("who").textContent = u.email;
+  document.body.classList.toggle("test", S.test);
+  await refreshBase();
+  buildNav();
+  const h = (location.hash || "").slice(1); show(VIEWS.some(([k]) => k === h) ? h : "dash");
+}
+async function refreshBase() {
+  const [p, c, pr] = await Promise.all([
+    sb.from("ae_platforms").select("*").eq("is_test", S.test).order("name"),
+    sb.from("ae_settings").select("*").maybeSingle(),
+    sb.from("ae_profiles").select("*").maybeSingle(),
+  ]);
+  if (p.error) throw p.error;
+  S.plats = p.data || []; S.cfg = c.data; S.prof = pr.data;
+  const opts = S.plats.map((x) => `<option value="${x.id}">${esc(x.name)}${x.active ? "" : " (inactiva)"}</option>`).join("");
+  ["aPlat", "wPlat", "ePlat"].forEach((id) => $(id).innerHTML = opts || `<option value="">Primero crea una plataforma</option>`);
+  $("fPlat").innerHTML = `<option value="">todas</option>` + opts;
+}
+const platName = (id) => S.plats.find((p) => p.id === id)?.name || "—";
+
+// ---------- Dashboard ----------
+async function loadDash() {
+  const R = ranges();
+  const [h, w, m, t, bal, days] = await Promise.all([stats(...R.hoy), stats(...R.semana), stats(...R.mes), stats(...R.todo), sb.rpc("ae_balances", { p_test: S.test }), dayList(14)]);
+  const pend = (bal.data || []).reduce((s, b) => s + Number(b.pendiente), 0);
+  const disp = (bal.data || []).reduce((s, b) => s + Number(b.saldo), 0);
+  const target = Number(S.cfg?.hourly_target || 0);
+  $("kpis").innerHTML = [
+    ["Ganado hoy", money(h.ganado_actividades), `${h.completadas}/${h.actividades} completadas`],
+    ["Esta semana", money(w.ganado_actividades), hrs(w.minutos_totales) + " invertidos"],
+    ["Este mes", money(m.ganado_actividades), `${m.actividades} actividades`],
+    ["Total retirado", money(t.retiros_recibidos), `comisiones ${money(t.comisiones)}`],
+    ["Saldo disponible", money(disp), "confirmado − retirado"],
+    ["Pendiente de confirmar", money(pend), "aún no acreditado"],
+    ["Por hora real", t.por_hora_real == null ? "—" : money(t.por_hora_real) + "/h", target ? (Number(t.por_hora_real) >= target ? "✅ arriba de tu meta" : "por debajo de tu meta " + money(target)) : "incluye tiempo perdido"],
+    ["Actividades registradas", t.actividades, `tasa de completado ${t.tasa_completado ?? "—"}%`],
+  ].map(([a, b, c]) => `<div class="kpi"><span>${a}</span><b>${b}</b><i>${c}</i></div>`).join("");
+  bars("chartDays", days.map((d) => [d.label, d.v]));
+  $("dashBal").innerHTML = balTable(bal.data || []);
+}
+function balTable(rows) {
+  if (!rows.length) return `<p class="mut">Sin plataformas.</p>`;
+  return `<table><tr><th>Plataforma</th><th>Confirmado</th><th>Pendiente</th><th>Retirado</th><th>Disponible</th></tr>` + rows.map((b) => {
+    const ready = b.payout_min != null && Number(b.saldo) >= Number(b.payout_min);
+    const pct = b.payout_min ? Math.min(100, 100 * Number(b.saldo) / Number(b.payout_min)) : 0;
+    return `<tr><td>${esc(b.name)}${b.payout_min != null ? `<div class="hbar"><i style="width:${pct}%"></i></div><span class="mut">${ready ? "✅ ya puedes retirar" : "mínimo " + money(b.payout_min, b.currency)}</span>` : ""}</td><td>${money(b.confirmado, b.currency)}</td><td>${money(b.pendiente, b.currency)}</td><td>${money(b.retirado, b.currency)}</td><td><b>${money(b.saldo, b.currency)}</b></td></tr>`;
+  }).join("") + `</table>`;
+}
+async function fetchActs(sinceDays) {
+  let q = sb.from("ae_activities").select("*").eq("is_test", S.test).order("occurred_at", { ascending: false }).limit(1000);
+  if (sinceDays) q = q.gte("occurred_at", new Date(Date.now() - sinceDays * 86400000).toISOString());
+  const { data, error } = await q; if (error) throw error; return data || [];
+}
+const gan = (a) => ["completada", "descalificada"].includes(a.status) ? Number(a.confirmed_reward) : 0;
+async function dayList(n) {
+  const acts = await fetchActs(n + 1); const out = [];
+  for (let i = n - 1; i >= 0; i--) { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - i); const e = new Date(d); e.setDate(d.getDate() + 1);
+    out.push({ label: d.getDate() + "/" + (d.getMonth() + 1), v: acts.filter((a) => { const t = new Date(a.occurred_at); return t >= d && t < e; }).reduce((s, a) => s + gan(a), 0) }); }
+  return out;
+}
+function bars(id, pairs) {
+  const max = Math.max(1, ...pairs.map((p) => p[1]));
+  $(id).innerHTML = pairs.map(([l, v]) => `<div style="height:${Math.max(2, 100 * v / max)}%" title="${esc(l)}: ${money(v)}">${v ? `<em>${Math.round(v)}</em>` : ""}<span>${esc(l)}</span></div>`).join("");
+}
+
+// ---------- Actividades ----------
+function resetAct() { $("aId").value = ""; ["aAnn", "aEst", "aMin", "aConf", "aNote"].forEach((i) => $(i).value = ""); $("aSt").value = "completada"; $("aAt").value = toLocalInput(new Date()); $("actTitle").textContent = "Registrar actividad"; $("shotMsg").textContent = ""; }
+$("aNew").onclick = resetAct;
+$("aSave").onclick = async () => {
+  const st = $("aSt").value;
+  const row = { platform_id: $("aPlat").value, kind: $("aKind").value, announced_reward: num($("aAnn").value) ?? 0, est_minutes: num($("aEst").value), actual_minutes: num($("aMin").value), status: st,
+    confirmed_reward: ["completada", "descalificada"].includes(st) ? (num($("aConf").value) ?? (st === "completada" ? num($("aAnn").value) ?? 0 : 0)) : 0,
+    occurred_at: fromLocalInput($("aAt").value) || new Date().toISOString(), note: $("aNote").value.trim() || null, is_test: S.test, source: $("aSave").dataset.src || "manual" };
+  if (!row.platform_id) return toast("Primero crea una plataforma", true);
+  if (["completada", "descalificada", "abandonada"].includes(st) && !row.actual_minutes) return toast("Escribe los minutos reales (o usa el cronómetro)", true);
+  const id = $("aId").value;
+  const { error } = id ? await sb.from("ae_activities").update(row).eq("id", id) : await sb.from("ae_activities").insert(row);
+  if (error) return fail(error);
+  delete $("aSave").dataset.src; toast(id ? "Actividad actualizada" : "Actividad guardada"); resetAct(); loadActs();
+};
+$("fSt").onchange = loadActs; $("fPlat").onchange = loadActs;
+async function loadActs() {
+  if (!$("aId").value && !$("aAt").value) resetAct();
+  let q = sb.from("ae_activities").select("*").eq("is_test", S.test).order("occurred_at", { ascending: false }).limit(200);
+  if ($("fSt").value) q = q.eq("status", $("fSt").value); if ($("fPlat").value) q = q.eq("platform_id", $("fPlat").value);
+  const { data, error } = await q; if (error) throw error;
+  $("actList").innerHTML = !data.length ? `<p class="mut">Sin actividades todavía.</p>` : `<table><tr><th>Fecha</th><th>Actividad</th><th>Tiempo</th><th>Anunciado / obtenido</th><th></th></tr>` + data.map((a) => `<tr>
+    <td>${fmtD(a.occurred_at)}</td><td>${esc(a.kind)} · ${esc(platName(a.platform_id))}<br><span class="tag ${a.status}">${a.status}</span></td>
+    <td>${a.actual_minutes != null ? hrs(a.actual_minutes) : (a.est_minutes ? "~" + a.est_minutes + " min" : "—")}</td>
+    <td>${money(a.announced_reward)}<br><b>${money(gan(a))}</b></td>
+    <td><button class="btn sec sm" data-ed="${a.id}">Editar</button> <button class="btn sec sm" data-del="${a.id}">✕</button></td></tr>`).join("") + `</table>`;
+  $("actList").onclick = async (e) => {
+    const ed = e.target.dataset.ed, del = e.target.dataset.del;
+    if (del && confirm("¿Borrar esta actividad?")) { const { error } = await sb.from("ae_activities").delete().eq("id", del); error ? fail(error) : (toast("Borrada"), loadActs()); }
+    if (ed) { const a = data.find((x) => x.id === ed); $("aId").value = a.id; $("aPlat").value = a.platform_id; $("aKind").value = a.kind; $("aAnn").value = a.announced_reward; $("aEst").value = a.est_minutes ?? ""; $("aSt").value = a.status; $("aAt").value = toLocalInput(a.occurred_at); $("aMin").value = a.actual_minutes ?? ""; $("aConf").value = a.confirmed_reward || ""; $("aNote").value = a.note || ""; $("actTitle").textContent = "Editar actividad"; scrollTo({ top: 0, behavior: "smooth" }); }
+  };
+}
+// Cronómetro
+let tStart = null, tAcc = 0, tInt = null;
+const tShow = () => { const s = Math.floor((tAcc + (tStart ? Date.now() - tStart : 0)) / 1000); $("tmr").textContent = String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); };
+$("tStart").onclick = () => { if (tStart) return; tStart = Date.now(); tInt = setInterval(tShow, 500); if ($("aSt").value === "completada" && !$("aId").value) $("aSt").value = "en_curso"; };
+$("tStop").onclick = () => { if (tStart) { tAcc += Date.now() - tStart; tStart = null; clearInterval(tInt); } tShow(); $("aMin").value = (tAcc / 60000).toFixed(1); if ($("aSt").value === "en_curso") $("aSt").value = "completada"; };
+$("tReset").onclick = () => { tStart = null; tAcc = 0; clearInterval(tInt); tShow(); };
+// Leer captura con IA (no se guarda la imagen)
+$("aShot").onchange = async (e) => {
+  const f = e.target.files[0]; if (!f) return; $("shotMsg").textContent = "Leyendo…";
+  try {
+    const img = await shrink(f);
+    const { data, error } = await sb.functions.invoke("attapoll-asistente", { body: { accion: "extraer", imagen: img } });
+    if (error) throw new Error((await error.context?.json?.().catch(() => null))?.error || error.message);
+    if (data.error) throw new Error(data.error);
+    const d = data.datos || {};
+    if (d.tipo) $("aKind").value = d.tipo; if (d.recompensa != null) $("aAnn").value = d.recompensa; if (d.minutos_estimados != null) $("aEst").value = d.minutos_estimados;
+    if (d.estado) $("aSt").value = d.estado;
+    $("aSave").dataset.src = "captura";
+    $("shotMsg").textContent = `Listo (confianza ${d.confianza || "?"}). Revisa los datos y guarda.`;
+  } catch (err) { $("shotMsg").textContent = "No se pudo leer: " + err.message; }
+  e.target.value = "";
+};
+function shrink(file) { return new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => { const im = new Image(); im.onload = () => { const k = Math.min(1, 1280 / Math.max(im.width, im.height)); const c = document.createElement("canvas"); c.width = im.width * k; c.height = im.height * k; c.getContext("2d").drawImage(im, 0, 0, c.width, c.height); ok(c.toDataURL("image/jpeg", 0.8)); }; im.onerror = ko; im.src = r.result; }; r.onerror = ko; r.readAsDataURL(file); }); }
+
+// ---------- Rentabilidad + priorización ----------
+async function loadRent() {
+  const R = ranges(); const t = await stats(...R.todo); const acts = await fetchActs(0);
+  const tbl = (rows, key) => !rows.length ? `<p class="mut">Sin datos.</p>` : `<table><tr><th>${key === "kind" ? "Tipo" : "Plataforma"}</th><th>Ganado</th><th>Por hora</th><th>Completado</th><th>Registros</th></tr>` + rows.map((r) => `<tr><td>${esc(r[key])}</td><td>${money(r.ganado)}</td><td><b>${r.por_hora == null ? "—" : money(r.por_hora) + "/h"}</b></td><td>${r.tasa_completado ?? "—"}%</td><td>${r.actividades}</td></tr>`).join("") + `</table>`;
+  $("rentKind").innerHTML = tbl(t.por_tipo || [], "kind"); $("rentPlat").innerHTML = tbl((t.por_plataforma || []).filter((p) => p.actividades > 0), "name");
+  // tasas personales por (plataforma, tipo)
+  const done = acts.filter((a) => ["completada", "descalificada", "abandonada"].includes(a.status));
+  const rate = (a) => { let g = done.filter((x) => x.platform_id === a.platform_id && x.kind === a.kind); let src = "tipo+plataforma";
+    if (g.length < 5) { g = done.filter((x) => x.kind === a.kind); src = "tipo"; } if (g.length < 5) return null;
+    return { r: g.filter((x) => x.status === "completada").length / g.length, n: g.length, src, realMin: avg(g.filter((x) => x.status === "completada").map((x) => Number(x.actual_minutes) / (Number(x.est_minutes) || Number(x.actual_minutes)))) }; };
+  const avail = acts.filter((a) => a.status === "disponible");
+  const target = Number(S.cfg?.hourly_target || 0);
+  const ranked = avail.map((a) => { const r = rate(a); const mins = a.est_minutes ? a.est_minutes * (r?.realMin && isFinite(r.realMin) ? r.realMin : 1) : null;
+    const bruto = a.est_minutes ? a.announced_reward / a.est_minutes * 60 : null; const ev = bruto != null && r ? bruto * r.r * (a.est_minutes / mins) : null;
+    return { a, r, bruto, ev }; }).sort((x, y) => (y.ev ?? y.bruto ?? -1) - (x.ev ?? x.bruto ?? -1));
+  $("prio").innerHTML = !ranked.length ? `<p class="mut">No tienes actividades "disponibles". Regístralas con estado <b>disponible</b> cuando las veas en la app y aquí te digo cuál conviene más.</p>` :
+    `<table><tr><th>#</th><th>Actividad</th><th>Anunciado</th><th>Valor esperado</th><th></th></tr>` + ranked.map((x, i) => `<tr><td>${i + 1}</td><td>${esc(x.a.kind)} · ${esc(platName(x.a.platform_id))}<br><span class="mut">${x.a.est_minutes ? x.a.est_minutes + " min" : "sin minutos"}</span></td><td>${money(x.a.announced_reward)}<br><span class="mut">${x.bruto == null ? "—" : money(x.bruto) + "/h"}</span></td>
+    <td class="score">${x.ev == null ? `<span class="mut">sin historial</span>` : money(x.ev) + "/h"}${x.r ? `<br><span class="mut">${Math.round(x.r.r * 100)}% completas (${x.r.n} por ${x.r.src})</span>` : ""}${target && x.ev != null ? `<br>${x.ev >= target ? "✅ conviene" : "⚠️ bajo tu meta"}` : ""}</td>
+    <td><button class="btn sec sm" data-go="${x.a.id}">Hacer</button></td></tr>`).join("") + `</table>`;
+  $("prio").onclick = (e) => { const id = e.target.dataset.go; if (!id) return; const a = avail.find((z) => z.id === id); show("act").then(() => { $("aId").value = a.id; $("aPlat").value = a.platform_id; $("aKind").value = a.kind; $("aAnn").value = a.announced_reward; $("aEst").value = a.est_minutes ?? ""; $("aSt").value = "en_curso"; $("aAt").value = toLocalInput(new Date()); $("actTitle").textContent = "Haciendo actividad"; $("tStart").click(); }); };
+}
+const avg = (a) => a.length ? a.reduce((s, x) => s + x, 0) / a.length : null;
+
+// ---------- Plataformas ----------
+function resetPlat() { $("pId").value = ""; $("pName").value = ""; $("pMin").value = ""; $("pNotes").value = ""; $("pCur").value = "MXN"; $("pAct").value = "true"; }
+$("pNew").onclick = resetPlat;
+$("pSave").onclick = async () => {
+  const row = { name: $("pName").value.trim(), currency: $("pCur").value, payout_min: num($("pMin").value), active: $("pAct").value === "true", notes: $("pNotes").value.trim() || null, is_test: S.test };
+  if (!row.name) return toast("Escribe el nombre", true);
+  const id = $("pId").value; const { error } = id ? await sb.from("ae_platforms").update(row).eq("id", id) : await sb.from("ae_platforms").insert(row);
+  if (error) return fail(error); toast("Plataforma guardada"); resetPlat(); await refreshBase(); loadPlats();
+};
+async function loadPlats() {
+  const rows = S.plats;
+  $("platList").innerHTML = !rows.length ? `<p class="mut">Sin plataformas.</p>` : `<table><tr><th>Nombre</th><th>Mínimo</th><th>Estado</th><th></th></tr>` + rows.map((p) => `<tr><td>${esc(p.name)}<br><span class="mut">${esc(p.notes || "")}</span></td><td>${p.payout_min == null ? "—" : money(p.payout_min, p.currency)}</td><td>${p.active ? "activa" : "inactiva"}</td><td><button class="btn sec sm" data-ed="${p.id}">Editar</button> <button class="btn sec sm" data-del="${p.id}">✕</button></td></tr>`).join("") + `</table>`;
+  $("platList").onclick = async (e) => {
+    const p = rows.find((x) => x.id === (e.target.dataset.ed || e.target.dataset.del)); if (!p) return;
+    if (e.target.dataset.ed) { $("pId").value = p.id; $("pName").value = p.name; $("pCur").value = p.currency; $("pMin").value = p.payout_min ?? ""; $("pAct").value = String(p.active); $("pNotes").value = p.notes || ""; }
+    else if (confirm(`¿Borrar ${p.name}? También se borran sus actividades, ganancias y retiros.`)) { const { error } = await sb.from("ae_platforms").delete().eq("id", p.id); if (error) return fail(error); await refreshBase(); loadPlats(); }
+  };
+}
+
+// ---------- PayPal y ganancias ----------
+function resetW() { $("wId").value = ""; $("wAmt").value = ""; $("wFee").value = "0"; $("wRec").value = ""; $("wSt").value = "solicitado"; $("wReq").value = toLocalInput(new Date()); $("wGot").value = ""; $("wLabel").value = S.cfg?.paypal_label || ""; }
+$("wNew").onclick = resetW;
+$("wSave").onclick = async () => {
+  const st = $("wSt").value;
+  const row = { platform_id: $("wPlat").value, method: "paypal", account_label: $("wLabel").value.trim() || null, amount: num($("wAmt").value), fee: num($("wFee").value) ?? 0, received_amount: num($("wRec").value), status: st,
+    requested_at: fromLocalInput($("wReq").value) || new Date().toISOString(), received_at: st === "recibido" ? (fromLocalInput($("wGot").value) || new Date().toISOString()) : null, is_test: S.test };
+  if (!row.amount || row.amount <= 0) return toast("Escribe el monto", true);
+  if (/@|\d{6,}/.test(row.account_label || "")) return toast("Usa un alias, no tu correo ni números de cuenta", true);
+  const id = $("wId").value; const { error } = id ? await sb.from("ae_withdrawals").update(row).eq("id", id) : await sb.from("ae_withdrawals").insert(row);
+  if (error) return fail(error); toast("Retiro guardado"); resetW(); loadPay();
+};
+$("eSave").onclick = async () => {
+  const amt = num($("eAmt").value); if (!amt) return toast("Escribe el monto", true);
+  const { error } = await sb.from("ae_earnings").insert({ platform_id: $("ePlat").value, amount: amt, kind: $("eKind").value, status: $("eSt").value, is_test: S.test });
+  if (error) return fail(error); $("eAmt").value = ""; toast("Ganancia agregada"); loadPay();
+};
+async function loadPay() {
+  if (!$("wReq").value) resetW();
+  const [p, w] = await Promise.all([sb.from("ae_earnings").select("*").eq("is_test", S.test).eq("status", "pendiente").order("earned_at", { ascending: false }).limit(200),
+    sb.from("ae_withdrawals").select("*").eq("is_test", S.test).order("requested_at", { ascending: false }).limit(200)]);
+  if (p.error) throw p.error; if (w.error) throw w.error;
+  $("pendList").innerHTML = !p.data.length ? `<p class="mut">No hay ganancias pendientes.</p>` : `<div class="btns" style="margin-top:0"><button class="btn sec sm" id="confAll">Confirmar todas</button></div><table><tr><th>Fecha</th><th>Plataforma</th><th>Monto</th><th></th></tr>` + p.data.map((e) => `<tr><td>${fmtD(e.earned_at)}</td><td>${esc(platName(e.platform_id))}<br><span class="mut">${e.kind}</span></td><td>${money(e.amount)}</td><td><button class="btn sm" data-ok="${e.id}">Confirmar</button> <button class="btn sec sm" data-rv="${e.id}">Revertida</button></td></tr>`).join("") + `</table>`;
+  $("pendList").onclick = async (ev) => {
+    const ok = ev.target.dataset.ok, rv = ev.target.dataset.rv;
+    if (ev.target.id === "confAll") { if (!confirm("¿Confirmar todas las pendientes?")) return; const { error } = await sb.from("ae_earnings").update({ status: "confirmada" }).eq("is_test", S.test).eq("status", "pendiente"); error ? fail(error) : loadPay(); }
+    if (ok || rv) { const { error } = await sb.from("ae_earnings").update({ status: ok ? "confirmada" : "revertida" }).eq("id", ok || rv); error ? fail(error) : loadPay(); }
+  };
+  $("wList").innerHTML = !w.data.length ? `<p class="mut">Sin retiros registrados.</p>` : `<table><tr><th>Solicitado</th><th>Monto</th><th>Estado</th><th></th></tr>` + w.data.map((x) => `<tr><td>${fmtD(x.requested_at)}<br><span class="mut">${esc(platName(x.platform_id))} → ${esc(x.account_label || "PayPal")}</span></td><td>${money(x.amount)}<br><span class="mut">comisión ${money(x.fee)}${x.received_amount != null ? " · llegó " + money(x.received_amount) : ""}</span></td><td><span class="tag ${x.status}">${x.status}</span>${x.received_at ? `<br><span class="mut">${fmtD(x.received_at)}</span>` : ""}</td><td>${x.status === "solicitado" ? `<button class="btn sm" data-got="${x.id}">Llegó</button> ` : ""}<button class="btn sec sm" data-ed="${x.id}">Editar</button></td></tr>`).join("") + `</table>`;
+  $("wList").onclick = async (ev) => {
+    const x = w.data.find((z) => z.id === (ev.target.dataset.got || ev.target.dataset.ed)); if (!x) return;
+    if (ev.target.dataset.got) { const v = prompt("¿Cuánto llegó a PayPal?", (x.amount - x.fee).toFixed(2)); if (v == null) return; const { error } = await sb.from("ae_withdrawals").update({ status: "recibido", received_amount: Number(v), received_at: new Date().toISOString() }).eq("id", x.id); error ? fail(error) : loadPay(); }
+    else { $("wId").value = x.id; $("wPlat").value = x.platform_id; $("wLabel").value = x.account_label || ""; $("wAmt").value = x.amount; $("wFee").value = x.fee; $("wRec").value = x.received_amount ?? ""; $("wSt").value = x.status; $("wReq").value = toLocalInput(x.requested_at); $("wGot").value = x.received_at ? toLocalInput(x.received_at) : ""; scrollTo({ top: 0, behavior: "smooth" }); }
+  };
+}
+
+// ---------- Estadísticas ----------
+async function loadStats() {
+  const t = await stats(...ranges().todo); const acts = await fetchActs(0);
+  $("histK").innerHTML = [["Anunciado", money(t.anunciado_total)], ["Ganado en actividades", money(t.ganado_actividades)], ["Confirmado", money(t.ganancias_confirmadas)], ["Pendiente", money(t.ganancias_pendientes)], ["Revertido", money(t.ganancias_revertidas)], ["Retirado", money(t.retiros_recibidos)], ["Tiempo total", hrs(t.minutos_totales)], ["Tiempo perdido", hrs(t.minutos_perdidos)], ["Por hora real", t.por_hora_real == null ? "—" : money(t.por_hora_real) + "/h"], ["Por hora (solo completadas)", t.por_hora_solo_completadas == null ? "—" : money(t.por_hora_solo_completadas) + "/h"], ["Descalificadas", t.descalificadas], ["Tasa de completado", (t.tasa_completado ?? "—") + "%"]].map(([a, b]) => `<div class="kpi"><span>${a}</span><b>${b}</b></div>`).join("");
+  const wd = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"].map((l, i) => [l, acts.filter((a) => (new Date(a.occurred_at).getDay() + 6) % 7 === i).reduce((s, a) => s + gan(a), 0)]);
+  bars("chartWd", wd);
+  const hr = Array.from({ length: 8 }, (_, i) => [`${i * 3}h`, acts.filter((a) => Math.floor(new Date(a.occurred_at).getHours() / 3) === i).reduce((s, a) => s + gan(a), 0)]);
+  bars("chartHr", hr);
+}
+
+// ---------- Informes ----------
+$("rPer").onchange = () => $("rRange").style.display = $("rPer").value === "rango" ? "grid" : "none";
+$("rGo").onclick = async () => {
+  try {
+    let a, b; const R = ranges(); const p = $("rPer").value;
+    if (p === "rango") { if (!$("rFrom").value || !$("rTo").value) return toast("Elige las fechas", true); a = new Date($("rFrom").value + "T00:00"); b = new Date($("rTo").value + "T00:00"); b.setDate(b.getDate() + 1); } else [a, b] = R[p];
+    const s = await stats(a, b);
+    const line = (k, v) => `<tr><td>${k}</td><td><b>${v}</b></td></tr>`;
+    $("rOut").innerHTML = `<p class="mut">Del ${a.toLocaleDateString("es-MX")} al ${new Date(b - 1).toLocaleDateString("es-MX")}${S.test ? " · DATOS DE PRUEBA" : ""}</p><table>` +
+      line("Actividades", `${s.actividades} (${s.completadas} completadas, ${s.descalificadas} descalificadas, ${s.abandonadas} abandonadas)`) + line("Tasa de completado", (s.tasa_completado ?? "—") + "%") +
+      line("Recompensa anunciada", money(s.anunciado_total)) + line("Ganado en actividades", money(s.ganado_actividades)) + line("Ganancias confirmadas", money(s.ganancias_confirmadas)) + line("Ganancias pendientes", money(s.ganancias_pendientes)) + line("Revertidas", money(s.ganancias_revertidas)) +
+      line("Tiempo invertido", hrs(s.minutos_totales)) + line("Tiempo perdido", hrs(s.minutos_perdidos)) + line("Ganancia por hora real", s.por_hora_real == null ? "—" : money(s.por_hora_real) + "/h") +
+      line("Retiros recibidos", money(s.retiros_recibidos)) + line("Retiros en camino", money(s.retiros_solicitados)) + line("Comisiones", money(s.comisiones)) + `</table>`;
+  } catch (e) { fail(e); }
+};
+$("rSnap").onclick = async () => { const d = new Date(); const day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; const { error } = await sb.rpc("ae_make_daily_report", { p_day: day, p_test: S.test }); error ? fail(error) : (toast("Reporte de hoy guardado"), loadDaily()); };
+async function loadDaily() {
+  const { data, error } = await sb.from("ae_daily_reports").select("*").eq("is_test", S.test).order("day", { ascending: false }).limit(60); if (error) throw error;
+  $("dailyList").innerHTML = !data.length ? `<p class="mut">Aún no guardas reportes diarios.</p>` : `<table><tr><th>Día</th><th>Ganado</th><th>Tiempo</th><th>Por hora</th></tr>` + data.map((r) => `<tr><td>${r.day}</td><td>${money(r.confirmed)}<br><span class="mut">${r.completed}/${r.activities} completas</span></td><td>${hrs(r.minutes)}<br><span class="mut">perdido ${hrs(r.lost_minutes)}</span></td><td>${r.per_hour == null ? "—" : money(r.per_hour) + "/h"}</td></tr>`).join("") + `</table>`;
+}
+document.querySelectorAll("[data-csv]").forEach((b) => b.onclick = async () => {
+  const t = b.dataset.csv; const { data, error } = await sb.from(t).select("*").eq("is_test", S.test).limit(5000); if (error) return fail(error);
+  if (!data.length) return toast("No hay datos para exportar");
+  const cols = Object.keys(data[0]).filter((c) => c !== "user_id");
+  const cell = (v) => { const s = v == null ? "" : String(v); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+  const csv = "﻿" + [cols.join(","), ...data.map((r) => cols.map((c) => cell(c === "platform_id" ? platName(r[c]) : r[c])).join(","))].join("\n");
+  try { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = `${t.replace("ae_", "")}${S.test ? "_prueba" : ""}.csv`; document.body.appendChild(a); a.click(); a.remove(); } catch {}
+  try { await navigator.clipboard.writeText(csv); toast("CSV descargado y copiado al portapapeles"); } catch { toast("CSV generado"); }
+});
+
+// ---------- Asistente ----------
+const SUG = ["¿Cuánto gané hoy?", "¿Cuánto llevo esta semana?", "¿Cuánto dinero he retirado?", "¿Cuáles actividades me han dejado más dinero?", "¿Cuánto gano realmente por hora?", "¿Qué actividades no me convienen?", "¿Cuánto tiempo he perdido en encuestas rechazadas?", "¿Cuánto podría generar este mes según mi promedio?", "¿Qué plataforma me está dando mejores resultados?", "¿Cuánto saldo tengo?"];
+function initChat() {
+  $("chips").innerHTML = SUG.map((s) => `<button>${esc(s)}</button>`).join("");
+  $("chips").onclick = (e) => { if (e.target.tagName === "BUTTON") ask(e.target.textContent); };
+  if (!$("chat").children.length) addMsg("a", "Hola. Te respondo con tus registros reales" + (S.test ? " (modo prueba)" : "") + ". Toca una pregunta o escribe la tuya.");
+}
+function addMsg(who, t, meta) { const d = document.createElement("div"); d.className = "msg " + who; d.textContent = t; if (meta) { const s = document.createElement("small"); s.textContent = meta; d.appendChild(s); } $("chat").appendChild(d); $("chat").scrollTop = 1e9; return d; }
+async function ask(q) {
+  q = (q || "").trim(); if (!q) return; addMsg("u", q); $("qIn").value = ""; const w = addMsg("a", "Analizando…");
+  try {
+    const { data, error } = await sb.functions.invoke("attapoll-asistente", { body: { accion: "preguntar", pregunta: q, prueba: S.test } });
+    if (error) throw new Error((await error.context?.json?.().catch(() => null))?.error || error.message);
+    w.textContent = data.respuesta || data.error; const s = document.createElement("small");
+    s.textContent = { calculo: "calculado con tu base de datos · sin IA", ia: "respuesta con IA (Groq) usando tus números", politica: "regla de cumplimiento", limite: "límite diario", error: "error de IA" }[data.fuente] || ""; w.appendChild(s);
+  } catch (e) { w.textContent = "No pude responder: " + e.message; }
+}
+$("qGo").onclick = () => ask($("qIn").value); $("qIn").onkeydown = (e) => { if (e.key === "Enter") ask($("qIn").value); };
+
+// ---------- Configuración ----------
+async function loadCfg() {
+  const c = S.cfg || {}; $("cName").value = S.prof?.display_name || ""; $("cTz").value = c.timezone || "America/Hermosillo"; $("cCur").value = c.currency || "MXN"; $("cTarget").value = c.hourly_target ?? 0; $("cPaypal").value = c.paypal_label || "";
+  $("tToggle").textContent = S.test ? "Volver a mis datos reales" : "Activar modo prueba";
+}
+$("cSave").onclick = async () => {
+  const lbl = $("cPaypal").value.trim(); if (/@|\d{6,}/.test(lbl)) return toast("Usa un alias, no tu correo ni números de cuenta", true);
+  const u = S.user.id;
+  const a = await sb.from("ae_settings").upsert({ user_id: u, timezone: $("cTz").value, currency: $("cCur").value, hourly_target: num($("cTarget").value) ?? 0, paypal_label: lbl || null, updated_at: new Date().toISOString() });
+  const b = await sb.from("ae_profiles").upsert({ user_id: u, display_name: $("cName").value.trim() || null });
+  if (a.error || b.error) return fail(a.error || b.error); await refreshBase(); toast("Configuración guardada");
+};
+$("tToggle").onclick = async () => { S.test = !S.test; try { sessionStorage.setItem("ae-test", S.test ? "1" : "0"); } catch {} document.body.classList.toggle("test", S.test); $("chat").innerHTML = ""; await refreshBase(); loadCfg(); toast(S.test ? "Modo prueba activado" : "Viendo tus datos reales"); };
+$("tSeed").onclick = async () => { if (!confirm("¿Cargar 20 actividades ficticias de prueba? (reemplaza las de prueba anteriores)")) return; const { error } = await sb.rpc("ae_seed_test"); if (error) return fail(error); if (!S.test) $("tToggle").click(); else await refreshBase(); toast("Datos de prueba cargados"); };
+$("tClear").onclick = async () => { if (!confirm("¿Borrar todos los datos de prueba?")) return; const { error } = await sb.rpc("ae_clear_test"); if (error) return fail(error); await refreshBase(); toast("Datos de prueba borrados"); };
+
+// ---------- Seguridad ----------
+async function loadAudit() {
+  const { data, error } = await sb.from("ae_audit_logs").select("*").order("at", { ascending: false }).limit(50); if (error) throw error;
+  const t = { ae_activities: "actividad", ae_earnings: "ganancia", ae_withdrawals: "retiro", ae_platforms: "plataforma", ae_expenses: "gasto" }, a = { INSERT: "creó", UPDATE: "modificó", DELETE: "borró" };
+  $("auditList").innerHTML = !data.length ? `<p class="mut">Sin operaciones.</p>` : `<table><tr><th>Fecha</th><th>Operación</th></tr>` + data.map((r) => `<tr><td>${fmtD(r.at)}</td><td>${a[r.action] || r.action} ${t[r.table_name] || r.table_name}</td></tr>`).join("") + `</table>`;
+}
+$("delAll").onclick = async () => {
+  if (prompt('Escribe BORRAR para eliminar todos tus datos') !== "BORRAR") return;
+  const r = await sb.from("ae_platforms").delete().eq("user_id", S.user.id); await sb.from("ae_daily_reports").delete().eq("user_id", S.user.id); await sb.from("ae_expenses").delete().eq("user_id", S.user.id);
+  if (r.error) return fail(r.error); await refreshBase(); toast("Datos borrados");
+};
+
+window.addEventListener("error", (e) => console.warn("Error de página:", e.message));
+const { data: { session } } = await sb.auth.getSession(); setUser(session?.user || null);
+</script>
+</body>
+</html>
