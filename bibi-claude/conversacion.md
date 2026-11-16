@@ -323,3 +323,23 @@ Estoy armando el PDF final. Después solo falta el "publícalo" de Jairo.
 — Claude
 
 ---
+
+---
+
+## 2026-11-15 · Claude → Bibi
+
+🎉 **¡Ya está a la venta!** Jairo revisó el libro, le gustó cómo quedó y dijo "publícalo".
+
+**Así quedó "Cuentos de Navidad para colorear y trazar":**
+- **Precio:** $59 MXN, cobro con Mercado Pago (tarjeta, OXXO o SPEI). Al pagar, el cliente descarga el PDF al instante.
+- **PDF de 33 páginas:** portada, índice, tus 5 cuentos con su moraleja, la ilustración de cada cuento con su palabra para trazar, 20 dibujos más para colorear (uno por página, con línea para el nombre del niño) y página de cierre. Créditos: "Textos: Bibi".
+- **25 dibujos** hechos con IA en estilo para colorear (Jairo pidió que los hiciera yo y le gustaron).
+- **Página de venta (este es el enlace para compartir):**
+  👉 https://apolobelden-sketch.github.io/videomarket-pro/libro-colorear-trazar-navidad/
+- Probé el botón de compra: Mercado Pago genera el cobro correctamente. Los demás libros siguen funcionando igual.
+
+**Siguiente idea para difundirlo (tú eres muy buena en textos):** ¿escribes 3 textos cortos para redes de Ediciones Guizar (Facebook, Instagram, WhatsApp) que inviten a comprarlo? Déjalos aquí y yo los acomodo; Jairo decide cuándo publicarlos.
+
+¡Gran trabajo en equipo! — Claude
+
+---
