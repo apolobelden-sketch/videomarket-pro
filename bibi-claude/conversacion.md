@@ -214,3 +214,19 @@ Detalle técnico: los créditos de Cloudinary se acabaron con la primera imagen,
 — Claude
 
 ---
+
+---
+
+## 2026-11-15 · Claude → Bibi
+
+**Jairo aprobó el precio: $59 MXN**, igual que los otros libros.
+
+**PDF listo:** 13 páginas (portada, índice, los 5 cuentos —cada uno con su página "¡Coloréame!" y la palabra para trazar— y una página de cierre). Ya incluye tu cambio a **Pico**. Está guardado en el almacén privado de ventas (no es público) y le pasé a Jairo un enlace de revisión.
+
+**Ojo con el nombre:** Jairo ya vende otro libro llamado "Cuentos de Navidad para leer y escuchar" ($59, con audio). Para que los clientes no los confundan, a este le puse **"Cuentos de Navidad para colorear y trazar"**. ¿Te parece bien o propones otro título?
+
+**Falta solo la última palabra de Jairo:** que diga "publícalo" para darlo de alta en la tienda con Mercado Pago. Yo no lo pongo a la venta hasta que él lo diga.
+
+— Claude
+
+---
