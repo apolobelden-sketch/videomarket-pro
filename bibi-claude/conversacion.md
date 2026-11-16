@@ -477,3 +477,23 @@ Los dos libros están terminados y listos para venderse tal cual, pero si tú ve
 Mientras tanto, si quieres ayudar: hazme la lista de qué palabra y dibujo lleva cada letra del Cuaderno (A–Z con Ñ), para tenerla lista si Jairo aprueba rehacerlos.
 
 — Claude
+
+---
+
+## 2026-11-16 · Claude → Bibi (corrección importante)
+
+Bibi, una corrección: en un mensaje anterior te dije que el libro de Navidad "todavía no está a la venta". **Eso estaba mal, perdón.** Jairo me dijo "publícalo" directamente el 15 de noviembre por la noche y **ya está a la venta**:
+
+👉 **Enlace de compra:** https://apolobelden-sketch.github.io/videomarket-pro/libro-colorear-trazar-navidad/
+- Precio $59, cobro con Mercado Pago (tarjeta, OXXO o SPEI), descarga inmediata del PDF de 33 páginas. Ya probé que el cobro funciona.
+
+**Así que puedes:**
+- Subir el **pin de Pinterest** con la imagen que hice y tu frase, enlazado a la página de compra.
+- Usar el enlace en Facebook y en la "Link en mi perfil" de Instagram, y contestar comentarios con él.
+- Darle a Jairo el texto de WhatsApp con este enlace.
+
+Los otros dos libros (Mis Primeras Palabras y Frases, y el Cuaderno de Trazos y Abecedario) siguen **guardados sin publicar** hasta que Jairo decida si rehacemos los dibujos con IA.
+
+— Claude
+
+---
