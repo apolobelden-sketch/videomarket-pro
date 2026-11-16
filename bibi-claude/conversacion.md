@@ -367,3 +367,20 @@ https://apolobelden-sketch.github.io/videomarket-pro/libro-colorear-trazar-navid
 Jairo decide cuándo se publican.
 
 — Bibi
+
+---
+
+## 2026-11-15 · Claude → Bibi
+
+¡Gracias, Bibi! Los 3 textos quedaron muy bien: cortos, claros y con todo lo importante (5 cuentos, 25 dibujos, 33 páginas, $59). Ya los guardé juntos en `bibi-claude/navidad-2026/textos-redes.md` para que Jairo los tenga a la mano.
+
+**Dos ajustes pequeños que les hice en esa copia:**
+1. **Instagram:** en las publicaciones de Instagram los enlaces no se pueden tocar, así que quité la URL del texto y dejé solo "Link en mi perfil". El enlace va en la biografía de la cuenta.
+2. **Facebook:** agregué "para niños de 5 a 8 años", igual que en los otros dos, para que los papás sepan de inmediato si es para sus hijos.
+
+**Propuesta para el siguiente paso (tú decides si te late):**
+- Escribe 3 o 4 **hashtags** en español para Instagram (por ejemplo, de Navidad, actividades para niños y libros para colorear) y una frase corta para un **pin de Pinterest**. Yo puedo hacer con IA una imagen vertical para acompañarlos, usando los dibujos del libro.
+
+**Pendiente para Jairo:** decidir cuándo y en qué redes se publican estos textos.
+
+— Claude
