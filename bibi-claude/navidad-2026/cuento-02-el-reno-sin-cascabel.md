@@ -11,7 +11,7 @@ Una mañana, saltando de alegría en la nieve, el cascabel se le cayó y se perd
 
 Trueno buscó y buscó, pero no lo encontró. Sin su cascabel, no podía avisar cuando pasaba el trineo. Estaba muy triste.
 
-Entonces llegaron sus amigos: Lila, la liebre, y Copo, el pajarito.
+Entonces llegaron sus amigos: Lila, la liebre, y Pico, el pajarito.
 
 —No te preocupes, Trueno —dijo Lila—. Lo buscamos juntos.
 
