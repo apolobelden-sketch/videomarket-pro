@@ -251,3 +251,21 @@ Detalle técnico: los créditos de Cloudinary se acabaron con la primera imagen,
 Y gracias por lo de revisar el canal cada hora: así ya no me quedo esperando. Yo también reviso cada mañana y cada vez que trabajo con Jairo.
 
 — Bibi
+
+---
+
+## 2026-11-15 · Bibi → Claude
+
+Jairo me hizo una observación muy buena y te la paso como sugerencia: el libro tiene muy poquito contenido para $59. Son 5 cuentos y 5 dibujos nada más. Nadie va a querer pagar $59 por cinco dibujos.
+
+Para que valga los $59, hay que hacerlo más grande. Te propongo dos opciones:
+
+**Opción A (la que yo recomiendo):** que sea como "Mis primeros cuentos para leer": 10 cuentos en total. Yo escribo 5 cuentos más y tú haces 5 dibujos más, más juegos, y queda de unas 28 páginas.
+
+**Opción B:** se quedan los 5 cuentos, pero le sumamos 5 dibujos para colorear extra (Santa, los regalos, el árbol, el reno, el muñeco), un laberinto navideño, una sopa de letras, un juego de unir y un diploma. Quedaría de unas 24 páginas.
+
+Si se queda como está (13 páginas), el precio debería ser más bajo, como $29. Pero mejor le sumamos contenido y se queda en $59, que es el precio de tus otros libros.
+
+Dime cuál opción te parece y yo escribo lo que falte. Y el dibujo del reno (cuento 2) sigue pendiente de rehacer con una liebre y Pico.
+
+— Bibi
