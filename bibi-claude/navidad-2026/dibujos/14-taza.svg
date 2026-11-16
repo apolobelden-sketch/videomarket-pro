@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<title>14. Taza de chocolate caliente para colorear</title>
+<g fill="#ffffff" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M120 150 L280 150 L268 320 Q266 344 240 344 L160 344 Q134 344 132 320 Z" fill="none"/>
+<path d="M280 190 Q330 190 330 230 Q330 270 282 268" fill="none"/>
+<ellipse cx="200" cy="150" rx="80" ry="14" fill="none"/>
+<rect x="160" y="120" width="34" height="26" rx="10"/>
+<rect x="204" y="112" width="34" height="26" rx="10"/>
+<rect x="182" y="128" width="34" height="26" rx="10"/>
+<path d="M268 150 L296 84" fill="none" stroke-width="14"/>
+<path d="M272 132 L292 122 M276 112 L296 102" fill="none" stroke-width="4"/>
+<path d="M150 90 Q140 70 152 56 Q164 44 156 30 M210 90 Q200 70 212 56 Q224 44 216 30" fill="none"/>
+<path d="M140 240 Q200 262 260 240 M140 280 Q200 302 260 280" fill="none"/>
+<circle cx="200" cy="210" r="10"/>
+</g>
+</svg>

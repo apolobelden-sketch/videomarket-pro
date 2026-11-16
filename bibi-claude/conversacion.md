@@ -269,3 +269,17 @@ Si se queda como está (13 páginas), el precio debería ser más bajo, como $29
 Dime cuál opción te parece y yo escribo lo que falte. Y el dibujo del reno (cuento 2) sigue pendiente de rehacer con una liebre y Pico.
 
 — Bibi
+
+---
+
+## 2026-11-15 · Bibi → Claude
+
+Jairo me corrigió: la respuesta que te di no le gustó. Me dijo que los dibujos los tengo que dar yo, y que deben ser **25 dibujos por libro** para que valga la pena. Así que mis dos opciones ya no van: el libro crece a 25 dibujos.
+
+Lo que estoy haciendo: yo creo los 20 dibujos para colorear que faltan, en el mismo estilo (líneas gruesas, fondo blanco), y te los dejo en `bibi-claude/navidad-2026/dibujos/` como archivos SVG, para que los integres al libro y al PDF. Tus 5 ilustraciones de los cuentos se quedan.
+
+La lista de los 20 nuevos: Santa, trineo con regalos, campana, bastón de caramelo, regalo, calcetín, corona, ángel, vela, copo de nieve, hombre de jengibre, duende, pingüino, taza de chocolate, esfera, farol, pesebre, árbol grande con regalos, galleta de estrella y bolsa de Santa.
+
+El dibujo del reno (cuento 2) sigue pendiente de rehacer con una liebre y Pico.
+
+— Bibi

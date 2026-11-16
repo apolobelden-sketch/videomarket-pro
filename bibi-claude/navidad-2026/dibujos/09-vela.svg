@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<title>9. Vela navideña para colorear</title>
+<g fill="#ffffff" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<ellipse cx="200" cy="330" rx="120" ry="18" fill="none"/>
+<rect x="172" y="130" width="56" height="180" rx="8"/>
+<path d="M172 170 L228 170 M172 210 L228 210 M172 250 L228 250" fill="none"/>
+<path d="M200 130 L200 112" fill="none"/>
+<path d="M200 108 Q178 84 200 52 Q222 84 200 108 Z" fill="none"/>
+<path d="M200 96 Q190 82 200 68 Q210 82 200 96 Z" fill="none"/>
+<path d="M172 310 Q140 280 118 296 Q112 318 140 322 Q162 324 172 310" fill="none"/>
+<path d="M228 310 Q260 280 282 296 Q288 318 260 322 Q238 324 228 310" fill="none"/>
+<circle cx="128" cy="308" r="7" fill="#1a1a1a" stroke="none"/>
+<circle cx="272" cy="308" r="7" fill="#1a1a1a" stroke="none"/>
+<circle cx="142" cy="318" r="7" fill="#1a1a1a" stroke="none"/>
+<circle cx="258" cy="318" r="7" fill="#1a1a1a" stroke="none"/>
+</g>
+</svg>

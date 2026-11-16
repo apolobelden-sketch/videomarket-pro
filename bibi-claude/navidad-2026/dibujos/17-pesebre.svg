@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<title>17. Pesebre de Navidad para colorear</title>
+<g fill="#ffffff" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M200 44 L208 62 L228 64 L212 78 L217 98 L200 88 L183 98 L188 78 L172 64 L192 62 Z" fill="none"/>
+<path d="M80 170 L200 96 L320 170" fill="none"/>
+<path d="M100 170 L100 300 M300 170 L300 300" fill="none"/>
+<path d="M80 300 L320 300" fill="none"/>
+<path d="M150 240 L250 240 L236 286 L164 286 Z" fill="none"/>
+<path d="M150 240 L164 286 M250 240 L236 286 M164 262 L236 262" fill="none"/>
+<path d="M170 240 Q180 224 190 240 Q200 224 210 240 Q220 224 230 240" fill="none"/>
+<circle cx="200" cy="200" r="14"/>
+<path d="M120 320 L120 336 M280 320 L280 336" fill="none"/>
+<path d="M100 170 L120 150 M300 170 L280 150" fill="none"/>
+</g>
+</svg>

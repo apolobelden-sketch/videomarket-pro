@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<title>20. Bolsa de Santa con regalos para colorear</title>
+<g fill="#ffffff" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M200 108 Q120 120 100 210 Q84 290 130 330 Q200 360 270 330 Q316 290 300 210 Q280 120 200 108 Z" fill="none"/>
+<path d="M200 108 Q170 70 140 82 Q128 100 152 108 Q178 114 200 108" fill="none"/>
+<path d="M200 108 Q230 70 260 82 Q272 100 248 108 Q222 114 200 108" fill="none"/>
+<circle cx="200" cy="106" r="10"/>
+<path d="M130 200 Q200 180 270 200 M118 260 Q200 240 282 260" fill="none"/>
+<rect x="140" y="60" width="46" height="38" rx="6" transform="rotate(-18 163 79)"/>
+<path d="M163 62 L163 96 M140 79 L186 79" fill="none" transform="rotate(-18 163 79)"/>
+<circle cx="252" cy="66" r="20"/>
+<path d="M232 66 L272 66 M252 46 L252 86" fill="none"/>
+<path d="M200 330 Q200 300 200 285" fill="none"/>
+<circle cx="160" cy="300" r="9"/>
+<circle cx="240" cy="300" r="9"/>
+</g>
+</svg>

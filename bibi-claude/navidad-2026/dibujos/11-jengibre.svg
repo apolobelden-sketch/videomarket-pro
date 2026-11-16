@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<title>11. Hombre de jengibre para colorear</title>
+<g fill="#ffffff" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="200" cy="105" r="48"/>
+<circle cx="184" cy="98" r="6" fill="#1a1a1a" stroke="none"/>
+<circle cx="216" cy="98" r="6" fill="#1a1a1a" stroke="none"/>
+<path d="M186 122 Q200 132 214 122" fill="none"/>
+<circle cx="200" cy="118" r="5"/>
+<path d="M200 153 Q200 230 200 235" fill="none"/>
+<path d="M200 185 L128 205 M200 185 L272 205" fill="none"/>
+<circle cx="124" cy="207" r="12"/>
+<circle cx="276" cy="207" r="12"/>
+<path d="M200 235 L160 320 M200 235 L240 320" fill="none"/>
+<circle cx="158" cy="322" r="10"/>
+<circle cx="242" cy="322" r="10"/>
+<circle cx="200" cy="180" r="7" fill="#1a1a1a" stroke="none"/>
+<circle cx="200" cy="210" r="7" fill="#1a1a1a" stroke="none"/>
+<path d="M160 150 Q200 138 240 150" fill="none"/>
+<path d="M148 88 Q140 60 162 62 Q170 78 160 88 M252 88 Q260 60 238 62 Q230 78 240 88" fill="none"/>
+</g>
+</svg>

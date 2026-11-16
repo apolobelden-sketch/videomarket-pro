@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<title>1. Cara de Santa Claus para colorear</title>
+<g fill="#ffffff" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M118 138 L200 42 L282 138 Z" fill="none"/>
+<circle cx="200" cy="38" r="17"/>
+<rect x="106" y="128" width="188" height="34" rx="17"/>
+<circle cx="200" cy="232" r="86"/>
+<path d="M128 238 Q128 348 200 352 Q272 348 272 238" fill="none"/>
+<path d="M162 272 Q200 256 238 272 Q200 292 162 272 Z"/>
+<circle cx="200" cy="246" r="14"/>
+<circle cx="168" cy="212" r="8" fill="#1a1a1a" stroke="none"/>
+<circle cx="232" cy="212" r="8" fill="#1a1a1a" stroke="none"/>
+<path d="M150 190 Q168 182 186 190" fill="none"/>
+<path d="M214 190 Q232 182 250 190" fill="none"/>
+</g>
+</svg>

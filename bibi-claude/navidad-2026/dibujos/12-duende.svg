@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<title>12. Duende navideño para colorear</title>
+<g fill="#ffffff" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M138 118 L200 30 Q230 20 246 44 Q280 90 262 118 Z" fill="none"/>
+<circle cx="246" cy="40" r="13"/>
+<rect x="128" y="112" width="144" height="26" rx="13"/>
+<path d="M150 138 L138 160 M250 138 L262 160" fill="none"/>
+<circle cx="200" cy="196" r="58"/>
+<path d="M146 190 L126 178 Q118 196 136 206 M254 190 L274 178 Q282 196 264 206" fill="none"/>
+<circle cx="180" cy="192" r="6" fill="#1a1a1a" stroke="none"/>
+<circle cx="220" cy="192" r="6" fill="#1a1a1a" stroke="none"/>
+<path d="M188 214 Q200 222 212 214" fill="none"/>
+<circle cx="200" cy="204" r="6"/>
+<path d="M164 246 L236 246 L262 330 Q200 348 138 330 Z" fill="none"/>
+<path d="M164 246 L182 268 L200 248 L218 268 L236 246" fill="none"/>
+<path d="M200 280 L200 330 M172 268 L172 340 M228 268 L228 340" fill="none"/>
+<circle cx="200" cy="300" r="8"/>
+</g>
+</svg>

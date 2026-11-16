@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<title>3. Campana navideña para colorear</title>
+<g fill="#ffffff" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M200 78 Q120 78 112 190 Q110 220 96 232 L304 232 Q290 220 288 190 Q280 78 200 78 Z" fill="none"/>
+<path d="M96 232 Q200 252 304 232 L304 252 Q200 272 96 252 Z"/>
+<circle cx="200" cy="292" r="16"/>
+<path d="M200 308 L200 326" fill="none"/>
+<path d="M200 78 Q170 40 140 52 Q128 66 150 74 Q175 82 200 78" fill="none"/>
+<path d="M200 78 Q230 40 260 52 Q272 66 250 74 Q225 82 200 78" fill="none"/>
+<circle cx="200" cy="78" r="10"/>
+<path d="M120 130 Q200 108 280 130" fill="none"/>
+<path d="M80 300 Q60 320 70 340 M320 300 Q340 320 330 340" fill="none"/>
+</g>
+</svg>

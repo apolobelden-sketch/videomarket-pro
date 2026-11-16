@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<title>13. Pingüino con bufanda para colorear</title>
+<g fill="#ffffff" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<ellipse cx="200" cy="220" rx="92" ry="118"/>
+<ellipse cx="200" cy="252" rx="56" ry="72" fill="none"/>
+<path d="M196 150 L204 150 L200 168 Z"/>
+<circle cx="176" cy="138" r="8" fill="#1a1a1a" stroke="none"/>
+<circle cx="224" cy="138" r="8" fill="#1a1a1a" stroke="none"/>
+<path d="M168 122 Q176 116 184 122 M216 122 Q224 116 232 122" fill="none"/>
+<path d="M116 210 Q96 260 122 296 Q138 260 132 220" fill="none"/>
+<path d="M284 210 Q304 260 278 296 Q262 260 268 220" fill="none"/>
+<rect x="138" y="168" width="124" height="26" rx="13"/>
+<path d="M250 176 L262 240 L236 240 L244 176" fill="none"/>
+<path d="M238 240 L250 240 M240 220 L248 220" fill="none"/>
+<ellipse cx="168" cy="342" rx="24" ry="10"/>
+<ellipse cx="232" cy="342" rx="24" ry="10"/>
+</g>
+</svg>

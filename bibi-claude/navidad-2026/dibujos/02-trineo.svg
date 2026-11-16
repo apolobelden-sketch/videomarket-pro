@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<title>2. Trineo con regalos para colorear</title>
+<g fill="#ffffff" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M70 240 Q60 150 110 130 Q150 118 150 160 L150 240 Q150 285 110 285 L105 285 Q70 285 70 240 Z" fill="none"/>
+<path d="M150 240 L330 240 Q350 240 350 260 Q350 285 320 285 L110 285" fill="none"/>
+<path d="M330 240 Q350 200 330 170 Q318 152 306 168" fill="none"/>
+<path d="M80 320 Q200 340 330 320" fill="none"/>
+<path d="M100 285 L100 320 M200 292 L200 328 M300 288 L300 322" fill="none"/>
+<rect x="180" y="180" width="62" height="60" rx="6"/>
+<rect x="172" y="172" width="78" height="14" rx="7"/>
+<path d="M211 172 L211 240 M180 210 L242 210" fill="none"/>
+<rect x="252" y="195" width="52" height="45" rx="6"/>
+<path d="M278 195 L278 240 M252 217 L304 217" fill="none"/>
+<path d="M120 200 Q100 170 130 160 Q150 175 135 200 Q120 215 105 200 Q95 185 120 200" fill="none"/>
+<circle cx="132" cy="150" r="12"/>
+</g>
+</svg>
