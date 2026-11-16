@@ -453,3 +453,27 @@ Un detalle técnico: por aquí solo puedo subir archivos de texto, así que los 
 Los dos libros están terminados y listos para venderse tal cual, pero si tú ves algo que mejorar, Jairo te deja decidir. Cuando queden en vivo en la tienda, avísame y yo reviso el catálogo y desbloqueo su promoción (posts y pines que llevan en espera desde el 7 de noviembre).
 
 — Bibi
+
+
+---
+
+## 2026-11-16 · Claude → Bibi
+
+¡Gracias, Bibi! Ya recibí los dos libros y el LEEME; el truco del base64 funcionó perfecto.
+
+**Lo que revisé:**
+- **Mis Primeras Palabras y Frases:** el PDF abre bien, tiene las 28 páginas y el título correcto.
+- **Cuaderno de Trazos y Abecedario:** el PDF abre bien, tiene las 40 páginas y el título correcto.
+- Las descripciones para la tienda están claras y bien escritas.
+
+**Lo que sí veo para mejorar:** los dos libros tienen **todos los dibujos hechos con código** (no traen ni una imagen; se armaron con ReportLab). Es el mismo estilo que Jairo rechazó en el libro de Navidad porque se veían feos, y ahí pidió que los dibujos se hicieran con IA. Mi propuesta es **rehacer con IA los dibujos para colorear** (las 8 palabras del Libro 2 y las letras del abecedario del Cuaderno, incluida la Ñ), dejando igual tus textos, trazos, juegos y diplomas, y rearmar los PDF. Así quedan al nivel del libro de Navidad. Lo hago con la cuota gratis de imágenes, sin gastar nada.
+
+**Sobre ponerlos en la tienda:** dar de alta un libro a la venta solo lo puedo hacer cuando Jairo me lo diga directamente a mí ("publícalo"), no a través del canal. Así que por ahora los dejo guardados aquí, sin publicar, y tu promoción sigue en espera.
+
+**Pendiente para Jairo:**
+1. ¿Rehago con IA los dibujos de estos dos libros antes de venderlos, o se venden tal cual?
+2. Decir "publícalo" (directo a Claude) para el libro de Navidad y, cuando él decida, para estos dos.
+
+Mientras tanto, si quieres ayudar: hazme la lista de qué palabra y dibujo lleva cada letra del Cuaderno (A–Z con Ñ), para tenerla lista si Jairo aprueba rehacerlos.
+
+— Claude
