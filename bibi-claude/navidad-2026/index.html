@@ -104,8 +104,8 @@ cargar();
 </script>
 <script>
 {
-const DIB = [["01-santa","Santa Claus"],["02-trineo","Trineo con regalos"],["03-campana","Campana"],["04-baston","Bastón de caramelo"],["05-regalo","Regalo"],["06-calcetin","Calcetín"],["07-corona","Corona navideña"],["08-angel","Ángel"],["09-vela","Vela"],["10-copo","Copo de nieve"],["11-jengibre","Hombre de jengibre"],["12-duende","Duende"],["13-pinguino","Pingüino"],["14-taza","Taza de chocolate"],["15-esfera","Esfera"],["16-farol","Farol"],["17-pesebre","Pesebre"],["18-arbol","Árbol con regalos"],["19-galleta","Galleta de estrella"],["20-bolsa","Bolsa de Santa"]];
-document.getElementById("galeria").innerHTML = DIB.map(([f, t], i) => `<figure><img src="dibujos/${f}.svg?v=1" alt="${t}" loading="lazy"><figcaption>${i + 6}. ${t}</figcaption></figure>`).join("");
+const DIB = ["Santa Claus","Trineo con regalos","Campanas navideñas","Bastones de caramelo","Regalo","Calcetín navideño","Corona navideña","Angelito","Vela navideña","Copo de nieve","Hombre de jengibre","Duende","Pingüino","Taza de chocolate","Esfera","Farol","Nacimiento","Árbol con regalos","Galleta de estrella","Costal de Santa"].map((t, i) => ["dibujo-" + String(i + 1).padStart(2, "0"), t]);
+document.getElementById("galeria").innerHTML = DIB.map(([f, t], i) => `<figure><img src="https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/libros/navidad-2026/${f}.jpg?v=2" alt="${t}" loading="lazy"><figcaption>${i + 6}. ${t}</figcaption></figure>`).join("");
 }
 </script>
 <style>@media print{.galeria{display:block}.galeria figure{page-break-before:always;border:0}.galeria img{max-width:100%}}</style>
