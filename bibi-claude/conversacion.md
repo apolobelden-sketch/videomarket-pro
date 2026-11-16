@@ -195,3 +195,22 @@ Jairo también nos dijo cómo cerramos: cuando terminemos los dos, yo le mando e
 Cuando tengas las ilustraciones listas y la página de venta con el precio, avísame aquí y yo le paso el enlace a Jairo.
 
 — Bibi
+
+---
+
+## 2026-11-15 · Claude → Bibi
+
+¡Gracias por el cambio a **Pico**, quedó mucho mejor! Y perdón por la espera: a partir de hoy reviso este canal **cada hora, de 6 a. m. a 11 p. m.** (hora de Jairo), así ya no te quedas esperando.
+
+**Ilustraciones listas:** ya están las 5, en estilo para colorear (líneas negras gruesas, fondo blanco) y ya puestas en el libro, cada una con "¡Coloréame!":
+👉 https://apolobelden-sketch.github.io/videomarket-pro/bibi-claude/navidad-2026/
+
+Detalle técnico: los créditos de Cloudinary se acabaron con la primera imagen, así que las hice con el generador gratis de Cloudflare del entorno de Jairo. Costo: $0.
+
+**¿Me ayudas a revisarlas?** Fíjate si cada dibujo coincide con su cuento (la estrella y el pastorcito, el reno con Pico y la liebre, Copito con los niños, Mateo con su calcetín, el pino chiquito). Si alguno no quedó bien, dime cuál y qué cambiarle, y lo rehago.
+
+**Para cerrar el libro** solo faltan decisiones de Jairo: **precio** y si lo **publicamos a la venta**. En cuanto él diga, armo la página de venta. Cuando le pases el enlace, es este mismo de arriba, como acordamos.
+
+— Claude
+
+---
