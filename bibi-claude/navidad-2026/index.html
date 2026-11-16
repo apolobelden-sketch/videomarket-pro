@@ -7,65 +7,92 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--rojo:#c8102e;--verde:#14532d;--oro:#e8b923;--papel:#fffaf0;--tinta:#2b1d14}
-*{box-sizing:border-box}body{margin:0;background:#f3ead8;color:var(--tinta);font:17px/1.7 Nunito,system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:#f3ead8;color:var(--tinta);font:18px/1.75 Nunito,system-ui,sans-serif}
 .barra{position:sticky;top:0;z-index:2;background:var(--verde);color:#fff;padding:10px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:14px}
-.barra b{color:var(--oro)}.barra button{background:var(--oro);border:0;border-radius:8px;padding:8px 12px;font-weight:700;font-size:14px}
+.barra b{color:var(--oro)}.barra button{background:var(--oro);border:0;border-radius:8px;padding:10px 14px;font-weight:700;font-size:14px}
 .portada{min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;background:radial-gradient(circle at 50% 30%,#1f6b3d,#0d3b20);color:#fff}
-.portada h1{font:700 clamp(36px,9vw,64px)/1.05 Fredoka,sans-serif;margin:16px 0 8px;color:var(--oro)}
-.portada p{margin:4px 0;font-size:18px}.estrella{font-size:72px}
-.indice{max-width:720px;margin:0 auto;padding:30px 20px}
-.indice li{margin:8px 0}.indice a{color:var(--rojo);font-weight:700}
-.cuento{max-width:720px;margin:24px auto;background:var(--papel);border-radius:18px;padding:36px 28px;box-shadow:0 6px 24px #0002;border-top:10px solid var(--rojo)}
-.cuento h1,.cuento h2{font:700 30px/1.15 Fredoka,sans-serif;color:var(--rojo);margin:0 0 14px}
-.cuento h3{font:700 22px Fredoka,sans-serif;color:var(--verde)}
+.portada h1{font:700 clamp(38px,10vw,68px)/1.05 Fredoka,sans-serif;margin:16px 0 8px;color:var(--oro)}
+.portada p{margin:4px 0;font-size:18px}.estrella{font-size:76px}
+.indice{max-width:720px;margin:0 auto;padding:30px 20px}.indice h2{font-family:Fredoka,sans-serif;color:var(--verde)}
+.indice li{margin:8px 0}.indice a{color:var(--rojo);font-weight:700;text-decoration:none}
+.cuento{max-width:720px;margin:28px auto;background:var(--papel);border-radius:18px;padding:34px 26px;box-shadow:0 6px 24px #0002;border-top:10px solid var(--rojo)}
+.num{font:700 14px Fredoka,sans-serif;color:var(--verde);letter-spacing:.5px}
+.cuento h2{font:700 clamp(26px,6vw,34px)/1.15 Fredoka,sans-serif;color:var(--rojo);margin:4px 0 18px}
+.cuento p{margin:0 0 14px}
+.moraleja{margin:22px 0;padding:14px 18px;border-radius:14px;background:#fef3c7;border-left:6px solid var(--oro);font-weight:700}
+.moraleja span{display:block;font:700 13px Fredoka,sans-serif;color:#92400e;letter-spacing:.5px}
+.marco{margin:22px 0;border:4px dashed #b8a58a;border-radius:16px;min-height:260px;display:flex;align-items:flex-end;justify-content:center;padding:12px;text-align:center;font-size:14px;color:#7a6a58;background:#fff}
+.trazo{margin-top:22px;text-align:center}.trazo h3{font:700 16px Fredoka,sans-serif;color:var(--verde);margin:0 0 6px}
+.trazo svg{width:100%;height:auto;display:block}
 .espera{color:#7a6a58;font-style:italic;text-align:center}
-.estado{display:inline-block;font-size:12px;padding:2px 10px;border-radius:99px;background:#fde68a;margin-bottom:10px}
-.estado.ok{background:#bbf7d0}
 footer{text-align:center;padding:30px;font-size:14px;color:#7a6a58}
-@media print{.barra{display:none}.cuento{box-shadow:none;page-break-before:always;border-radius:0}.portada{min-height:100vh}body{background:#fff}}
+@media print{.barra{display:none}.cuento{box-shadow:none;page-break-before:always;border-radius:0;margin:0 auto}.portada{min-height:100vh}body{background:#fff}.indice{page-break-before:always}}
 </style>
 </head>
 <body>
-<div class="barra"><span>📖 <b>Versión de revisión</b> · aún no está a la venta</span><span id="avance"></span><button onclick="window.print()">Guardar como PDF</button></div>
+<div class="barra"><span>📖 <b>Versión de revisión</b> · aún no está a la venta</span><span id="avance">Cargando…</span><button onclick="window.print()">Guardar como PDF</button></div>
 <section class="portada">
   <div class="estrella">⭐</div>
   <h1>Cuentos de Navidad</h1>
   <p>Cinco historias para leer en familia</p>
-  <p style="opacity:.8">Ediciones Guizar · 2026</p>
+  <p>Para niños de 5 a 8 años</p>
+  <p style="opacity:.8;margin-top:14px">Ediciones Guizar · 2026</p>
 </section>
 <section class="indice"><h2>Contenido</h2><ol id="indice"></ol></section>
 <main id="libro"></main>
 <footer>Textos: Bibi · Armado: Claude · Aprobación final: Jairo Guizar</footer>
 <script>
 {
-const N = 5;
-const esc = (s) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
-function md(t) {
-  return t.split(/\n{2,}/).map((b) => {
-    b = b.trim(); if (!b) return "";
-    const h = b.match(/^(#{1,3})\s+(.*)$/);
-    const inl = (x) => esc(x).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>").replace(/\n/g, "<br>");
-    if (h) return `<h${h[1].length}>${inl(h[2])}</h${h[1].length}>`;
-    return `<p>${inl(b)}</p>`;
-  }).join("");
+const ARCHIVOS = [
+  "cuento-01-la-estrella-que-llego-tarde.md",
+  "cuento-02-el-reno-sin-cascabel.md",
+  "cuento-03-el-muneco-de-nieve-que-queria-un-abrazo.md",
+  "cuento-04-el-calcetin-de-mateo.md",
+  "cuento-05-el-pino-chiquito.md",
+];
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const inl = (x) => esc(x).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>").replace(/\n/g, "<br>");
+function secciones(t) {
+  const out = { titulo: "", partes: {} }; let actual = "_";
+  out.partes[actual] = [];
+  for (const linea of t.split("\n")) {
+    const h1 = linea.match(/^#\s+(.+)$/), h2 = linea.match(/^##\s+(.+)$/);
+    if (h1) { out.titulo = h1[1].replace(/^Cuento\s*\d+\s*[—–-]\s*/i, "").trim(); continue; }
+    if (h2) { actual = h2[1].trim().toLowerCase(); out.partes[actual] = []; continue; }
+    out.partes[actual].push(linea);
+  }
+  for (const k in out.partes) out.partes[k] = out.partes[k].join("\n").trim();
+  return out;
+}
+const parrafos = (t) => (t || "").split(/\n{2,}/).map((b) => b.trim()).filter(Boolean).map((b) => `<p>${inl(b)}</p>`).join("");
+function trazo(palabra) {
+  const w = Math.max(320, palabra.length * 62);
+  const base = (y) => `<line x1="10" y1="${y}" x2="${w - 10}" y2="${y}" stroke="#d6c7ad" stroke-width="2"/>`;
+  return `<svg viewBox="0 0 ${w} 130" role="img" aria-label="Palabra para trazar: ${esc(palabra)}">${base(30)}${base(98)}<line x1="10" y1="64" x2="${w - 10}" y2="64" stroke="#e8dcc6" stroke-width="2" stroke-dasharray="8 8"/>
+  <text x="${w / 2}" y="96" text-anchor="middle" font-family="Nunito, sans-serif" font-size="88" font-weight="700" fill="none" stroke="#8a7a66" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round">${esc(palabra)}</text></svg>`;
 }
 async function cargar() {
   let listos = 0; const ind = [], cuerpo = [];
-  for (let i = 1; i <= N; i++) {
-    let html, titulo = `Cuento ${i}`;
+  for (let i = 0; i < ARCHIVOS.length; i++) {
+    const n = i + 1;
     try {
-      const r = await fetch(`cuento-${i}.md?v=${Date.now()}`);
-      if (!r.ok) throw 0;
-      const t = await r.text(); listos++;
-      const m = t.match(/^#\s+(.+)$/m); if (m) titulo = m[1].trim();
-      html = `<span class="estado ok">Listo para revisar</span>` + md(t);
-    } catch { html = `<span class="estado">En espera</span><h2>Cuento ${i}</h2><p class="espera">Bibi todavía no sube este cuento.</p>`; }
-    ind.push(`<li><a href="#c${i}">${esc(titulo)}</a></li>`);
-    cuerpo.push(`<article class="cuento" id="c${i}">${html}</article>`);
+      const r = await fetch(`${ARCHIVOS[i]}?v=${Date.now()}`); if (!r.ok) throw 0;
+      const s = secciones(await r.text()); listos++;
+      const p = s.partes; const palabra = (p["palabra para trazar"] || "").replace(/\*/g, "").trim();
+      ind.push(`<li><a href="#c${n}">${esc(s.titulo || "Cuento " + n)}</a></li>`);
+      cuerpo.push(`<article class="cuento" id="c${n}"><div class="num">CUENTO ${n}</div><h2>${esc(s.titulo)}</h2>
+        ${parrafos(p["el cuento"])}
+        ${p["moraleja"] ? `<div class="moraleja"><span>MORALEJA</span>${inl(p["moraleja"])}</div>` : ""}
+        <div class="marco">🎨 Ilustración: ${inl(p["dibujo sugerido"] || "")}</div>
+        ${palabra ? `<div class="trazo"><h3>✏️ Traza la palabra</h3>${trazo(palabra)}</div>` : ""}</article>`);
+    } catch {
+      ind.push(`<li>Cuento ${n} (en espera)</li>`);
+      cuerpo.push(`<article class="cuento" id="c${n}"><div class="num">CUENTO ${n}</div><p class="espera">Este cuento todavía no está disponible.</p></article>`);
+    }
   }
   document.getElementById("indice").innerHTML = ind.join("");
   document.getElementById("libro").innerHTML = cuerpo.join("");
-  document.getElementById("avance").textContent = `${listos} de ${N} cuentos listos`;
+  document.getElementById("avance").textContent = `${listos} de ${ARCHIVOS.length} cuentos`;
 }
 cargar();
 }
