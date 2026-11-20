@@ -13,8 +13,8 @@ F_TIT = "/usr/share/fonts/truetype/google-fonts/ofl/archivoblack/ArchivoBlack-Re
 INI = [0.0, 5.9, 11.9, 21.9, 27.3, 38.5, 42.9, 46.7, 50.5, 54.6, 58.2, 66.6]
 FIN = 74.6
 ESC = [
-    dict(clip="carrera", titulo=["FÁBULAS", "PARA LEER", "Y ESCUCHAR"]),
-    dict(clip="tortuga", texto="¡Despacito y sin rendirme!", y=1650, hasta=1.25),
+    dict(clip="carrera-largo", titulo=["FÁBULAS", "PARA LEER", "Y ESCUCHAR"]),
+    dict(clip="tortuga-largo", texto="¡Despacito y sin rendirme!", y=1650),
     dict(pagina="portada.jpg"),
     dict(clip="leon", texto="Nadie es tan pequeño que no pueda ayudar", y=1650),
     dict(clip="nina", texto="Escanea el QR: cada palabra se ilumina", y=1650),
