@@ -120,7 +120,7 @@ def capa_texto(e):
     d = ImageDraw.Draw(im)
     if e.get("titulo"):
         f = ImageFont.truetype(F_TIT, 132)
-        y = 260
+        y = e.get("y_titulo", 260)
         for linea in e["titulo"]:
             w = d.textlength(linea, font=f)
             d.text(((W - w) / 2 + 6, y + 8), linea, font=f, fill=(60, 25, 0, 150))
