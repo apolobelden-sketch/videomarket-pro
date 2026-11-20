@@ -1,0 +1,5 @@
+04:40:20 instalando
+04:43:32 texto listo (1, 226, 4096)
+04:46:47 modelo en gpu 12.8 GB
+05:01:05 generado en 854 s
+05:01:07 listo
