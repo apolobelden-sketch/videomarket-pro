@@ -1,0 +1,11 @@
+08:43:45 instalando
+08:56:42 textos listos
+09:00:02 modelo en gpu
+09:13:29 clip tortuga en 806 s
+09:26:58 clip leon en 808 s
+09:40:26 clip nina en 808 s
+09:53:54 clip zorra en 807 s
+10:07:23 clip colorear en 808 s
+10:20:51 clip hormiga en 808 s
+10:34:20 clip familia en 808 s
+10:34:20 listo
