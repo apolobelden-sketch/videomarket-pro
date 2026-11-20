@@ -42,6 +42,37 @@ def camara(im, cx, cy, z, dx=0, dy=0):
     e = vh / H
     return im.transform((W, H), Image.AFFINE, (a, 0, x0, 0, e, y0), resample=Image.BICUBIC)
 
+# ---------- movimiento de personajes (deformación tipo títere) ----------
+import cv2
+def deforma(arr, movs, t):
+    """Mueve partes del dibujo: respira, gira (cabeza, cola, red), mece (ratón, hojas, caminar)."""
+    if not movs: return arr
+    h, w = arr.shape[:2]; q = 4
+    gy, gx = np.mgrid[0:h:q, 0:w:q].astype(np.float32)
+    dx = np.zeros_like(gx); dy = np.zeros_like(gy)
+    for m in movs:
+        cx, cy = m["c"][0] * w, m["c"][1] * h
+        R = m["r"] * w
+        d2 = ((gx - cx) ** 2 + (gy - cy) ** 2) / (R * R)
+        wgt = np.clip(1 - d2, 0, 1) ** 2
+        s = math.sin(2 * math.pi * m["f"] * t + m.get("fase", 0))
+        if m["tipo"] == "respira":
+            k = m["amp"] * (0.5 + 0.5 * s)
+            dx += (gx - cx) * k * wgt; dy += (gy - cy) * k * wgt * 1.3
+        elif m["tipo"] == "gira":
+            px, py = m.get("p", m["c"])[0] * w, m.get("p", m["c"])[1] * h
+            a = math.radians(m["amp"] * s)
+            rx, ry = gx - px, gy - py
+            dx += (rx * math.cos(a) - ry * math.sin(a) - rx) * wgt
+            dy += (rx * math.sin(a) + ry * math.cos(a) - ry) * wgt
+        elif m["tipo"] == "mece":
+            v = m.get("dir", [0, 1])
+            val = s if not m.get("abs") else abs(s)
+            dx += v[0] * m["amp"] * val * wgt; dy += v[1] * m["amp"] * val * wgt
+    dx = cv2.resize(dx, (w, h)); dy = cv2.resize(dy, (w, h))
+    X, Y = np.meshgrid(np.arange(w, dtype=np.float32), np.arange(h, dtype=np.float32))
+    return cv2.remap(arr, X - dx, Y - dy, cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
+
 # ---------- capas de efectos ----------
 yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
 r = np.sqrt(((xx - W / 2) / (W / 2)) ** 2 + ((yy - H / 2) / (H / 2)) ** 2)
@@ -138,7 +169,11 @@ def cuadro_escena(i, tl):
     dx = dy = 0
     if e.get("tiembla"):
         dx = e["tiembla"] * math.sin(tl * 23); dy = e["tiembla"] * math.cos(tl * 19)
-    fr = np.asarray(camara(base(e["img"]), cx, cy, z, dx, dy), np.float32)
+    src = deforma(np.asarray(base(e["img"])), e.get("mueve"), tl)
+    ih, iw = src.shape[:2]; vw, vh = iw / z, ih / z
+    x0 = min(max(cx * iw - vw / 2 + dx, 0), iw - vw); y0 = min(max(cy * ih - vh / 2 + dy, 0), ih - vh)
+    M = np.float32([[W / vw, 0, -x0 * W / vw], [0, H / vh, -y0 * H / vh]])
+    fr = cv2.warpAffine(src, M, (W, H), flags=cv2.INTER_CUBIC).astype(np.float32)
     if e.get("rayos", 0):
         fr = 255 - (255 - fr) * (1 - RAYOS * e["rayos"] * (0.75 + 0.25 * math.sin(tl * 1.3)))
     fr = particulas(fr, tl + i * 7, e.get("chispas", 0.0))

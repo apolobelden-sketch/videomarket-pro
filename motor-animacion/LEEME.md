@@ -2,7 +2,8 @@
 
 Convierte dibujos fijos en un video vertical animado (1080×1920, 30 cuadros por segundo), sin créditos de IA.
 
-- Movimientos de cámara suaves, acercamientos, paneos, "respiración", temblor
+- Movimiento real de personajes: respiran, giran la cabeza, mueven la cola, el ratón muerde, la red se balancea, caminan
+- Movimientos de cámara suaves
 - Rayos de luz, chispas doradas, viñeta, transiciones suaves
 - Texto del cuento en pantalla y moraleja final
 - Sin música ni voz (la música se pone en cada red social)
