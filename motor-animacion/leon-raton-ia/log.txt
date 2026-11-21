@@ -1,0 +1,5 @@
+15:23:53 instalando
+15:25:39 gpu Tesla T4 x 2 texto en cuda:0
+15:26:07 textos listos en 134 s
+15:26:07 script /kaggle/src/script.py True
+17:11:58 todo listo en 108 min
