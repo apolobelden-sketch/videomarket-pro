@@ -87,12 +87,14 @@ try:
     MID = "Wan-AI/Wan2.2-TI2V-5B-Diffusers"
     pt = WanImageToVideoPipeline.from_pretrained(MID, transformer=None, vae=None, torch_dtype=torch.bfloat16)
     # El texto se procesa en la tarjeta 0 (mas rapido que en CPU) y luego se libera
-    pt.text_encoder.to("cuda:0")
+    dev_txt = "cuda:0" if torch.cuda.get_device_capability(0)[0] >= 7 else "cpu"   # P100 no maneja bf16: el texto va en CPU
+    pt.text_encoder.to(dev_txt)
+    log("gpu", torch.cuda.get_device_name(0), "x", torch.cuda.device_count(), "texto en", dev_txt)
     emb = {}
     with torch.no_grad():
         for nombre, ps in ESCENAS:
             for j, p in enumerate(ps):
-                pe, ne = pt.encode_prompt(prompt=p + ESTILO, negative_prompt=NEG, do_classifier_free_guidance=True, device="cuda:0")
+                pe, ne = pt.encode_prompt(prompt=p + ESTILO, negative_prompt=NEG, do_classifier_free_guidance=True, device=dev_txt)
                 emb[f"{nombre}-{j}"] = (pe.to("cpu", torch.float16), ne.to("cpu", torch.float16))
     tok = pt.tokenizer
     del pt; gc.collect(); torch.cuda.empty_cache()
