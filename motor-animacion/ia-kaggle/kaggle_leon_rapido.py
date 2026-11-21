@@ -1,5 +1,6 @@
 # Ediciones Guizar - "El leon y el raton" animado con IA (Wan 2.2 TI2V-5B) en Kaggle, gratis.
-# Version rapida: las DOS tarjetas T4 trabajan al mismo tiempo (cada una su mitad de escenas, en hilos) y 25 pasos en vez de 30.
+# Version rapida: las DOS tarjetas T4 trabajan al mismo tiempo (cada una su mitad de escenas, en procesos separados;
+# con hilos en un solo proceso el decodificador fallaba con "illegal memory access") y 25 pasos en vez de 30.
 # Cada escena = 2 clips encadenados (el segundo arranca en el ultimo cuadro del primero): ~6.7 s sin ida y vuelta.
 import os, subprocess, sys, time, traceback, gc, json
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
@@ -43,12 +44,18 @@ def cargar(dev, tok):
     except Exception: pass
     return pipe
 
-def trabajador(gpu, pipe, emb, nombres):
+TMP = "/kaggle/tmp/"
+
+def trabajador(gpu, nombres):
     log = logf(f"log-gpu{gpu}.txt")
     import torch, numpy as np
     from diffusers.utils import export_to_video, load_image
+    from transformers import AutoTokenizer
     from PIL import Image
-    dev = f"cuda:{gpu}"
+    emb = torch.load(TMP + "emb.pt")
+    pipe = cargar("cuda:0", AutoTokenizer.from_pretrained(TMP + "tok"))
+    open(TMP + f"listo{gpu}", "w").write("1")
+    log("modelo en gpu", gpu, round(torch.cuda.memory_allocated() / 1e9, 1), "GB")
     for nombre in nombres:
         try:
             img = load_image(BASE + nombre + ".jpg").convert("RGB")
@@ -59,9 +66,8 @@ def trabajador(gpu, pipe, emb, nombres):
             for j in range(2):
                 pe, ne = emb[f"{nombre}-{j}"]
                 t0 = time.time()
-                with torch.cuda.device(gpu):
-                    frames = pipe(image=img, prompt_embeds=pe.to(dev), negative_prompt_embeds=ne.to(dev), height=H, width=W,
-                                  num_frames=CUADROS, guidance_scale=5.0, num_inference_steps=PASOS).frames[0]
+                frames = pipe(image=img, prompt_embeds=pe.to("cuda:0"), negative_prompt_embeds=ne.to("cuda:0"), height=H, width=W,
+                              num_frames=CUADROS, guidance_scale=5.0, num_inference_steps=PASOS).frames[0]
                 frames = list(frames)
                 todos += frames if j == 0 else frames[1:]
                 ult = frames[-1]
@@ -70,12 +76,16 @@ def trabajador(gpu, pipe, emb, nombres):
                     a = np.asarray(ult); a = a * 255 if a.max() <= 1.0 else a
                     img = Image.fromarray(np.clip(a, 0, 255).astype("uint8"))
                 log("parte", nombre, j, "en", round(time.time() - t0), "s")
-                with torch.cuda.device(gpu): torch.cuda.empty_cache()
+                torch.cuda.empty_cache()
             export_to_video(todos, OUT + f"clip-{nombre}.mp4", fps=24)
             log("clip", nombre, "listo", len(todos), "cuadros")
         except Exception:
             log("ERROR en", nombre, traceback.format_exc()[-1500:])
     log("fin gpu", gpu)
+
+if len(sys.argv) > 3 and sys.argv[1] == "trabajador":
+    trabajador(int(sys.argv[2]), sys.argv[3].split(","))
+    sys.exit(0)
 
 log = logf("log.txt")
 try:
@@ -96,19 +106,26 @@ try:
             for j, p in enumerate(ps):
                 pe, ne = pt.encode_prompt(prompt=p + ESTILO, negative_prompt=NEG, do_classifier_free_guidance=True, device=dev_txt)
                 emb[f"{nombre}-{j}"] = (pe.to("cpu", torch.float16), ne.to("cpu", torch.float16))
-    tok = pt.tokenizer
+    os.makedirs(TMP, exist_ok=True)
+    torch.save(emb, TMP + "emb.pt")
+    pt.tokenizer.save_pretrained(TMP + "tok")
     del pt; gc.collect(); torch.cuda.empty_cache()
     log("textos listos en", round(time.time() - t_ini), "s")
-    import threading
-    pipes = []
-    for g in range(min(2, torch.cuda.device_count())):
-        pipes.append(cargar(f"cuda:{g}", tok)); gc.collect()
-        log("modelo en gpu", g, round(torch.cuda.memory_allocated(g) / 1e9, 1), "GB")
     nombres = [e[0] for e in ESCENAS]
-    grupos = [nombres[0::2], nombres[1::2]] if len(pipes) == 2 else [nombres]
-    hilos = [threading.Thread(target=trabajador, args=(g, pipes[g], emb, grupos[g])) for g in range(len(pipes))]
-    for h in hilos: h.start()
-    for h in hilos: h.join()
+    n_gpu = torch.cuda.device_count()
+    grupos = [nombres[0::2], nombres[1::2]] if n_gpu >= 2 else [nombres]
+    yo = "/kaggle/src/script.py"
+    if not os.path.exists(yo):
+        yo = os.path.abspath(globals().get("__file__", ""))
+    log("script", yo, os.path.exists(yo))
+    procs = []
+    for g, grupo in enumerate(grupos):
+        env = dict(os.environ, CUDA_VISIBLE_DEVICES=str(g))
+        procs.append(subprocess.Popen([sys.executable, yo, "trabajador", str(g), ",".join(grupo)], env=env))
+        for _ in range(120):   # espera a que cargue antes de lanzar el siguiente (memoria RAM)
+            if os.path.exists(TMP + f"listo{g}") or procs[-1].poll() is not None: break
+            time.sleep(10)
+    for p in procs: p.wait()
     log("todo listo en", round((time.time() - t_ini) / 60), "min")
 except Exception:
     log("ERROR", traceback.format_exc()[-3000:])
