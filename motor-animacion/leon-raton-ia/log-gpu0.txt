@@ -1,0 +1,14 @@
+15:29:42 modelo en gpu 0 12.8 GB
+15:42:30 parte e1 0 en 767 s
+15:55:13 parte e1 1 en 763 s
+15:55:17 clip e1 listo 161 cuadros
+16:08:03 parte e3 0 en 764 s
+16:20:47 parte e3 1 en 764 s
+16:20:51 clip e3 listo 161 cuadros
+16:33:36 parte e5 0 en 764 s
+16:46:20 parte e5 1 en 763 s
+16:46:25 clip e5 listo 161 cuadros
+16:59:09 parte e7 0 en 763 s
+17:11:52 parte e7 1 en 763 s
+17:11:55 clip e7 listo 161 cuadros
+17:11:55 fin gpu 0
