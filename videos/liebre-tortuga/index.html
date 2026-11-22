@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La liebre y la tortuga · Ediciones Guizar</title>
+<meta name="description" content="Cuento animado y narrado para niños. Mira todos los libros de Ediciones Guizar.">
+<meta property="og:title" content="La liebre y la tortuga · cuento animado">
+<meta property="og:description" content="Cuento narrado para niños. Toca para ver el video y todos mis libros.">
+<meta property="og:image" content="https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/libros/liebre-tortuga-ia/e1.jpg">
+<meta property="og:type" content="video.other">
+<style>
+  :root { --crema:#fff8e7; --tinta:#4a2c14; --rojo:#d61e24; --oro:#f5b82e; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--crema); color:var(--tinta); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 480px; margin: 0 auto; padding: 16px 16px 32px; text-align:center; }
+  h1 { font-size: 1.5rem; margin: 6px 0 12px; }
+  .marco { position: relative; border-radius: 18px; overflow: hidden; background:#000; box-shadow: 0 8px 24px rgba(74,44,20,.25); }
+  video { display:block; width:100%; aspect-ratio: 9/16; background:#000; }
+  .final { position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+           background: rgba(255,248,231,.94); padding: 24px; }
+  .final.ver { display:flex; }
+  .final p { margin:0; font-size:1.25rem; font-weight:700; }
+  .boton { display:inline-block; background:var(--rojo); color:#fff; text-decoration:none; font-weight:800; font-size:1.2rem;
+           padding: 16px 26px; border-radius: 999px; box-shadow: 0 4px 0 #8f1015; }
+  .boton:active { transform: translateY(2px); box-shadow: 0 2px 0 #8f1015; }
+  .otra { background:none; border:2px solid var(--tinta); color:var(--tinta); border-radius:999px; padding:10px 18px; font-weight:700; font-size:1rem; cursor:pointer; }
+  .fijo { margin-top: 18px; }
+  .pie { margin-top: 16px; font-size:.9rem; opacity:.75; }
+</style>
+</head>
+<body>
+<main>
+  <h1>🐢 La liebre y la tortuga 🐇</h1>
+  <div class="marco">
+    <video id="v" controls playsinline preload="metadata"
+      poster="https://pnjglzuxsyahxcbgjwvq.supabase.co/storage/v1/object/public/archivos/libros/liebre-tortuga-ia/e1.jpg"
+      src="https://res.cloudinary.com/dgdw8fbku/video/upload/ediciones-guizar/videos-ia/la-liebre-y-la-tortuga.mp4"></video>
+    <div class="final" id="final">
+      <p>¿Te gustó el cuento?</p>
+      <a class="boton" href="https://apolobelden-sketch.github.io/videomarket-pro/catalogo/">📚 Ver todos mis libros</a>
+      <button class="otra" id="otra" type="button">↺ Verlo otra vez</button>
+    </div>
+  </div>
+  <div class="fijo">
+    <a class="boton" href="https://apolobelden-sketch.github.io/videomarket-pro/catalogo/">📚 Ver todos mis libros</a>
+  </div>
+  <p class="pie">Ediciones Guizar · cuentos y libros para niños</p>
+</main>
+<script>
+  const v = document.getElementById("v"), f = document.getElementById("final");
+  v.addEventListener("ended", () => f.classList.add("ver"));
+  v.addEventListener("play", () => f.classList.remove("ver"));
+  document.getElementById("otra").addEventListener("click", () => { f.classList.remove("ver"); v.currentTime = 0; v.play(); });
+</script>
+</body>
+</html>
